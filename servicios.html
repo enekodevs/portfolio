@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n-title="ptitle">Servicios y proceso — Eneko Navarrete</title>
+<meta name="description" content="Software técnico a medida: cálculo, configuradores, 3D, dashboards y PWA. Y un proceso claro, contado fase a fase.">
+<link rel="canonical" href="https://enekodevs.com/servicios">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Eneko Navarrete">
+<meta property="og:url" content="https://enekodevs.com/servicios">
+<meta property="og:title" content="Servicios y proceso — Eneko Navarrete">
+<meta property="og:description" content="Software técnico a medida: cálculo, configuradores, 3D, dashboards y PWA. Y un proceso claro, contado fase a fase.">
+<meta property="og:image" content="https://enekodevs.com/screenshots/editor-3d.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Servicios y proceso — Eneko Navarrete">
+<meta name="twitter:description" content="Software técnico a medida y un proceso claro, contado fase a fase.">
+<meta name="twitter:image" content="https://enekodevs.com/screenshots/editor-3d.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>try{var _t=localStorage.getItem("eneko.theme");if(_t==="dark")document.documentElement.setAttribute("data-theme","dark");var _l=localStorage.getItem("eneko.lang");if(_l==="ca"||_l==="en")document.documentElement.setAttribute("lang",_l);}catch(e){}</script>
+<style>
+  /* ============================================================
+     enekodevs — SERVICIOS (híbrido NRG). Mismo sistema que
+     index.html. El PROCESO se cuenta como un
+     "scroll-through" de fases (pin + swap), en versión sobria
+     y SIN 3D pesado. Firma transversal: barrido ámbar de texto.
+     ============================================================ */
+  :root{
+    --paper:#f2f0ea;--paper-2:#eae7df;--card:#fbfaf6;--ink:#15171a;--ink-2:#3c4147;--ink-3:#727880;
+    --plum:#26202b;--plum-2:#1b1620;
+    --cobalt:#946412;--cobalt-2:#6f4b0c;--amber:#e6a92e;--amber-soft:#c9962b;--green:#c9962b;
+    --line:rgba(21,23,26,.12);--line-2:rgba(21,23,26,.24);
+    --d-line:rgba(242,240,234,.16);--d-fg:#efece4;--d-fg-2:#a7a3ac;
+    --shadow:0 40px 80px -46px rgba(21,23,26,.5);
+    --ample:1220px;--gut:clamp(20px,4vw,52px);--ease:cubic-bezier(.2,.7,.2,1);
+  }
+  /* ---------- TEMA OSCURO ---------- */
+  [data-theme="dark"]{
+    --paper:#141019;--paper-2:#1b1620;--card:#221b2b;--ink:#efece4;--ink-2:#c6c1cc;--ink-3:#8d8797;
+    --plum:#0e0a14;--plum-2:#0a0710;
+    --cobalt:#e6a92e;--cobalt-2:#c9962b;--amber:#e6a92e;--amber-soft:#c9962b;--green:#c9962b;
+    --line:rgba(242,240,234,.13);--line-2:rgba(242,240,234,.26);
+    --d-line:rgba(242,240,234,.12);--d-fg:#efece4;--d-fg-2:#a7a3ac;
+    --shadow:0 40px 80px -46px rgba(0,0,0,.72);
+  }
+  html.theme-anim,html.theme-anim *{transition:background-color .45s var(--ease),color .45s var(--ease),border-color .45s var(--ease)!important}
+  [data-theme="dark"] .btn{background:var(--ink);color:var(--plum-2)}
+  /* secciones intencionadamente oscuras (o con degradado de papel hardcodeado): no invertir */
+  [data-theme="dark"] header{background:linear-gradient(var(--paper),rgba(20,16,25,0))}
+  [data-theme="dark"] .contacto{background:var(--plum-2)}
+  [data-theme="dark"] footer{background:var(--plum-2);color:var(--d-fg-2);border-top-color:var(--line)}
+
+  /* ---------- CONTROLES NAV (idioma + tema) ---------- */
+  .nav-ctl{display:flex;align-items:center;gap:10px}
+  .lang{display:inline-flex;align-items:center;gap:2px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+  .lang button{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.05em;color:var(--ink-3);background:transparent;border:0;cursor:pointer;padding:5px 8px;border-radius:999px;transition:color .2s var(--ease),background .2s var(--ease)}
+  .lang button:hover{color:var(--ink)}
+  .lang button.on{background:var(--ink);color:var(--paper)}
+  .theme-toggle{width:38px;height:38px;flex:none;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:border-color .2s var(--ease),transform .2s var(--ease)}
+  .theme-toggle:hover{border-color:var(--line-2);transform:translateY(-1px)}
+  .theme-toggle svg{width:16px;height:16px}
+  .theme-toggle .ic-sun{display:none}.theme-toggle .ic-moon{display:block}
+  [data-theme="dark"] .theme-toggle .ic-sun{display:block}[data-theme="dark"] .theme-toggle .ic-moon{display:none}
+  @media(max-width:520px){.brand .n span{display:none}.lang button{padding:5px 6px}.nav-ctl .btn{display:none}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:'Archivo',system-ui,sans-serif;letter-spacing:-.03em;line-height:.96;text-wrap:balance}
+  .wrap{max-width:var(--ample);margin:0 auto;padding:0 var(--gut)}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cobalt);display:inline-flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:28px;height:1px;background:currentColor;opacity:.6}
+  a:focus-visible,button:focus-visible{outline:2.5px solid var(--cobalt);outline-offset:4px;border-radius:4px}
+  ::selection{background:rgba(230,169,46,.22)}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:999px;font-family:'Archivo',sans-serif;font-weight:700;font-size:.92rem;letter-spacing:-.01em;background:var(--ink);color:var(--paper);border:1px solid transparent;cursor:pointer;transition:transform .22s var(--ease),box-shadow .22s var(--ease)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 34px -12px rgba(21,23,26,.5)}
+  .btn svg{width:15px;height:15px;transition:transform .22s var(--ease)}.btn:hover svg{transform:translateX(3px)}
+
+  /* ---------- TOPBAR ---------- */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:linear-gradient(var(--paper),rgba(242,240,234,0))}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px var(--gut);max-width:var(--ample);margin:0 auto}
+  .brand{display:flex;align-items:center;gap:11px}
+  .mono-mark{width:34px;height:34px;border:1.5px solid var(--ink);border-radius:8px;display:grid;place-items:center;font-family:'Archivo',sans-serif;font-weight:900;font-size:.82rem}
+  .brand .n{font-family:'Archivo',sans-serif;font-weight:700;font-size:.95rem}
+  .brand .n span{font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:.64rem;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase;display:block}
+  .nlinks{display:flex;gap:22px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
+  .nlinks a{color:var(--ink-2);transition:color .2s}.nlinks a:hover,.nlinks a.on{color:var(--ink)}
+  .nlinks a.on{color:var(--cobalt)}
+  @media(max-width:820px){.nlinks{display:none}}
+
+  /* ---------- HERO-LITE ---------- */
+  .hero{padding:150px 0 60px}
+  .hero h1{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(2.6rem,8vw,6rem);letter-spacing:-.04em;line-height:.94;text-transform:uppercase;margin:.2em 0 0}
+  .hero .lead{max-width:46ch;font-size:clamp(1.05rem,1.7vw,1.32rem);color:var(--ink-2);font-weight:500;margin-top:26px}
+
+  section{position:relative}.pad{padding:clamp(64px,11vh,110px) 0}
+  .kicker-h2{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(2rem,5vw,3.4rem);text-transform:uppercase;letter-spacing:-.035em;max-width:22ch;margin:.34em 0 0}
+  .kicker-h2 em{font-style:normal;color:var(--cobalt)}
+  .lead-2{max-width:60ch;margin-top:20px;color:var(--ink-2)}
+
+  /* ---------- SERVICIOS (tarjetas) ---------- */
+  .servicios{background:var(--paper)}
+  .cards{display:grid;gap:16px;margin-top:48px}
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 28px;position:relative;overflow:hidden;transition:.32s var(--ease)}
+  .ncard::before{content:"";position:absolute;left:0;top:0;height:3px;width:0;background:var(--cobalt);transition:width .35s var(--ease)}
+  .ncard:hover{transform:translateY(-5px);box-shadow:var(--shadow)}.ncard:hover::before{width:100%}
+  .ncard .ic{width:42px;height:42px;border-radius:11px;border:1px solid var(--line);display:grid;place-items:center;color:var(--cobalt);background:var(--paper)}
+  .ncard .ic svg{width:20px;height:20px}
+  .ncard h3{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.22rem;margin:16px 0 9px;letter-spacing:-.02em}
+  .ncard p{font-size:.94rem;color:var(--ink-2)}
+  @media(min-width:600px){.cards{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:940px){.cards{grid-template-columns:repeat(3,1fr)}}
+
+  /* ---------- PROCESO · intro + SCROLL-THROUGH DE FASES ---------- */
+  .prun-intro{background:var(--plum);color:var(--d-fg);padding:clamp(74px,13vh,120px) 0 clamp(26px,5vh,44px)}
+  .prun-intro .eyebrow{color:var(--amber)}
+  .prun-intro .pi-title{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(2rem,5vw,3.4rem);text-transform:uppercase;letter-spacing:-.035em;max-width:20ch;margin:.3em 0 0}
+  .prun-intro .pi-title em{font-style:normal;color:var(--amber)}
+  .prun-intro .pi-lead{max-width:56ch;margin-top:18px;color:var(--d-fg-2)}
+  .prun{background:var(--plum);color:var(--d-fg)}
+  /* fallback estático (sin JS / reduce / móvil): fases apiladas */
+  .prun .fall{max-width:var(--ample);margin:0 auto;padding:clamp(60px,10vh,100px) var(--gut);display:grid;gap:14px}
+  .prun .fall .fp{border-top:1px solid var(--d-line);padding:22px 0;display:grid;gap:8px}
+  .prun .fall .fp .top{display:flex;gap:16px;align-items:baseline;font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--amber);letter-spacing:.1em}
+  .prun .fall .fp h3{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.5rem}
+  .prun .fall .fp p{color:var(--d-fg-2);max-width:60ch}
+  body.run .prun .fall{display:none}
+
+  body.run .prun{height:500vh}
+  body.run .prun .sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:clamp(64px,9vh,100px) 0 clamp(96px,13vh,128px)}
+  .prun .sticky{display:none}
+  body.run .prun .sticky{display:flex}
+  /* rejilla blueprint de fondo */
+  .prun .sticky::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--d-line) 1px,transparent 1px),linear-gradient(90deg,var(--d-line) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(100% 80% at 78% 12%,#000,transparent 74%);mask-image:radial-gradient(100% 80% at 78% 12%,#000,transparent 74%);opacity:.7}
+  .prun .head{position:relative;z-index:4;flex:0 0 auto;width:100%;margin-bottom:clamp(8px,2.4vh,26px)}
+  .prun .head .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap}
+  .prun .b-tag{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
+  .prun .head h2{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(1.3rem,2.6vw,2rem);text-transform:uppercase;letter-spacing:-.03em;max-width:20ch;margin-top:8px}
+  /* escenario: paneles absolutos que se intercambian */
+  .prun .stage{position:relative;z-index:3;flex:1 1 auto;width:100%;max-width:var(--ample);margin:0 auto;padding:0 var(--gut)}
+  .pphase{position:absolute;inset:0;display:grid;grid-template-columns:1fr;gap:30px;align-content:center;
+    opacity:0;transform:translateY(26px);transition:opacity .6s var(--ease),transform .6s var(--ease);pointer-events:none}
+  .pphase.on{opacity:1;transform:none;pointer-events:auto}
+  .pphase .txt,.pphase .big{transition:transform .12s linear}
+  .pphase .txt .meta{display:flex;gap:12px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--d-fg-2)}
+  .pphase .txt .meta .t{color:var(--amber);border:1px solid rgba(230,169,46,.4);border-radius:999px;padding:4px 12px}
+  .pphase .txt h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(1.55rem,3.6vw,2.7rem);text-transform:uppercase;letter-spacing:-.035em;line-height:.98;margin:12px 0 10px}
+  .pphase .txt p{color:var(--d-fg-2);max-width:42ch;font-size:clamp(.95rem,1.25vw,1.06rem);line-height:1.5}
+  .pphase .txt .deliv{margin-top:14px;display:inline-flex;gap:10px;align-items:flex-start;border-left:2px solid var(--amber);padding-left:14px;color:var(--d-fg);font-size:.86rem;line-height:1.45;max-width:42ch}
+  .pphase .txt .deliv b{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:3px}
+  /* número enorme de la fase (visual sobrio, sin 3D) */
+  .pphase .big{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(7rem,26vw,20rem);line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1.5px rgba(230,169,46,.5);text-align:right;align-self:center;user-select:none}
+  @media(min-width:900px){.pphase{grid-template-columns:1.15fr .85fr;gap:50px}}
+  /* timeline horizontal de fases (estilo Phase 04 NRG): activa en ámbar, avanza al scrollear */
+  .prun .ptl{position:absolute;left:0;right:0;bottom:clamp(22px,4.5vh,40px);z-index:4;max-width:var(--ample);margin:0 auto;padding:0 var(--gut)}
+  .prun .ptl .track{position:relative;height:2px;background:rgba(242,240,234,.18);margin-bottom:15px}
+  .prun .ptl .track i{position:absolute;inset:0;transform-origin:0 50%;transform:scaleX(0);background:var(--amber);transition:transform .12s linear}
+  .prun .ptl .steps{display:flex;gap:18px}
+  .prun .ptl a{flex:1;display:flex;gap:8px;align-items:baseline;font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;color:var(--d-fg-2);transition:color .3s;cursor:pointer}
+  .prun .ptl a b{font-weight:500;color:var(--d-fg-2);transition:color .3s}
+  .prun .ptl a.on{color:var(--d-fg)}.prun .ptl a.on b{color:var(--amber)}
+  @media(max-width:640px){.prun .ptl .steps{display:none}.pphase .big{display:none}}
+
+  /* ---------- POR QUÉ (compacto) ---------- */
+  .why{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .reasons{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:44px}
+  .reason{background:var(--card);padding:26px 26px;display:flex;gap:18px}
+  .reason .no{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--cobalt);letter-spacing:.1em;padding-top:4px}
+  .reason h3{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.12rem;letter-spacing:-.01em;margin-bottom:7px}
+  .reason p{font-size:.92rem;color:var(--ink-2);max-width:56ch}
+  @media(min-width:800px){.reasons{grid-template-columns:1fr 1fr}}
+
+  /* ---------- CTA ---------- */
+  .contacto{background:var(--ink);color:var(--paper)}
+  .contacto .inner{max-width:var(--ample);margin:0 auto;padding:clamp(70px,12vh,110px) var(--gut);text-align:center}
+  .contacto h2{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(2rem,5.4vw,3.6rem);text-transform:uppercase;letter-spacing:-.04em;color:#fff;max-width:20ch;margin:.3em auto .5em}
+  .contacto h2 em{font-style:normal;color:var(--amber)}
+  .contacto p{color:rgba(242,240,234,.7);max-width:52ch;margin:0 auto 30px}
+  .contacto .btn{background:var(--amber);color:var(--plum)}
+  .contacto .eyebrow{color:var(--amber)}
+
+  footer{background:var(--ink);color:rgba(242,240,234,.55);border-top:1px solid rgba(242,240,234,.12)}
+  .foot{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;padding:28px var(--gut);max-width:var(--ample);margin:0 auto;font-family:'IBM Plex Mono',monospace;font-size:.74rem}
+  .foot .n{color:#fff;font-family:'Archivo',sans-serif;font-weight:700}
+  .foot-nav{display:flex;gap:16px}
+
+  .scrollbar{position:fixed;top:0;left:0;height:2.5px;width:100%;z-index:60;background:linear-gradient(90deg,var(--cobalt),var(--amber));transform:scaleX(0);transform-origin:0 50%;transition:transform .1s linear}
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--rd,0ms)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- BARRIDO ÁMBAR (firma transversal, ligado al scroll) ---------- */
+  .sweep{--sw-base:var(--ink);--sw-hi:var(--amber);--em:var(--cobalt);
+    background-image:linear-gradient(100deg,var(--sw-base) 0%,var(--sw-base) 40%,var(--sw-hi) 50%,var(--sw-base) 60%,var(--sw-base) 100%);
+    background-size:260% 100%;background-position-x:100%;background-repeat:no-repeat;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .sweep em{-webkit-text-fill-color:var(--em);background:none}
+  .lead-2.sweep,.hero .lead.sweep{--sw-base:var(--ink-2)}
+  .prun-intro .pi-title.sweep,.pphase .txt h3.sweep{--sw-base:var(--d-fg)}
+  .contacto h2.sweep{--sw-base:#fff;--em:var(--amber)}
+  @media (prefers-reduced-motion: reduce){.sweep{-webkit-text-fill-color:currentColor!important;color:inherit!important;background:none!important}
+    .reveal{opacity:1!important;transform:none!important;transition:none}html{scroll-behavior:auto}}
+</style>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="favicon.svg">
+  <meta name="theme-color" content="#f2f0ea">
+</head>
+<body>
+
+<div class="scrollbar" id="scrollbar" aria-hidden="true"></div>
+
+<!-- TOPBAR -->
+<header>
+  <div class="nav">
+    <a class="brand" href="index.html"><span class="mono-mark">EN</span><span class="n">Eneko Navarrete<span>Design Engineer</span></span></a>
+    <nav class="nlinks">
+      <a href="index.html" data-i18n="nav.home">Inicio</a>
+      <a href="trabajo.html" data-i18n="nav.work">Trabajo</a>
+      <a href="#servicios" class="on" data-i18n="nav.services">Servicios</a>
+      <a href="tarifas.html" data-i18n="nav.tarifas">Tarifas</a>
+      <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
+    </nav>
+    <div class="nav-ctl">
+      <div class="lang" role="group" aria-label="Idioma / Llengua / Language">
+        <button type="button" data-lang="es" class="on">ES</button>
+        <button type="button" data-lang="ca">CA</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <button class="theme-toggle" type="button" id="themeToggle" aria-label="Cambiar entre tema claro y oscuro" data-i18n-aria="nav.theme">
+        <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a class="btn" href="contacto.html"><span data-i18n="nav.cta">Hablemos</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO-LITE -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="hero.eyebrow">Servicios · Proceso</span>
+    <h1 data-i18n-html="hero.title">Software técnico<br>que se usa de verdad.</h1>
+    <p class="lead sweep" data-i18n="hero.lead">Lógica densa, datos persistentes, interfaces precisas y entregables que el cliente puede llevarse al mundo físico. Y un proceso claro, contado paso a paso.</p>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="servicios pad" id="servicios">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="serv.eyebrow">Qué construyo</span>
+    <h2 class="kicker-h2 sweep" data-i18n-html="serv.title">Productos, no <em>plantillas.</em></h2>
+    <div class="cards">
+      <article class="ncard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg></div><h3 data-i18n="serv.1.t">Aplicaciones de cálculo</h3><p data-i18n="serv.1.p">Calculadoras de ingeniería, costes, dimensionado o energía. Motor matemático testeado y resultados en tiempo real.</p></article>
+      <article class="ncard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3 data-i18n="serv.2.t">Herramientas de presupuesto</h3><p data-i18n="serv.2.p">Cotizadores con tarifas, descuentos, IVA y exportación a PDF/XLSX. Tu comercial cierra venta desde el móvil.</p></article>
+      <article class="ncard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/></svg></div><h3 data-i18n="serv.3.t">Configuradores de producto</h3><p data-i18n="serv.3.p">El cliente elige medidas, materiales y acabados; la app calcula precio y envía el pedido al ERP o por email.</p></article>
+      <article class="ncard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4.9V17L12 22 3 17V6.9z"/><path d="M3 7l9 5 9-5"/></svg></div><h3 data-i18n="serv.4.t">Visualizadores 3D técnicos</h3><p data-i18n="serv.4.p">Modelos paramétricos en navegador con Three.js: rotación, capas, mediciones y exportación a OBJ/DXF.</p></article>
+      <article class="ncard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><h3 data-i18n="serv.5.t">Dashboards y back-office</h3><p data-i18n="serv.5.p">Paneles de operación: usuarios, métricas, facturación, auth con OAuth, planes y permisos. Supabase + RLS desde el día uno.</p></article>
+      <article class="ncard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><h3 data-i18n="serv.6.t">PWA + despliegue continuo</h3><p data-i18n="serv.6.p">Apps instalables, modo offline, despliegue automático en Cloudflare o Vercel, dominio propio y SEO técnico cuidado.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO · intro + SCROLL-THROUGH DE FASES -->
+<section class="prun-intro">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="proc.eyebrow">Cómo trabajo</span>
+    <h2 class="pi-title sweep" data-i18n-html="proc.title">Un ritmo semanal, <em>demos cada viernes.</em></h2>
+    <p class="pi-lead" data-i18n="proc.lead">Sin agencias por medio. Sin meses de silencio. Cada semana hay algo que tocar y una decisión por tomar.</p>
+  </div>
+</section>
+<section class="prun" id="proceso">
+  <div class="sticky">
+
+    <div class="stage">
+      <article class="pphase" data-i="0">
+        <div class="txt">
+          <div class="meta"><span data-i18n="proc.p1.fase">Fase 01</span><span class="t" data-i18n="proc.p1.time">30–45 min</span></div>
+          <h3 class="sweep" data-i18n="proc.p1.t">Conversación inicial</h3>
+          <p data-i18n="proc.p1.p">Me cuentas el problema y lo que has probado. Salimos con un mini-diagnóstico por escrito y una primera estimación de alcance.</p>
+          <div class="deliv"><span><b data-i18n="proc.deliv">Entregable</b><span data-i18n="proc.p1.deliv">Documento de una página con objetivo, riesgos y siguiente paso.</span></span></div>
+        </div>
+        <div class="big" aria-hidden="true">01</div>
+      </article>
+
+      <article class="pphase" data-i="1">
+        <div class="txt">
+          <div class="meta"><span data-i18n="proc.p2.fase">Fase 02</span><span class="t" data-i18n="proc.p2.time">3–5 días</span></div>
+          <h3 class="sweep" data-i18n="proc.p2.t">Spec corta y propuesta</h3>
+          <p data-i18n="proc.p2.p">Convierto la conversación en un documento técnico breve: qué se construye, qué no, cómo se mide el éxito, en cuántas iteraciones y a qué precio.</p>
+          <div class="deliv"><span><b data-i18n="proc.deliv">Entregable</b><span data-i18n="proc.p2.deliv">Spec + presupuesto cerrado por fases.</span></span></div>
+        </div>
+        <div class="big" aria-hidden="true">02</div>
+      </article>
+
+      <article class="pphase" data-i="2">
+        <div class="txt">
+          <div class="meta"><span data-i18n="proc.p3.fase">Fase 03</span><span class="t" data-i18n="proc.p3.time">Cada viernes</span></div>
+          <h3 class="sweep" data-i18n="proc.p3.t">Iteraciones semanales con demo</h3>
+          <p data-i18n="proc.p3.p">Cada lunes priorizamos juntos lo de la semana. El código está en tu GitHub desde el día uno. Sin sorpresas al final.</p>
+          <div class="deliv"><span><b data-i18n="proc.deliv">Entregable</b><span data-i18n="proc.p3.deliv">App desplegada cada semana en staging + nota de cambios.</span></span></div>
+        </div>
+        <div class="big" aria-hidden="true">03</div>
+      </article>
+
+      <article class="pphase" data-i="3">
+        <div class="txt">
+          <div class="meta"><span data-i18n="proc.p4.fase">Fase 04</span><span class="t" data-i18n="proc.p4.time">Producción</span></div>
+          <h3 class="sweep" data-i18n="proc.p4.t">Lanzamiento y mantenimiento</h3>
+          <p data-i18n="proc.p4.p">Despliegue a producción, dominio propio, métricas activas. Después: horas mensuales, evolutivos, o te llevas el código y operas solo.</p>
+          <div class="deliv"><span><b data-i18n="proc.deliv">Entregable</b><span data-i18n="proc.p4.deliv">Handover técnico, runbook y métricas conectadas.</span></span></div>
+        </div>
+        <div class="big" aria-hidden="true">04</div>
+      </article>
+    </div>
+
+    <div class="ptl" aria-hidden="true">
+      <div class="track"><i id="pbarFill"></i></div>
+      <div class="steps">
+        <a data-i="0"><b>01</b> <span data-i18n="proc.tl1">Conversación</span></a>
+        <a data-i="1"><b>02</b> <span data-i18n="proc.tl2">Spec</span></a>
+        <a data-i="2"><b>03</b> <span data-i18n="proc.tl3">Iteraciones</span></a>
+        <a data-i="3"><b>04</b> <span data-i18n="proc.tl4">Lanzamiento</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- fallback estático (sin JS / reduce / móvil) -->
+  <div class="fall">
+    <div class="fp"><div class="top"><span data-i18n="proc.p1.fase">Fase 01</span><span data-i18n="proc.p1.time">30–45 min</span></div><h3 data-i18n="proc.p1.t">Conversación inicial</h3><p data-i18n="proc.p1.p">Me cuentas el problema y lo que has probado. Salimos con un mini-diagnóstico por escrito y una primera estimación de alcance.</p></div>
+    <div class="fp"><div class="top"><span data-i18n="proc.p2.fase">Fase 02</span><span data-i18n="proc.p2.time">3–5 días</span></div><h3 data-i18n="proc.p2.t">Spec corta y propuesta</h3><p data-i18n="proc.p2.pf">Convierto la conversación en un documento técnico breve: qué se construye, qué no, cómo se mide el éxito y a qué precio.</p></div>
+    <div class="fp"><div class="top"><span data-i18n="proc.p3.fase">Fase 03</span><span data-i18n="proc.p3.time">Cada viernes</span></div><h3 data-i18n="proc.p3.t">Iteraciones semanales con demo</h3><p data-i18n="proc.p3.pf">Cada lunes priorizamos juntos. El código está en tu GitHub desde el día uno. Sin sorpresas al final.</p></div>
+    <div class="fp"><div class="top"><span data-i18n="proc.p4.fase">Fase 04</span><span data-i18n="proc.p4.time">Producción</span></div><h3 data-i18n="proc.p4.t">Lanzamiento y mantenimiento</h3><p data-i18n="proc.p4.pf">Despliegue a producción, dominio propio y métricas activas. Después, evolutivos o te llevas el código.</p></div>
+  </div>
+</section>
+
+<!-- POR QUÉ -->
+<section class="why pad" id="por-que">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="why.eyebrow">Por qué contratarme</span>
+    <h2 class="kicker-h2 sweep" data-i18n-html="why.title">Criterios que casi nadie <em>aplica.</em></h2>
+    <div class="reasons">
+      <div class="reason reveal"><div class="no">01</div><div><h3 data-i18n="why.1.t">Hablo con quien usa la herramienta</h3><p data-i18n="why.1.p">Antes de escribir código contacto con los usuarios reales para entender qué les frena. Así nació el corte axial de DomesLab: de una conversación, no de una suposición.</p></div></div>
+      <div class="reason reveal"><div class="no">02</div><div><h3 data-i18n="why.2.t">Reviso lo que entrego</h3><p data-i18n="why.2.p">Pruebo el producto, lo dejo funcionando de verdad y documentado — no una demo a medias.</p></div></div>
+      <div class="reason reveal"><div class="no">03</div><div><h3 data-i18n="why.3.t">Construyo pensando en el futuro</h3><p data-i18n="why.3.p">Separo la lógica del producto para poder ampliarlo o mantenerlo sin rehacerlo.</p></div></div>
+      <div class="reason reveal"><div class="no">04</div><div><h3 data-i18n="why.4.t">Entrega continua y auditable</h3><p data-i18n="why.4.p">Lint, typecheck y tests en cada PR. Despliegue automático en cada push a main. Cada cambio, reversible.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="contacto" id="contacto">
+  <div class="inner">
+    <span class="eyebrow" data-i18n="cta.eyebrow">Siguiente paso</span>
+    <h2 class="sweep" data-i18n-html="cta.title">Construyamos tu <em>herramienta.</em></h2>
+    <p data-i18n="cta.lead">Cuéntame qué necesita tu equipo o tus clientes. En menos de 48 horas te respondo con un diagnóstico, una estimación de alcance y la siguiente decisión.</p>
+    <a href="contacto.html" class="btn"><span data-i18n="cta.btn">Empieza tu proyecto</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
+<footer><div class="foot">
+  <span class="n">ENEKO NAVARRETE</span>
+  <div class="foot-nav"><a href="index.html" data-i18n="nav.home">Inicio</a><a href="trabajo.html" data-i18n="nav.work">Trabajo</a><a href="tarifas.html" data-i18n="nav.tarifas">Tarifas</a><a href="contacto.html" data-i18n="nav.contact">Contacto</a></div>
+  <span>eneko.devs@gmail.com</span>
+</div></footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var small = window.innerWidth < 700;
+  var bar=document.getElementById("scrollbar");
+  var clamp=function(x,a,b){return Math.max(a,Math.min(b,x));};
+
+  addEventListener("scroll",function(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;if(bar)bar.style.transform="scaleX("+(m>0?h.scrollTop/m:0)+")";},{passive:true});
+
+  if(reduce){ return; } // fallback estático visible, sin animación
+
+  // reveals
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.14});
+  document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
+  document.querySelectorAll(".cards").forEach(function(g){Array.prototype.forEach.call(g.children,function(c,i){c.style.setProperty("--rd",(i*55)+"ms");});});
+
+  // --- BARRIDO ÁMBAR ligado al scroll ---
+  var sw=[];
+  document.querySelectorAll(".kicker-h2,.lead-2,.hero .lead,.prun-intro .pi-title,.contacto h2").forEach(function(el){el.classList.add("sweep");sw.push(el);});
+  document.querySelectorAll(".sweep").forEach(function(el){if(sw.indexOf(el)<0)sw.push(el);});
+  function updateSweeps(){
+    var vh=innerHeight, start=vh*0.92, end=vh*0.34, span=start-end;
+    for(var i=0;i<sw.length;i++){var el=sw[i],r=el.getBoundingClientRect();
+      if(r.bottom<-100||r.top>vh+100)continue;
+      var p=clamp((start-r.top)/span,0,1);
+      el.style.backgroundPositionX=(100-p*100).toFixed(1)+"%";}
+  }
+
+  // --- PROCESO · scroll-through de fases (pin + swap) ---
+  var prun=document.getElementById("proceso");
+  var phases=[].slice.call(prun.querySelectorAll(".pphase"));
+  var navs=[].slice.call(prun.querySelectorAll(".ptl a"));
+  var pbar=document.getElementById("pbarFill");
+  var N=phases.length, active=-1;
+  if(!small && N){
+    document.body.classList.add("run");
+    // click en la nav → salta a la fase
+    navs.forEach(function(a){a.addEventListener("click",function(){
+      var i=+a.getAttribute("data-i");
+      var r=prun.getBoundingClientRect(), total=prun.offsetHeight-innerHeight;
+      var top=window.scrollY+r.top + total*((i+0.5)/N);
+      scrollTo({top:top,behavior:"smooth"});
+    });});
+  }
+  function setActive(i){
+    if(i===active) return; active=i;
+    for(var k=0;k<N;k++){ phases[k].classList.toggle("on",k===i); if(navs[k])navs[k].classList.toggle("on",k===i); }
+  }
+  function updatePhases(){
+    if(small) return;
+    var r=prun.getBoundingClientRect(), total=prun.offsetHeight-innerHeight;
+    var p=clamp((-r.top)/total,0,1);
+    if(pbar) pbar.style.transform="scaleX("+p+")";
+    var idx=clamp(Math.floor(p*N),0,N-1);
+    setActive(idx);
+    // sub-progreso dentro de la fase activa
+    var sub=clamp(p*N-idx,0,1);
+    var ph=phases[idx];
+    // barrido del título de la fase activa
+    var h=ph && ph.querySelector("h3.sweep");
+    if(h) h.style.backgroundPositionX=(100-clamp(sub*2.2,0,1)*100).toFixed(1)+"%";
+    // deriva horizontal: el texto entra y se va hacia la izquierda; el número gigante contra-parallax (estilo Phase 04)
+    var tx=ph && ph.querySelector(".txt"), bg=ph && ph.querySelector(".big");
+    if(tx) tx.style.transform="translateX("+(-sub*52).toFixed(1)+"px)";
+    if(bg) bg.style.transform="translateX("+(sub*34).toFixed(1)+"px)";
+  }
+
+  var tick=false;
+  function onScroll(){ if(!tick){tick=true;requestAnimationFrame(function(){updateSweeps();updatePhases();tick=false;});} }
+  addEventListener("scroll",onScroll,{passive:true});
+  addEventListener("resize",function(){updateSweeps();updatePhases();},{passive:true});
+  setActive(0); updateSweeps(); updatePhases();
+})();
+</script>
+
+<!-- i18n (ES/CA/EN) + tema claro/oscuro -->
+<script>
+(function(){
+  var I18N={
+   es:{
+    "ptitle":"Servicios y proceso — Eneko Navarrete",
+    "nav.home":"Inicio","nav.work":"Trabajo","nav.services":"Servicios","nav.tarifas":"Tarifas","nav.contact":"Contacto","nav.cta":"Hablemos","nav.theme":"Cambiar entre tema claro y oscuro",
+    "hero.eyebrow":"Servicios · Proceso","hero.title":"Software técnico<br>que se usa de verdad.",
+    "hero.lead":"Lógica densa, datos persistentes, interfaces precisas y entregables que el cliente puede llevarse al mundo físico. Y un proceso claro, contado paso a paso.",
+    "serv.eyebrow":"Qué construyo","serv.title":"Productos, no <em>plantillas.</em>",
+    "serv.1.t":"Aplicaciones de cálculo","serv.1.p":"Calculadoras de ingeniería, costes, dimensionado o energía. Motor matemático testeado y resultados en tiempo real.",
+    "serv.2.t":"Herramientas de presupuesto","serv.2.p":"Cotizadores con tarifas, descuentos, IVA y exportación a PDF/XLSX. Tu comercial cierra venta desde el móvil.",
+    "serv.3.t":"Configuradores de producto","serv.3.p":"El cliente elige medidas, materiales y acabados; la app calcula precio y envía el pedido al ERP o por email.",
+    "serv.4.t":"Visualizadores 3D técnicos","serv.4.p":"Modelos paramétricos en navegador con Three.js: rotación, capas, mediciones y exportación a OBJ/DXF.",
+    "serv.5.t":"Dashboards y back-office","serv.5.p":"Paneles de operación: usuarios, métricas, facturación, auth con OAuth, planes y permisos. Supabase + RLS desde el día uno.",
+    "serv.6.t":"PWA + despliegue continuo","serv.6.p":"Apps instalables, modo offline, despliegue automático en Cloudflare o Vercel, dominio propio y SEO técnico cuidado.",
+    "proc.eyebrow":"Cómo trabajo","proc.title":"Un ritmo semanal, <em>demos cada viernes.</em>","proc.lead":"Sin agencias por medio. Sin meses de silencio. Cada semana hay algo que tocar y una decisión por tomar.","proc.deliv":"Entregable",
+    "proc.p1.fase":"Fase 01","proc.p1.time":"30–45 min","proc.p1.t":"Conversación inicial","proc.p1.p":"Me cuentas el problema y lo que has probado. Salimos con un mini-diagnóstico por escrito y una primera estimación de alcance.","proc.p1.deliv":"Documento de una página con objetivo, riesgos y siguiente paso.",
+    "proc.p2.fase":"Fase 02","proc.p2.time":"3–5 días","proc.p2.t":"Spec corta y propuesta","proc.p2.p":"Convierto la conversación en un documento técnico breve: qué se construye, qué no, cómo se mide el éxito, en cuántas iteraciones y a qué precio.","proc.p2.deliv":"Spec + presupuesto cerrado por fases.","proc.p2.pf":"Convierto la conversación en un documento técnico breve: qué se construye, qué no, cómo se mide el éxito y a qué precio.",
+    "proc.p3.fase":"Fase 03","proc.p3.time":"Cada viernes","proc.p3.t":"Iteraciones semanales con demo","proc.p3.p":"Cada lunes priorizamos juntos lo de la semana. El código está en tu GitHub desde el día uno. Sin sorpresas al final.","proc.p3.deliv":"App desplegada cada semana en staging + nota de cambios.","proc.p3.pf":"Cada lunes priorizamos juntos. El código está en tu GitHub desde el día uno. Sin sorpresas al final.",
+    "proc.p4.fase":"Fase 04","proc.p4.time":"Producción","proc.p4.t":"Lanzamiento y mantenimiento","proc.p4.p":"Despliegue a producción, dominio propio, métricas activas. Después: horas mensuales, evolutivos, o te llevas el código y operas solo.","proc.p4.deliv":"Handover técnico, runbook y métricas conectadas.","proc.p4.pf":"Despliegue a producción, dominio propio y métricas activas. Después, evolutivos o te llevas el código.",
+    "proc.tl1":"Conversación","proc.tl2":"Spec","proc.tl3":"Iteraciones","proc.tl4":"Lanzamiento",
+    "why.eyebrow":"Por qué contratarme","why.title":"Criterios que casi nadie <em>aplica.</em>",
+    "why.1.t":"Hablo con quien usa la herramienta","why.1.p":"Antes de escribir código contacto con los usuarios reales para entender qué les frena. Así nació el corte axial de DomesLab: de una conversación, no de una suposición.",
+    "why.2.t":"Reviso lo que entrego","why.2.p":"Pruebo el producto, lo dejo funcionando de verdad y documentado — no una demo a medias.",
+    "why.3.t":"Construyo pensando en el futuro","why.3.p":"Separo la lógica del producto para poder ampliarlo o mantenerlo sin rehacerlo.",
+    "why.4.t":"Entrega continua y auditable","why.4.p":"Lint, typecheck y tests en cada PR. Despliegue automático en cada push a main. Cada cambio, reversible.",
+    "cta.eyebrow":"Siguiente paso","cta.title":"Construyamos tu <em>herramienta.</em>","cta.lead":"Cuéntame qué necesita tu equipo o tus clientes. En menos de 48 horas te respondo con un diagnóstico, una estimación de alcance y la siguiente decisión.","cta.btn":"Empieza tu proyecto"
+   },
+   ca:{
+    "ptitle":"Serveis i procés — Eneko Navarrete",
+    "nav.home":"Inici","nav.work":"Feina","nav.services":"Serveis","nav.tarifas":"Tarifes","nav.contact":"Contacte","nav.cta":"Parlem-ne","nav.theme":"Canviar entre tema clar i fosc",
+    "hero.eyebrow":"Serveis · Procés","hero.title":"Programari tècnic<br>que s'utilitza de debò.",
+    "hero.lead":"Lògica densa, dades persistents, interfícies precises i entregables que el client es pot endur al món físic. I un procés clar, explicat pas a pas.",
+    "serv.eyebrow":"Què construeixo","serv.title":"Productes, no <em>plantilles.</em>",
+    "serv.1.t":"Aplicacions de càlcul","serv.1.p":"Calculadores d'enginyeria, costos, dimensionament o energia. Motor matemàtic provat i resultats en temps real.",
+    "serv.2.t":"Eines de pressupost","serv.2.p":"Cotitzadors amb tarifes, descomptes, IVA i exportació a PDF/XLSX. El teu comercial tanca venda des del mòbil.",
+    "serv.3.t":"Configuradors de producte","serv.3.p":"El client tria mides, materials i acabats; l'app calcula el preu i envia la comanda a l'ERP o per email.",
+    "serv.4.t":"Visualitzadors 3D tècnics","serv.4.p":"Models paramètrics al navegador amb Three.js: rotació, capes, mesuraments i exportació a OBJ/DXF.",
+    "serv.5.t":"Dashboards i back-office","serv.5.p":"Panells d'operació: usuaris, mètriques, facturació, auth amb OAuth, plans i permisos. Supabase + RLS des del primer dia.",
+    "serv.6.t":"PWA + desplegament continu","serv.6.p":"Apps instal·lables, mode offline, desplegament automàtic a Cloudflare o Vercel, domini propi i SEO tècnic cuidat.",
+    "proc.eyebrow":"Com treballo","proc.title":"Un ritme setmanal, <em>demos cada divendres.</em>","proc.lead":"Sense agències pel mig. Sense mesos de silenci. Cada setmana hi ha alguna cosa per tocar i una decisió per prendre.","proc.deliv":"Entregable",
+    "proc.p1.fase":"Fase 01","proc.p1.time":"30–45 min","proc.p1.t":"Conversa inicial","proc.p1.p":"M'expliques el problema i el que has provat. En sortim amb un mini-diagnòstic per escrit i una primera estimació d'abast.","proc.p1.deliv":"Document d'una pàgina amb objectiu, riscos i següent pas.",
+    "proc.p2.fase":"Fase 02","proc.p2.time":"3–5 dies","proc.p2.t":"Spec curta i proposta","proc.p2.p":"Converteixo la conversa en un document tècnic breu: què es construeix, què no, com es mesura l'èxit, en quantes iteracions i a quin preu.","proc.p2.deliv":"Spec + pressupost tancat per fases.","proc.p2.pf":"Converteixo la conversa en un document tècnic breu: què es construeix, què no, com es mesura l'èxit i a quin preu.",
+    "proc.p3.fase":"Fase 03","proc.p3.time":"Cada divendres","proc.p3.t":"Iteracions setmanals amb demo","proc.p3.p":"Cada dilluns prioritzem junts el de la setmana. El codi és al teu GitHub des del primer dia. Sense sorpreses al final.","proc.p3.deliv":"App desplegada cada setmana a staging + nota de canvis.","proc.p3.pf":"Cada dilluns prioritzem junts. El codi és al teu GitHub des del primer dia. Sense sorpreses al final.",
+    "proc.p4.fase":"Fase 04","proc.p4.time":"Producció","proc.p4.t":"Llançament i manteniment","proc.p4.p":"Desplegament a producció, domini propi, mètriques actives. Després: hores mensuals, evolutius, o t'endús el codi i operes sol.","proc.p4.deliv":"Handover tècnic, runbook i mètriques connectades.","proc.p4.pf":"Desplegament a producció, domini propi i mètriques actives. Després, evolutius o t'endús el codi.",
+    "proc.tl1":"Conversa","proc.tl2":"Spec","proc.tl3":"Iteracions","proc.tl4":"Llançament",
+    "why.eyebrow":"Per què contractar-me","why.title":"Criteris que gairebé ningú <em>aplica.</em>",
+    "why.1.t":"Parlo amb qui fa servir l'eina","why.1.p":"Abans d'escriure codi contacto amb els usuaris reals per entendre què els frena. Així va néixer el tall axial de DomesLab: d'una conversa, no d'una suposició.",
+    "why.2.t":"Reviso el que entrego","why.2.p":"Provo el producte, el deixo funcionant de debò i documentat — no una demo a mitges.",
+    "why.3.t":"Construeixo pensant en el futur","why.3.p":"Separo la lògica del producte per poder ampliar-lo o mantenir-lo sense refer-lo.",
+    "why.4.t":"Lliurament continu i auditable","why.4.p":"Lint, typecheck i tests a cada PR. Desplegament automàtic a cada push a main. Cada canvi, reversible.",
+    "cta.eyebrow":"Següent pas","cta.title":"Construïm la teva <em>eina.</em>","cta.lead":"Explica'm què necessita el teu equip o els teus clients. En menys de 48 hores et responc amb un diagnòstic, una estimació d'abast i la següent decisió.","cta.btn":"Comença el teu projecte"
+   },
+   en:{
+    "ptitle":"Services and process — Eneko Navarrete",
+    "nav.home":"Home","nav.work":"Work","nav.services":"Services","nav.tarifas":"Pricing","nav.contact":"Contact","nav.cta":"Let's talk","nav.theme":"Toggle light / dark theme",
+    "hero.eyebrow":"Services · Process","hero.title":"Technical software<br>that actually gets used.",
+    "hero.lead":"Dense logic, persistent data, precise interfaces and deliverables the client can take into the physical world. And a clear process, told step by step.",
+    "serv.eyebrow":"What I build","serv.title":"Products, not <em>templates.</em>",
+    "serv.1.t":"Calculation apps","serv.1.p":"Engineering, cost, sizing or energy calculators. A tested math engine and real-time results.",
+    "serv.2.t":"Quoting tools","serv.2.p":"Quoters with rates, discounts, VAT and export to PDF/XLSX. Your sales rep closes deals from their phone.",
+    "serv.3.t":"Product configurators","serv.3.p":"The client picks sizes, materials and finishes; the app computes the price and sends the order to the ERP or by email.",
+    "serv.4.t":"Technical 3D viewers","serv.4.p":"Parametric models in the browser with Three.js: rotation, layers, measurements and export to OBJ/DXF.",
+    "serv.5.t":"Dashboards and back-office","serv.5.p":"Operations panels: users, metrics, billing, OAuth auth, plans and permissions. Supabase + RLS from day one.",
+    "serv.6.t":"PWA + continuous deployment","serv.6.p":"Installable apps, offline mode, automatic deployment on Cloudflare or Vercel, your own domain and careful technical SEO.",
+    "proc.eyebrow":"How I work","proc.title":"A weekly rhythm, <em>demos every Friday.</em>","proc.lead":"No agencies in between. No months of silence. Every week there's something to touch and a decision to make.","proc.deliv":"Deliverable",
+    "proc.p1.fase":"Phase 01","proc.p1.time":"30–45 min","proc.p1.t":"Initial conversation","proc.p1.p":"You tell me the problem and what you've tried. We come out with a written mini-diagnosis and a first scope estimate.","proc.p1.deliv":"One-page document with goal, risks and next step.",
+    "proc.p2.fase":"Phase 02","proc.p2.time":"3–5 days","proc.p2.t":"Short spec and proposal","proc.p2.p":"I turn the conversation into a brief technical document: what gets built, what doesn't, how success is measured, in how many iterations and at what price.","proc.p2.deliv":"Spec + fixed quote by phases.","proc.p2.pf":"I turn the conversation into a brief technical document: what gets built, what doesn't, how success is measured and at what price.",
+    "proc.p3.fase":"Phase 03","proc.p3.time":"Every Friday","proc.p3.t":"Weekly iterations with a demo","proc.p3.p":"Every Monday we prioritise the week together. The code is in your GitHub from day one. No surprises at the end.","proc.p3.deliv":"App deployed to staging every week + changelog.","proc.p3.pf":"Every Monday we prioritise together. The code is in your GitHub from day one. No surprises at the end.",
+    "proc.p4.fase":"Phase 04","proc.p4.time":"Production","proc.p4.t":"Launch and maintenance","proc.p4.p":"Deploy to production, your own domain, live metrics. Afterwards: monthly hours, enhancements, or you take the code and run it yourself.","proc.p4.deliv":"Technical handover, runbook and connected metrics.","proc.p4.pf":"Deploy to production, your own domain and live metrics. Afterwards, enhancements or you take the code.",
+    "proc.tl1":"Conversation","proc.tl2":"Spec","proc.tl3":"Iterations","proc.tl4":"Launch",
+    "why.eyebrow":"Why hire me","why.title":"Criteria almost nobody <em>applies.</em>",
+    "why.1.t":"I talk to whoever uses the tool","why.1.p":"Before writing code I reach out to the real users to understand what holds them back. That's how DomesLab's axial cut was born: from a conversation, not an assumption.",
+    "why.2.t":"I review what I deliver","why.2.p":"I test the product, leave it truly working and documented — not a half-finished demo.",
+    "why.3.t":"I build with the future in mind","why.3.p":"I separate the product logic so it can be extended or maintained without rebuilding it.",
+    "why.4.t":"Continuous, auditable delivery","why.4.p":"Lint, typecheck and tests on every PR. Automatic deployment on every push to main. Every change, reversible.",
+    "cta.eyebrow":"Next step","cta.title":"Let's build your <em>tool.</em>","cta.lead":"Tell me what your team or your clients need. In under 48 hours I'll reply with a diagnosis, a scope estimate and the next decision.","cta.btn":"Start your project"
+   }
+  };
+  window.I18N=I18N;
+  var LANGS=["es","ca","en"],root=document.documentElement;
+  function applyLang(lang){
+    if(LANGS.indexOf(lang)<0)lang="es";
+    var d=I18N[lang]||I18N.es;
+    document.querySelectorAll("[data-i18n]").forEach(function(el){var k=el.getAttribute("data-i18n");if(d[k]!=null)el.textContent=d[k];});
+    document.querySelectorAll("[data-i18n-html]").forEach(function(el){var k=el.getAttribute("data-i18n-html");if(d[k]!=null)el.innerHTML=d[k];});
+    document.querySelectorAll("[data-i18n-aria]").forEach(function(el){var k=el.getAttribute("data-i18n-aria");if(d[k]!=null){el.setAttribute("aria-label",d[k]);el.setAttribute("title",d[k]);}});
+    var tEl=document.querySelector("[data-i18n-title]");if(tEl){var tk=tEl.getAttribute("data-i18n-title");if(d[tk]!=null)document.title=d[tk];}
+    root.setAttribute("lang",lang);
+    document.querySelectorAll(".lang button").forEach(function(b){var on=b.getAttribute("data-lang")===lang;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on?"true":"false");});
+    window.__lang=lang;
+    try{localStorage.setItem("eneko.lang",lang);}catch(e){}
+    window.dispatchEvent(new CustomEvent("langchange",{detail:lang}));
+  }
+  window.applyLang=applyLang;
+  document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",function(){applyLang(b.getAttribute("data-lang"));});});
+  var startLang="es";try{var s=localStorage.getItem("eneko.lang");if(s)startLang=s;}catch(e){}
+  applyLang(startLang);
+
+  var THEME_COLOR={light:"#f2f0ea",dark:"#141019"};
+  function applyTheme(theme,animate){
+    theme=theme==="dark"?"dark":"light";
+    if(animate){root.classList.add("theme-anim");setTimeout(function(){root.classList.remove("theme-anim");},480);}
+    if(theme==="dark")root.setAttribute("data-theme","dark");else root.removeAttribute("data-theme");
+    var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",THEME_COLOR[theme]);
+    document.querySelectorAll(".theme-toggle").forEach(function(b){b.setAttribute("aria-pressed",theme==="dark"?"true":"false");});
+    try{localStorage.setItem("eneko.theme",theme);}catch(e){}
+  }
+  var startTheme="light";try{var st=localStorage.getItem("eneko.theme");if(st==="dark"||st==="light")startTheme=st;}catch(e){}
+  applyTheme(startTheme,false);
+  document.querySelectorAll(".theme-toggle").forEach(function(btn){btn.addEventListener("click",function(){var next=root.getAttribute("data-theme")==="dark"?"light":"dark";applyTheme(next,true);});});
+})();
+</script>
+
+</body>
+</html>
