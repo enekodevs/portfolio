@@ -111,7 +111,8 @@ header.site{position:sticky;top:0;z-index:40;background:rgba(10,12,15,.86);backd
 .reserva input,.reserva select{width:100%;background:var(--fondo-2);border:1px solid var(--linea);border-radius:12px;color:var(--crema);font:inherit;padding:13px 14px;margin-top:6px}
 .reserva input:focus,.reserva select:focus{outline:2px solid var(--acento);outline-offset:0;border-color:transparent}
 .reserva .ok{display:none;background:rgba(215,247,91,.12);border:1px solid rgba(215,247,91,.4);border-radius:12px;padding:16px;font-size:.95rem}
-.reserva .ok.show{display:block}
+.reserva .ok.show{display:flex;gap:12px;align-items:flex-start}
+.reserva .ok-mark{width:22px;height:22px;flex:0 0 auto;color:var(--acento);margin-top:1px}
 .reserva .pasos{list-style:none;display:flex;flex-direction:column;gap:16px}
 .reserva .pasos li{display:flex;gap:14px;align-items:flex-start}
 .reserva .pasos b{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;color:var(--acento);line-height:1.1}
@@ -145,9 +146,12 @@ footer.site{background:var(--fondo-2);color:rgba(243,244,239,.65);font-size:.88r
 .legal a{text-decoration:underline}
 
 /* ---------- MOTION ---------- */
+.scrollbar{position:fixed;top:0;left:0;height:3px;width:100%;z-index:60;
+  background:linear-gradient(90deg,var(--acento),var(--naranja));
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .1s linear}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--rd,0ms)}
 .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion: reduce){.reveal{opacity:1!important;transform:none!important;transition:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1!important;transform:none!important;transition:none}.scrollbar{display:none}html{scroll-behavior:auto}}
 
 /* ---------- RESPONSIVE ---------- */
 @media(min-width:820px){
@@ -159,6 +163,7 @@ footer.site{background:var(--fondo-2);color:rgba(243,244,239,.65);font-size:.88r
 </style>
 </head>
 <body>
+<div class="scrollbar" id="scrollbar" aria-hidden="true"></div>
 
 <div class="demoband"><span lang="es">DEMO — Así podría ser la web de tu gimnasio · hecha por <a href="https://enekodevs.com" target="_blank" rel="noopener">enekodevs.com</a></span><span lang="eu">DEMOA — Zure gimnasioaren webgunea horrelakoa izan liteke · <a href="https://enekodevs.com" target="_blank" rel="noopener">enekodevs.com</a>-ek egina</span></div>
 
@@ -236,7 +241,7 @@ footer.site{background:var(--fondo-2);color:rgba(243,244,239,.65);font-size:.88r
         <select id="f-dia"><option lang="es">Lunes · 07:30</option><option lang="eu">Astelehena · 07:30</option><option lang="es">Lunes · 18:30</option><option lang="eu">Astelehena · 18:30</option><option lang="es">Miércoles · 10:00</option><option lang="eu">Asteazkena · 10:00</option><option lang="es">Viernes · 20:00</option><option lang="eu">Ostirala · 20:00</option></select></div>
       <div><label for="f-tel"><span lang="es">WhatsApp (para la confirmación)</span><span lang="eu">WhatsApp (baieztapenerako)</span></label><input id="f-tel" type="tel" placeholder="600 000 000"></div>
       <button class="btn" type="submit" style="justify-content:center"><span lang="es">Reservar plaza</span><span lang="eu">Plaza erreserbatu</span></button>
-      <div class="ok" id="reserva-ok"><span lang="es">✅ Plaza reservada (demo). En la web real, ahora mismo te llegaría la confirmación al WhatsApp.</span><span lang="eu">✅ Plaza erreserbatuta (demoa). Benetako webgunean, baieztapena WhatsApp-era iritsiko litzaizuke oraintxe.</span></div>
+      <div class="ok" id="reserva-ok"><svg class="ok-mark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.7l5.3 5.3L20 7.3" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span lang="es">Plaza reservada (demo). En la web real, ahora mismo te llegaría la confirmación al WhatsApp.</span><span lang="eu">Plaza erreserbatuta (demoa). Benetako webgunean, baieztapena WhatsApp-era iritsiko litzaizuke oraintxe.</span></div>
     </form>
   </div>
 </div></section>
@@ -338,6 +343,17 @@ footer.site{background:var(--fondo-2);color:rgba(243,244,239,.65);font-size:.88r
       document.getElementById("reserva-ok").classList.add("show");
     });
   }
+
+  /* barra de progreso de scroll */
+  var bar = document.getElementById("scrollbar");
+  function onScroll(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var p = max > 0 ? h.scrollTop / max : 0;
+    if(bar) bar.style.transform = "scaleX(" + p + ")";
+  }
+  document.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
 
   /* reveal */
   if(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
