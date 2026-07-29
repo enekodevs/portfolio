@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n-title="ptitle">Com vaig construir DomesLab — cas tècnic | Eneko Navarrete</title>
+<meta name="description" content="Cas tècnic de DomesLab: com un full de càlcul legacy es va convertir en un SaaS amb 3D en temps real, plànols PDF i BOM exportable. Motor matemàtic testat i desplegament continu.">
+<link rel="canonical" href="https://enekodevs.com/ca/domeslab">
+<link rel="alternate" hreflang="es" href="https://enekodevs.com/domeslab">
+<link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/domeslab">
+<link rel="alternate" hreflang="en" href="https://enekodevs.com/en/domeslab">
+<link rel="alternate" hreflang="x-default" href="https://enekodevs.com/domeslab">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Eneko Navarrete">
+<meta property="og:url" content="https://enekodevs.com/ca/domeslab">
+<meta property="og:title" content="Com vaig construir DomesLab — cas tècnic | Eneko Navarrete">
+<meta property="og:description" content="De full de càlcul legacy a SaaS en producció: motor geodèsic testat, 3D en temps real, plànols PDF i BOM exportable. El cas tècnic, pas a pas.">
+<meta property="og:image" content="https://enekodevs.com/screenshots/editor-3d.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Com vaig construir DomesLab — cas tècnic | Eneko Navarrete">
+<meta name="twitter:description" content="De full de càlcul legacy a SaaS en producció: el cas tècnic de DomesLab.">
+<meta name="twitter:image" content="https://enekodevs.com/screenshots/editor-3d.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://enekodevs.com/#person",
+      "name": "Eneko Navarrete",
+      "url": "https://enekodevs.com/",
+      "email": "mailto:eneko.devs@gmail.com",
+      "sameAs": [
+        "https://github.com/enekodevs",
+        "https://www.linkedin.com/in/eneko-navarrete"
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://enekodevs.com/domeslab#article",
+      "headline": "Cómo construí DomesLab: de hoja de cálculo legacy a SaaS en producción",
+      "url": "https://enekodevs.com/ca/domeslab",
+      "inLanguage": "ca",
+      "datePublished": "2026-07-14",
+      "dateModified": "2026-07-14",
+      "author": {"@id": "https://enekodevs.com/#person"},
+      "image": "https://enekodevs.com/screenshots/editor-3d.png",
+      "keywords": "domos geodésicos, configurador 3D, Three.js, React, TypeScript, SaaS, PWA",
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "DomesLab",
+        "url": "https://domeslab.com/",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Web",
+        "author": {"@id": "https://enekodevs.com/#person"}
+      }
+    }
+  ]
+}
+</script>
+<link rel="preload" href="/fonts/archivo-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+<script>try{var _t=localStorage.getItem("eneko.theme");if(_t==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}</script>
+<style>
+/* Fuentes self-hosted, subset latin (WEB-16). Ficheros en /fonts/. */
+@font-face{font-family:'Archivo';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/archivo-500.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/archivo-600.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/archivo-700.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:800;font-display:swap;src:url(/fonts/archivo-800.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:900;font-display:swap;src:url(/fonts/archivo-900.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/ibm-plex-mono-400.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/ibm-plex-mono-500.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/ibm-plex-sans-400.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/ibm-plex-sans-500.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/ibm-plex-sans-600.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+
+  /* enekodevs — CASO TÉCNICO DomesLab (híbrido). Artículo editorial, mismos tokens. */
+  :root{
+    --paper:#f2f0ea;--paper-2:#eae7df;--card:#fbfaf6;--ink:#15171a;--ink-2:#3c4147;--ink-3:#727880;
+    --plum:#26202b;--plum-2:#1b1620;
+    --cobalt:#946412;--cobalt-2:#6f4b0c;--amber:#e6a92e;--amber-soft:#c9962b;--green:#c9962b;
+    --line:rgba(21,23,26,.12);--line-2:rgba(21,23,26,.24);
+    --d-line:rgba(242,240,234,.16);--d-fg:#efece4;--d-fg-2:#a7a3ac;
+    --shadow:0 40px 80px -46px rgba(21,23,26,.5);
+    --ample:1220px;--gut:clamp(20px,4vw,52px);--ease:cubic-bezier(.2,.7,.2,1);
+  }
+  /* ---------- TEMA OSCURO ---------- */
+  [data-theme="dark"]{
+    --paper:#141019;--paper-2:#1b1620;--card:#221b2b;--ink:#efece4;--ink-2:#c6c1cc;--ink-3:#8d8797;
+    --plum:#0e0a14;--plum-2:#0a0710;
+    --cobalt:#e6a92e;--cobalt-2:#c9962b;--amber:#e6a92e;--amber-soft:#c9962b;--green:#c9962b;
+    --line:rgba(242,240,234,.13);--line-2:rgba(242,240,234,.26);
+    --d-line:rgba(242,240,234,.12);--d-fg:#efece4;--d-fg-2:#a7a3ac;
+    --shadow:0 40px 80px -46px rgba(0,0,0,.72);
+  }
+  html.theme-anim,html.theme-anim *{transition:background-color .45s var(--ease),color .45s var(--ease),border-color .45s var(--ease)!important}
+  [data-theme="dark"] header{background:linear-gradient(var(--paper),rgba(20,16,25,0))}
+  [data-theme="dark"] footer{background:var(--plum-2);color:var(--d-fg-2);border-top-color:var(--line)}
+  [data-theme="dark"] .btn{background:var(--ink);color:var(--plum-2)}
+
+  /* ---------- CONTROLES NAV (idioma + tema) ---------- */
+  .nav-ctl{display:flex;align-items:center;gap:10px}
+  .lang{display:inline-flex;align-items:center;gap:2px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+  .lang button{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.05em;color:var(--ink-3);background:transparent;border:0;cursor:pointer;padding:5px 8px;border-radius:999px;transition:color .2s var(--ease),background .2s var(--ease)}
+  .lang button:hover{color:var(--ink)}
+  .lang button.on{background:var(--ink);color:var(--paper)}
+  .theme-toggle{width:38px;height:38px;flex:none;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:border-color .2s var(--ease),transform .2s var(--ease)}
+  .theme-toggle:hover{border-color:var(--line-2);transform:translateY(-1px)}
+  .theme-toggle svg{width:16px;height:16px}
+  .theme-toggle .ic-sun{display:none}.theme-toggle .ic-moon{display:block}
+  [data-theme="dark"] .theme-toggle .ic-sun{display:block}[data-theme="dark"] .theme-toggle .ic-moon{display:none}
+  @media(max-width:520px){.brand .n span{display:none}.lang button{padding:5px 6px}.nav-ctl .btn{display:none}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:'Archivo',system-ui,sans-serif;letter-spacing:-.03em;line-height:.96;text-wrap:balance}
+  .wrap{max-width:var(--ample);margin:0 auto;padding:0 var(--gut)}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cobalt);display:inline-flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:28px;height:1px;background:currentColor;opacity:.6}
+  a:focus-visible,button:focus-visible{outline:2.5px solid var(--cobalt);outline-offset:4px;border-radius:4px}
+  ::selection{background:rgba(230,169,46,.22)}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;font-family:'Archivo',sans-serif;font-weight:700;font-size:.96rem;white-space:nowrap;background:var(--ink);color:var(--paper);border:1px solid transparent;cursor:pointer;transition:transform .22s var(--ease),box-shadow .22s var(--ease)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 34px -12px rgba(21,23,26,.5)}
+  .btn svg{width:16px;height:16px;transition:transform .22s var(--ease)}.btn:hover svg{transform:translateX(3px)}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:linear-gradient(var(--paper),rgba(242,240,234,0))}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px var(--gut);max-width:var(--ample);margin:0 auto}
+  .brand{display:flex;align-items:center;gap:11px}
+  .mono-mark{width:34px;height:34px;border:1.5px solid var(--ink);border-radius:8px;display:grid;place-items:center;font-family:'Archivo',sans-serif;font-weight:900;font-size:.82rem}
+  .brand .n{font-family:'Archivo',sans-serif;font-weight:700;font-size:.95rem}
+  .brand .n span{font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:.64rem;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase;display:block}
+  .nlinks{display:flex;gap:22px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
+  .nlinks a{color:var(--ink-2);transition:color .2s}.nlinks a:hover{color:var(--ink)}.nlinks a.on{color:var(--cobalt)}
+  @media(max-width:820px){.nlinks{display:none}}
+
+  /* ---------- ARTÍCULO ---------- */
+  .a-hero{padding:150px 0 30px}
+  .a-hero .back{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:inline-block;margin-bottom:26px;transition:color .2s}
+  .a-hero .back:hover{color:var(--cobalt)}
+  .a-hero h1{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(2.6rem,7vw,5.4rem);letter-spacing:-.04em;line-height:.94;text-transform:uppercase;margin:.22em 0 0}
+  .a-hero h1 em{font-style:normal;color:var(--cobalt)}
+  .a-hero .lead{max-width:62ch;font-size:clamp(1.05rem,1.6vw,1.28rem);color:var(--ink-2);margin-top:24px}
+  .a-hero .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .a-hero .chips span{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.05em;color:var(--ink-2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:var(--card)}
+  .a-hero .demo{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--cobalt);margin-top:24px;border-bottom:1px solid currentColor;padding-bottom:2px}
+
+  .art{max-width:880px;margin:0 auto;padding:30px var(--gut) 40px}
+  .a-sec{margin-top:58px}
+  .a-sec .k-num{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt)}
+  .a-sec h2{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(1.7rem,3.6vw,2.6rem);text-transform:uppercase;letter-spacing:-.03em;margin:.3em 0 0}
+  .a-sec p{color:var(--ink-2);margin-top:18px;max-width:68ch}
+  .a-list{list-style:none;margin-top:22px;border-top:1px solid var(--line)}
+  .a-list li{display:flex;gap:16px;padding:13px 2px;border-bottom:1px solid var(--line);color:var(--ink-2)}
+  .a-list li::before{content:"—";color:var(--amber);font-family:'IBM Plex Mono',monospace;flex-shrink:0}
+  .feat-grid{display:grid;gap:14px;margin-top:26px}
+  @media(min-width:680px){.feat-grid{grid-template-columns:1fr 1fr}}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+  .feat .t{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.04rem;letter-spacing:-.01em}
+  .feat p{font-size:.92rem;margin-top:8px}
+  .shots{display:grid;gap:18px;margin-top:26px}
+  @media(min-width:680px){.shots{grid-template-columns:1fr 1fr}}
+  .shots figure{margin:0}
+  .shots img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line);background:var(--paper-2)}
+  .shots figcaption{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.04em;color:var(--ink-3);margin-top:9px}
+  .stack-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .stack-chips span{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.04em;color:var(--ink-2);border:1px solid var(--line);border-radius:999px;padding:7px 13px;background:var(--card)}
+
+  /* ---------- CTA ---------- */
+  .a-cta{margin:70px 0 90px}
+  .a-cta .panel{background:var(--plum);color:var(--d-fg);border-radius:22px;padding:clamp(30px,5vw,54px);position:relative;overflow:hidden}
+  .a-cta .panel::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--d-line) 1px,transparent 1px),linear-gradient(90deg,var(--d-line) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(90% 80% at 85% 8%,#000,transparent 72%);mask-image:radial-gradient(90% 80% at 85% 8%,#000,transparent 72%)}
+  .a-cta .in{position:relative;z-index:2}
+  .a-cta h2{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(1.8rem,4.4vw,3rem);text-transform:uppercase;letter-spacing:-.03em;max-width:22ch}
+  .a-cta h2 em{font-style:normal;color:var(--amber)}
+  .a-cta p{color:var(--d-fg-2);max-width:56ch;margin-top:16px}
+  .a-cta .row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:28px}
+  .a-cta .btn{background:var(--amber);color:var(--plum)}
+  .a-cta .alt{font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--d-fg-2);border-bottom:1px solid currentColor;padding-bottom:2px}
+  .a-cta .alt:hover{color:var(--d-fg)}
+
+  footer{background:var(--ink);color:rgba(242,240,234,.55);border-top:1px solid rgba(242,240,234,.12)}
+  .foot{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;padding:26px var(--gut);max-width:var(--ample);margin:0 auto;font-family:'IBM Plex Mono',monospace;font-size:.74rem}
+  .foot .n{color:#fff;font-family:'Archivo',sans-serif;font-weight:700}.foot-nav{display:flex;gap:16px}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--rd,0ms)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1!important;transform:none!important;transition:none}html{scroll-behavior:auto}}
+</style>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#f2f0ea">
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="/ca/"><span class="mono-mark">EN</span><span class="n">Eneko Navarrete<span>Design Engineer</span></span></a>
+    <nav class="nlinks">
+      <a href="/ca/" data-i18n="nav.home">Inici</a>
+      <a href="/ca/trabajo" class="on" data-i18n="nav.work">Feina</a>
+      <a href="/ca/servicios" data-i18n="nav.services">Serveis</a>
+      <a href="/ca/tarifas" data-i18n="nav.tarifas">Tarifes</a>
+      <a href="/ca/contacto" data-i18n="nav.contact">Contacte</a>
+    </nav>
+    <div class="nav-ctl">
+      <div class="lang" role="group" aria-label="Idioma / Llengua / Language">
+        <button type="button" data-lang="es" class="on">ES</button>
+        <button type="button" data-lang="ca">CA</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <button class="theme-toggle" type="button" id="themeToggle" aria-label="Cambiar entre tema claro y oscuro" data-i18n-aria="nav.theme">
+        <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a class="btn" href="mailto:eneko.devs@gmail.com?subject=Proyecto%20web%20a%20medida"><span data-i18n="nav.cta">Enviar email</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO del artículo -->
+<section class="a-hero">
+  <div class="wrap">
+    <a class="back" href="/ca/trabajo" data-i18n="art.back">← Tota la feina</a>
+    <div>
+      <span class="eyebrow" data-i18n="art.eyebrow">Cas tècnic · 2025–2026 · en producció</span>
+      <h1 data-i18n-html="art.h1">Com vaig construir <em>DomesLab.</em></h1>
+      <p class="lead" data-i18n="art.lead">Un configurador-calculadora web per dissenyar, pressupostar i construir cúpules geodèsiques. Substitueix un full de càlcul legacy i una sessió de CAD per un flux al navegador: 3D en temps real, plànols PDF i BOM (llista de materials) exportable.</p>
+      <div class="chips"><span>React 18</span><span>TypeScript strict</span><span>Three.js + r3f</span><span>Supabase</span><span>Stripe</span><span>PWA</span></div>
+      <br>
+      <a class="demo" href="https://domeslab.com/" target="_blank" rel="noopener" data-i18n="art.demo">Veure demo en viu · domeslab.com →</a>
+    </div>
+  </div>
+</section>
+
+<article class="art">
+
+  <!-- 01 · EL PROBLEMA -->
+  <section class="a-sec reveal">
+    <span class="k-num">01</span>
+    <h2 data-i18n="art.prob.title">El problema</h2>
+    <p data-i18n="art.prob.lead">El punt de partida era el flux habitual del sector: un full de càlcul heretat i un prototip HTML autocontingut (Acidome). Funcionava, però cada pressupost era fràgil i lent.</p>
+    <ul class="a-list">
+      <li data-i18n="art.prob.1">Fulls de càlcul fràgils on un error trenca tots els pressupostos.</li>
+      <li data-i18n="art.prob.2">Sense previsualització 3D: impossible mostrar el resultat al client.</li>
+      <li data-i18n="art.prob.3">Talls i bisells calculats a mà, propensos a errors.</li>
+      <li data-i18n="art.prob.4">Sense reutilització de plantilles entre projectes.</li>
+    </ul>
+  </section>
+
+  <!-- 02 · LA SOLUCIÓN -->
+  <section class="a-sec reveal">
+    <span class="k-num">02</span>
+    <h2 data-i18n="art.sol.title">La solució</h2>
+    <p data-i18n="art.sol.p1">Vaig partir del prototip Acidome i el vaig convertir en una app moderna: Vite, React 18, TypeScript estricte i react-three-fiber. El motor matemàtic viu en codi pur i testat, i resol icosaedres, octaedres i tetraedres amb subdivisió geodèsica V1–V6.</p>
+    <p data-i18n="art.sol.p2">Calcula barres per longitud (±0.5 mm), angles de tall compostos, coberta, ferratges i cost total — tot en menys de 200 ms mentre manipules l'escena 3D.</p>
+    <p data-i18n="art.sol.p3">Funcions com el tall axial Good Karma Pro van sortir de parlar amb constructors reals. El criteri: ensenyar el que cal decidir i amagar la matemàtica que no necessiten.</p>
+    <ul class="a-list">
+      <li data-i18n="art.sol.1">Motor matemàtic pur amb tests de paritat contra el legacy.</li>
+      <li data-i18n="art.sol.2">Visor 3D interactiu amb r3f: càmera, capes, mode explosionat.</li>
+      <li data-i18n="art.sol.3">Talls, bisells i angles compostos calculats a l'instant.</li>
+      <li data-i18n="art.sol.4">SaaS multiusuari amb auth, plans i projectes persistents.</li>
+    </ul>
+  </section>
+
+  <!-- 03 · POR DENTRO -->
+  <section class="a-sec reveal">
+    <span class="k-num">03</span>
+    <h2 data-i18n="art.feat.title">Per dins</h2>
+    <div class="feat-grid">
+      <div class="feat"><div class="t" data-i18n="art.f1.t">Motor geodèsic V1–V6</div><p data-i18n="art.f1.p">Icosaedre, octaedre i tetraedre amb subdivisió fins a V6, projecció a esfera i porcions configurables.</p></div>
+      <div class="feat"><div class="t" data-i18n="art.f2.t">Talls Good Karma</div><p data-i18n="art.f2.p">Angles compostos de serra d'engletar, bisells i longituds reals després de connexió, llestos per al taller.</p></div>
+      <div class="feat"><div class="t" data-i18n="art.f3.t">Visor 3D interactiu</div><p data-i18n="art.f3.p">Càmera orbital, selecció de barres, capes, materials de fusta i mode explosionat amb un slider.</p></div>
+      <div class="feat"><div class="t" data-i18n="art.f4.t">Plànols PDF + BOM</div><p data-i18n="art.f4.p">Plànol de despeçament amb bin-packing 1D, BOM editable amb preus i exportació XLSX en 4 fulls.</p></div>
+      <div class="feat"><div class="t" data-i18n="art.f5.t">Plantilles llestes</div><p data-i18n="art.f5.p">Glamping, hivernacle, esdeveniment, mini-cúpula. Punt de partida amb un clic.</p></div>
+      <div class="feat"><div class="t" data-i18n="art.f6.t">SaaS multiusuari</div><p data-i18n="art.f6.p">Comptes, projectes persistits, 4 trams de subscripció i pagament amb Stripe.</p></div>
+    </div>
+    <div class="shots">
+      <figure><img src="/screenshots/editor-3d.webp" width="1600" height="900" alt="Editor 3D de DomesLab con el domo y las barras clasificadas por color" loading="lazy" decoding="async"><figcaption data-i18n="art.img1">L'editor 3D: barres classificades per color segons la longitud.</figcaption></figure>
+      <figure><img src="/screenshots/bom.webp" width="1600" height="900" alt="Panel BOM de DomesLab con barras, cubierta, herrajes y totales" loading="lazy" decoding="async"><figcaption data-i18n="art.img2">El BOM: barres, coberta, ferratges i totals.</figcaption></figure>
+      <figure><img src="/screenshots/despiece.webp" width="1600" height="900" alt="Plano de despiece de DomesLab con bin-packing 1D" loading="lazy" decoding="async"><figcaption data-i18n="art.img3">Plànol de despeçament amb bin-packing 1D.</figcaption></figure>
+      <figure><img src="/screenshots/diagrama-corte.webp" width="1600" height="900" alt="Diagrama de corte de DomesLab con ángulos y biseles" loading="lazy" decoding="async"><figcaption data-i18n="art.img4">Diagrama de tall amb angles i bisells.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 04 · EL RESULTADO -->
+  <section class="a-sec reveal">
+    <span class="k-num">04</span>
+    <h2 data-i18n="art.res.title">El resultat</h2>
+    <ul class="a-list">
+      <li data-i18n="art.res.1">App PWA instal·lable, mode offline i rendiment &lt;200 ms.</li>
+      <li data-i18n="art.res.2">Exportació a PDF, XLSX, CSV, OBJ i DXF amb un clic.</li>
+      <li data-i18n="art.res.3">Desplegament continu a Cloudflare a cada push a main.</li>
+      <li data-i18n="art.res.4">+34 tests unitaris, e2e Playwright i auditoria a11y en verd.</li>
+    </ul>
+    <p data-i18n="art.stack.title">Stack complet:</p>
+    <div class="stack-chips"><span>Vite 5</span><span>React 18</span><span>TypeScript strict</span><span>Three.js + r3f</span><span>Tailwind</span><span>Zustand</span><span>Supabase</span><span>Stripe</span><span>Vitest</span><span>Playwright</span><span>jsPDF</span><span>SheetJS</span><span>Cloudflare Pages</span></div>
+  </section>
+
+  <!-- CTA -->
+  <section class="a-cta reveal">
+    <div class="panel"><div class="in">
+      <span class="eyebrow" data-i18n="art.cta.eyebrow">Següent pas</span>
+      <h2 data-i18n-html="art.cta.title">El teu càlcul viu en un <em>full de càlcul fràgil?</em></h2>
+      <p data-i18n="art.cta.lead">Explica'm el procés que vols convertir en eina. En menys de 48 hores et responc amb un diagnòstic i una estimació d'abast. Sense compromís.</p>
+      <div class="row">
+        <a class="btn" href="/ca/contacto"><span data-i18n="art.cta.btn">Explica'm el teu cas</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="alt" href="https://domeslab.com/" target="_blank" rel="noopener" data-i18n="art.cta.demo">Veure DomesLab en viu</a>
+      </div>
+    </div></div>
+  </section>
+
+</article>
+
+<footer><div class="foot">
+  <span class="n">ENEKO NAVARRETE</span>
+  <div class="foot-nav"><a href="/ca/" data-i18n="nav.home">Inici</a><a href="/ca/trabajo" data-i18n="nav.work">Feina</a><a href="/ca/servicios" data-i18n="nav.services">Serveis</a><a href="/ca/tarifas" data-i18n="nav.tarifas">Tarifes</a></div>
+  <span><a href="https://www.linkedin.com/in/eneko-navarrete" target="_blank" rel="noopener">LinkedIn</a></span>
+</div></footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduce) return;
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll(".reveal").forEach(function(el,i){el.style.setProperty("--rd",(i*90)+"ms");io.observe(el);});
+})();
+</script>
+
+<!-- i18n (ES/CA/EN) + tema claro/oscuro -->
+<script>
+(function(){
+  var I18N={
+   es:{
+    "ptitle":"Cómo construí DomesLab — caso técnico | Eneko Navarrete",
+    "nav.home":"Inicio","nav.work":"Trabajo","nav.services":"Servicios","nav.tarifas":"Tarifas","nav.contact":"Contacto","nav.cta":"Enviar email","nav.theme":"Cambiar entre tema claro y oscuro",
+    "art.back":"← Todo el trabajo",
+    "art.eyebrow":"Caso técnico · 2025–2026 · en producción",
+    "art.h1":"Cómo construí <em>DomesLab.</em>",
+    "art.lead":"Un configurador-calculadora web para diseñar, presupuestar y construir domos geodésicos. Sustituye una hoja de cálculo legacy y una sesión de CAD por un flujo en el navegador: 3D en tiempo real, planos PDF y BOM (lista de materiales) exportable.",
+    "art.demo":"Ver demo en vivo · domeslab.com →",
+    "art.prob.title":"El problema",
+    "art.prob.lead":"El punto de partida era el flujo habitual del sector: una hoja de cálculo heredada y un prototipo HTML autocontenido (Acidome). Funcionaba, pero cada presupuesto era frágil y lento.",
+    "art.prob.1":"Hojas de cálculo frágiles donde un error rompe todos los presupuestos.",
+    "art.prob.2":"Sin previsualización 3D: imposible enseñar el resultado al cliente.",
+    "art.prob.3":"Cortes y biseles calculados a mano, propensos a fallo.",
+    "art.prob.4":"Sin reutilización de plantillas entre proyectos.",
+    "art.sol.title":"La solución",
+    "art.sol.p1":"Partí del prototipo Acidome y lo convertí en una app moderna: Vite, React 18, TypeScript estricto y react-three-fiber. El motor matemático vive en código puro y testeado, y resuelve icosaedros, octaedros y tetraedros con subdivisión geodésica V1–V6.",
+    "art.sol.p2":"Calcula barras por longitud (±0.5 mm), ángulos de corte compuestos, cubierta, herrajes y coste total — todo en menos de 200 ms mientras manipulas la escena 3D.",
+    "art.sol.p3":"Funciones como el corte axial Good Karma Pro salieron de hablar con constructores reales. El criterio: enseñar lo que hay que decidir y esconder la matemática que no necesitan.",
+    "art.sol.1":"Motor matemático puro con tests de paridad contra el legacy.",
+    "art.sol.2":"Visor 3D interactivo con r3f: cámara, capas, modo explosionado.",
+    "art.sol.3":"Cortes, biseles y ángulos compuestos calculados al instante.",
+    "art.sol.4":"SaaS multiusuario con auth, planes y proyectos persistentes.",
+    "art.feat.title":"Por dentro",
+    "art.f1.t":"Motor geodésico V1–V6","art.f1.p":"Icosaedro, octaedro y tetraedro con subdivisión hasta V6, proyección a esfera y porciones configurables.",
+    "art.f2.t":"Cortes Good Karma","art.f2.p":"Ángulos compuestos de sierra ingletadora, biseles y longitudes reales tras conexión, listos para taller.",
+    "art.f3.t":"Visor 3D interactivo","art.f3.p":"Cámara orbital, selección de barras, capas, materiales de madera y modo explosionado con un slider.",
+    "art.f4.t":"Planos PDF + BOM","art.f4.p":"Plano de despiece con bin-packing 1D, BOM editable con precios y exportación XLSX en 4 hojas.",
+    "art.f5.t":"Plantillas listas","art.f5.p":"Glamping, invernadero, evento, mini-domo. Punto de partida en un clic.",
+    "art.f6.t":"SaaS multiusuario","art.f6.p":"Cuentas, proyectos persistidos, 4 tramos de suscripción y pago con Stripe.",
+    "art.img1":"El editor 3D: barras clasificadas por color según longitud.",
+    "art.img2":"El BOM: barras, cubierta, herrajes y totales.",
+    "art.img3":"Plano de despiece con bin-packing 1D.",
+    "art.img4":"Diagrama de corte con ángulos y biseles.",
+    "art.res.title":"El resultado",
+    "art.res.1":"App PWA instalable, modo offline y rendimiento <200 ms.",
+    "art.res.2":"Exportación a PDF, XLSX, CSV, OBJ y DXF en un clic.",
+    "art.res.3":"Despliegue continuo en Cloudflare con cada push a main.",
+    "art.res.4":"+34 tests unitarios, e2e Playwright y auditoría a11y en verde.",
+    "art.stack.title":"Stack completo:",
+    "art.cta.eyebrow":"Siguiente paso",
+    "art.cta.title":"¿Tu cálculo vive en una <em>hoja de cálculo frágil?</em>",
+    "art.cta.lead":"Cuéntame el proceso que quieres convertir en herramienta. En menos de 48 horas te respondo con un diagnóstico y una estimación de alcance. Sin compromiso.",
+    "art.cta.btn":"Cuéntame tu caso",
+    "art.cta.demo":"Ver DomesLab en vivo"
+   },
+   ca:{
+    "ptitle":"Com vaig construir DomesLab — cas tècnic | Eneko Navarrete",
+    "nav.home":"Inici","nav.work":"Feina","nav.services":"Serveis","nav.tarifas":"Tarifes","nav.contact":"Contacte","nav.cta":"Enviar email","nav.theme":"Canviar entre tema clar i fosc",
+    "art.back":"← Tota la feina",
+    "art.eyebrow":"Cas tècnic · 2025–2026 · en producció",
+    "art.h1":"Com vaig construir <em>DomesLab.</em>",
+    "art.lead":"Un configurador-calculadora web per dissenyar, pressupostar i construir cúpules geodèsiques. Substitueix un full de càlcul legacy i una sessió de CAD per un flux al navegador: 3D en temps real, plànols PDF i BOM (llista de materials) exportable.",
+    "art.demo":"Veure demo en viu · domeslab.com →",
+    "art.prob.title":"El problema",
+    "art.prob.lead":"El punt de partida era el flux habitual del sector: un full de càlcul heretat i un prototip HTML autocontingut (Acidome). Funcionava, però cada pressupost era fràgil i lent.",
+    "art.prob.1":"Fulls de càlcul fràgils on un error trenca tots els pressupostos.",
+    "art.prob.2":"Sense previsualització 3D: impossible mostrar el resultat al client.",
+    "art.prob.3":"Talls i bisells calculats a mà, propensos a errors.",
+    "art.prob.4":"Sense reutilització de plantilles entre projectes.",
+    "art.sol.title":"La solució",
+    "art.sol.p1":"Vaig partir del prototip Acidome i el vaig convertir en una app moderna: Vite, React 18, TypeScript estricte i react-three-fiber. El motor matemàtic viu en codi pur i testat, i resol icosaedres, octaedres i tetraedres amb subdivisió geodèsica V1–V6.",
+    "art.sol.p2":"Calcula barres per longitud (±0.5 mm), angles de tall compostos, coberta, ferratges i cost total — tot en menys de 200 ms mentre manipules l'escena 3D.",
+    "art.sol.p3":"Funcions com el tall axial Good Karma Pro van sortir de parlar amb constructors reals. El criteri: ensenyar el que cal decidir i amagar la matemàtica que no necessiten.",
+    "art.sol.1":"Motor matemàtic pur amb tests de paritat contra el legacy.",
+    "art.sol.2":"Visor 3D interactiu amb r3f: càmera, capes, mode explosionat.",
+    "art.sol.3":"Talls, bisells i angles compostos calculats a l'instant.",
+    "art.sol.4":"SaaS multiusuari amb auth, plans i projectes persistents.",
+    "art.feat.title":"Per dins",
+    "art.f1.t":"Motor geodèsic V1–V6","art.f1.p":"Icosaedre, octaedre i tetraedre amb subdivisió fins a V6, projecció a esfera i porcions configurables.",
+    "art.f2.t":"Talls Good Karma","art.f2.p":"Angles compostos de serra d'engletar, bisells i longituds reals després de connexió, llestos per al taller.",
+    "art.f3.t":"Visor 3D interactiu","art.f3.p":"Càmera orbital, selecció de barres, capes, materials de fusta i mode explosionat amb un slider.",
+    "art.f4.t":"Plànols PDF + BOM","art.f4.p":"Plànol de despeçament amb bin-packing 1D, BOM editable amb preus i exportació XLSX en 4 fulls.",
+    "art.f5.t":"Plantilles llestes","art.f5.p":"Glamping, hivernacle, esdeveniment, mini-cúpula. Punt de partida amb un clic.",
+    "art.f6.t":"SaaS multiusuari","art.f6.p":"Comptes, projectes persistits, 4 trams de subscripció i pagament amb Stripe.",
+    "art.img1":"L'editor 3D: barres classificades per color segons la longitud.",
+    "art.img2":"El BOM: barres, coberta, ferratges i totals.",
+    "art.img3":"Plànol de despeçament amb bin-packing 1D.",
+    "art.img4":"Diagrama de tall amb angles i bisells.",
+    "art.res.title":"El resultat",
+    "art.res.1":"App PWA instal·lable, mode offline i rendiment <200 ms.",
+    "art.res.2":"Exportació a PDF, XLSX, CSV, OBJ i DXF amb un clic.",
+    "art.res.3":"Desplegament continu a Cloudflare a cada push a main.",
+    "art.res.4":"+34 tests unitaris, e2e Playwright i auditoria a11y en verd.",
+    "art.stack.title":"Stack complet:",
+    "art.cta.eyebrow":"Següent pas",
+    "art.cta.title":"El teu càlcul viu en un <em>full de càlcul fràgil?</em>",
+    "art.cta.lead":"Explica'm el procés que vols convertir en eina. En menys de 48 hores et responc amb un diagnòstic i una estimació d'abast. Sense compromís.",
+    "art.cta.btn":"Explica'm el teu cas",
+    "art.cta.demo":"Veure DomesLab en viu"
+   },
+   en:{
+    "ptitle":"How I built DomesLab — technical case study | Eneko Navarrete",
+    "nav.home":"Home","nav.work":"Work","nav.services":"Services","nav.tarifas":"Pricing","nav.contact":"Contact","nav.cta":"Send email","nav.theme":"Toggle light / dark theme",
+    "art.back":"← All work",
+    "art.eyebrow":"Technical case study · 2025–2026 · in production",
+    "art.h1":"How I built <em>DomesLab.</em>",
+    "art.lead":"A complete configurator-calculator web app to design, quote and build geodesic domes. It replaces a legacy spreadsheet and a CAD session with a browser flow: real-time 3D, PDF blueprints and an exportable BOM (bill of materials).",
+    "art.demo":"See live demo · domeslab.com →",
+    "art.prob.title":"The problem",
+    "art.prob.lead":"The starting point was the industry's usual flow: an inherited spreadsheet and a self-contained HTML prototype (Acidome). It worked, but every quote was fragile and slow.",
+    "art.prob.1":"Fragile spreadsheets where one error breaks every quote.",
+    "art.prob.2":"No 3D preview: impossible to show the result to the client.",
+    "art.prob.3":"Cuts and bevels calculated by hand, error-prone.",
+    "art.prob.4":"No template reuse across projects.",
+    "art.sol.title":"The solution",
+    "art.sol.p1":"I started from the Acidome prototype and turned it into a modern app: Vite, React 18, strict TypeScript and react-three-fiber. The math engine lives in pure, tested code and handles icosahedra, octahedra and tetrahedra with geodesic subdivision V1–V6.",
+    "art.sol.p2":"It computes beams by length (±0.5 mm), compound cut angles, cover, hardware and total cost — all in under 200 ms while you manipulate the 3D scene.",
+    "art.sol.p3":"Features like the Good Karma Pro axial cut came from talking to real builders. The principle: show what needs deciding and hide the math they don't need.",
+    "art.sol.1":"Pure math engine with parity tests against the legacy.",
+    "art.sol.2":"Interactive 3D viewer with r3f: camera, layers, exploded mode.",
+    "art.sol.3":"Cuts, bevels and compound angles computed instantly.",
+    "art.sol.4":"Multi-tenant SaaS with auth, plans and persistent projects.",
+    "art.feat.title":"Under the hood",
+    "art.f1.t":"Geodesic engine V1–V6","art.f1.p":"Icosahedron, octahedron and tetrahedron with subdivision up to V6, sphere projection and configurable portions.",
+    "art.f2.t":"Good Karma cuts","art.f2.p":"Compound miter saw angles, bevels and real lengths after connection, ready for the workshop.",
+    "art.f3.t":"Interactive 3D viewer","art.f3.p":"Orbit camera, beam selection, layers, wood materials and exploded mode with a slider.",
+    "art.f4.t":"PDF blueprints + BOM","art.f4.p":"Cut plan with 1D bin-packing, editable BOM with prices and XLSX export in 4 sheets.",
+    "art.f5.t":"Ready-made templates","art.f5.p":"Glamping, greenhouse, event, mini-dome. A starting point in one click.",
+    "art.f6.t":"Multi-tenant SaaS","art.f6.p":"Accounts, persisted projects, 4 subscription tiers and Stripe checkout.",
+    "art.img1":"The 3D editor: beams color-coded by length.",
+    "art.img2":"The BOM: beams, cover, hardware and totals.",
+    "art.img3":"Cut plan with 1D bin-packing.",
+    "art.img4":"Cut diagram with angles and bevels.",
+    "art.res.title":"The result",
+    "art.res.1":"Installable PWA, offline mode and <200 ms performance.",
+    "art.res.2":"Export to PDF, XLSX, CSV, OBJ and DXF in one click.",
+    "art.res.3":"Continuous deployment on Cloudflare on every push to main.",
+    "art.res.4":"+34 unit tests, Playwright e2e and a11y audit all green.",
+    "art.stack.title":"Full stack:",
+    "art.cta.eyebrow":"Next step",
+    "art.cta.title":"Does your calculation live in a <em>fragile spreadsheet?</em>",
+    "art.cta.lead":"Tell me about the process you want to turn into a tool. In under 48 hours I'll reply with a diagnosis and a scope estimate. No strings attached.",
+    "art.cta.btn":"Tell me your case",
+    "art.cta.demo":"See DomesLab live"
+   }
+  };
+  window.I18N=I18N;
+  var LANGS=["es","ca","en"],root=document.documentElement;
+  function applyLang(lang){
+    if(LANGS.indexOf(lang)<0)lang="es";
+    var d=I18N[lang]||I18N.es;
+    document.querySelectorAll("[data-i18n]").forEach(function(el){var k=el.getAttribute("data-i18n");if(d[k]!=null)el.textContent=d[k];});
+    document.querySelectorAll("[data-i18n-html]").forEach(function(el){var k=el.getAttribute("data-i18n-html");if(d[k]!=null)el.innerHTML=d[k];});
+    document.querySelectorAll("[data-i18n-aria]").forEach(function(el){var k=el.getAttribute("data-i18n-aria");if(d[k]!=null){el.setAttribute("aria-label",d[k]);el.setAttribute("title",d[k]);}});
+    var tEl=document.querySelector("[data-i18n-title]");if(tEl){var tk=tEl.getAttribute("data-i18n-title");if(d[tk]!=null)document.title=d[tk];}
+    root.setAttribute("lang",lang);
+    document.querySelectorAll(".lang button").forEach(function(b){var on=b.getAttribute("data-lang")===lang;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on?"true":"false");});
+    window.__lang=lang;
+    try{localStorage.setItem("eneko.lang",lang);}catch(e){}
+    window.dispatchEvent(new CustomEvent("langchange",{detail:lang}));
+  }
+  window.applyLang=applyLang;
+  var LANG_URLS={"es":"https://enekodevs.com/domeslab","ca":"https://enekodevs.com/ca/domeslab","en":"https://enekodevs.com/en/domeslab"};document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",function(){var l=b.getAttribute("data-lang");try{localStorage.setItem("eneko.lang",l);}catch(e){}if(l!=="ca")location.href=LANG_URLS[l];});});
+  var startLang="ca";
+  applyLang(startLang);
+
+  var THEME_COLOR={light:"#f2f0ea",dark:"#141019"};
+  function applyTheme(theme,animate){
+    theme=theme==="dark"?"dark":"light";
+    if(animate){root.classList.add("theme-anim");setTimeout(function(){root.classList.remove("theme-anim");},480);}
+    if(theme==="dark")root.setAttribute("data-theme","dark");else root.removeAttribute("data-theme");
+    var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",THEME_COLOR[theme]);
+    document.querySelectorAll(".theme-toggle").forEach(function(b){b.setAttribute("aria-pressed",theme==="dark"?"true":"false");});
+    try{localStorage.setItem("eneko.theme",theme);}catch(e){}
+  }
+  var startTheme="light";try{var st=localStorage.getItem("eneko.theme");if(st==="dark"||st==="light")startTheme=st;}catch(e){}
+  applyTheme(startTheme,false);
+  document.querySelectorAll(".theme-toggle").forEach(function(btn){btn.addEventListener("click",function(){var next=root.getAttribute("data-theme")==="dark"?"light":"dark";applyTheme(next,true);});});
+})();
+</script>
+
+</body>
+</html>

@@ -1,8 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://enekodevs.com/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://enekodevs.com/trabajo</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://enekodevs.com/servicios</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://enekodevs.com/tarifas</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://enekodevs.com/contacto</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://enekodevs.com/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/ca/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/trabajo</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/trabajo"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/trabajo"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/trabajo"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/trabajo"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/ca/trabajo</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/trabajo"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/trabajo"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/trabajo"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/trabajo"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/en/trabajo</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/trabajo"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/trabajo"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/trabajo"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/trabajo"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/domeslab</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/domeslab"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/domeslab"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/domeslab"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/domeslab"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/ca/domeslab</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/domeslab"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/domeslab"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/domeslab"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/domeslab"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/en/domeslab</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/domeslab"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/domeslab"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/domeslab"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/domeslab"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/servicios</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/servicios"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/servicios"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/servicios"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/servicios"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/ca/servicios</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/servicios"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/servicios"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/servicios"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/servicios"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/en/servicios</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/servicios"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/servicios"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/servicios"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/servicios"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/tarifas</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/tarifas"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/tarifas"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/tarifas"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/tarifas"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/ca/tarifas</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/tarifas"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/tarifas"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/tarifas"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/tarifas"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/en/tarifas</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/tarifas"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/tarifas"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/tarifas"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/tarifas"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/contacto</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/contacto"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/contacto"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/contacto"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/contacto"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/ca/contacto</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/contacto"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/contacto"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/contacto"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/contacto"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/en/contacto</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/contacto"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/contacto"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/contacto"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/contacto"/>
+    <lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
 </urlset>

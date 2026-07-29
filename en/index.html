@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-i18n-title="ptitle">Eneko Navarrete — Aplicaciones web técnicas a medida</title>
-<meta name="description" content="Design engineer. 3D en tiempo real e ingeniería que llega a producción. Mira cómo se construye una herramienta a medida, paso a paso.">
-<link rel="canonical" href="https://enekodevs.com/">
+<title data-i18n-title="ptitle">Eneko Navarrete — Custom technical web apps</title>
+<meta name="description" content="Design engineer. Real-time 3D and engineering that ships to production. See how a custom tool gets built, step by step.">
+<link rel="canonical" href="https://enekodevs.com/en/">
 <link rel="alternate" hreflang="es" href="https://enekodevs.com/">
 <link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/">
 <link rel="alternate" hreflang="en" href="https://enekodevs.com/en/">
 <link rel="alternate" hreflang="x-default" href="https://enekodevs.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Eneko Navarrete">
-<meta property="og:url" content="https://enekodevs.com/">
-<meta property="og:title" content="Eneko Navarrete — Aplicaciones web técnicas a medida">
-<meta property="og:description" content="Diseño y construyo aplicaciones web a medida —calculadoras, configuradores, 3D— y las dejo en producción: probadas, desplegadas y con código auditable.">
+<meta property="og:url" content="https://enekodevs.com/en/">
+<meta property="og:title" content="Eneko Navarrete — Custom technical web apps">
+<meta property="og:description" content="I design and build custom web applications —calculators, configurators, 3D— and ship them to production: tested, deployed, with auditable code.">
 <meta property="og:image" content="https://enekodevs.com/screenshots/editor-3d.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:locale" content="es_ES">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
 <meta property="og:locale:alternate" content="ca_ES">
-<meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Eneko Navarrete — Aplicaciones web técnicas a medida">
-<meta name="twitter:description" content="Aplicaciones web técnicas a medida: calculadoras, configuradores y 3D en producción.">
+<meta name="twitter:title" content="Eneko Navarrete — Custom technical web apps">
+<meta name="twitter:description" content="Custom technical web applications: calculators, configurators and 3D in production.">
 <meta name="twitter:image" content="https://enekodevs.com/screenshots/editor-3d.png">
 <script type="application/ld+json">
 {
@@ -50,7 +50,7 @@
       "@id": "https://enekodevs.com/#website",
       "url": "https://enekodevs.com/",
       "name": "Eneko Navarrete — Aplicaciones web técnicas a medida",
-      "inLanguage": "es",
+      "inLanguage": "en",
       "publisher": {"@id": "https://enekodevs.com/#person"}
     },
     {
@@ -193,7 +193,7 @@
   /* ---------- HERO ---------- */
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding:120px 0 80px;overflow:hidden}
   /* retrato B/N a sangre — FIJO, sin transiciones */
-  .hero-photo{position:absolute;inset:0;z-index:0;background:url('screenshots/eneko.jpg') no-repeat;background-size:cover;background-position:76% 28%;
+  .hero-photo{position:absolute;inset:0;z-index:0;background:url('/screenshots/eneko.jpg') no-repeat;background-size:cover;background-position:76% 28%;
     filter:grayscale(1) contrast(1.12) brightness(1.02);mix-blend-mode:multiply;opacity:.92;transform:scale(1.05)}
   .hero-photo,.hero-photo-dither{-webkit-mask-image:linear-gradient(90deg,transparent 6%,#000 50%,#000 100%);mask-image:linear-gradient(90deg,transparent 6%,#000 50%,#000 100%)}
   .hero-photo-dither{position:absolute;inset:0;z-index:0;pointer-events:none;mix-blend-mode:multiply;opacity:.24;
@@ -353,8 +353,8 @@
   }
   @media(min-width:560px) and (max-width:899px){.spec .grid{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(2,1fr)}}
 </style>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="favicon.svg">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.svg">
   <meta name="theme-color" content="#f2f0ea">
 </head>
 <body class="preloading">
@@ -366,7 +366,7 @@
   <div class="pre-c">
     <div class="pre-logo">EN<em>(E)</em>KO</div>
     <div class="pre-num" id="preNum">0%</div>
-    <button class="pre-enter" id="preEnter"><span data-i18n="pre.enter">Entrar</span>
+    <button class="pre-enter" id="preEnter"><span data-i18n="pre.enter">Enter</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
     </button>
   </div>
@@ -377,11 +377,11 @@
   <div class="nav">
     <a class="brand" href="#top"><span class="mono-mark">EN</span><span class="n">Eneko Navarrete<span>Design Engineer</span></span></a>
     <nav class="nlinks">
-      <a href="index.html" class="on" data-i18n="nav.home">Inicio</a>
-      <a href="trabajo.html" data-i18n="nav.work">Trabajo</a>
-      <a href="servicios.html" data-i18n="nav.services">Servicios</a>
-      <a href="tarifas.html" data-i18n="nav.tarifas">Tarifas</a>
-      <a href="contacto.html" data-i18n="nav.contact">Contacto</a>
+      <a href="/en/" class="on" data-i18n="nav.home">Home</a>
+      <a href="/en/trabajo" data-i18n="nav.work">Work</a>
+      <a href="/en/servicios" data-i18n="nav.services">Services</a>
+      <a href="/en/tarifas" data-i18n="nav.tarifas">Pricing</a>
+      <a href="/en/contacto" data-i18n="nav.contact">Contact</a>
     </nav>
     <div class="nav-ctl">
       <div class="lang" role="group" aria-label="Idioma / Llengua / Language">
@@ -393,7 +393,7 @@
         <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
         <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
-      <a class="btn" href="contacto.html"><span data-i18n="nav.cta">Hablemos</span>
+      <a class="btn" href="/en/contacto"><span data-i18n="nav.cta">Let's talk</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
@@ -405,14 +405,14 @@
   <div class="hero-photo-dither" aria-hidden="true"></div>
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
-    <span class="eyebrow" data-i18n="hero.eyebrow">Aplicaciones web técnicas a medida · España</span>
+    <span class="eyebrow" data-i18n="hero.eyebrow">Custom technical web apps · Spain</span>
     <h1><span class="ln"><span>Eneko</span></span><span class="ln"><span>Devs.</span></span></h1>
     <div class="sub">
-      <p class="lead" data-i18n-html="hero.lead">¿Necesitas una herramienta que un SaaS genérico no cubre? Diseño y construyo tu aplicación web a medida —calculadoras, configuradores, 3D— y la dejo <b>en producción</b>: probada, desplegada y con código que puedes auditar.</p>
+      <p class="lead" data-i18n-html="hero.lead">Need a tool a generic SaaS doesn't cover? I design and build your custom web app —calculators, configurators, 3D— and ship it <b>to production</b>: tested, deployed and with code you can audit.</p>
       <div class="hero-cta">
-        <a class="btn" href="#contacto"><span data-i18n="hero.cta1">Cuéntame tu problema</span>
+        <a class="btn" href="#contacto"><span data-i18n="hero.cta1">Tell me your problem</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-line" href="https://domeslab.com/" target="_blank" rel="noopener" data-i18n="hero.cta2">Ver DomesLab en vivo</a>
+        <a class="btn btn-line" href="https://domeslab.com/" target="_blank" rel="noopener" data-i18n="hero.cta2">See DomesLab live</a>
       </div>
     </div>
   </div>
@@ -421,25 +421,25 @@
 <!-- PROOF · EN PRODUCCIÓN -->
 <section class="proof" id="proof">
   <div class="wrap">
-    <span class="eyebrow" data-i18n="proof.eyebrow">En producción ahora — no son mockups</span>
+    <span class="eyebrow" data-i18n="proof.eyebrow">Live in production now — not mockups</span>
     <div class="proof-grid">
       <a class="proof-item" href="https://domeslab.com/" target="_blank" rel="noopener">
-        <span class="pi-k" data-i18n="proof.1.k">SaaS · 3D en tiempo real</span>
+        <span class="pi-k" data-i18n="proof.1.k">SaaS · real-time 3D</span>
         <span class="pi-t">DomesLab</span>
-        <span class="pi-d" data-i18n="proof.1.d">Configurador-calculadora de domos geodésicos: 3D en vivo, planos PDF, BOM y pagos con Stripe.</span>
-        <span class="pi-live"><span class="dot"></span><span data-i18n="proof.1.live">En vivo · domeslab.com</span></span>
+        <span class="pi-d" data-i18n="proof.1.d">Configurator-calculator for geodesic domes: live 3D, PDF plans, BOM and Stripe payments.</span>
+        <span class="pi-live"><span class="dot"></span><span data-i18n="proof.1.live">Live · domeslab.com</span></span>
       </a>
       <a class="proof-item" href="https://calniu.com/" target="_blank" rel="noopener">
-        <span class="pi-k" data-i18n="proof.2.k">Web · 5 idiomas</span>
+        <span class="pi-k" data-i18n="proof.2.k">Website · 5 languages</span>
         <span class="pi-t">Cal Niu</span>
-        <span class="pi-d" data-i18n="proof.2.d">Web en producción para un proyecto rural de cultura y bioconstrucción del Berguedà.</span>
-        <span class="pi-live"><span class="dot"></span><span data-i18n="proof.2.live">En vivo · calniu.com</span></span>
+        <span class="pi-d" data-i18n="proof.2.d">Production website for a rural culture and natural-building project in the Berguedà.</span>
+        <span class="pi-live"><span class="dot"></span><span data-i18n="proof.2.live">Live · calniu.com</span></span>
       </a>
       <a class="proof-item" href="https://cupo-app.pages.dev/" target="_blank" rel="noopener">
-        <span class="pi-k" data-i18n="proof.3.k">Producto propio · Reservas</span>
+        <span class="pi-k" data-i18n="proof.3.k">Own product · Bookings</span>
         <span class="pi-t">Cupo</span>
-        <span class="pi-d" data-i18n="proof.3.d">Reservas para turismo activo sin comisiones: plazas en tiempo real y señal con Stripe.</span>
-        <span class="pi-live"><span class="dot"></span><span data-i18n="proof.3.live">Demo en vivo</span></span>
+        <span class="pi-d" data-i18n="proof.3.d">Commission-free bookings for active tourism: real-time slots and deposits with Stripe.</span>
+        <span class="pi-live"><span class="dot"></span><span data-i18n="proof.3.live">Live demo</span></span>
       </a>
     </div>
   </div>
@@ -453,27 +453,27 @@
       <svg viewBox="0 0 440 360"><ellipse cx="220" cy="300" rx="180" ry="36"/><path d="M40 300 Q58 138 220 70 Q382 138 400 300 M96 300 Q108 156 220 70 Q332 156 344 300 M158 300 Q164 146 220 70 Q276 146 282 300 M220 300V70"/><path d="M60 266 Q220 322 380 266 M92 214 Q220 264 348 214 M126 160 Q220 200 314 160 M164 114 Q220 138 276 114"/></svg>
     </div>
     <div class="overlay">
-      <div class="b-tag" data-i18n="build.tag">Caso de estudio · DomesLab</div>
-      <h2 class="b-title" data-i18n-html="build.title">Se construye<br>mientras bajas.</h2>
+      <div class="b-tag" data-i18n="build.tag">Case study · DomesLab</div>
+      <h2 class="b-title" data-i18n-html="build.title">It builds<br>as you scroll.</h2>
     </div>
     <div class="phases" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
-    <div class="phase-lab" aria-hidden="true"><span data-i18n="build.phase">Fase</span> <span id="phNum">01</span><b id="phName">Estructura</b></div>
+    <div class="phase-lab" aria-hidden="true"><span data-i18n="build.phase">Phase</span> <span id="phNum">01</span><b id="phName">Estructura</b></div>
   </div>
   <div class="fall-phases">
-    <div><span>01</span><b data-i18n="build.p1.t">Estructura geodésica</b> <span data-i18n="build.p1.d">— barras calculadas por longitud</span></div>
-    <div><span>02</span><b data-i18n="build.p2.t">Nodos</b> <span data-i18n="build.p2.d">— hubs de unión</span></div>
-    <div><span>03</span><b data-i18n="build.p3.t">Paneles</b> <span data-i18n="build.p3.d">— cerramiento de vidrio</span></div>
-    <div><span>04</span><b data-i18n="build.p4.t">Configurador en vivo</b> <span data-i18n="build.p4.d">— 3D en tiempo real, en producción</span></div>
+    <div><span>01</span><b data-i18n="build.p1.t">Geodesic structure</b> <span data-i18n="build.p1.d">— struts sized by length</span></div>
+    <div><span>02</span><b data-i18n="build.p2.t">Nodes</b> <span data-i18n="build.p2.d">— connection hubs</span></div>
+    <div><span>03</span><b data-i18n="build.p3.t">Panels</b> <span data-i18n="build.p3.d">— glass cladding</span></div>
+    <div><span>04</span><b data-i18n="build.p4.t">Live configurator</b> <span data-i18n="build.p4.d">— real-time 3D, in production</span></div>
   </div>
 </section>
 
 <!-- SPEC -->
 <section class="spec">
   <div class="grid">
-    <div class="cell"><div class="k">01 · SaaS</div><div class="v" data-i18n="spec.1.v">En producción</div><div class="u" data-i18n="spec.1.u">con pagos Stripe</div></div>
-    <div class="cell"><div class="k">02 · 3D</div><div class="v" data-i18n="spec.2.v">Tiempo real</div><div class="u">Three.js</div></div>
-    <div class="cell"><div class="k">03 · PWA</div><div class="v" data-i18n="spec.3.v">Offline</div><div class="u" data-i18n="spec.3.u">instalable</div></div>
-    <div class="cell"><div class="k">04 · TS</div><div class="v" data-i18n="spec.4.v">Con tests</div><div class="u" data-i18n="spec.4.u">CI continuo</div></div>
+    <div class="cell"><div class="k">01 · SaaS</div><div class="v" data-i18n="spec.1.v">In production</div><div class="u" data-i18n="spec.1.u">with Stripe payments</div></div>
+    <div class="cell"><div class="k">02 · 3D</div><div class="v" data-i18n="spec.2.v">Real time</div><div class="u">Three.js</div></div>
+    <div class="cell"><div class="k">03 · PWA</div><div class="v" data-i18n="spec.3.v">Offline</div><div class="u" data-i18n="spec.3.u">installable</div></div>
+    <div class="cell"><div class="k">04 · TS</div><div class="v" data-i18n="spec.4.v">Tested</div><div class="u" data-i18n="spec.4.u">Continuous CI</div></div>
   </div>
 </section>
 
@@ -481,18 +481,18 @@
 <section class="sobre pad" id="sobre">
   <div class="wrap"><div class="grid">
     <div>
-      <span class="eyebrow" data-i18n="about.eyebrow">Sobre mí</span>
-      <p class="big" data-i18n-html="about.big">Ingeniería de software aplicada a <em>problemas reales de negocio.</em></p>
-      <p class="first" data-i18n="about.p1">Soy Eneko Navarrete. Construyo aplicaciones web a medida para quien tiene un problema técnico concreto y necesita una herramienta para su caso — no un SaaS genérico que solo cubre el 60%.</p>
-      <p data-i18n="about.p2">No hago plantillas ni landings genéricas: diseño aplicaciones donde la lógica importa —cálculos correctos, datos persistentes y exportaciones que un cliente puede llevarse al taller.</p>
+      <span class="eyebrow" data-i18n="about.eyebrow">About me</span>
+      <p class="big" data-i18n-html="about.big">Software engineering applied to <em>real business problems.</em></p>
+      <p class="first" data-i18n="about.p1">I'm Eneko Navarrete. I build custom web apps for people with a specific technical problem who need a tool for their case — not a generic SaaS that only covers 60%.</p>
+      <p data-i18n="about.p2">I don't do templates or generic landing pages: I design apps where the logic matters —correct calculations, persistent data and exports a client can take to the workshop.</p>
     </div>
     <div>
-      <span class="avail"><span class="dot"></span><span data-i18n="about.avail">Disponible para nuevos proyectos</span></span>
+      <span class="avail"><span class="dot"></span><span data-i18n="about.avail">Available for new projects</span></span>
       <div class="meta">
-        <div><div class="k" data-i18n="about.k1">Base</div><div class="v" data-i18n="about.v1">España · remoto</div></div>
-        <div><div class="k" data-i18n="about.k2">Foco</div><div class="v" data-i18n="about.v2">Web técnica</div></div>
-        <div><div class="k" data-i18n="about.k3">Idiomas</div><div class="v">ES · CA · EN</div></div>
-        <div><div class="k" data-i18n="about.k4">Respuesta</div><div class="v">&lt; 48 h</div></div>
+        <div><div class="k" data-i18n="about.k1">Based in</div><div class="v" data-i18n="about.v1">Spain · remote</div></div>
+        <div><div class="k" data-i18n="about.k2">Focus</div><div class="v" data-i18n="about.v2">Technical web</div></div>
+        <div><div class="k" data-i18n="about.k3">Languages</div><div class="v">ES · CA · EN</div></div>
+        <div><div class="k" data-i18n="about.k4">Response</div><div class="v">&lt; 48 h</div></div>
       </div>
     </div>
   </div></div>
@@ -501,7 +501,7 @@
 <!-- PANEL OSCURO (guiño NRG) -->
 <section class="panel">
   <div class="inner">
-    <blockquote data-i18n-html="quote.text">Producto, <em>no demos.</em> Con tests, despliegue continuo y código que puedes auditar.</blockquote>
+    <blockquote data-i18n-html="quote.text">Product, <em>not demos.</em> With tests, continuous deployment and code you can audit.</blockquote>
     <cite>Eneko Navarrete · Design Engineer</cite>
   </div>
 </section>
@@ -510,7 +510,7 @@
 <section class="stack pad" id="stack">
   <div class="wrap">
     <span class="eyebrow" data-i18n="stack.eyebrow">Stack</span>
-    <h2 class="kicker-h2" data-i18n-html="stack.title">Herramientas para entregar <em>producto.</em></h2>
+    <h2 class="kicker-h2" data-i18n-html="stack.title">Tools to ship <em>product.</em></h2>
     <div class="chips">
       <span class="chip">TypeScript</span><span class="chip">React 18</span><span class="chip">Three.js / r3f</span><span class="chip">Vite</span><span class="chip">Tailwind</span><span class="chip">Zustand</span><span class="chip">Supabase</span><span class="chip">Stripe</span><span class="chip">Playwright</span><span class="chip">Vitest</span><span class="chip">PWA</span><span class="chip">Cloudflare</span>
     </div>
@@ -520,13 +520,13 @@
 <!-- EXPLORA -->
 <section class="explora pad" id="explora">
   <div class="wrap">
-    <span class="eyebrow" data-i18n="explora.eyebrow">Explora</span>
-    <h2 class="kicker-h2" data-i18n-html="explora.title">En <em>cuatro páginas.</em></h2>
+    <span class="eyebrow" data-i18n="explora.eyebrow">Explore</span>
+    <h2 class="kicker-h2" data-i18n-html="explora.title">In <em>four pages.</em></h2>
     <div class="cards">
-      <a class="ncard" href="trabajo.html"><span class="no">01</span><h3 data-i18n="explora.c1.t">Trabajo y caso de estudio</h3><p data-i18n="explora.c1.p">DomesLab a fondo, la galería real de la app y una selección de webs y visualizadores 3D.</p><span class="go"><span data-i18n="explora.c1.go">Ver trabajo</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a class="ncard" href="servicios.html"><span class="no">02</span><h3 data-i18n="explora.c2.t">Servicios y proceso</h3><p data-i18n="explora.c2.p">Qué construyo —calculadoras, configuradores, dashboards— y cómo trabajo hasta producción.</p><span class="go"><span data-i18n="explora.c2.go">Ver servicios</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a class="ncard" href="tarifas.html"><span class="no">03</span><h3 data-i18n="explora.c3.t">Tarifas y planes</h3><p data-i18n="explora.c3.p">Calculadora orientativa, mantenimiento, hosting y condiciones sin letra pequeña.</p><span class="go"><span data-i18n="explora.c3.go">Ver tarifas</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a class="ncard" href="contacto.html"><span class="no">04</span><h3 data-i18n="explora.c4.t">Contacto</h3><p data-i18n="explora.c4.p">Cuéntame tu idea y te respondo con un plan y un presupuesto orientativo, sin compromiso.</p><span class="go"><span data-i18n="explora.c4.go">Hablemos</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="ncard" href="/en/trabajo"><span class="no">01</span><h3 data-i18n="explora.c1.t">Work and case study</h3><p data-i18n="explora.c1.p">DomesLab in depth, the app's real gallery and a selection of websites and 3D viewers.</p><span class="go"><span data-i18n="explora.c1.go">See work</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="ncard" href="/en/servicios"><span class="no">02</span><h3 data-i18n="explora.c2.t">Services and process</h3><p data-i18n="explora.c2.p">What I build —calculators, configurators, dashboards— and how I work all the way to production.</p><span class="go"><span data-i18n="explora.c2.go">See services</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="ncard" href="/en/tarifas"><span class="no">03</span><h3 data-i18n="explora.c3.t">Pricing and plans</h3><p data-i18n="explora.c3.p">Ballpark calculator, maintenance, hosting and terms with no small print.</p><span class="go"><span data-i18n="explora.c3.go">See pricing</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="ncard" href="/en/contacto"><span class="no">04</span><h3 data-i18n="explora.c4.t">Contact</h3><p data-i18n="explora.c4.p">Tell me your idea and I'll reply with a plan and a ballpark quote, no strings attached.</p><span class="go"><span data-i18n="explora.c4.go">Let's talk</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
     </div>
   </div>
 </section>
@@ -534,10 +534,10 @@
 <!-- CONTACTO -->
 <section class="contacto" id="contacto">
   <div class="inner">
-    <span class="eyebrow" data-i18n="cta.eyebrow">Siguiente paso</span>
-    <h2 data-i18n-html="cta.title">Construyamos tu <em>herramienta.</em></h2>
-    <p data-i18n="cta.lead">Cuéntame qué necesita tu equipo o tus clientes. En menos de 48 horas te respondo con un diagnóstico, una estimación de alcance y la siguiente decisión.</p>
-    <a href="mailto:eneko.devs@gmail.com" class="btn"><span data-i18n="cta.btn">Empieza tu proyecto</span>
+    <span class="eyebrow" data-i18n="cta.eyebrow">Next step</span>
+    <h2 data-i18n-html="cta.title">Let's build your <em>tool.</em></h2>
+    <p data-i18n="cta.lead">Tell me what your team or your clients need. In under 48 hours I'll reply with a diagnosis, a scope estimate and the next decision.</p>
+    <a href="mailto:eneko.devs@gmail.com" class="btn"><span data-i18n="cta.btn">Start your project</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
     </a>
   </div>
@@ -687,8 +687,8 @@
     window.dispatchEvent(new CustomEvent("langchange",{detail:lang}));
   }
   window.applyLang=applyLang;
-  var LANG_URLS={"es":"https://enekodevs.com/","ca":"https://enekodevs.com/ca/","en":"https://enekodevs.com/en/"};document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",function(){var l=b.getAttribute("data-lang");try{localStorage.setItem("eneko.lang",l);}catch(e){}if(l!=="es")location.href=LANG_URLS[l];});});
-  var startLang="es";try{var s=localStorage.getItem("eneko.lang");if(s==="ca"||s==="en")location.replace(s==="ca"?"https://enekodevs.com/ca/":"https://enekodevs.com/en/");}catch(e){}
+  var LANG_URLS={"es":"https://enekodevs.com/","ca":"https://enekodevs.com/ca/","en":"https://enekodevs.com/en/"};document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",function(){var l=b.getAttribute("data-lang");try{localStorage.setItem("eneko.lang",l);}catch(e){}if(l!=="en")location.href=LANG_URLS[l];});});
+  var startLang="en";
   applyLang(startLang);
 
   var THEME_COLOR={light:"#f2f0ea",dark:"#141019"};
