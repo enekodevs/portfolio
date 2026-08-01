@@ -16,8 +16,8 @@
 <meta property="og:title" content="Eneko Navarrete — Aplicacions web tècniques a mida">
 <meta property="og:description" content="Dissenyo i construeixo aplicacions web a mida —calculadores, configuradors, 3D— i les deixo en producció: provades, desplegades i amb codi auditable.">
 <meta property="og:image" content="https://enekodevs.com/screenshots/editor-3d.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
 <meta property="og:locale" content="ca_ES">
 <meta property="og:locale:alternate" content="es_ES">
 <meta property="og:locale:alternate" content="en_GB">
@@ -216,6 +216,12 @@
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
   body.entered .hero h1 .ln > span{animation:titleUp 2.9s var(--ease) forwards, titleShine 1.3s linear 0s forwards}
   .hero h1 .ln:nth-child(2) > span{animation-delay:.6s,.6s}
+  .hero h1 .ln:nth-child(3) > span{animation-delay:1.05s,1.05s}
+  /* segunda línea del h1: la propuesta de valor, visible y en registro menor */
+  .hero h1 .tag{margin-top:.3em;padding-bottom:.14em;margin-bottom:-.14em}
+  .hero h1 .tag > span{font-family:'IBM Plex Mono',monospace;font-weight:400;
+    font-size:clamp(.72rem,1.5vw,1.05rem);letter-spacing:.18em;line-height:1.3;
+    background:none;-webkit-text-fill-color:var(--cobalt)!important;color:var(--cobalt)!important}
   @keyframes titleUp{to{transform:translateY(0);opacity:1}}
   @keyframes titleShine{to{background-position:100% 0}}
   .hero .sub{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:flex-end;margin-top:clamp(40px,8vh,90px)}
@@ -404,8 +410,7 @@
   <div class="hero-photo-dither" aria-hidden="true"></div>
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
-    <span class="eyebrow" data-i18n="hero.eyebrow">Aplicacions web tècniques a mida · Espanya</span>
-    <h1><span class="ln"><span>Eneko</span></span><span class="ln"><span>Devs.</span></span></h1>
+    <h1><span class="ln"><span>Eneko</span></span><span class="ln"><span>Devs.</span></span><span class="ln tag"><span data-i18n="hero.eyebrow">Aplicacions web tècniques a mida · Espanya</span></span></h1>
     <div class="sub">
       <p class="lead" data-i18n-html="hero.lead">Necessites una eina que un SaaS genèric no cobreix? Dissenyo i construeixo la teva aplicació web a mida —calculadores, configuradors, 3D— i la deixo <b>en producció</b>: provada, desplegada i amb codi que pots auditar.</p>
       <div class="hero-cta">
