@@ -1,0 +1,13 @@
+# Redirecciones para Cloudflare Pages.
+# La página de tarifas se retira: los precios se dan en respuestas privadas.
+
+/tarifas                    /servicios      301
+/tarifas.html               /servicios      301
+/tarifas-y-servicios        /servicios      301
+/tarifas-y-servicios.html   /servicios      301
+
+/ca/tarifas                 /ca/servicios   301
+/ca/tarifas.html            /ca/servicios   301
+
+/en/tarifas                 /en/servicios   301
+/en/tarifas.html            /en/servicios   301
