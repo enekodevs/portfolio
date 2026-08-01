@@ -1,7 +1,7 @@
 # Cabeceras para Cloudflare Pages.
 # Cachea los recursos estáticos con fuerza; el HTML siempre fresco.
 
-/assets/*
+/fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
 /screenshots/*
