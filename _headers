@@ -4,6 +4,11 @@
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
+# La versión va en la ruta (/vendor/three-0.160.0/), así que subir de versión
+# cambia la URL: nunca hay que invalidar esta caché.
+/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
+
 /screenshots/*
   Cache-Control: public, max-age=604800
 
