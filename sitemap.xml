@@ -121,8 +121,4 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/contacto"/>
     <lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://enekodevs.com/cv</loc>
-    <lastmod>2026-08-01</lastmod><changefreq>yearly</changefreq><priority>0.5</priority>
-  </url>
 </urlset>

@@ -11,3 +11,10 @@
 
 /en/tarifas                 /en/servicios   301
 /en/tarifas.html            /en/servicios   301
+
+# El CV sale de la web. /cv.pdf no lo enlazaba ninguna página, pero era una
+# URL repartible, así que también se redirige en vez de dejarla en 404.
+
+/cv                         /contacto       301
+/cv.html                    /contacto       301
+/cv.pdf                     /contacto       301
