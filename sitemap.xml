@@ -121,4 +121,28 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/contacto"/>
     <lastmod>2026-08-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://enekodevs.com/negocios/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/negocios/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/negocis/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/small-business/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/negocios/"/>
+    <lastmod>2026-08-07</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/ca/negocis/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/negocios/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/negocis/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/small-business/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/negocios/"/>
+    <lastmod>2026-08-07</lastmod><changefreq>monthly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/en/small-business/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/negocios/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/negocis/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/small-business/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/negocios/"/>
+    <lastmod>2026-08-07</lastmod><changefreq>monthly</changefreq><priority>0.8</priority>
+  </url>
 </urlset>

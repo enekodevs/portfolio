@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en" class="sin-js">
+<head>
+<script>document.documentElement.className="con-js cargando"</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I opened 203 small-business websites · Eneko Navarrete</title>
+<meta name="description" content="203 small-business websites, opened one by one. Nine problems that keep coming up, each with a fixed price to fix. One-time payment, no monthly fee.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#221b2e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f2f0ea" media="(prefers-color-scheme: light)">
+
+<link rel="canonical" href="https://enekodevs.com/en/small-business/">
+<link rel="alternate" hreflang="es" href="https://enekodevs.com/negocios/">
+<link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/negocis/">
+<link rel="alternate" hreflang="en" href="https://enekodevs.com/en/small-business/">
+<link rel="alternate" hreflang="x-default" href="https://enekodevs.com/negocios/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Eneko Navarrete">
+<meta property="og:url" content="https://enekodevs.com/en/small-business/">
+<meta property="og:title" content="I opened 203 small-business websites. Here's what's wrong with them.">
+<meta property="og:description" content="Nine problems that keep coming up, ranked by frequency, each with a fixed price. One-time payment, no monthly fee.">
+<meta property="og:image" content="https://enekodevs.com/negocios/og-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AUDITED ONE BY ONE. I opened 203 small-business websites. Nine problems that keep coming up, each with a fixed price. One-time payment, no monthly fee. enekodevs.com/en/small-business">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="ca_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="I opened 203 small-business websites. Here's what's wrong with them.">
+<meta name="twitter:description" content="Nine problems that keep coming up, ranked by frequency, each with a fixed price. One-time payment, no monthly fee.">
+<meta name="twitter:image" content="https://enekodevs.com/negocios/og-en.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23221b2e'/%3E%3Crect x='6' y='6' width='8' height='8' fill='%23e3a93a'/%3E%3Crect x='18' y='6' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='6' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='18' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3C/svg%3E">
+
+<link rel="preload" href="/negocios/fuentes/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<style>
+/* Archivo variable, AUTOALOJADA (OFL-1.1, licencia en fuentes/).
+   Los dos ejes que usa la pagina: peso 100-900 y anchura 62-125%.
+   Nada de Google Fonts: asi todo el mundo ve la misma letra, no hay peticion
+   a un tercero (y de paso, ni un problema de RGPD). */
+@font-face{
+  font-family:'Archivo Variable'; font-style:normal; font-display:swap;
+  font-weight:100 900; font-stretch:62% 125%;
+  src:url(/negocios/fuentes/archivo-latin-standard-normal.woff2) format('woff2-variations');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Archivo Variable'; font-style:normal; font-display:swap;
+  font-weight:100 900; font-stretch:62% 125%;
+  src:url(/negocios/fuentes/archivo-latin-ext-standard-normal.woff2) format('woff2-variations');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+:root{
+  --fondo:#221b2e; --fondo-2:#2b2339; --filete:rgba(242,240,234,.10); --filete-2:rgba(242,240,234,.26);
+  --tinta:#f2f0ea; --tinta-2:#bcb4c8; --tinta-3:#948ca4;
+  --amarillo:#e3a93a; --sobre-amarillo:#1d1505;
+  /* el amarillo como TINTA (titular, foco). Sobre fondo oscuro el de relleno ya
+     da 7,8:1, asi que es el mismo; en claro no llega a 4,5:1 y baja a ocre. */
+  --amarillo-texto:#e3a93a;
+  --azul:#a08cc8; --azul-apagado:#3a3049;          /* el lila de enekodevs */
+  --reticula:rgba(242,240,234,.045); --celda:76px; --radio:12px; --amarillo-claro:#f0bc57;
+  /* Archivo primero: es la unica que servimos nosotros, asi que es la unica
+     que ve TODO el mundo igual. Lo de detras es solo por si no llega. */
+  --tec:"Archivo Variable","Bahnschrift","DIN Alternate","Segoe UI Variable Display",system-ui,sans-serif;
+  --margen:clamp(20px,5.5vw,88px);
+  --paso:clamp(64px,11vh,140px);
+}
+:root[data-tema="claro"]{
+  --fondo:#f2f0ea; --fondo-2:#e8e5dc; --filete:rgba(34,27,46,.13); --filete-2:rgba(34,27,46,.32);
+  --tinta:#1c1626; --tinta-2:#524a60; --tinta-3:#6f6780;
+  --amarillo:#d99a22; --sobre-amarillo:#1d1505; --amarillo-texto:#8a6414;
+  --azul:#6a5590; --azul-apagado:#d6d1c6;
+  --reticula:rgba(34,27,46,.06); --amarillo-claro:#eeb43e;
+  color-scheme:light;
+}
+*,::before,::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--fondo); color:var(--tinta);
+  font-family:var(--tec); font-size:17px; line-height:1.5;
+  font-variation-settings:"wght" 400,"wdth" 100;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-weight:400;line-height:.98;letter-spacing:-.02em;font-variation-settings:"wght" 500,"wdth" 95}
+a{color:inherit}
+p{text-wrap:pretty}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:3px solid var(--amarillo-texto);outline-offset:3px}
+/* el titular queda debajo de la cabecera fija si se salta por ancla */
+section[id]{scroll-margin-top:96px}
+.oculto{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* ---------- retícula de fondo (enekodevs) ---------- */
+:root.cargando body::before{opacity:0}
+body::before{transition:opacity .8s .25s ease;
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(to right, var(--reticula) 0 1px, transparent 1px var(--celda)),
+    repeating-linear-gradient(to bottom, var(--reticula) 0 1px, transparent 1px var(--celda));
+  mask-image:radial-gradient(135% 110% at 50% 28%, #000 55%, rgba(0,0,0,.35) 100%);
+}
+
+/* ---------- lienzo persistente ---------- */
+#lienzo{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.capa{position:relative;z-index:1}
+
+/* ---------- cabecera ---------- */
+.cabecera{
+  position:fixed;top:0;left:0;right:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px var(--margen);
+  font-size:13.5px;color:var(--tinta-2);
+  background:color-mix(in srgb,var(--fondo) 82%,transparent);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;transition:border-color .3s;
+}
+.cabecera.pegada{border-bottom-color:var(--filete)}
+.cabecera b{color:var(--tinta);font-variation-settings:"wght" 600,"wdth" 92}
+.cabecera nav{display:flex;align-items:center;gap:14px}
+.cabecera nav a{text-decoration:none;color:var(--tinta-3);font-size:13px}
+.cabecera nav a:hover{color:var(--tinta)}
+@media (max-width:700px){.cabecera nav a{display:none}}
+.tema{border:1px solid var(--tinta-3);border-radius:var(--radio);padding:7px 13px;min-height:44px;display:inline-flex;align-items:center;gap:8px;font-size:13px}
+.tema:hover{border-color:var(--tinta);background:var(--fondo-2)}
+
+/* CTA flotante */
+.flotante{
+  position:fixed;right:var(--margen);bottom:24px;z-index:20;
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 22px;border-radius:var(--radio);background:var(--amarillo);color:var(--sobre-amarillo);
+  font-variation-settings:"wght" 650,"wdth" 92;font-size:16px;text-decoration:none;
+  box-shadow:0 10px 34px rgba(0,0,0,.45);
+  transform:translateY(calc(100% + 48px));transition:transform .45s cubic-bezier(.2,.9,.2,1);
+}
+.flotante.dentro{transform:none}
+.flotante:hover{background:var(--amarillo-claro)}
+
+/* ---------- rejilla base ---------- */
+.hoja{max-width:1320px;margin-inline:auto;padding-inline:var(--margen)}
+section{padding-block:var(--paso)}
+
+/* ---------- portada ---------- */
+.portada{min-height:100svh;display:grid;align-content:center;padding-top:96px;position:relative}
+h1{font-size:clamp(44px,8.2vw,116px);max-width:15ch;font-variation-settings:"wght" 550,"wdth" 88}
+h1 em{font-style:normal;color:var(--amarillo-texto)}
+.bajada{margin-top:26px;font-size:clamp(17px,2vw,22px);color:var(--tinta-2);max-width:34ch}
+.fila-cta{margin-top:38px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.accion{
+  display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 28px;border-radius:var(--radio);
+  background:var(--amarillo);color:var(--sobre-amarillo);text-decoration:none;
+  font-variation-settings:"wght" 650,"wdth" 92;font-size:17px;
+  transition:transform .2s,background .2s;
+}
+.accion:hover{background:var(--amarillo-claro);transform:translateY(-2px)}
+.accion .fl{transition:transform .25s}
+.accion:hover .fl{transform:translateX(5px)}
+.accion-2{
+  display:inline-flex;align-items:center;min-height:56px;padding:0 22px;border-radius:var(--radio);
+  border:1px solid var(--tinta-3);color:var(--tinta-2);text-decoration:none;font-size:16px;
+}
+.accion-2:hover{border-color:var(--tinta);color:var(--tinta)}
+.desliza{position:absolute;bottom:34px;left:0;font-size:12.5px;color:var(--tinta-3);letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.desliza i{display:block;width:1px;height:34px;background:var(--filete-2);animation:cae 2.2s infinite}
+@keyframes cae{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- escena 203 ---------- */
+.censo{min-height:100svh;display:grid;align-content:center;gap:34px}
+.censo-cabeza{display:flex;flex-wrap:wrap;align-items:flex-end;gap:clamp(20px,4vw,56px)}
+.cifra{font-size:clamp(96px,20vw,260px);line-height:.78;font-variation-settings:"wght" 600,"wdth" 82;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+.censo-cabeza p{font-size:clamp(18px,2.4vw,28px);max-width:16ch;color:var(--tinta-2);line-height:1.2}
+#ancla-rejilla{min-height:clamp(180px,30vh,300px)}
+.leyenda{display:flex;flex-wrap:wrap;gap:28px;font-size:16px;color:var(--tinta-2)}
+.leyenda span{display:flex;align-items:center;gap:10px}
+.pastilla{width:13px;height:13px;flex:none}
+.pastilla.si{background:var(--azul)} .pastilla.no{background:var(--azul-apagado);outline:1px solid var(--tinta-3)}
+.leyenda b{color:var(--tinta);font-variation-settings:"wght" 650,"wdth" 92;font-size:19px}
+
+/* ---------- lista de problemas ---------- */
+.titulo-seccion{font-size:clamp(32px,5.4vw,68px);max-width:16ch;text-wrap:balance}
+.entradilla{margin-top:18px;color:var(--tinta-2);max-width:44ch;font-size:16.5px}
+.lista{border-top:1px solid var(--filete-2)}
+.fila{border-bottom:1px solid var(--filete);position:relative}
+.fila-btn{
+  width:100%;display:grid;
+  grid-template-columns:minmax(200px,1.15fr) minmax(140px,1.6fr) 62px 58px 74px;
+  align-items:center;gap:18px;padding:17px 4px;text-align:left;
+  transition:background .18s;
+}
+.fila-btn:hover{background:var(--fondo-2);border-radius:var(--radio)}
+.fila.abierta .fila-btn{background:var(--amarillo);color:var(--sobre-amarillo);border-radius:var(--radio) var(--radio) 0 0}
+.fila-nombre{display:flex;align-items:center;gap:14px;font-size:clamp(15px,1.5vw,18.5px);font-variation-settings:"wght" 500,"wdth" 95}
+.signo{
+  flex:none;width:26px;height:26px;border:1px solid currentColor;position:relative;opacity:.55;transition:opacity .2s,transform .3s;
+}
+.fila-btn:hover .signo{opacity:1}
+.fila.abierta .signo{opacity:1;transform:rotate(45deg)}
+.signo::before,.signo::after{content:"";position:absolute;background:currentColor;left:50%;top:50%;translate:-50% -50%}
+.signo::before{width:11px;height:1.5px}
+.signo::after{width:1.5px;height:11px}
+.pista{height:14px;position:relative}
+.fila-n{font-size:clamp(19px,2.2vw,26px);text-align:right;font-variant-numeric:tabular-nums;font-variation-settings:"wght" 600,"wdth" 88}
+.fila-pct{font-size:14px;text-align:right;color:var(--tinta-3);font-variant-numeric:tabular-nums}
+.fila.abierta .fila-pct{color:var(--sobre-amarillo);opacity:.7}
+.fila-precio{font-size:clamp(15px,1.6vw,18px);text-align:right;font-variant-numeric:tabular-nums;font-variation-settings:"wght" 500,"wdth" 92}
+.encabezados{margin-top:clamp(34px,6vh,70px);display:grid;grid-template-columns:minmax(200px,1.15fr) minmax(140px,1.6fr) 62px 58px 74px;gap:18px;padding:0 4px 10px;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-3)}
+.encabezados span:nth-child(3),.encabezados span:nth-child(4),.encabezados span:nth-child(5){text-align:right}
+
+.ficha{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.3,1,.3,1)}
+.fila.abierta .ficha{grid-template-rows:1fr}
+/* visibility (no display) para que la ficha cerrada salga del arbol de
+   accesibilidad sin perder la transicion ni las medidas del lienzo. */
+.ficha-caja{overflow:hidden;visibility:hidden;transition:visibility 0s .45s}
+.fila.abierta .ficha-caja{visibility:visible;transition:visibility 0s}
+.ficha-cont{
+  display:flex;flex-wrap:wrap;align-items:flex-end;gap:clamp(20px,4vw,60px);
+  padding:26px 4px 34px;
+  opacity:0;transform:translateY(10px);transition:opacity .35s .1s,transform .35s .1s;
+}
+.fila.abierta .ficha-cont{opacity:1;transform:none}
+.banda{flex:1 0 100%;height:clamp(54px,8.5vh,92px);margin-top:4px}
+.golpe{font-size:clamp(22px,3.2vw,40px);max-width:19ch;line-height:1.04;font-variation-settings:"wght" 500,"wdth" 92;text-wrap:balance}
+.arreglo{max-width:30ch}
+.arreglo dt{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-3);margin-bottom:7px}
+.arreglo dd{color:var(--tinta-2);font-size:16px}
+.precio-caja{margin-left:auto;text-align:right}
+.precio-caja .n{font-size:clamp(38px,5vw,64px);line-height:.9;font-variation-settings:"wght" 600,"wdth" 85;font-variant-numeric:tabular-nums}
+.precio-caja .p{font-size:13px;color:var(--tinta-3);margin-top:8px;max-width:24ch;margin-left:auto}
+.nota{margin-top:22px;font-size:14px;color:var(--tinta-3);max-width:52ch}
+
+/* ---------- precios ---------- */
+.tarifas{margin-top:clamp(32px,5vh,64px);border-top:1px solid var(--filete-2)}
+.tarifa{
+  display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:20px;
+  padding:24px 4px;border-bottom:1px solid var(--filete);position:relative;
+  transition:background .2s;
+}
+.tarifa:hover{background:var(--fondo-2);border-radius:var(--radio)}
+/* la sangria del hover va por translate, no por padding-left: mover padding
+   obliga a recalcular la maquetacion en cada fotograma de la transicion. */
+.tarifa h3,.tarifa p{transition:translate .3s cubic-bezier(.2,.9,.2,1)}
+.tarifa:hover h3,.tarifa:hover p{translate:18px 0}
+.tarifa h3{font-size:clamp(20px,2.4vw,28px)}
+.tarifa p{grid-column:1;color:var(--tinta-2);font-size:16px;margin-top:6px;max-width:46ch}
+.tarifa .n{grid-row:1/3;font-size:clamp(34px,5vw,58px);line-height:.9;font-variation-settings:"wght" 600,"wdth" 85;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cierre{margin-top:24px;font-size:clamp(17px,2vw,21px)}
+.marca{background:var(--amarillo);color:var(--sobre-amarillo);padding:2px 8px;font-variation-settings:"wght" 600,"wdth" 92;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* ---------- pasos ---------- */
+.pasos{margin-top:clamp(30px,5vh,56px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,48px)}
+.paso{border-top:2px solid var(--tinta);padding-top:18px}
+.paso .k{font-size:12.5px;letter-spacing:.12em;color:var(--tinta-3)}
+.paso h3{font-size:clamp(19px,2.2vw,26px);margin-top:10px}
+.paso p{color:var(--tinta-2);font-size:16px;margin-top:8px}
+
+/* ---------- contacto ---------- */
+.contacto{min-height:78svh;display:grid;align-content:center}
+#ancla-cta{min-height:clamp(120px,22vh,220px)}
+.contacto h2{font-size:clamp(40px,8vw,110px);font-variation-settings:"wght" 550,"wdth" 88}
+.contacto-pie{margin-top:26px;color:var(--tinta-2);font-size:16px}
+.contacto-pie a{color:var(--tinta)}
+.pie{border-top:1px solid var(--filete);padding:26px 0;display:flex;flex-wrap:wrap;gap:22px;font-size:13.5px;color:var(--tinta-3)}
+
+/* ---------- pantalla de carga ---------- */
+#carga{
+  position:fixed;inset:0;z-index:40;
+  display:grid;place-items:center;
+  background:transparent;      /* el lienzo queda visible por debajo */
+  pointer-events:none;
+  transition:opacity .5s ease,visibility .5s;
+}
+#carga .marcador{
+  font-size:clamp(46px,9.5vmin,104px);line-height:.8;
+  font-variation-settings:"wght" 600,"wdth" 82;letter-spacing:-.045em;
+  font-variant-numeric:tabular-nums;
+}
+#carga>*{grid-area:1/1}
+#carga .hueco{width:min(68vmin,480px);aspect-ratio:1}
+#carga .centro{text-align:center}
+#carga .marcador small{font-size:.36em;margin-left:.12em;font-variation-settings:"wght" 500,"wdth" 92;
+  vertical-align:.32em;color:var(--tinta-3)}
+:root.listo #carga{opacity:0;visibility:hidden}
+:root.cargando body{overflow:hidden}
+:root.cargando .capa,:root.cargando .cabecera{opacity:0;transform:translateY(18px)}
+:root.cargando .flotante{opacity:0}
+.capa,.cabecera{transition:opacity .7s .1s ease,transform .7s .1s cubic-bezier(.2,.9,.2,1)}
+
+/* ---------- burbuja del cursor ---------- */
+#burbuja{
+  position:fixed;z-index:30;pointer-events:none;
+  padding:7px 11px;background:var(--tinta);color:var(--fondo);
+  font-size:12.5px;font-variation-settings:"wght" 600,"wdth" 92;white-space:nowrap;
+  opacity:0;transform:translate(-50%,-160%);transition:opacity .15s;
+}
+#burbuja.ver{opacity:1}
+
+/* ---------- responsive ---------- */
+@media (max-width:860px){
+  .fila-btn,.encabezados{grid-template-columns:1fr 46px 68px;gap:10px}
+  .fila-btn .pista,.fila-btn .fila-pct,
+  .encabezados span:nth-child(2),.encabezados span:nth-child(4){display:none}
+  .encabezados{font-size:11px;letter-spacing:.06em}
+  .pasos{grid-template-columns:1fr;gap:26px}
+  .precio-caja{margin-left:0;text-align:left}
+  .precio-caja .p{margin-left:0}
+  .flotante{left:var(--margen);right:var(--margen);justify-content:center}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .cabecera .sufijo{display:none}
+  .censo-cabeza{gap:16px}
+  .fila-btn{padding:15px 2px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,::before,::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+/* sin JS: la tabla oculta se hace visible */
+.sin-js #lienzo,.sin-js #carga{display:none}
+/* ...y tambien si el guion arranca pero muere antes de pintar la lista: el
+   estado degradado no puede depender de que JS este DESACTIVADO del todo.
+   Hay que deshacer TODO lo de .oculto, tambien overflow y white-space: con
+   nowrap la tabla salia en una sola linea kilometrica. */
+.sin-js .respaldo,main:has(#lista:empty) .respaldo{
+  position:static!important;width:auto;height:auto;overflow:visible;clip-path:none;white-space:normal;
+  border-collapse:collapse;margin-top:8px;
+}
+.sin-js .respaldo td,.sin-js .respaldo th,
+main:has(#lista:empty) .respaldo td,main:has(#lista:empty) .respaldo th{padding:10px 12px;border-bottom:1px solid var(--filete);text-align:left;vertical-align:top}
+/* sin lista no hay fila que tocar ni cabecera de columnas que encabece nada */
+.sin-js .solo-js,.sin-js .encabezados,
+main:has(#lista:empty) .solo-js,main:has(#lista:empty) .encabezados{display:none}
+
+/* ---------- papel ---------- */
+@media print{
+  :root{
+    --fondo:#f2f0ea;--fondo-2:#f2f0ea;--filete:rgba(34,27,46,.3);--filete-2:rgba(34,27,46,.5);
+    --tinta:#1c1626;--tinta-2:#3a3346;--tinta-3:#4d4559;--reticula:transparent;
+    --amarillo-texto:#8a6414;color-scheme:light;
+  }
+  #lienzo,#carga,#burbuja,.cabecera,.flotante,.desliza,body::before{display:none!important}
+  .respaldo{position:static!important;width:auto;height:auto;overflow:visible;clip-path:none;white-space:normal;border-collapse:collapse}
+  .respaldo td,.respaldo th{padding:8px 10px;border-bottom:1px solid var(--filete);text-align:left;vertical-align:top}
+  .lista,.encabezados,.solo-js{display:none}
+  section{padding-block:18px;break-inside:avoid}
+  .portada,.censo,.contacto{min-height:0}
+}
+</style>
+</head>
+<body>
+<canvas id="lienzo" aria-hidden="true"></canvas>
+<div id="burbuja" aria-hidden="true"></div>
+
+<!-- decorativa de arriba abajo: el contenido de debajo ya esta en el DOM y es
+     navegable. Con aria-live el contador cantaba 0..100 al lector de pantalla. -->
+<div id="carga" aria-hidden="true">
+  <div class="hueco" id="ancla-carga"></div>
+  <div class="centro">
+    <div class="marcador" id="carga-n">0<small>%</small></div>
+  </div>
+</div>
+<script>
+/* Red de seguridad independiente del guion principal: si algo falla mas abajo,
+   la pantalla de carga no puede dejar la pagina bloqueada con overflow:hidden. */
+setTimeout(function(){
+  var r = document.documentElement;
+  if (r.classList.contains('cargando')) { r.classList.remove('cargando'); r.classList.add('listo'); }
+}, 6000);
+</script>
+
+<header class="cabecera">
+  <div><b>Eneko Navarrete</b><span class="sufijo"> · web development · Berguedà</span></div>
+  <nav>
+    <a href="/en/">enekodevs.com</a>
+    <button class="tema" id="tema" type="button">Light mode</button>
+  </nav>
+</header>
+
+<a class="flotante" id="flotante" href="#contacto">Tell me your problem →</a>
+
+<main class="capa">
+
+  <!-- 1. portada -->
+  <section class="portada hoja" id="portada">
+    <h1>Your website shouldn't cost you a fee <em>every month</em>.</h1>
+    <p class="bajada">Build it once and it's yours. You only pay again if you ask for something new.</p>
+    <div class="fila-cta">
+      <a class="accion" href="#contacto">Tell me your problem <span class="fl">→</span></a>
+      <a class="accion-2" href="#diagnostico">See the 9 problems</a>
+    </div>
+    <div class="desliza"><i></i> Scroll down</div>
+  </section>
+
+  <!-- 2. el censo -->
+  <section class="censo hoja" id="censo">
+    <h2 class="oculto">The census: 203 websites opened one by one</h2>
+    <div class="censo-cabeza">
+      <div class="cifra" id="contador" data-hasta="203">0</div>
+      <p>small-business websites, opened one by one.</p>
+    </div>
+    <div id="ancla-rejilla"></div>
+    <div class="leyenda">
+      <span><i class="pastilla si"></i><b>189</b> with at least one of these nine problems</span>
+      <span><i class="pastilla no"></i><b>14</b> with none of this</span>
+    </div>
+  </section>
+
+  <!-- 3. los nueve -->
+  <section class="hoja" id="diagnostico">
+    <h2 class="titulo-seccion">Nine problems. They keep repeating.</h2>
+    <p class="entradilla"><span class="solo-js">Tap one and the squares group together. </span>Each card tells you what it's costing you and what it costs to fix.</p>
+
+    <div class="encabezados" aria-hidden="true">
+      <span>What's wrong with the site</span><span>Breakdown</span><span>No.</span><span>%</span><span>Fix</span>
+    </div>
+    <div class="lista" id="lista"></div>
+    <p class="nota">The remaining 14 had none of this. I still count them: without them, the percentages would lie.</p>
+  </section>
+
+  <!-- 4. precios -->
+  <section class="hoja" id="precios">
+    <h2 class="titulo-seccion">And if you want the whole website</h2>
+    <div class="tarifas">
+      <div class="tarifa"><h3>Simple website</h3><p>With whatever system your business needs: bookings, appointments, or whatever it takes.</p><div class="n">300 €</div></div>
+      <div class="tarifa"><h3>A website you can edit yourself</h3><p>Your own panel: change text, prices and photos without calling anyone.</p><div class="n">750 €</div></div>
+      <div class="tarifa"><h3>Changes whenever you need them</h3><p>First hour 50 €. Each one after that, 35 €.</p><div class="n">from 50 €</div></div>
+      <div class="tarifa"><h3>Seasonal check-up</h3><p>Before summer, before Christmas. You decide when.</p><div class="n">50 €</div></div>
+    </div>
+    <p class="cierre">Always a one-time payment. <span class="marca">No monthly fee, no contract, no commission.</span></p>
+  </section>
+
+  <!-- 5. cómo va -->
+  <section class="hoja" id="como">
+    <h2 class="titulo-seccion">How this works</h2>
+    <div class="pasos">
+      <div class="paso"><div class="k">01</div><h3>You message me</h3><p>Your website address and a couple of lines.</p></div>
+      <div class="paso"><div class="k">02</div><h3>I tell you what's wrong</h3><p>I open your site, take a look, and tell you what I'd do. No obligation.</p></div>
+      <div class="paso"><div class="k">03</div><h3>Fixed price</h3><p>In writing. If it doesn't work for you, you owe nothing.</p></div>
+    </div>
+  </section>
+
+  <!-- 6. contacto -->
+  <section class="contacto hoja" id="contacto">
+    <div id="ancla-cta"></div>
+    <h2>Send me the address<br>and I'll take a look.</h2>
+    <div class="fila-cta">
+      <a class="accion" href="https://wa.me/34617575495?text=Hi%20Eneko%2C%20my%20website%20is%3A%20">WhatsApp <span class="fl">→</span></a>
+      <a class="accion-2" href="mailto:eneko.devs@gmail.com?subject=My%20website">eneko.devs@gmail.com</a>
+    </div>
+    <p class="contacto-pie">I'll get back to you within 24 hours. If you'd rather call: <a href="tel:+34617575495">617 575 495</a>.</p>
+  </section>
+
+  <!-- respaldo accesible / sin JS / impresión -->
+  <table class="oculto respaldo">
+    <caption>Problems found in 203 small-business websites</caption>
+    <thead><tr><th>Problem</th><th>Businesses</th><th>%</th><th>Fix</th><th>What I do</th></tr></thead>
+    <!-- Contenido REAL en el HTML, no generado por el guion: si el JavaScript
+         falla, esta tabla sigue diciendo lo mismo que la lista. El guion la
+         reescribe identica cuando todo va bien. -->
+    <tbody id="respaldo">
+      <tr><td>Can't book online</td><td>66</td><td>33 %</td><td>150 €</td><td>Timed booking, confirmation and reminder, right on your website.</td></tr>
+      <tr><td>Website looks abandoned</td><td>40</td><td>20 %</td><td>100 €</td><td>Express rescue with a fixed scope: you know exactly what's included before we start.</td></tr>
+      <tr><td>Nobody replies to the form</td><td>22</td><td>11 %</td><td>100 €</td><td>Instant confirmation and a reminder before the appointment.</td></tr>
+      <tr><td>Prices and hours are hidden</td><td>14</td><td>7 %</td><td>75 €</td><td>Real text, readable on mobile. Nothing locked inside an image.</td></tr>
+      <tr><td>Actually broken</td><td>14</td><td>7 %</td><td>100 €</td><td>I fix it and test it in front of you.</td></tr>
+      <tr><td>Slow and heavy on mobile</td><td>12</td><td>6 %</td><td>100 €</td><td>I measure it, fix it, and measure it again.</td></tr>
+      <tr><td>Customers go to another platform</td><td>11</td><td>5 %</td><td>200 €</td><td>Bookings and deposits on your own website, no commission.</td></tr>
+      <tr><td>Tasks still done by hand</td><td>7</td><td>3 %</td><td>50 €</td><td>I automate whichever one steals the most of your time. We start with one.</td></tr>
+      <tr><td>Emails that don't arrive</td><td>3</td><td>1 %</td><td>75 €</td><td>Email on your own domain, set up so it actually arrives.</td></tr>
+    </tbody>
+  </table>
+</main>
+
+<footer class="pie hoja capa">
+  <span>Eneko Navarrete</span><span>web development</span><span>Berguedà, Barcelona</span>
+  <span><a href="/en/">enekodevs.com</a></span>
+</footer>
+
+<script>
+/* la clase ya se puso en <head> para que no haya destello de contenido */
+
+/* ============ datos ============ */
+const P = [
+ {id:'cita',   n:"Can't book online",              c:66, e:150, golpe:"After hours, the booking goes to someone else.",              fix:"Timed booking, confirmation and reminder, right on your website.", pie:"On the website you already have. Included if I build your site."},
+ {id:'vieja',  n:'Website looks abandoned',         c:40, e:100, golpe:'If the website looks like 2011, so does the business.',        fix:"Express rescue with a fixed scope: you know exactly what's included before we start.", pie:'In days, not weeks.'},
+ {id:'mudo',   n:'Nobody replies to the form',      c:22, e:100, golpe:'They fill out the form and get nothing back. No confirmation, no notice.', fix:'Instant confirmation and a reminder before the appointment.', pie:'Tested in front of you.'},
+ {id:'oculto', n:'Prices and hours are hidden',     c:14, e: 75, golpe:"What Google can't read, it won't show.",                       fix:'Real text, readable on mobile. Nothing locked inside an image.', pie:'The cheapest fix on the list.'},
+ {id:'roto',   n:'Actually broken',                 c:14, e:100, golpe:"A broken button isn't a glitch: it's a lost sale.",            fix:'I fix it and test it in front of you.', pie:"I send you proof it's fixed."},
+ {id:'lento',  n:'Slow and heavy on mobile',        c:12, e:100, golpe:'Half of them leave before it loads.',                          fix:'I measure it, fix it, and measure it again.', pie:"If the second measurement doesn't improve, you don't pay."},
+ {id:'ajena',  n:'Customers go to another platform', c:11, e:200, golpe:'6% of every booking, all year, forever.',                     fix:'Bookings and deposits on your own website, no commission.', pie:'Just once. The platform charges every single booking.'},
+ {id:'mano',   n:'Tasks still done by hand',        c: 7, e: 50, golpe:'Cancellations and membership passes eat up your morning.',     fix:'I automate whichever one steals the most of your time. We start with one.', pie:'The first hour. Each one after that, 35 €.'},
+ {id:'correo', n:"Emails that don't arrive",        c: 3, e: 75, golpe:"A quote stuck in spam is a quote that doesn't exist.",          fix:'Email on your own domain, set up so it actually arrives.', pie:'The least common one, but it leaves the worst impression.'}
+];
+const TOTAL = 203, CON = 189;
+/* solo nichos que se auditaron de verdad (bancos: outdoor, gimnasios,
+   psicologas, rocodromos). Nada de rubros inventados. */
+const RUBROS = ['kayak school','climbing wall','gym','dive center','riding stables','psychologist','yoga studio','surf school','climbing center','adventure tourism'];
+
+/* ============ pintar la lista ============ */
+const lista = document.getElementById('lista');
+lista.innerHTML = P.map((p,i)=>`
+<div class="fila" data-id="${p.id}">
+  <button class="fila-btn" type="button" aria-expanded="false" aria-controls="f-${p.id}">
+    <span class="fila-nombre"><span class="signo" aria-hidden="true"></span>${p.n}</span>
+    <span class="pista" data-pista="${p.id}" aria-hidden="true"></span>
+    <span class="fila-n">${p.c}</span>
+    <span class="fila-pct">${Math.round(p.c/TOTAL*100)} %</span>
+    <span class="fila-precio">${p.e} €</span>
+  </button>
+  <div class="ficha" id="f-${p.id}" role="region" aria-label="${p.n}">
+    <div class="ficha-caja"><div class="ficha-cont">
+      <p class="golpe">${p.golpe}</p>
+      <dl class="arreglo"><dt>Qué hago</dt><dd>${p.fix}</dd></dl>
+      <div class="precio-caja"><div class="n">${p.e} €</div><div class="p">${p.pie}</div></div>
+      <div class="banda" data-banda="${p.id}" aria-hidden="true"></div>
+    </div></div>
+  </div>
+</div>`).join('');
+
+document.getElementById('respaldo').innerHTML = P.map(p=>
+  `<tr><td>${p.n}</td><td>${p.c}</td><td>${Math.round(p.c/TOTAL*100)} %</td><td>${p.e} €</td><td>${p.fix}</td></tr>`).join('');
+
+/* ============ acordeón ============ */
+let abierta = null;
+lista.querySelectorAll('.fila-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const fila = btn.closest('.fila');
+    const yaAbierta = fila.classList.contains('abierta');
+    lista.querySelectorAll('.fila').forEach(f=>{f.classList.remove('abierta');f.querySelector('.fila-btn').setAttribute('aria-expanded','false')});
+    if(!yaAbierta){ fila.classList.add('abierta'); btn.setAttribute('aria-expanded','true'); abierta = fila.dataset.id; }
+    else abierta = null;
+    campo.enfoque = abierta;
+    /* abrir o cerrar mueve todo lo de debajo: hay que remedir mientras dura
+       la transicion, o las barras apuntarian a donde estaban antes */
+    campo.remedir();
+  });
+});
+
+/* ============ tema ============ */
+const btnTema = document.getElementById('tema');
+const claroPorDefecto = window.matchMedia('(prefers-color-scheme: light)').matches;
+if(claroPorDefecto) document.documentElement.dataset.tema = 'claro';
+/* sin aria-pressed a proposito: la etiqueta ya dice a donde lleva el boton
+   ("Modo claro"), y las dos cosas juntas se contradicen al leerlas. */
+const pintaBoton = ()=>{
+  const claro = document.documentElement.dataset.tema === 'claro';
+  btnTema.textContent = claro ? 'Dark mode' : 'Light mode';
+};
+pintaBoton();
+btnTema.addEventListener('click',()=>{
+  document.documentElement.dataset.tema = document.documentElement.dataset.tema === 'claro' ? '' : 'claro';
+  pintaBoton(); campo.leerColores();
+});
+
+/* ============ cabecera + CTA flotante ============ */
+const cab = document.querySelector('.cabecera'), flot = document.getElementById('flotante');
+const censo = document.getElementById('censo'), contacto = document.getElementById('contacto');
+addEventListener('scroll',()=>{
+  cab.classList.toggle('pegada', scrollY > 40);
+  const y = scrollY + innerHeight;
+  flot.classList.toggle('dentro', scrollY > innerHeight*0.9 && y < contacto.offsetTop + 200);
+},{passive:true});
+
+/* ============ contador ============ */
+const contador = document.getElementById('contador');
+new IntersectionObserver((es,o)=>{
+  es.forEach(e=>{ if(!e.isIntersecting) return; o.unobserve(e.target);
+    const t0 = performance.now(), dur = 1100;
+    const paso = t=>{ const k = Math.min(1,(t-t0)/dur), s = 1-Math.pow(1-k,3);
+      contador.textContent = Math.round(s*TOTAL); if(k<1) requestAnimationFrame(paso); };
+    requestAnimationFrame(paso);
+  });
+},{threshold:.6}).observe(contador);
+
+/* ============ EL CAMPO DE CUADRADOS ============ */
+const campo = (()=>{
+  const cv = document.getElementById('lienzo'), cx = cv.getContext('2d');
+  const suave = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W=0,H=0,dpr=1;
+  let COL = {azul:'#a08cc8', apagado:'#3a3049', amarillo:'#e3a93a', sobreAmarillo:'#1d1505'};
+
+  const leerColores = ()=>{
+    const s = getComputedStyle(document.documentElement);
+    COL.azul = s.getPropertyValue('--azul').trim();
+    COL.apagado = s.getPropertyValue('--azul-apagado').trim();
+    COL.amarillo = s.getPropertyValue('--amarillo').trim();
+    COL.sobreAmarillo = s.getPropertyValue('--sobre-amarillo').trim();
+  };
+  leerColores();
+
+  // partículas: una por negocio
+  const bichos = [];
+  let k = 0;
+  P.forEach((p,pi)=>{ for(let i=0;i<p.c;i++) bichos.push({idx:k++, pi, id:p.id, rubro:RUBROS[k%RUBROS.length]}); });
+  while(bichos.length < TOTAL) bichos.push({idx:k++, pi:-1, id:null, rubro:RUBROS[k%RUBROS.length]});
+
+  bichos.forEach(b=>{
+    b.x = Math.random()*innerWidth; b.y = Math.random()*innerHeight;
+    b.tx = b.x; b.ty = b.y; b.s = 11; b.ts = 11; b.a = .5; b.ta = .5;
+    b.vx = 0; b.vy = 0;
+    b.fx = Math.random()*Math.PI*2; b.fy = Math.random()*Math.PI*2; // fase de deriva
+    b.velBase = .055 + Math.random()*.05;                             // rapidez individual
+    b.vel = b.velBase;
+  });
+
+  /* Solo raton. En tactil el dedo dispara pointermove al hacer scroll y deja un
+     boquete permanente de repulsion donde toco por ultima vez; ademas
+     'pointerleave' no burbujea, asi que en window no llegaba a saltar nunca. */
+  const raton = {x:-9999, y:-9999, dentro:false};
+  const suelta = ()=>{ raton.dentro=false; raton.x=raton.y=-9999; };
+  addEventListener('pointermove', e=>{
+    if(e.pointerType && e.pointerType !== 'mouse') return;
+    raton.x=e.clientX; raton.y=e.clientY; raton.dentro=true;
+  },{passive:true});
+  document.documentElement.addEventListener('pointerleave', suelta);
+  addEventListener('blur', suelta);
+
+  const medir = ()=>{
+    dpr = Math.min(2, devicePixelRatio||1);
+    W = innerWidth; H = innerHeight;
+    cv.width = W*dpr; cv.height = H*dpr;
+    cx.setTransform(dpr,0,0,dpr,0,0);
+  };
+  medir(); addEventListener('resize', medir);
+
+  const anclaRejilla = document.getElementById('ancla-rejilla');
+  const anclaCta = document.getElementById('ancla-cta');
+  const portada = document.getElementById('portada');
+
+  const api = { enfoque:null, leerColores, cargando:true, saliendo:false, avance:0, giro:0 };
+
+  /* --- MEDIDAS CACHEADAS ------------------------------------------------
+     Antes esto pedia getBoundingClientRect 8 veces POR FOTOGRAMA, y cada
+     llamada obliga al navegador a recalcular la maquetacion entera: 60 veces
+     por segundo, tambien en el movil. Ahora se mide una vez, se guarda en
+     coordenadas de DOCUMENTO, y por fotograma solo restamos scrollY.
+     Se vuelve a medir cuando el tamano cambia de verdad: resize, fuentes
+     cargadas, y al abrir o cerrar una ficha (que mueve todo lo de debajo). */
+  const M = {};
+  const cajaDoc = el => { const r = el.getBoundingClientRect();
+    return {top:r.top + scrollY, left:r.left, width:r.width, height:r.height}; };
+  const V = c => c && {top:c.top - scrollY, left:c.left, width:c.width, height:c.height,
+                       bottom:c.top - scrollY + c.height};
+
+  function medirLayout(){
+    const carga = document.getElementById('ancla-carga');
+    M.portada = cajaDoc(portada);
+    M.rejilla = cajaDoc(anclaRejilla);
+    M.lista   = cajaDoc(lista);
+    M.cta     = cajaDoc(anclaCta);
+    if(carga) M.carga = cajaDoc(carga);
+    M.pistas = {}; M.bandas = {};
+    P.forEach(p=>{
+      const ep = lista.querySelector(`[data-pista="${p.id}"]`);
+      const eb = lista.querySelector(`[data-banda="${p.id}"]`);
+      if(ep) M.pistas[p.id] = cajaDoc(ep);
+      if(eb) M.bandas[p.id] = cajaDoc(eb);
+    });
+  }
+  medirLayout();
+  addEventListener('resize', medirLayout);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(medirLayout);
+
+  /* La ficha se abre con una transicion de 450 ms: mientras dura, todo lo que
+     hay debajo se mueve, asi que se remide durante ese rato y se para. */
+  api.remedir = ()=>{
+    const t0 = performance.now();
+    const tic = ahora => { medirLayout(); if(ahora - t0 < 620) requestAnimationFrame(tic); };
+    requestAnimationFrame(tic);
+  };
+
+  /* --- decidir escena según el scroll --- */
+  function escenaActiva(){
+    if(api.cargando || api.saliendo) return 'carga';
+    const centro = H/2;
+    const d = c => { const v = V(c); return v ? Math.abs(v.top + v.height/2 - centro) : 1e9; };
+    const cand = [
+      {nombre:'dispersa', d: d(M.portada)},
+      {nombre:'rejilla',  d: d(M.rejilla)},
+      {nombre:'barras',   d: d(M.lista)},
+      {nombre:'flecha',   d: d(M.cta)}
+    ];
+    cand.sort((a,b)=>a.d-b.d);
+    return cand[0].nombre;
+  }
+
+  /* --- cada escena fija destinos --- */
+  const puntosFlecha = (()=>{ // flecha → dibujada en una malla 21x11
+    const arte = [
+      '.....................',
+      '.....................',
+      '.........#...........',
+      '..........#..........',
+      '...........#.........',
+      '####################.',
+      '...........#.........',
+      '..........#..........',
+      '.........#...........',
+      '.....................',
+      '.....................'];
+    const pts=[];
+    arte.forEach((fil,y)=>[...fil].forEach((ch,x)=>{ if(ch==='#') pts.push({x,y}); }));
+    return pts;
+  })();
+
+  function colocar(escena){
+    if(escena==='carga'){
+      // un cuadrado hecho de cuadraditos, que gira y se va rellenando
+      const r = V(M.carga) || {left:W/2, top:H/2, width:Math.min(W,H)*0.6, height:Math.min(W,H)*0.6};
+      const cxx = r.left + r.width/2, cyy = r.top + r.height/2;
+      const S = Math.min(r.width, r.height) * 0.86;   // lado del cuadrado
+      const half = S/2;
+      const giro = api.giro;
+      const cg = Math.cos(giro), sg = Math.sin(giro);
+      const hechos = api.avance * TOTAL;
+
+      bichos.forEach((b,i)=>{
+        // posición sobre el perímetro: 0 → esquina superior izquierda, sentido horario
+        const u = (i/TOTAL)*4, lado = Math.floor(u), f = u - lado;
+        let px, py;
+        if(lado===0){ px = -half + f*S; py = -half; }
+        else if(lado===1){ px = half;   py = -half + f*S; }
+        else if(lado===2){ px = half - f*S; py = half; }
+        else { px = -half; py = half - f*S; }
+
+        b.tx = cxx + px*cg - py*sg;
+        b.ty = cyy + px*sg + py*cg;
+        b.rot = giro;
+
+        const puesto = i < hechos;
+        const recien = puesto && i > hechos - 5;
+        b.ts = recien ? S*0.026 : puesto ? S*0.0125 : S*0.0075;
+        b.ta = recien ? 1 : puesto ? .92 : .13;
+        b.col = recien ? COL.amarillo : puesto ? COL.azul : COL.apagado;
+        b.deriva = 0;
+        b.vel = puesto ? .26 : .14;     // los ya puestos siguen el giro más pegados
+      });
+      return;
+    }
+    if(escena==='dispersa'){
+      const rp = V(M.portada);
+      bichos.forEach((b,i)=>{
+        b.ts = 10;
+        b.ta = b.pi<0 ? .16 : .30;
+        b.col = b.pi<0 ? COL.apagado : COL.azul;
+        // reparto pseudoaleatorio estable por el ancho
+        const gx = (Math.sin(i*12.9898)*43758.5453) % 1;
+        const gy = (Math.sin(i*78.233)*12345.6789) % 1;
+        b.tx = (Math.abs(gx))*(W-40)+20;
+        b.ty = rp.top + 120 + Math.abs(gy)*(rp.height-180);
+        b.deriva = 1;
+      });
+      return;
+    }
+    if(escena==='rejilla'){
+      const r = V(M.rejilla);
+      const cols = W < 640 ? 15 : W < 1000 ? 21 : 29;
+      const filas = Math.ceil(TOTAL/cols);
+      const paso = Math.min(26, Math.max(12, r.width/cols));
+      const lado = paso*0.72;
+      const x0 = r.left + (r.width - cols*paso)/2 + paso/2;
+      const y0 = r.top + (r.height - filas*paso)/2 + paso/2;
+      bichos.forEach((b,i)=>{
+        b.tx = x0 + (i%cols)*paso; b.ty = y0 + Math.floor(i/cols)*paso;
+        b.ts = lado; b.ta = b.pi<0 ? .30 : 1;
+        b.col = b.pi<0 ? COL.apagado : COL.azul;
+        b.deriva = 0;
+      });
+      return;
+    }
+    if(escena==='barras'){
+      const grupos = {};
+      P.forEach(p=>{ const c = V(M.pistas[p.id]); if(c) grupos[p.id]=c; });
+      const bandas = {};
+      if(api.enfoque){
+        const c = V(M.bandas[api.enfoque]);
+        if(c) bandas[api.enfoque] = c;
+      }
+      const contadores = {};
+      bichos.forEach(b=>{
+        if(b.pi<0){ // los 14 limpios: fila tenue bajo la lista
+          const rl = V(M.lista);
+          const i = b.idx % 14;
+          b.tx = rl.left + 8 + i*15; b.ty = rl.bottom + 26;
+          b.ts = 9; b.ta = .22; b.col = COL.apagado; b.deriva = 0; return;
+        }
+        const p = P[b.pi], r = grupos[p.id];
+        if(!r){ b.ta = 0; return; }
+        contadores[p.id] = (contadores[p.id]||0);
+        const i = contadores[p.id]++;
+        const enfocada = api.enfoque === p.id;
+
+        if(enfocada){
+          // la fila abierta lleva sus cuadrados abajo, a la ficha (donde el fondo es transparente)
+          const bd = bandas[p.id];
+          if(bd && bd.width > 20){
+            const paso = Math.max(9, Math.min(17, Math.sqrt(bd.width*bd.height/p.c)));
+            const cols = Math.max(1, Math.floor(bd.width/paso));
+            const filas = Math.ceil(p.c/cols);
+            const x0 = bd.left + paso/2;
+            const y0 = bd.top + (bd.height - filas*paso)/2 + paso/2;
+            b.tx = x0 + (i%cols)*paso;
+            b.ty = y0 + Math.floor(i/cols)*paso;
+            b.ts = paso*0.74; b.ta = 1; b.col = COL.amarillo; b.deriva = 0;
+            return;
+          }
+        }
+        const maxAncho = Math.max(60, r.width);
+        const paso = Math.min(13, maxAncho/Math.max(P[0].c, 1));
+        b.tx = r.left + i*paso + paso/2;
+        b.ty = r.top + r.height/2;
+        b.ts = paso*0.72;
+        b.ta = api.enfoque ? .16 : .85;
+        b.col = COL.azul;
+        b.deriva = 0;
+      });
+      return;
+    }
+    if(escena==='flecha'){
+      const r = V(M.cta);
+      const cols = 21, filas = 11;
+      const paso = Math.min(22, r.width/cols, 34);
+      const x0 = r.left + (r.width - cols*paso)/2 + paso/2;
+      const y0 = r.top + (r.height - filas*paso)/2 + paso/2;
+      bichos.forEach((b,i)=>{
+        const pt = puntosFlecha[i % puntosFlecha.length];
+        const anillo = Math.floor(i / puntosFlecha.length);
+        b.tx = x0 + pt.x*paso + (anillo? (Math.sin(i*3.3)*paso*1.6):0);
+        b.ty = y0 + pt.y*paso + (anillo? (Math.cos(i*2.1)*paso*1.2):0);
+        b.ts = anillo ? 7 : paso*0.7;
+        b.ta = anillo ? .12 : 1;
+        b.col = anillo ? COL.apagado : COL.amarillo;
+        b.deriva = anillo ? 1 : 0;
+      });
+      return;
+    }
+  }
+
+  /* --- hover sobre un cuadrado --- */
+  const burbuja = document.getElementById('burbuja');
+  let ultimoHover = null;
+
+  /* --- bucle --- */
+  let t = 0;
+  function marco(ahora){
+    t = ahora/1000;
+    if(!suave) api.giro = t*0.55 + api.avance*1.15;   // gira, y acelera al llenarse
+    const escena = escenaActiva();
+    colocar(escena);
+
+    cx.clearRect(0,0,W,H);
+    let sobre = null;
+
+    for(const b of bichos){
+      // deriva orgánica solo en escenas sueltas
+      let tx = b.tx, ty = b.ty;
+      if(b.deriva && !suave){ tx += Math.sin(t*0.5 + b.fx)*14; ty += Math.cos(t*0.42 + b.fy)*11; }
+
+      // repulsión del cursor
+      if(raton.dentro){
+        const dx = b.x - raton.x, dy = b.y - raton.y;
+        const d2 = dx*dx + dy*dy;
+        if(d2 < 16000){
+          const d = Math.max(12, Math.sqrt(d2));
+          const f = (1 - d/126) * 34;
+          tx += dx/d*f; ty += dy/d*f;
+        }
+      }
+
+      const v = suave ? 1 : b.vel;
+      b.x += (tx - b.x)*v; b.y += (ty - b.y)*v;
+      b.s += (b.ts - b.s)*0.12;
+      b.a += (b.ta - b.a)*0.09;
+
+      // ¿el ratón está encima?
+      if(raton.dentro && escena==='rejilla' && Math.abs(raton.x-b.x)<b.s && Math.abs(raton.y-b.y)<b.s) sobre = b;
+
+      cx.globalAlpha = b.a;
+      cx.fillStyle = b.col || COL.azul;
+      const h = b.s;
+      if(b.rot){
+        cx.save(); cx.translate(b.x, b.y); cx.rotate(b.rot);
+        cx.fillRect(-h/2, -h/2, h, h); cx.restore();
+      } else cx.fillRect(b.x - h/2, b.y - h/2, h, h);
+    }
+    cx.globalAlpha = 1;
+
+    if(sobre !== ultimoHover){
+      ultimoHover = sobre;
+      if(sobre){
+        const p = sobre.pi >= 0 ? P[sobre.pi].n : 'None of the nine';
+        burbuja.textContent = `${sobre.rubro} · ${p}`;
+        burbuja.classList.add('ver');
+      } else burbuja.classList.remove('ver');
+    }
+    if(sobre){ burbuja.style.left = sobre.x+'px'; burbuja.style.top = sobre.y+'px'; }
+
+    if(!document.hidden) requestAnimationFrame(marco);
+    else corriendo = false;   /* pestana en segundo plano: se para del todo */
+  }
+  let corriendo = true;
+  requestAnimationFrame(marco);
+  document.addEventListener('visibilitychange', ()=>{
+    if(!document.hidden && !corriendo){ corriendo = true; requestAnimationFrame(marco); }
+  });
+
+  /* ============ la carga ============ */
+  const numCarga = document.getElementById('carga-n');
+
+  api.terminarCarga = ()=>{
+    if(api.saliendo) return;
+    api.saliendo = true;
+    api.cargando = false;
+    numCarga.firstChild.nodeValue = 100;
+
+    // 1) todos se llenan, golpe seco
+    bichos.forEach(b=>{ b.vel = .34; });
+
+    setTimeout(()=>{
+      // 2) estallan hacia fuera y sueltan la página
+      document.documentElement.classList.remove('cargando');
+      document.documentElement.classList.add('listo');
+      bichos.forEach(b=>{
+        const ang = Math.atan2(b.y - H/2, b.x - W/2);
+        b.x += Math.cos(ang)*Math.min(W,H)*0.22;
+        b.y += Math.sin(ang)*Math.min(W,H)*0.22;
+        b.vel = b.velBase; b.rot = 0;
+      });
+      api.saliendo = false;
+      /* durante la carga, .capa lleva un translateY(18px) y el body no tiene
+         barra de desplazamiento: las medidas de antes estaban desviadas.
+         Se remide ahora que la pagina esta en su sitio de verdad. */
+      api.remedir();
+    }, suave ? 60 : 420);
+  };
+
+  api.moverAvance = v => {
+    api.avance = Math.max(api.avance, Math.min(1, v));
+    numCarga.firstChild.nodeValue = Math.round(api.avance*100);
+  };
+
+  return api;
+})();
+
+/* --- ritmo de la carga: mínimo estético + espera real --- */
+(()=>{
+  const suave = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DUR = suave ? 380 : 1750;
+  const t0 = performance.now();
+  let recursosListos = false;
+
+  const listo = ()=>{ recursosListos = true; };
+  if(document.readyState === 'complete') listo();
+  else addEventListener('load', listo);
+  // por si algo se atasca, no bloqueamos nunca más de 4 s
+  setTimeout(listo, 4000);
+
+  const tic = ahora=>{
+    const k = Math.min(1, (ahora - t0)/DUR);
+    // easing: arranca rápido, se frena, y remata al final
+    const s = k < .92 ? 1 - Math.pow(1 - k/.92, 2.4) : 1;
+    campo.moverAvance(s * (recursosListos ? 1 : .93));
+    if(k >= 1 && recursosListos){ campo.terminarCarga(); return; }
+    requestAnimationFrame(tic);
+  };
+  requestAnimationFrame(tic);
+})();
+</script>
+</body>
+</html>
