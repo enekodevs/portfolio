@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<script>try{var _t=localStorage.getItem("eneko.theme");if(_t==="light"){document.documentElement.setAttribute("data-theme","light")}else if(_t!=="dark"&&matchMedia("(prefers-color-scheme: light)").matches){document.documentElement.setAttribute("data-theme","light")}}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Web para gimnasio con precios claros · Eneko Navarrete</title>
 <meta name="description" content="Abrí 46 webs de gimnasios y estudios de yoga: 32 escondían el precio en una imagen. Precios y horario visibles, reserva online, sin cuota mensual.">
@@ -57,7 +58,7 @@
   --margen:clamp(20px,5.5vw,88px);
   --paso:clamp(58px,9vh,116px);
 }
-:root[data-tema="claro"]{
+:root[data-theme="light"]{
   --fondo:#f2f0ea; --fondo-2:#e8e5dc; --filete:rgba(34,27,46,.13); --filete-2:rgba(34,27,46,.32);
   --tinta:#1c1626; --tinta-2:#524a60; --tinta-3:#6f6780;
   --amarillo:#d99a22; --sobre-amarillo:#1d1505; --amarillo-texto:#8a6414; --amarillo-claro:#eeb43e;
@@ -560,11 +561,12 @@ h1 em{font-style:normal;color:var(--amarillo-texto)}
    para que sin JS no quede un boton muerto que no hace nada. */
 (function(){
   var r=document.documentElement, b=document.getElementById('tema');
-  if(matchMedia('(prefers-color-scheme: light)').matches) r.dataset.tema='claro';
-  var pinta=function(){ b.textContent = r.dataset.tema==='claro' ? 'Modo oscuro' : 'Modo claro'; };
+  var pinta=function(){ b.textContent = r.getAttribute('data-theme')==='light' ? 'Modo oscuro' : 'Modo claro'; };
   pinta(); b.hidden=false;
   b.addEventListener('click',function(){
-    r.dataset.tema = r.dataset.tema==='claro' ? '' : 'claro';
+    var claro = r.getAttribute('data-theme')==='light';
+    if(claro){ r.removeAttribute('data-theme'); } else { r.setAttribute('data-theme','light'); }
+    try{localStorage.setItem('eneko.theme', claro ? 'dark' : 'light')}catch(e){}
     pinta();
   });
 })();
