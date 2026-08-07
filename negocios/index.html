@@ -262,6 +262,14 @@ h1 em{font-style:normal;color:var(--amarillo-texto)}
 .contacto-pie{margin-top:26px;color:var(--tinta-2);font-size:16px}
 .contacto-pie a{color:var(--tinta)}
 .pie{border-top:1px solid var(--filete);padding:26px 0;display:flex;flex-wrap:wrap;gap:22px;font-size:13.5px;color:var(--tinta-3)}
+/* Los enlaces por oficio viven en el pie a proposito: el pie queda FUERA de
+   todo lo que mide el lienzo (portada, ancla-rejilla, lista, ancla-cta), asi
+   que anadir aqui no mueve ni una escena. Ocupa su propia linea del flex. */
+.pie .sectores{flex:1 0 100%;font-size:15px;line-height:2}
+.pie .sectores b{color:var(--tinta-2);font-variation-settings:"wght" 600,"wdth" 92}
+.pie .sectores a{color:var(--tinta-2);text-decoration:underline;
+  text-decoration-color:var(--filete-2);text-underline-offset:4px;transition:color .2s}
+.pie .sectores a:hover{color:var(--tinta);text-decoration-color:currentColor}
 
 /* ---------- pantalla de carga ---------- */
 #carga{
@@ -474,6 +482,15 @@ setTimeout(function(){
 </main>
 
 <footer class="pie hoja capa">
+  <nav class="sectores" aria-label="Páginas por oficio">
+    <b>Tu sector, en detalle:</b>
+    <a href="/negocios/pagina-web-psicologos/">consultas de psicología</a> ·
+    <a href="/negocios/pagina-web-gimnasios/">gimnasios, yoga y pilates</a> ·
+    <a href="/negocios/pagina-web-centros-ecuestres/">centros ecuestres e hípicas</a> ·
+    <a href="/negocios/pagina-web-kayak-turismo-acuatico/">kayak y turismo acuático</a> ·
+    <a href="/negocios/pagina-web-turismo-activo-barranquismo/">turismo activo y barranquismo</a> ·
+    <a href="/negocios/pagina-web-rocodromos/">rocódromos</a>.
+  </nav>
   <span>Eneko Navarrete</span><span>desarrollo web</span><span>Berguedà, Barcelona</span>
   <span><a href="/">enekodevs.com</a></span>
 </footer>

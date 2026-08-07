@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online booking for outdoor activities · Eneko Navarrete</title>
+<meta name="description" content="I opened 77 outdoor activity websites in the UK and Ireland: 8 had no online booking and 13 were actually broken. Fixed price, no monthly fee, built once.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#221b2e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f2f0ea" media="(prefers-color-scheme: light)">
+
+<link rel="canonical" href="https://enekodevs.com/en/small-business/outdoor-activity-booking-website/">
+<link rel="alternate" hreflang="en" href="https://enekodevs.com/en/small-business/outdoor-activity-booking-website/">
+<link rel="alternate" hreflang="x-default" href="https://enekodevs.com/en/small-business/outdoor-activity-booking-website/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Eneko Navarrete">
+<meta property="og:url" content="https://enekodevs.com/en/small-business/outdoor-activity-booking-website/">
+<meta property="og:title" content="I opened 77 outdoor activity websites in the UK and Ireland">
+<meta property="og:description" content="A website for your outdoor activity business with its own booking system: no commission, no monthly fee, fixed price in writing.">
+<meta property="og:image" content="https://enekodevs.com/negocios/og-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AUDITED ONE BY ONE. I opened 203 small-business websites. Nine problems that keep coming up, each with a fixed price. One-time payment, no monthly fee. enekodevs.com/en/small-business">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="I opened 77 outdoor activity websites in the UK and Ireland">
+<meta name="twitter:description" content="A website for your outdoor activity business with its own booking system: no commission, no monthly fee, fixed price in writing.">
+<meta name="twitter:image" content="https://enekodevs.com/negocios/og-en.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23221b2e'/%3E%3Crect x='6' y='6' width='8' height='8' fill='%23e3a93a'/%3E%3Crect x='18' y='6' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='6' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='18' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3C/svg%3E">
+
+<link rel="preload" href="/negocios/fuentes/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<style>
+/* Archivo variable, self-hosted (OFL-1.1, license in /negocios/fuentes/).
+   Same absolute paths as the ES site: one single set of files for all of
+   /negocios/ and /en/small-business/, so nothing new gets downloaded if
+   you already came from the other language. */
+@font-face{
+  font-family:'Archivo Variable'; font-style:normal; font-display:swap;
+  font-weight:100 900; font-stretch:62% 125%;
+  src:url(/negocios/fuentes/archivo-latin-standard-normal.woff2) format('woff2-variations');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Archivo Variable'; font-style:normal; font-display:swap;
+  font-weight:100 900; font-stretch:62% 125%;
+  src:url(/negocios/fuentes/archivo-latin-ext-standard-normal.woff2) format('woff2-variations');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+:root{
+  --fondo:#221b2e; --fondo-2:#2b2339; --filete:rgba(242,240,234,.10); --filete-2:rgba(242,240,234,.26);
+  --tinta:#f2f0ea; --tinta-2:#bcb4c8; --tinta-3:#948ca4;
+  --amarillo:#e3a93a; --sobre-amarillo:#1d1505; --amarillo-texto:#e3a93a; --amarillo-claro:#f0bc57;
+  --azul:#a08cc8; --azul-apagado:#3a3049;
+  --reticula:rgba(242,240,234,.045); --celda:76px; --radio:12px;
+  --tec:"Archivo Variable","Bahnschrift","DIN Alternate","Segoe UI Variable Display",system-ui,sans-serif;
+  --margen:clamp(20px,5.5vw,88px);
+  --paso:clamp(58px,9vh,116px);
+}
+:root[data-tema="claro"]{
+  --fondo:#f2f0ea; --fondo-2:#e8e5dc; --filete:rgba(34,27,46,.13); --filete-2:rgba(34,27,46,.32);
+  --tinta:#1c1626; --tinta-2:#524a60; --tinta-3:#6f6780;
+  --amarillo:#d99a22; --sobre-amarillo:#1d1505; --amarillo-texto:#8a6414; --amarillo-claro:#eeb43e;
+  --azul:#6a5590; --azul-apagado:#d6d1c6;
+  --reticula:rgba(34,27,46,.06);
+  color-scheme:light;
+}
+*,::before,::after{box-sizing:border-box;margin:0;padding:0}
+/* without this, the theme button's display:inline-flex would beat the
+   hidden attribute, and a dead button would show up with JS disabled. */
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--fondo); color:var(--tinta);
+  font-family:var(--tec); font-size:17px; line-height:1.55;
+  font-variation-settings:"wght" 400,"wdth" 100;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-weight:400;line-height:1.02;letter-spacing:-.02em;font-variation-settings:"wght" 500,"wdth" 95;text-wrap:balance}
+a{color:inherit}
+p,li{text-wrap:pretty}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:3px solid var(--amarillo-texto);outline-offset:3px}
+section[id]{scroll-margin-top:96px}
+.oculto{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* ---------- background grid (inherited from the mother page) ---------- */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(to right, var(--reticula) 0 1px, transparent 1px var(--celda)),
+    repeating-linear-gradient(to bottom, var(--reticula) 0 1px, transparent 1px var(--celda));
+  mask-image:radial-gradient(135% 110% at 50% 24%, #000 55%, rgba(0,0,0,.35) 100%);
+}
+.capa{position:relative;z-index:1}
+
+/* ---------- header ---------- */
+.cabecera{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:12px var(--margen);
+  font-size:14px;color:var(--tinta-2);
+  background:color-mix(in srgb,var(--fondo) 86%,transparent);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--filete);
+}
+.cabecera b{color:var(--tinta);font-variation-settings:"wght" 600,"wdth" 92}
+.cabecera nav{display:flex;align-items:center;gap:14px}
+.cabecera nav a{color:var(--tinta-2);font-size:14px}
+.cabecera nav a:hover{color:var(--tinta)}
+@media (max-width:700px){.cabecera .sufijo{display:none}}
+.tema{border:1px solid var(--tinta-3);border-radius:var(--radio);padding:7px 13px;min-height:44px;display:inline-flex;align-items:center;font-size:14px}
+.tema:hover{border-color:var(--tinta);background:var(--fondo-2)}
+
+/* ---------- base grid ---------- */
+.hoja{max-width:1180px;margin-inline:auto;padding-inline:var(--margen)}
+section{padding-block:var(--paso)}
+
+/* ---------- breadcrumb ---------- */
+.miga{font-size:14.5px;color:var(--tinta-3);padding-top:clamp(22px,4vh,40px)}
+.miga ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.miga li+li::before{content:"/";margin-right:8px;color:var(--filete-2)}
+.miga a{color:var(--tinta-2);text-underline-offset:3px}
+.miga a:hover{color:var(--amarillo-texto)}
+.miga [aria-current]{color:var(--tinta-3)}
+
+/* ---------- hero ---------- */
+.portada{padding-top:clamp(18px,3vh,34px)}
+.portada-caja{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr);gap:clamp(24px,5vw,64px);align-items:center}
+h1{font-size:clamp(38px,6.4vw,82px);max-width:16ch;font-variation-settings:"wght" 550,"wdth" 88;line-height:1.0}
+h1 em{font-style:normal;color:var(--amarillo-texto)}
+.bajada{margin-top:24px;font-size:clamp(17px,1.9vw,21px);color:var(--tinta-2);max-width:40ch}
+.fila-cta{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.accion{
+  display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 26px;border-radius:var(--radio);
+  background:var(--amarillo);color:var(--sobre-amarillo);text-decoration:none;
+  font-variation-settings:"wght" 650,"wdth" 92;font-size:17px;
+  transition:transform .2s,background .2s;
+}
+.accion:hover{background:var(--amarillo-claro);transform:translateY(-2px)}
+.accion .fl{transition:transform .25s}
+.accion:hover .fl{transform:translateX(5px)}
+.accion-2{
+  display:inline-flex;align-items:center;min-height:56px;padding:0 22px;border-radius:var(--radio);
+  border:1px solid var(--tinta-3);color:var(--tinta-2);text-decoration:none;font-size:16.5px;
+}
+.accion-2:hover{border-color:var(--tinta);color:var(--tinta)}
+
+/* static dispersion: 77 squares, one per website audited.
+   Pure SVG, no script and no canvas: the mother's motif, in a light version. */
+.dispersion{width:100%;height:auto;max-width:400px;margin-inline:auto;display:block}
+.dispersion rect{transition:opacity .5s ease}
+.dispersion .con{fill:var(--azul)}
+.dispersion .sin{fill:var(--azul-apagado);stroke:var(--tinta-3);stroke-width:1}
+@media (max-width:820px){
+  .portada-caja{grid-template-columns:1fr}
+  .dispersion{max-width:300px;margin-inline:0}
+}
+
+/* ---------- section headings / stats ---------- */
+.titulo-seccion{font-size:clamp(30px,4.6vw,58px);max-width:18ch}
+.entradilla{margin-top:18px;color:var(--tinta-2);max-width:52ch;font-size:17px}
+.cifras{margin-top:clamp(28px,5vh,52px);border-top:1px solid var(--filete-2)}
+.cifra-fila{
+  display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:clamp(16px,3vw,36px);
+  padding:22px 4px;border-bottom:1px solid var(--filete);transition:background .2s;
+}
+.cifra-fila:hover{background:var(--fondo-2);border-radius:var(--radio)}
+.cifra-fila .n{
+  font-size:clamp(40px,6vw,72px);line-height:.9;min-width:2.4ch;
+  font-variation-settings:"wght" 600,"wdth" 85;font-variant-numeric:tabular-nums;
+}
+.cifra-fila h3{font-size:clamp(18px,2vw,23px)}
+.cifra-fila p{color:var(--tinta-2);font-size:16.5px;margin-top:7px;max-width:54ch}
+.nota{margin-top:22px;font-size:15px;color:var(--tinta-3);max-width:56ch}
+
+/* ---------- requirements list ---------- */
+.debe{margin-top:clamp(28px,5vh,52px);list-style:none;display:grid;gap:0;border-top:1px solid var(--filete-2)}
+.debe li{padding:22px 4px;border-bottom:1px solid var(--filete);display:grid;grid-template-columns:auto 1fr;gap:clamp(14px,2.5vw,28px);align-items:start}
+.debe .k{font-size:13.5px;letter-spacing:.12em;color:var(--tinta-3);font-variant-numeric:tabular-nums;padding-top:5px}
+.debe h3{font-size:clamp(18px,2vw,23px)}
+.debe p{color:var(--tinta-2);font-size:16.5px;margin-top:7px;max-width:58ch}
+
+/* ---------- prices (same markup as the mother page) ---------- */
+.tarifas{margin-top:clamp(28px,5vh,56px);border-top:1px solid var(--filete-2)}
+.tarifa{
+  display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:20px;
+  padding:24px 4px;border-bottom:1px solid var(--filete);transition:background .2s;
+}
+.tarifa:hover{background:var(--fondo-2);border-radius:var(--radio)}
+.tarifa h3,.tarifa p{transition:translate .3s cubic-bezier(.2,.9,.2,1)}
+.tarifa:hover h3,.tarifa:hover p{translate:18px 0}
+.tarifa h3{font-size:clamp(19px,2.2vw,26px)}
+.tarifa p{grid-column:1;color:var(--tinta-2);font-size:16.5px;margin-top:6px;max-width:46ch}
+.tarifa .n{grid-row:1/3;font-size:clamp(30px,4.4vw,52px);line-height:.9;font-variation-settings:"wght" 600,"wdth" 85;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cierre{margin-top:24px;font-size:clamp(17px,2vw,21px)}
+.marca{background:var(--amarillo);color:var(--sobre-amarillo);padding:2px 8px;font-variation-settings:"wght" 600,"wdth" 92;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* ---------- steps ---------- */
+.pasos{margin-top:clamp(28px,5vh,52px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,44px);list-style:none}
+.paso{border-top:2px solid var(--tinta);padding-top:18px}
+.paso .k{font-size:13.5px;letter-spacing:.12em;color:var(--tinta-3)}
+.paso h3{font-size:clamp(19px,2.2vw,25px);margin-top:10px}
+.paso p{color:var(--tinta-2);font-size:16.5px;margin-top:8px}
+@media (max-width:860px){.pasos{grid-template-columns:1fr;gap:26px}}
+
+/* ---------- FAQ ---------- */
+.faq{margin-top:clamp(26px,4vh,46px);border-top:1px solid var(--filete-2)}
+.faq-item{padding:22px 4px;border-bottom:1px solid var(--filete)}
+.faq-item h3{font-size:clamp(18px,2vw,23px)}
+.faq-item p{color:var(--tinta-2);font-size:16.5px;margin-top:9px;max-width:62ch}
+
+/* ---------- contact ---------- */
+.contacto h2{font-size:clamp(34px,6vw,78px);font-variation-settings:"wght" 550,"wdth" 88;max-width:14ch}
+.contacto-pie{margin-top:24px;color:var(--tinta-2);font-size:16.5px}
+.contacto-pie a{color:var(--tinta)}
+
+/* ---------- sibling pages ---------- */
+.hermanas{border-top:1px solid var(--filete)}
+.hermanas h2{font-size:clamp(22px,2.6vw,30px)}
+.hermanas ul{margin-top:20px;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px}
+.hermanas li{border-bottom:1px solid var(--filete)}
+.hermanas a{display:block;padding:14px 4px;font-size:16.5px;color:var(--tinta-2);text-decoration:none;transition:background .2s,color .2s}
+.hermanas a:hover{background:var(--fondo-2);color:var(--tinta);border-radius:var(--radio)}
+.hermanas .aqui{display:block;padding:14px 4px;font-size:16.5px;color:var(--tinta-3)}
+.hermanas .idioma{margin-top:24px;font-size:15px;color:var(--tinta-3)}
+.hermanas .idioma a{display:inline;padding:0;color:var(--tinta-2)}
+
+.pie{border-top:1px solid var(--filete);padding:26px 0;display:flex;flex-wrap:wrap;gap:22px;font-size:14.5px;color:var(--tinta-3)}
+
+@media (max-width:560px){
+  body{font-size:16px}
+  .cifra-fila{grid-template-columns:1fr;gap:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,::before,::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+@media print{
+  :root{
+    --fondo:#f2f0ea;--fondo-2:#f2f0ea;--filete:rgba(34,27,46,.3);--filete-2:rgba(34,27,46,.5);
+    --tinta:#1c1626;--tinta-2:#3a3346;--tinta-3:#4d4559;--reticula:transparent;
+    --amarillo-texto:#8a6414;color-scheme:light;
+  }
+  .cabecera,body::before,.dispersion{display:none!important}
+  section{padding-block:16px;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="cabecera capa">
+  <div><b>Eneko Navarrete</b><span class="sufijo"> · web development · Berguedà</span></div>
+  <nav>
+    <a href="/en/small-business/">The 9 problems</a>
+    <button class="tema" id="tema" type="button" hidden>Light mode</button>
+  </nav>
+</header>
+
+<div class="capa">
+
+<nav class="miga hoja" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/en/">enekodevs.com</a></li>
+    <li><a href="/en/small-business/">Small business websites</a></li>
+    <li><span aria-current="page">Outdoor activity booking</span></li>
+  </ol>
+</nav>
+
+<main>
+
+  <!-- 1. hero -->
+  <section class="portada hoja" id="portada">
+    <div class="portada-caja">
+      <div>
+        <h1>An outdoor activity website where people can actually <em>book online</em>.</h1>
+        <p class="bajada">No more taking bookings by phone the night before, and no commission handed to an outside platform. The calendar is yours, the booking too.</p>
+        <div class="fila-cta">
+          <a class="accion" href="#contacto">Send me your website address <span class="fl">→</span></a>
+          <a class="accion-2" href="#evidencia">See what I found in 77 outdoor activity websites</a>
+        </div>
+      </div>
+      <svg class="dispersion" viewBox="0 0 380 450" role="img" aria-labelledby="disp-tit">
+        <title id="disp-tit">77 scattered squares, one for each outdoor activity website I opened: 18 in solid lilac, the ones with a footer stuck years in the past, and 59 dimmed, the rest.</title>
+        <rect class="sin" x="18" y="14" width="14" height="14"/>
+        <rect class="sin" x="69" y="21" width="13" height="13"/>
+        <rect class="con" x="111" y="26" width="14" height="14"/>
+        <rect class="sin" x="161" y="23" width="17" height="17"/>
+        <rect class="sin" x="216" y="15" width="17" height="17"/>
+        <rect class="con" x="258" y="14" width="16" height="16"/>
+        <rect class="sin" x="316" y="12" width="16" height="16"/>
+        <rect class="sin" x="47" y="60" width="13" height="13"/>
+        <rect class="sin" x="94" y="55" width="16" height="16"/>
+        <rect class="con" x="144" y="54" width="14" height="14"/>
+        <rect class="sin" x="187" y="56" width="15" height="15"/>
+        <rect class="con" x="231" y="57" width="15" height="15"/>
+        <rect class="sin" x="289" y="66" width="17" height="17"/>
+        <rect class="con" x="331" y="58" width="16" height="16"/>
+        <rect class="sin" x="20" y="105" width="14" height="14"/>
+        <rect class="sin" x="68" y="105" width="17" height="17"/>
+        <rect class="sin" x="119" y="100" width="16" height="16"/>
+        <rect class="sin" x="159" y="108" width="13" height="13"/>
+        <rect class="sin" x="211" y="100" width="15" height="15"/>
+        <rect class="sin" x="255" y="104" width="15" height="15"/>
+        <rect class="con" x="305" y="104" width="15" height="15"/>
+        <rect class="sin" x="42" y="145" width="16" height="16"/>
+        <rect class="sin" x="85" y="142" width="17" height="17"/>
+        <rect class="sin" x="139" y="140" width="17" height="17"/>
+        <rect class="con" x="188" y="145" width="15" height="15"/>
+        <rect class="sin" x="240" y="146" width="17" height="17"/>
+        <rect class="sin" x="288" y="135" width="17" height="17"/>
+        <rect class="con" x="328" y="140" width="14" height="14"/>
+        <rect class="sin" x="21" y="185" width="14" height="14"/>
+        <rect class="sin" x="68" y="175" width="18" height="18"/>
+        <rect class="sin" x="112" y="173" width="14" height="14"/>
+        <rect class="con" x="169" y="173" width="14" height="14"/>
+        <rect class="con" x="214" y="178" width="14" height="14"/>
+        <rect class="sin" x="265" y="185" width="17" height="17"/>
+        <rect class="con" x="304" y="173" width="13" height="13"/>
+        <rect class="sin" x="36" y="228" width="17" height="17"/>
+        <rect class="sin" x="92" y="219" width="14" height="14"/>
+        <rect class="sin" x="135" y="218" width="15" height="15"/>
+        <rect class="sin" x="195" y="217" width="17" height="17"/>
+        <rect class="sin" x="232" y="222" width="17" height="17"/>
+        <rect class="con" x="291" y="224" width="15" height="15"/>
+        <rect class="sin" x="333" y="223" width="16" height="16"/>
+        <rect class="sin" x="18" y="259" width="18" height="18"/>
+        <rect class="sin" x="68" y="256" width="14" height="14"/>
+        <rect class="sin" x="114" y="265" width="16" height="16"/>
+        <rect class="con" x="168" y="254" width="14" height="14"/>
+        <rect class="sin" x="213" y="262" width="15" height="15"/>
+        <rect class="con" x="257" y="254" width="16" height="16"/>
+        <rect class="sin" x="310" y="253" width="16" height="16"/>
+        <rect class="sin" x="46" y="295" width="14" height="14"/>
+        <rect class="sin" x="89" y="299" width="17" height="17"/>
+        <rect class="sin" x="138" y="294" width="17" height="17"/>
+        <rect class="sin" x="183" y="306" width="16" height="16"/>
+        <rect class="sin" x="243" y="302" width="17" height="17"/>
+        <rect class="sin" x="278" y="302" width="14" height="14"/>
+        <rect class="sin" x="331" y="306" width="15" height="15"/>
+        <rect class="sin" x="23" y="345" width="14" height="14"/>
+        <rect class="sin" x="60" y="347" width="18" height="18"/>
+        <rect class="sin" x="111" y="340" width="14" height="14"/>
+        <rect class="sin" x="168" y="340" width="14" height="14"/>
+        <rect class="con" x="209" y="348" width="16" height="16"/>
+        <rect class="sin" x="260" y="347" width="18" height="18"/>
+        <rect class="sin" x="315" y="341" width="16" height="16"/>
+        <rect class="sin" x="42" y="378" width="17" height="17"/>
+        <rect class="sin" x="91" y="372" width="17" height="17"/>
+        <rect class="sin" x="144" y="381" width="16" height="16"/>
+        <rect class="sin" x="189" y="378" width="17" height="17"/>
+        <rect class="sin" x="235" y="380" width="15" height="15"/>
+        <rect class="con" x="286" y="381" width="14" height="14"/>
+        <rect class="con" x="338" y="388" width="17" height="17"/>
+        <rect class="sin" x="16" y="412" width="14" height="14"/>
+        <rect class="con" x="61" y="426" width="17" height="17"/>
+        <rect class="sin" x="115" y="412" width="16" height="16"/>
+        <rect class="sin" x="164" y="428" width="15" height="15"/>
+        <rect class="sin" x="208" y="424" width="13" height="13"/>
+        <rect class="sin" x="267" y="416" width="13" height="13"/>
+        <rect class="sin" x="311" y="415" width="16" height="16"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 2. the evidence -->
+  <section class="hoja" id="evidencia">
+    <h2 class="titulo-seccion">I opened 77 outdoor activity websites, one by one.</h2>
+    <p class="entradilla">Kayak schools, adventure centres and outdoor activity providers across the UK and Ireland. Not a survey: 77 websites I opened myself, phone in hand, trying to book a session the way any customer would on a Friday night.</p>
+    <div class="cifras">
+      <div class="cifra-fila">
+        <div class="n">18</div>
+        <div>
+          <h3>Footer stuck years in the past</h3>
+          <p>A copyright notice from 2019, prices from a season that no longer applies, a phone number nobody answers anymore. Nobody checks the footer on purpose, but it's the first thing that makes a booking feel risky before anyone gets to the price.</p>
+        </div>
+      </div>
+      <div class="cifra-fila">
+        <div class="n">13</div>
+        <div>
+          <h3>Actually broken</h3>
+          <p>An expired SSL certificate throwing a warning before the homepage even loads, a booking button pointing at a page that doesn't exist. Not slow, not ugly: broken, in a way that stops a booking dead.</p>
+        </div>
+      </div>
+      <div class="cifra-fila">
+        <div class="n">13</div>
+        <div>
+          <h3>Slow and heavy on a phone</h3>
+          <p>Long enough to load on mobile data that half the people trying to book on the way to the activity give up before the calendar even appears. On a site that lives or dies by weekend bookings, that's money walking away.</p>
+        </div>
+      </div>
+    </div>
+    <p class="nota">I count all 77, including the ones that were fine. Without them the numbers would lie. 8 had no online booking at all, and I've seen the same story elsewhere: a centre paying commission on every booking to an outside platform instead of taking it on its own site. This sample comes from the same audit of <a href="/en/small-business/">small-business websites</a>, opened one by one.</p>
+  </section>
+
+  <!-- 3. what it should have -->
+  <section class="hoja" id="deberia">
+    <h2 class="titulo-seccion">What an outdoor activity website should have</h2>
+    <p class="entradilla">None of this is exotic. It's what someone expects before booking an activity with some risk attached, and almost nobody has it.</p>
+    <ol class="debe">
+      <li>
+        <span class="k">01</span>
+        <div>
+          <h3>Booking on your own site, not a platform taking a cut</h3>
+          <p>The customer picks a session, pays or leaves a deposit, right there. No handing a percentage of every booking to an outside platform. If a listing elsewhere brings you people, keep it, but stop being the centre where booking means calling.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">02</span>
+        <div>
+          <h3>Instant confirmation and a reminder before the activity</h3>
+          <p>The customer gets confirmation the moment they book, and a reminder the day before with what to bring. It's what cuts down the empty slot nobody notices until the group doesn't show up.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">03</span>
+        <div>
+          <h3>Ability to close a session for weather or water levels without confusing anyone</h3>
+          <p>If conditions turn, you close that session from your own panel and everyone who had a spot gets the message at once, instead of you calling round one by one.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">04</span>
+        <div>
+          <h3>Real prices on the site, not a contact-us button</h3>
+          <p>A clear price per activity and per group, or the fixed price if you have one. Someone comparing five centres on their phone rules out first the one that won't say what it costs.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">05</span>
+        <div>
+          <h3>Actual text about what people ask before booking</h3>
+          <p>Minimum age, fitness level needed, what to bring, whether the price includes gear. Written as real text, readable on a phone, not locked inside a photo that neither Google nor a screen reader can read.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 4. prices (identical to the mother page) -->
+  <section class="hoja" id="precios">
+    <h2 class="titulo-seccion">What it costs</h2>
+    <p class="entradilla">The same prices published on <a href="/en/small-business/#precios">the main page</a>. No monthly fee and no commission per booking.</p>
+    <div class="tarifas">
+      <div class="tarifa"><h3>Simple website</h3><p>With whatever system your business needs: bookings, appointments, or whatever it takes.</p><div class="n">300 €</div></div>
+      <div class="tarifa"><h3>A website you can edit yourself</h3><p>Your own panel: change text, prices and photos without calling anyone.</p><div class="n">750 €</div></div>
+      <div class="tarifa"><h3>Changes whenever you need them</h3><p>First hour 50 €. Each one after that, 35 €.</p><div class="n">from 50 €</div></div>
+      <div class="tarifa"><h3>Seasonal check-up</h3><p>Before summer, before Christmas. You decide when.</p><div class="n">50 €</div></div>
+    </div>
+    <p class="cierre">Always a one-time payment. <span class="marca">No monthly fee, no contract, no commission.</span></p>
+  </section>
+
+  <!-- 5. how it works -->
+  <section class="hoja" id="como">
+    <h2 class="titulo-seccion">How this works</h2>
+    <ol class="pasos">
+      <li class="paso"><div class="k">01</div><h3>You message me</h3><p>Your website address and a couple of lines.</p></li>
+      <li class="paso"><div class="k">02</div><h3>I'll tell you what's wrong</h3><p>I open your site, look at it the way someone booking an outdoor activity would, and tell you what I'd do. No obligation.</p></li>
+      <li class="paso"><div class="k">03</div><h3>Fixed price</h3><p>In writing. If it doesn't work for you, you owe nothing.</p></li>
+    </ol>
+  </section>
+
+  <!-- 6. FAQ -->
+  <section class="hoja" id="preguntas">
+    <h2 class="titulo-seccion">What people usually ask me</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <h3>Can I take a deposit or full payment when someone books?</h3>
+        <p>Yes. The customer pays in full or leaves a deposit at the moment of booking, whichever you decide. The money lands straight in your account, with no middleman taking a cut of every session.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What if I need to cancel a session because of weather or water levels?</h3>
+        <p>You close that session from your own panel and everyone who had a spot is notified at once, with the option to move to another date or get a refund depending on how you've set it up. No calling round one by one.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I limit how many people book each session?</h3>
+        <p>Yes. You set the maximum per session and the site stops offering spots once it's full. No fitting more people in than a guide can safely take.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What happens to customers' data?</h3>
+        <p>Only the minimum gets collected: name, contact details, and whatever the activity needs, such as weight or age where a limit applies. The data goes to your site and your inbox, not to a middleman platform, and the legal side is agreed in writing before we start.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. contact -->
+  <section class="contacto hoja" id="contacto">
+    <h2>Send me the address and I'll take a look.</h2>
+    <div class="fila-cta">
+      <a class="accion" href="https://wa.me/34617575495?text=Hi%20Eneko%2C%20I%20run%20an%20outdoor%20activity%20business%20and%20my%20website%20is%3A%20">WhatsApp <span class="fl">→</span></a>
+      <a class="accion-2" href="mailto:eneko.devs@gmail.com?subject=My%20outdoor%20activity%20website">eneko.devs@gmail.com</a>
+    </div>
+    <p class="contacto-pie">I'll get back to you within 24 hours. If you'd rather call: <a href="tel:+34617575495">617 575 495</a>.</p>
+  </section>
+
+  <!-- 8. sibling pages -->
+  <section class="hermanas hoja" id="hermanas">
+    <h2>Same thing, other trades</h2>
+    <ul>
+      <li><a href="/en/small-business/climbing-gym-website/">Climbing gyms</a></li>
+      <li><span class="aqui" aria-current="page">Outdoor activity booking (you are here)</span></li>
+    </ul>
+    <p class="idioma">En español: <a href="/negocios/">webs para negocios pequeños</a>.</p>
+  </section>
+
+</main>
+
+<footer class="pie hoja">
+  <span>Eneko Navarrete</span><span>web development</span><span>Berguedà, Barcelona</span>
+  <span><a href="/en/small-business/">The 9 problems</a></span>
+  <span><a href="/en/">enekodevs.com</a></span>
+</footer>
+
+</div>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@graph":[
+  {
+   "@type":"Service",
+   "@id":"https://enekodevs.com/en/small-business/outdoor-activity-booking-website/#servicio",
+   "name":"Online booking website for outdoor activity centres",
+   "serviceType":"Website design and development with online booking systems",
+   "description":"Website for outdoor activity centres with its own online booking for sessions, instant confirmation and reminders, no commission per booking and no monthly fee.",
+   "url":"https://enekodevs.com/en/small-business/outdoor-activity-booking-website/",
+   "inLanguage":"en",
+   "provider":{
+    "@type":"Person",
+    "@id":"https://enekodevs.com/#eneko",
+    "name":"Eneko Navarrete",
+    "jobTitle":"Web developer",
+    "url":"https://enekodevs.com/",
+    "email":"eneko.devs@gmail.com",
+    "telephone":"+34617575495",
+    "address":{"@type":"PostalAddress","addressRegion":"Berguedà","addressLocality":"Barcelona","addressCountry":"ES"}
+   },
+   "areaServed":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Ireland"}],
+   "audience":{"@type":"Audience","audienceType":"Outdoor activity centres and adventure tourism businesses"},
+   "offers":[
+    {"@type":"Offer","name":"Simple website","description":"With whatever system your business needs: bookings, appointments, or whatever it takes.","price":"300","priceCurrency":"EUR","url":"https://enekodevs.com/en/small-business/outdoor-activity-booking-website/#precios"},
+    {"@type":"Offer","name":"A website you can edit yourself","description":"Your own panel: change text, prices and photos without calling anyone.","price":"750","priceCurrency":"EUR","url":"https://enekodevs.com/en/small-business/outdoor-activity-booking-website/#precios"},
+    {"@type":"Offer","name":"Changes whenever you need them","description":"First hour 50 €. Each one after that, 35 €.","price":"50","priceCurrency":"EUR","url":"https://enekodevs.com/en/small-business/outdoor-activity-booking-website/#precios"},
+    {"@type":"Offer","name":"Seasonal check-up","description":"Before summer, before Christmas. You decide when.","price":"50","priceCurrency":"EUR","url":"https://enekodevs.com/en/small-business/outdoor-activity-booking-website/#precios"}
+   ]
+  },
+  {
+   "@type":"FAQPage",
+   "@id":"https://enekodevs.com/en/small-business/outdoor-activity-booking-website/#faq",
+   "mainEntity":[
+    {"@type":"Question","name":"Can I take a deposit or full payment when someone books?","acceptedAnswer":{"@type":"Answer","text":"Yes. The customer pays in full or leaves a deposit at the moment of booking, whichever you decide. The money lands straight in your account, with no middleman taking a cut of every session."}},
+    {"@type":"Question","name":"What if I need to cancel a session because of weather or water levels?","acceptedAnswer":{"@type":"Answer","text":"You close that session from your own panel and everyone who had a spot is notified at once, with the option to move to another date or get a refund depending on how you've set it up. No calling round one by one."}},
+    {"@type":"Question","name":"Can I limit how many people book each session?","acceptedAnswer":{"@type":"Answer","text":"Yes. You set the maximum per session and the site stops offering spots once it's full. No fitting more people in than a guide can safely take."}},
+    {"@type":"Question","name":"What happens to customers' data?","acceptedAnswer":{"@type":"Answer","text":"Only the minimum gets collected: name, contact details, and whatever the activity needs, such as weight or age where a limit applies. The data goes to your site and your inbox, not to a middleman platform, and the legal side is agreed in writing before we start."}}
+   ]
+  },
+  {
+   "@type":"BreadcrumbList",
+   "itemListElement":[
+    {"@type":"ListItem","position":1,"name":"enekodevs.com","item":"https://enekodevs.com/en/"},
+    {"@type":"ListItem","position":2,"name":"Small business websites","item":"https://enekodevs.com/en/small-business/"},
+    {"@type":"ListItem","position":3,"name":"Outdoor activity booking","item":"https://enekodevs.com/en/small-business/outdoor-activity-booking-website/"}
+   ]
+  }
+ ]
+}
+</script>
+
+<script>
+/* The only thing JavaScript does on this page: the theme button.
+   It's hidden by default (hidden attribute) and only appears if the
+   script runs, so no dead button shows up with JS disabled. */
+(function(){
+  var r=document.documentElement, b=document.getElementById('tema');
+  if(matchMedia('(prefers-color-scheme: light)').matches) r.dataset.tema='claro';
+  var pinta=function(){ b.textContent = r.dataset.tema==='claro' ? 'Dark mode' : 'Light mode'; };
+  pinta(); b.hidden=false;
+  b.addEventListener('click',function(){
+    r.dataset.tema = r.dataset.tema==='claro' ? '' : 'claro';
+    pinta();
+  });
+})();
+</script>
+</body>
+</html>

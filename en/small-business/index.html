@@ -262,6 +262,14 @@ h1 em{font-style:normal;color:var(--amarillo-texto)}
 .contacto-pie{margin-top:26px;color:var(--tinta-2);font-size:16px}
 .contacto-pie a{color:var(--tinta)}
 .pie{border-top:1px solid var(--filete);padding:26px 0;display:flex;flex-wrap:wrap;gap:22px;font-size:13.5px;color:var(--tinta-3)}
+/* The per-trade links live in the footer on purpose: the footer sits OUTSIDE
+   everything the canvas measures (portada, ancla-rejilla, lista, ancla-cta),
+   so adding here moves no scene at all. It takes its own flex line. */
+.pie .sectores{flex:1 0 100%;font-size:15px;line-height:2}
+.pie .sectores b{color:var(--tinta-2);font-variation-settings:"wght" 600,"wdth" 92}
+.pie .sectores a{color:var(--tinta-2);text-decoration:underline;
+  text-decoration-color:var(--filete-2);text-underline-offset:4px;transition:color .2s}
+.pie .sectores a:hover{color:var(--tinta);text-decoration-color:currentColor}
 
 /* ---------- pantalla de carga ---------- */
 #carga{
@@ -474,6 +482,11 @@ setTimeout(function(){
 </main>
 
 <footer class="pie hoja capa">
+  <nav class="sectores" aria-label="Pages by trade">
+    <b>Your trade, in detail:</b>
+    <a href="/en/small-business/climbing-gym-website/">climbing gyms</a> ·
+    <a href="/en/small-business/outdoor-activity-booking-website/">outdoor activity booking</a>.
+  </nav>
   <span>Eneko Navarrete</span><span>web development</span><span>Berguedà, Barcelona</span>
   <span><a href="/en/">enekodevs.com</a></span>
 </footer>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web para turismo activo con reserva online · Eneko Navarrete</title>
+<meta name="description" content="Abrí 47 webs de turismo activo y barranquismo: 15 no dejaban reservar la actividad online. Una web con reserva propia, precio cerrado y sin cuota mensual.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#221b2e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f2f0ea" media="(prefers-color-scheme: light)">
+
+<link rel="canonical" href="https://enekodevs.com/negocios/pagina-web-turismo-activo-barranquismo/">
+<link rel="alternate" hreflang="es" href="https://enekodevs.com/negocios/pagina-web-turismo-activo-barranquismo/">
+<link rel="alternate" hreflang="x-default" href="https://enekodevs.com/negocios/pagina-web-turismo-activo-barranquismo/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Eneko Navarrete">
+<meta property="og:url" content="https://enekodevs.com/negocios/pagina-web-turismo-activo-barranquismo/">
+<meta property="og:title" content="De 47 webs de turismo activo y barranquismo, 15 no dejaban reservar la actividad">
+<meta property="og:description" content="Una página web para tu empresa de turismo activo con reserva online propia: sin comisión, sin cuota mensual, precio cerrado por escrito.">
+<meta property="og:image" content="https://enekodevs.com/negocios/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Fondo lila oscuro con cuadrados dispersos y el titular «Abrí 203 webs de negocios pequeños».">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="De 47 webs de turismo activo y barranquismo, 15 no dejaban reservar la actividad">
+<meta name="twitter:description" content="Una página web para tu empresa de turismo activo con reserva online propia: sin comisión, sin cuota mensual, precio cerrado por escrito.">
+<meta name="twitter:image" content="https://enekodevs.com/negocios/og.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23221b2e'/%3E%3Crect x='6' y='6' width='8' height='8' fill='%23e3a93a'/%3E%3Crect x='18' y='6' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='6' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='18' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3C/svg%3E">
+
+<link rel="preload" href="/negocios/fuentes/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<style>
+/* Archivo variable, AUTOALOJADA (OFL-1.1, licencia en /negocios/fuentes/).
+   Mismas rutas absolutas que la madre: un solo juego de ficheros para todo
+   /negocios/, asi la hija no descarga nada nuevo si ya vienes de la madre. */
+@font-face{
+  font-family:'Archivo Variable'; font-style:normal; font-display:swap;
+  font-weight:100 900; font-stretch:62% 125%;
+  src:url(/negocios/fuentes/archivo-latin-standard-normal.woff2) format('woff2-variations');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Archivo Variable'; font-style:normal; font-display:swap;
+  font-weight:100 900; font-stretch:62% 125%;
+  src:url(/negocios/fuentes/archivo-latin-ext-standard-normal.woff2) format('woff2-variations');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+:root{
+  --fondo:#221b2e; --fondo-2:#2b2339; --filete:rgba(242,240,234,.10); --filete-2:rgba(242,240,234,.26);
+  --tinta:#f2f0ea; --tinta-2:#bcb4c8; --tinta-3:#948ca4;
+  --amarillo:#e3a93a; --sobre-amarillo:#1d1505; --amarillo-texto:#e3a93a; --amarillo-claro:#f0bc57;
+  --azul:#a08cc8; --azul-apagado:#3a3049;
+  --reticula:rgba(242,240,234,.045); --celda:76px; --radio:12px;
+  --tec:"Archivo Variable","Bahnschrift","DIN Alternate","Segoe UI Variable Display",system-ui,sans-serif;
+  --margen:clamp(20px,5.5vw,88px);
+  --paso:clamp(58px,9vh,116px);
+}
+:root[data-tema="claro"]{
+  --fondo:#f2f0ea; --fondo-2:#e8e5dc; --filete:rgba(34,27,46,.13); --filete-2:rgba(34,27,46,.32);
+  --tinta:#1c1626; --tinta-2:#524a60; --tinta-3:#6f6780;
+  --amarillo:#d99a22; --sobre-amarillo:#1d1505; --amarillo-texto:#8a6414; --amarillo-claro:#eeb43e;
+  --azul:#6a5590; --azul-apagado:#d6d1c6;
+  --reticula:rgba(34,27,46,.06);
+  color-scheme:light;
+}
+*,::before,::after{box-sizing:border-box;margin:0;padding:0}
+/* sin esto, el display:inline-flex del boton de tema le ganaria al atributo
+   hidden y el boton muerto saldria igual con JavaScript desactivado. */
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--fondo); color:var(--tinta);
+  font-family:var(--tec); font-size:17px; line-height:1.55;
+  font-variation-settings:"wght" 400,"wdth" 100;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-weight:400;line-height:1.02;letter-spacing:-.02em;font-variation-settings:"wght" 500,"wdth" 95;text-wrap:balance}
+a{color:inherit}
+p,li{text-wrap:pretty}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:3px solid var(--amarillo-texto);outline-offset:3px}
+section[id]{scroll-margin-top:96px}
+.oculto{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* ---------- reticula de fondo (heredada de la madre) ---------- */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(to right, var(--reticula) 0 1px, transparent 1px var(--celda)),
+    repeating-linear-gradient(to bottom, var(--reticula) 0 1px, transparent 1px var(--celda));
+  mask-image:radial-gradient(135% 110% at 50% 24%, #000 55%, rgba(0,0,0,.35) 100%);
+}
+.capa{position:relative;z-index:1}
+
+/* ---------- cabecera ---------- */
+.cabecera{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:12px var(--margen);
+  font-size:14px;color:var(--tinta-2);
+  background:color-mix(in srgb,var(--fondo) 86%,transparent);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--filete);
+}
+.cabecera b{color:var(--tinta);font-variation-settings:"wght" 600,"wdth" 92}
+.cabecera nav{display:flex;align-items:center;gap:14px}
+.cabecera nav a{color:var(--tinta-2);font-size:14px}
+.cabecera nav a:hover{color:var(--tinta)}
+@media (max-width:700px){.cabecera .sufijo{display:none}}
+.tema{border:1px solid var(--tinta-3);border-radius:var(--radio);padding:7px 13px;min-height:44px;display:inline-flex;align-items:center;font-size:14px}
+.tema:hover{border-color:var(--tinta);background:var(--fondo-2)}
+
+/* ---------- rejilla base ---------- */
+.hoja{max-width:1180px;margin-inline:auto;padding-inline:var(--margen)}
+section{padding-block:var(--paso)}
+
+/* ---------- miga de pan ---------- */
+.miga{font-size:14.5px;color:var(--tinta-3);padding-top:clamp(22px,4vh,40px)}
+.miga ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.miga li+li::before{content:"/";margin-right:8px;color:var(--filete-2)}
+.miga a{color:var(--tinta-2);text-underline-offset:3px}
+.miga a:hover{color:var(--amarillo-texto)}
+.miga [aria-current]{color:var(--tinta-3)}
+
+/* ---------- portada ---------- */
+.portada{padding-top:clamp(18px,3vh,34px)}
+.portada-caja{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr);gap:clamp(24px,5vw,64px);align-items:center}
+h1{font-size:clamp(38px,6.4vw,82px);max-width:16ch;font-variation-settings:"wght" 550,"wdth" 88;line-height:1.0}
+h1 em{font-style:normal;color:var(--amarillo-texto)}
+.bajada{margin-top:24px;font-size:clamp(17px,1.9vw,21px);color:var(--tinta-2);max-width:40ch}
+.fila-cta{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.accion{
+  display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 26px;border-radius:var(--radio);
+  background:var(--amarillo);color:var(--sobre-amarillo);text-decoration:none;
+  font-variation-settings:"wght" 650,"wdth" 92;font-size:17px;
+  transition:transform .2s,background .2s;
+}
+.accion:hover{background:var(--amarillo-claro);transform:translateY(-2px)}
+.accion .fl{transition:transform .25s}
+.accion:hover .fl{transform:translateX(5px)}
+.accion-2{
+  display:inline-flex;align-items:center;min-height:56px;padding:0 22px;border-radius:var(--radio);
+  border:1px solid var(--tinta-3);color:var(--tinta-2);text-decoration:none;font-size:16.5px;
+}
+.accion-2:hover{border-color:var(--tinta);color:var(--tinta)}
+
+/* dispersion estatica: 47 cuadrados, uno por empresa auditada.
+   SVG puro, sin guion y sin lienzo: el guino de la madre, en version ligera. */
+.dispersion{width:100%;height:auto;max-width:400px;margin-inline:auto;display:block}
+.dispersion rect{transition:opacity .5s ease}
+.dispersion .con{fill:var(--azul)}
+.dispersion .sin{fill:var(--azul-apagado);stroke:var(--tinta-3);stroke-width:1}
+@media (max-width:820px){
+  .portada-caja{grid-template-columns:1fr}
+  .dispersion{max-width:300px;margin-inline:0}
+}
+
+/* ---------- leyenda / cifras ---------- */
+.titulo-seccion{font-size:clamp(30px,4.6vw,58px);max-width:18ch}
+.entradilla{margin-top:18px;color:var(--tinta-2);max-width:52ch;font-size:17px}
+.cifras{margin-top:clamp(28px,5vh,52px);border-top:1px solid var(--filete-2)}
+.cifra-fila{
+  display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:clamp(16px,3vw,36px);
+  padding:22px 4px;border-bottom:1px solid var(--filete);transition:background .2s;
+}
+.cifra-fila:hover{background:var(--fondo-2);border-radius:var(--radio)}
+.cifra-fila .n{
+  font-size:clamp(40px,6vw,72px);line-height:.9;min-width:2.4ch;
+  font-variation-settings:"wght" 600,"wdth" 85;font-variant-numeric:tabular-nums;
+}
+.cifra-fila h3{font-size:clamp(18px,2vw,23px)}
+.cifra-fila p{color:var(--tinta-2);font-size:16.5px;margin-top:7px;max-width:54ch}
+.nota{margin-top:22px;font-size:15px;color:var(--tinta-3);max-width:56ch}
+
+/* ---------- lista de requisitos ---------- */
+.debe{margin-top:clamp(28px,5vh,52px);list-style:none;display:grid;gap:0;border-top:1px solid var(--filete-2)}
+.debe li{padding:22px 4px;border-bottom:1px solid var(--filete);display:grid;grid-template-columns:auto 1fr;gap:clamp(14px,2.5vw,28px);align-items:start}
+.debe .k{font-size:13.5px;letter-spacing:.12em;color:var(--tinta-3);font-variant-numeric:tabular-nums;padding-top:5px}
+.debe h3{font-size:clamp(18px,2vw,23px)}
+.debe p{color:var(--tinta-2);font-size:16.5px;margin-top:7px;max-width:58ch}
+
+/* ---------- precios (misma semantica que la madre) ---------- */
+.tarifas{margin-top:clamp(28px,5vh,56px);border-top:1px solid var(--filete-2)}
+.tarifa{
+  display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:20px;
+  padding:24px 4px;border-bottom:1px solid var(--filete);transition:background .2s;
+}
+.tarifa:hover{background:var(--fondo-2);border-radius:var(--radio)}
+.tarifa h3,.tarifa p{transition:translate .3s cubic-bezier(.2,.9,.2,1)}
+.tarifa:hover h3,.tarifa:hover p{translate:18px 0}
+.tarifa h3{font-size:clamp(19px,2.2vw,26px)}
+.tarifa p{grid-column:1;color:var(--tinta-2);font-size:16.5px;margin-top:6px;max-width:46ch}
+.tarifa .n{grid-row:1/3;font-size:clamp(30px,4.4vw,52px);line-height:.9;font-variation-settings:"wght" 600,"wdth" 85;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cierre{margin-top:24px;font-size:clamp(17px,2vw,21px)}
+.marca{background:var(--amarillo);color:var(--sobre-amarillo);padding:2px 8px;font-variation-settings:"wght" 600,"wdth" 92;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* ---------- pasos ---------- */
+.pasos{margin-top:clamp(28px,5vh,52px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,44px);list-style:none}
+.paso{border-top:2px solid var(--tinta);padding-top:18px}
+.paso .k{font-size:13.5px;letter-spacing:.12em;color:var(--tinta-3)}
+.paso h3{font-size:clamp(19px,2.2vw,25px);margin-top:10px}
+.paso p{color:var(--tinta-2);font-size:16.5px;margin-top:8px}
+@media (max-width:860px){.pasos{grid-template-columns:1fr;gap:26px}}
+
+/* ---------- preguntas ---------- */
+.faq{margin-top:clamp(26px,4vh,46px);border-top:1px solid var(--filete-2)}
+.faq-item{padding:22px 4px;border-bottom:1px solid var(--filete)}
+.faq-item h3{font-size:clamp(18px,2vw,23px)}
+.faq-item p{color:var(--tinta-2);font-size:16.5px;margin-top:9px;max-width:62ch}
+
+/* ---------- contacto ---------- */
+.contacto h2{font-size:clamp(34px,6vw,78px);font-variation-settings:"wght" 550,"wdth" 88;max-width:14ch}
+.contacto-pie{margin-top:24px;color:var(--tinta-2);font-size:16.5px}
+.contacto-pie a{color:var(--tinta)}
+
+/* ---------- hermanas ---------- */
+.hermanas{border-top:1px solid var(--filete)}
+.hermanas h2{font-size:clamp(22px,2.6vw,30px)}
+.hermanas ul{margin-top:20px;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px}
+.hermanas li{border-bottom:1px solid var(--filete)}
+.hermanas a{display:block;padding:14px 4px;font-size:16.5px;color:var(--tinta-2);text-decoration:none;transition:background .2s,color .2s}
+.hermanas a:hover{background:var(--fondo-2);color:var(--tinta);border-radius:var(--radio)}
+.hermanas .aqui{display:block;padding:14px 4px;font-size:16.5px;color:var(--tinta-3)}
+.hermanas .idioma{margin-top:24px;font-size:15px;color:var(--tinta-3)}
+.hermanas .idioma a{display:inline;padding:0;color:var(--tinta-2)}
+
+.pie{border-top:1px solid var(--filete);padding:26px 0;display:flex;flex-wrap:wrap;gap:22px;font-size:14.5px;color:var(--tinta-3)}
+
+@media (max-width:560px){
+  body{font-size:16px}
+  .cifra-fila{grid-template-columns:1fr;gap:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,::before,::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+@media print{
+  :root{
+    --fondo:#f2f0ea;--fondo-2:#f2f0ea;--filete:rgba(34,27,46,.3);--filete-2:rgba(34,27,46,.5);
+    --tinta:#1c1626;--tinta-2:#3a3346;--tinta-3:#4d4559;--reticula:transparent;
+    --amarillo-texto:#8a6414;color-scheme:light;
+  }
+  .cabecera,body::before,.dispersion{display:none!important}
+  section{padding-block:16px;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="cabecera capa">
+  <div><b>Eneko Navarrete</b><span class="sufijo"> · desarrollo web · Berguedà</span></div>
+  <nav>
+    <a href="/negocios/">Los 9 problemas</a>
+    <button class="tema" id="tema" type="button" hidden>Modo claro</button>
+  </nav>
+</header>
+
+<div class="capa">
+
+<nav class="miga hoja" aria-label="Miga de pan">
+  <ol>
+    <li><a href="/">enekodevs.com</a></li>
+    <li><a href="/negocios/">Webs de negocios pequeños</a></li>
+    <li><span aria-current="page">Turismo activo y barranquismo</span></li>
+  </ol>
+</nav>
+
+<main>
+
+  <!-- 1. portada -->
+  <section class="portada hoja" id="portada">
+    <div class="portada-caja">
+      <div>
+        <h1>Una web para tu empresa de turismo activo donde se pueda <em>reservar online</em>.</h1>
+        <p class="bajada">Sin explicar la disponibilidad por WhatsApp cada tarde y sin perder al cliente que decide reservar un domingo por la noche. Las plazas son tuyas, la agenda también.</p>
+        <div class="fila-cta">
+          <a class="accion" href="#contacto">Pásame la dirección de tu web <span class="fl">→</span></a>
+          <a class="accion-2" href="#evidencia">Ver qué encontré en 47 empresas</a>
+        </div>
+      </div>
+      <svg class="dispersion" viewBox="0 0 320 410" role="img" aria-labelledby="disp-tit">
+        <title id="disp-tit">47 cuadrados dispersos, uno por cada web de turismo activo o barranquismo que abrí: 15 en lila sólido, las que no dejaban reservar la actividad online, y 32 apagados, las que sí.</title>
+        <rect class="sin" x="12" y="25" width="15" height="15"/>
+        <rect class="con" x="74" y="16" width="16" height="16"/>
+        <rect class="con" x="133" y="13" width="16" height="16"/>
+        <rect class="sin" x="180" y="19" width="16" height="16"/>
+        <rect class="sin" x="249" y="19" width="15" height="15"/>
+        <rect class="sin" x="44" y="53" width="17" height="17"/>
+        <rect class="sin" x="101" y="64" width="15" height="15"/>
+        <rect class="con" x="159" y="58" width="17" height="17"/>
+        <rect class="sin" x="209" y="54" width="16" height="16"/>
+        <rect class="sin" x="272" y="54" width="15" height="15"/>
+        <rect class="sin" x="16" y="107" width="17" height="17"/>
+        <rect class="sin" x="76" y="99" width="18" height="18"/>
+        <rect class="con" x="131" y="99" width="15" height="15"/>
+        <rect class="sin" x="186" y="92" width="17" height="17"/>
+        <rect class="sin" x="239" y="99" width="14" height="14"/>
+        <rect class="sin" x="40" y="144" width="16" height="16"/>
+        <rect class="sin" x="102" y="134" width="16" height="16"/>
+        <rect class="sin" x="160" y="146" width="18" height="18"/>
+        <rect class="sin" x="215" y="142" width="16" height="16"/>
+        <rect class="con" x="270" y="134" width="16" height="16"/>
+        <rect class="con" x="20" y="188" width="17" height="17"/>
+        <rect class="sin" x="69" y="174" width="16" height="16"/>
+        <rect class="sin" x="137" y="177" width="18" height="18"/>
+        <rect class="sin" x="184" y="184" width="16" height="16"/>
+        <rect class="sin" x="236" y="177" width="16" height="16"/>
+        <rect class="sin" x="46" y="222" width="14" height="14"/>
+        <rect class="sin" x="105" y="217" width="13" height="13"/>
+        <rect class="sin" x="159" y="218" width="14" height="14"/>
+        <rect class="sin" x="218" y="227" width="17" height="17"/>
+        <rect class="con" x="263" y="219" width="17" height="17"/>
+        <rect class="sin" x="19" y="263" width="16" height="16"/>
+        <rect class="sin" x="67" y="260" width="15" height="15"/>
+        <rect class="con" x="125" y="265" width="13" height="13"/>
+        <rect class="sin" x="180" y="268" width="16" height="16"/>
+        <rect class="sin" x="245" y="265" width="18" height="18"/>
+        <rect class="con" x="53" y="293" width="14" height="14"/>
+        <rect class="sin" x="103" y="298" width="15" height="15"/>
+        <rect class="sin" x="158" y="293" width="13" height="13"/>
+        <rect class="con" x="213" y="296" width="15" height="15"/>
+        <rect class="con" x="273" y="299" width="15" height="15"/>
+        <rect class="sin" x="19" y="338" width="18" height="18"/>
+        <rect class="sin" x="71" y="339" width="14" height="14"/>
+        <rect class="con" x="133" y="337" width="16" height="16"/>
+        <rect class="con" x="188" y="332" width="14" height="14"/>
+        <rect class="con" x="237" y="345" width="14" height="14"/>
+        <rect class="con" x="50" y="375" width="16" height="16"/>
+        <rect class="sin" x="107" y="384" width="17" height="17"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 2. la evidencia -->
+  <section class="hoja" id="evidencia">
+    <h2 class="titulo-seccion">Abrí 47 webs de empresas de turismo activo y barranquismo, una a una.</h2>
+    <p class="entradilla">Barranquismo, rafting, vías ferratas y multiaventura. No es una encuesta ni un informe de nadie: son 47 webs que abrí yo, con el móvil en la mano, intentando reservar una actividad como lo haría un cliente un sábado cualquiera.</p>
+    <div class="cifras">
+      <div class="cifra-fila">
+        <div class="n">15</div>
+        <div>
+          <h3>No se podía reservar la actividad desde la web</h3>
+          <p>Un teléfono, un WhatsApp o un formulario que acaba en un correo que se contesta cuando se puede. El cliente que decide reservar el sábado que viene, un jueves a las diez de la noche, no espera: reserva en la empresa de al lado, la que sí tiene un botón.</p>
+        </div>
+      </div>
+      <div class="cifra-fila">
+        <div class="n">8</div>
+        <div>
+          <h3>El precio decía «consultar»</h3>
+          <p>Ni una cifra, ni un rango. Quien compara varias empresas en el móvil antes de decidir descarta primero las que no dicen cuánto va a costar, y eso no lo arregla ninguna llamada después.</p>
+        </div>
+      </div>
+      <div class="cifra-fila">
+        <div class="n">7</div>
+        <div>
+          <h3>Web abandonada</h3>
+          <p>Un aviso de la temporada 2019, fotos con un logo antiguo, un teléfono que ya no coge nadie. Nadie lo mira con lupa, pero para reservar una actividad con algo de riesgo la primera duda es si esa empresa sigue en pie.</p>
+        </div>
+      </div>
+    </div>
+    <p class="nota">Cuento las 47, también las que estaban bien. Sin ellas los números mentirían. Esta muestra sale de la misma auditoría de <a href="/negocios/">webs de negocios pequeños</a> que abrí una a una.</p>
+  </section>
+
+  <!-- 3. que deberia tener -->
+  <section class="hoja" id="deberia">
+    <h2 class="titulo-seccion">Qué debería tener la web de una empresa de turismo activo</h2>
+    <p class="entradilla">Nada de esto es exótico. Es lo que alguien da por hecho antes de reservar una actividad con algo de riesgo, y casi nadie lo tiene.</p>
+    <ol class="debe">
+      <li>
+        <span class="k">01</span>
+        <div>
+          <h3>Reserva por plazas y salida, no un WhatsApp que hay que repetir</h3>
+          <p>El cliente ve las salidas disponibles, elige plazas y paga o deja una señal ahí mismo. Se acabó explicar la misma disponibilidad tres veces al día por WhatsApp. Y si prefieres validar cada reserva a mano antes de confirmarla, también se puede.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">02</span>
+        <div>
+          <h3>Confirmación al momento y recordatorio antes de la salida</h3>
+          <p>El cliente recibe la confirmación en cuanto reserva, y un aviso el día antes con lo que tiene que llevar. Es lo que más reduce el hueco que se queda vacío el día de la actividad.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">03</span>
+        <div>
+          <h3>Poder cerrar una salida por caudal o climatología sin liar a nadie</h3>
+          <p>Si el río sube o el parte de meteo lo desaconseja, cierras esa salida desde tu propio panel y quien tenía plaza recibe el aviso solo, sin que tengas que llamar uno a uno.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">04</span>
+        <div>
+          <h3>Precio real en la web, no un botón de «consultar»</h3>
+          <p>Un rango claro por actividad y por grupo, o el precio cerrado si lo tienes. Quien compara varias empresas en el móvil descarta primero la que no dice cuánto le va a costar.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">05</span>
+        <div>
+          <h3>Contar en texto lo que preguntan antes de reservar</h3>
+          <p>Edad mínima, nivel físico que hace falta, qué llevar puesto, si el precio incluye el material. En texto de verdad, legible en el móvil, no metido dentro de una foto que no lee ni Google ni un lector de pantalla.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 4. precios (identicos a la madre) -->
+  <section class="hoja" id="precios">
+    <h2 class="titulo-seccion">Lo que cuesta</h2>
+    <p class="entradilla">Los mismos precios que están publicados en <a href="/negocios/#precios">la página general</a>. Sin cuota mensual y sin comisión por reserva.</p>
+    <div class="tarifas">
+      <div class="tarifa"><h3>Web sencilla</h3><p>Con el sistema que necesite tu negocio: reservas, citas o el que sea.</p><div class="n">300 €</div></div>
+      <div class="tarifa"><h3>Web que editas tú</h3><p>Panel propio: cambias textos, precios y fotos sin llamar a nadie.</p><div class="n">750 €</div></div>
+      <div class="tarifa"><h3>Cambios cuando los pidas</h3><p>Primera hora 50 €. Las siguientes, 35 €.</p><div class="n">desde 50 €</div></div>
+      <div class="tarifa"><h3>Revisión de temporada</h3><p>Antes de verano, antes de Navidad. La pides tú.</p><div class="n">50 €</div></div>
+    </div>
+    <p class="cierre">Todo pago único. <span class="marca">Sin cuota, sin permanencia, sin comisión.</span></p>
+  </section>
+
+  <!-- 5. como va -->
+  <section class="hoja" id="como">
+    <h2 class="titulo-seccion">Cómo va esto</h2>
+    <ol class="pasos">
+      <li class="paso"><div class="k">01</div><h3>Me escribes</h3><p>La dirección de tu web y dos líneas.</p></li>
+      <li class="paso"><div class="k">02</div><h3>Te digo qué le pasa</h3><p>Abro tu web, la miro como la miraría alguien que quiere reservar una salida y te cuento qué haría. Sin compromiso.</p></li>
+      <li class="paso"><div class="k">03</div><h3>Precio cerrado</h3><p>Por escrito. Si no encaja, no debes nada.</p></li>
+    </ol>
+  </section>
+
+  <!-- 6. preguntas -->
+  <section class="hoja" id="preguntas">
+    <h2 class="titulo-seccion">Lo que me suelen preguntar</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <h3>¿Puedo cobrar la reserva o una señal al reservar online?</h3>
+        <p>Sí. El cliente paga entero o deja una señal en el momento de reservar, según decidas tú. El dinero llega directo a tu cuenta, sin intermediario que se quede un porcentaje por cada salida.</p>
+      </div>
+      <div class="faq-item">
+        <h3>¿Y si tengo que cancelar la salida por el tiempo o el caudal del río?</h3>
+        <p>Cierras esa salida desde tu panel y todos los que tenían plaza reciben el aviso a la vez, con la opción de cambiar de fecha o pedir el reembolso según lo que hayas configurado. No hace falta llamar uno a uno.</p>
+      </div>
+      <div class="faq-item">
+        <h3>¿Se pueden limitar las plazas por turno?</h3>
+        <p>Sí. Fijas el máximo de gente por salida y la web deja de ofrecer plazas en cuanto se llena. Nada de meter a más gente de la que puede llevar un guía con seguridad.</p>
+      </div>
+      <div class="faq-item">
+        <h3>¿Qué pasa con los datos de quien reserva?</h3>
+        <p>Se pide lo mínimo: nombre, contacto y lo necesario para la actividad, como peso o edad si aplica un límite. Los datos van a tu web y a tu correo, no a una plataforma intermedia, y la parte legal queda por escrito antes de empezar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. contacto -->
+  <section class="contacto hoja" id="contacto">
+    <h2>Pásame la dirección y la miro yo.</h2>
+    <div class="fila-cta">
+      <a class="accion" href="https://wa.me/34617575495?text=Hola%20Eneko%2C%20tengo%20una%20empresa%20de%20turismo%20activo%20y%20mi%20web%20es%3A%20">WhatsApp <span class="fl">→</span></a>
+      <a class="accion-2" href="mailto:eneko.devs@gmail.com?subject=Web%20para%20mi%20empresa%20de%20turismo%20activo">eneko.devs@gmail.com</a>
+    </div>
+    <p class="contacto-pie">Te contesto en menos de 24 h. Si prefieres llamar: <a href="tel:+34617575495">617 575 495</a>.</p>
+  </section>
+
+  <!-- 8. hermanas -->
+  <!-- OJO OBREROS: este bloque no se publica hasta que las 8 paginas existan.
+       Enlazar a una hermana que aun no esta subida es un 404 y se nota. -->
+  <section class="hermanas hoja" id="hermanas">
+    <h2>Lo mismo, para otros oficios</h2>
+    <ul>
+      <li><a href="/negocios/pagina-web-psicologos/">Consultas de psicología</a></li>
+      <li><a href="/negocios/pagina-web-gimnasios/">Gimnasios, yoga y pilates</a></li>
+      <li><a href="/negocios/pagina-web-centros-ecuestres/">Centros ecuestres e hípicas</a></li>
+      <li><a href="/negocios/pagina-web-kayak-turismo-acuatico/">Kayak y turismo acuático</a></li>
+      <li><span class="aqui" aria-current="page">Turismo activo y barranquismo (estás aquí)</span></li>
+      <li><a href="/negocios/pagina-web-rocodromos/">Rocódromos</a></li>
+    </ul>
+    <p class="idioma">In English: <a href="/en/small-business/climbing-gym-website/">climbing gym websites</a> and <a href="/en/small-business/outdoor-activity-booking-website/">outdoor activity booking</a>.</p>
+  </section>
+
+</main>
+
+<footer class="pie hoja">
+  <span>Eneko Navarrete</span><span>desarrollo web</span><span>Berguedà, Barcelona</span>
+  <span><a href="/negocios/">Los 9 problemas</a></span>
+  <span><a href="/">enekodevs.com</a></span>
+</footer>
+
+</div>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@graph":[
+  {
+   "@type":"Service",
+   "@id":"https://enekodevs.com/negocios/pagina-web-turismo-activo-barranquismo/#servicio",
+   "name":"Página web con reserva online para empresas de turismo activo",
+   "serviceType":"Diseño y desarrollo de páginas web con sistema de reserva online",
+   "description":"Página web para empresas de turismo activo y barranquismo con reserva de plazas online propia, confirmación automática y recordatorio, sin comisión por reserva y sin cuota mensual.",
+   "url":"https://enekodevs.com/negocios/pagina-web-turismo-activo-barranquismo/",
+   "inLanguage":"es",
+   "provider":{
+    "@type":"Person",
+    "@id":"https://enekodevs.com/#eneko",
+    "name":"Eneko Navarrete",
+    "jobTitle":"Desarrollador web",
+    "url":"https://enekodevs.com/",
+    "email":"eneko.devs@gmail.com",
+    "telephone":"+34617575495",
+    "address":{"@type":"PostalAddress","addressRegion":"Berguedà","addressLocality":"Barcelona","addressCountry":"ES"}
+   },
+   "areaServed":{"@type":"Country","name":"España"},
+   "audience":{"@type":"Audience","audienceType":"Empresas de turismo activo y barranquismo"},
+   "offers":[
+    {"@type":"Offer","name":"Web sencilla","description":"Con el sistema que necesite tu negocio: reservas, citas o el que sea.","price":"300","priceCurrency":"EUR","url":"https://enekodevs.com/negocios/pagina-web-turismo-activo-barranquismo/#precios"},
+    {"@type":"Offer","name":"Web que editas tú","description":"Panel propio: cambias textos, precios y fotos sin llamar a nadie.","price":"750","priceCurrency":"EUR","url":"https://enekodevs.com/negocios/pagina-web-turismo-activo-barranquismo/#precios"},
+    {"@type":"Offer","name":"Cambios cuando los pidas","description":"Primera hora 50 €. Las siguientes, 35 €.","price":"50","priceCurrency":"EUR","url":"https://enekodevs.com/negocios/pagina-web-turismo-activo-barranquismo/#precios"},
+    {"@type":"Offer","name":"Revisión de temporada","description":"Antes de verano, antes de Navidad. La pides tú.","price":"50","priceCurrency":"EUR","url":"https://enekodevs.com/negocios/pagina-web-turismo-activo-barranquismo/#precios"}
+   ]
+  },
+  {
+   "@type":"FAQPage",
+   "@id":"https://enekodevs.com/negocios/pagina-web-turismo-activo-barranquismo/#faq",
+   "mainEntity":[
+    {"@type":"Question","name":"¿Puedo cobrar la reserva o una señal al reservar online?","acceptedAnswer":{"@type":"Answer","text":"Sí. El cliente paga entero o deja una señal en el momento de reservar, según decidas tú. El dinero llega directo a tu cuenta, sin intermediario que se quede un porcentaje por cada salida."}},
+    {"@type":"Question","name":"¿Y si tengo que cancelar la salida por el tiempo o el caudal del río?","acceptedAnswer":{"@type":"Answer","text":"Cierras esa salida desde tu panel y todos los que tenían plaza reciben el aviso a la vez, con la opción de cambiar de fecha o pedir el reembolso según lo que hayas configurado. No hace falta llamar uno a uno."}},
+    {"@type":"Question","name":"¿Se pueden limitar las plazas por turno?","acceptedAnswer":{"@type":"Answer","text":"Sí. Fijas el máximo de gente por salida y la web deja de ofrecer plazas en cuanto se llena. Nada de meter a más gente de la que puede llevar un guía con seguridad."}},
+    {"@type":"Question","name":"¿Qué pasa con los datos de quien reserva?","acceptedAnswer":{"@type":"Answer","text":"Se pide lo mínimo: nombre, contacto y lo necesario para la actividad, como peso o edad si aplica un límite. Los datos van a tu web y a tu correo, no a una plataforma intermedia, y la parte legal queda por escrito antes de empezar."}}
+   ]
+  },
+  {
+   "@type":"BreadcrumbList",
+   "itemListElement":[
+    {"@type":"ListItem","position":1,"name":"enekodevs.com","item":"https://enekodevs.com/"},
+    {"@type":"ListItem","position":2,"name":"Webs de negocios pequeños","item":"https://enekodevs.com/negocios/"},
+    {"@type":"ListItem","position":3,"name":"Turismo activo y barranquismo","item":"https://enekodevs.com/negocios/pagina-web-turismo-activo-barranquismo/"}
+   ]
+  }
+ ]
+}
+</script>
+
+<script>
+/* Lo unico que hace JavaScript en esta pagina: el boton de tema.
+   Va oculto por defecto (atributo hidden) y solo aparece si el guion corre,
+   para que sin JS no quede un boton muerto que no hace nada. */
+(function(){
+  var r=document.documentElement, b=document.getElementById('tema');
+  if(matchMedia('(prefers-color-scheme: light)').matches) r.dataset.tema='claro';
+  var pinta=function(){ b.textContent = r.dataset.tema==='claro' ? 'Modo oscuro' : 'Modo claro'; };
+  pinta(); b.hidden=false;
+  b.addEventListener('click',function(){
+    r.dataset.tema = r.dataset.tema==='claro' ? '' : 'claro';
+    pinta();
+  });
+})();
+</script>
+</body>
+</html>
