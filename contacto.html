@@ -145,6 +145,8 @@
   .m .ic svg{width:18px;height:18px}
   .m .k{font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--d-fg-2)}
   .m .v{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.02rem;color:var(--d-fg)}
+  .m.m-cal .ic{color:var(--amber);border-color:var(--amber)}
+  .m .sub{display:block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--d-fg-2);margin-top:2px}
   @media(min-width:880px){.c-grid{grid-template-columns:1.05fr .95fr}}
 
   footer{background:var(--ink);color:rgba(242,240,234,.55);border-top:1px solid rgba(242,240,234,.12)}
@@ -204,6 +206,10 @@
             <span data-i18n="c.cta">Escríbeme un email</span>
           </a>
           <div class="methods">
+            <a class="m m-cal" href="https://cal.com/enekodevs/reunion-de-20m" target="_blank" rel="noopener">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+              <span><span class="k" data-i18n="c.m0k">Videollamada</span><br><span class="v" data-i18n="c.m0v">Reserva una llamada de 20 min</span><br><span class="sub" data-i18n="c.m0sub">Elige hora y hablamos — sin compromiso</span></span>
+            </a>
             <a class="m" href="mailto:eneko.devs@gmail.com">
               <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
               <span><span class="k" data-i18n="c.m1">Email</span><br><span class="v">eneko.devs@gmail.com</span></span>
@@ -247,21 +253,24 @@
     "nav.home":"Inicio","nav.work":"Trabajo","nav.services":"Servicios","nav.caso":"Caso DomesLab","nav.contact":"Contacto","nav.cta":"Enviar email","nav.theme":"Cambiar entre tema claro y oscuro",
     "c.eyebrow":"Hablemos de tu proyecto","c.title":"¿Tienes un problema técnico <em>que merece una herramienta?</em>",
     "c.lead":"Cuéntame qué necesita tu equipo o tus clientes. En menos de 48 horas te respondo con un diagnóstico, una estimación de alcance y la siguiente decisión a tomar. Sin compromiso.",
-    "c.avail":"Disponible para nuevos proyectos · < 48 h","c.cta":"Escríbeme un email","c.m1":"Email","c.m2":"Teléfono"
+    "c.avail":"Disponible para nuevos proyectos · < 48 h","c.cta":"Escríbeme un email","c.m1":"Email","c.m2":"Teléfono",
+    "c.m0k":"Videollamada","c.m0v":"Reserva una llamada de 20 min","c.m0sub":"Elige hora y hablamos — sin compromiso"
    },
    ca:{
     "ptitle":"Contacte — Eneko Navarrete",
     "nav.home":"Inici","nav.work":"Feina","nav.services":"Serveis","nav.caso":"Cas DomesLab","nav.contact":"Contacte","nav.cta":"Enviar email","nav.theme":"Canviar entre tema clar i fosc",
     "c.eyebrow":"Parlem del teu projecte","c.title":"Tens un problema tècnic <em>que mereix una eina?</em>",
     "c.lead":"Explica'm què necessita el teu equip o els teus clients. En menys de 48 hores et responc amb un diagnòstic, una estimació d'abast i la següent decisió a prendre. Sense compromís.",
-    "c.avail":"Disponible per a nous projectes · < 48 h","c.cta":"Escriu-me un email","c.m1":"Email","c.m2":"Telèfon"
+    "c.avail":"Disponible per a nous projectes · < 48 h","c.cta":"Escriu-me un email","c.m1":"Email","c.m2":"Telèfon",
+    "c.m0k":"Videotrucada","c.m0v":"Reserva una trucada de 20 min","c.m0sub":"Tria l'hora i parlem — sense compromís"
    },
    en:{
     "ptitle":"Contact — Eneko Navarrete",
     "nav.home":"Home","nav.work":"Work","nav.services":"Services","nav.caso":"DomesLab case","nav.contact":"Contact","nav.cta":"Send email","nav.theme":"Toggle light / dark theme",
     "c.eyebrow":"Let's talk about your project","c.title":"Got a technical problem <em>that deserves a tool?</em>",
     "c.lead":"Tell me what your team or your clients need. In under 48 hours I'll reply with a diagnosis, a scope estimate and the next decision to make. No strings attached.",
-    "c.avail":"Available for new projects · < 48 h","c.cta":"Email me","c.m1":"Email","c.m2":"Phone"
+    "c.avail":"Available for new projects · < 48 h","c.cta":"Email me","c.m1":"Email","c.m2":"Phone",
+    "c.m0k":"Video call","c.m0v":"Book a 20-min call","c.m0sub":"Pick a time and let's talk — no strings attached"
    }
   };
   window.I18N=I18N;
