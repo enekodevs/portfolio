@@ -251,6 +251,7 @@
   /* fallback estático: lista de fases */
   .fall-phases{max-width:var(--ample);margin:34px auto 0;padding:0 var(--gut);display:grid;gap:10px}
   body.run .fall-phases{display:none}
+  body:not(.run) .build .phases,body:not(.run) .build .phase-lab{display:none}
   .fall-phases div{border-top:1px solid var(--d-line);padding:14px 0;display:flex;gap:16px;font-family:'IBM Plex Mono',monospace;font-size:.86rem;color:var(--d-fg-2)}
   .fall-phases div b{color:var(--d-fg);font-weight:500}
 
