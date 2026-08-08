@@ -724,7 +724,7 @@
   };
   let PHASES = phaseNames();
 
-  if(reduce || small){ /* queda el fallback SVG + lista de fases */ }
+  if(reduce){ /* con reduced-motion queda el fallback SVG + lista de fases */ }
   else{
   const startDome = () => import('three').then(async (THREE)=>{
    try{
@@ -732,7 +732,7 @@
     document.body.classList.add("run");
     let W=holder.clientWidth,H=holder.clientHeight;
     const renderer=new THREE.WebGLRenderer({antialias:true});
-    renderer.setSize(W,H); renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
+    renderer.setSize(W,H); renderer.setPixelRatio(Math.min(devicePixelRatio,small?1.25:1.5));
     renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.05; renderer.outputColorSpace=THREE.SRGBColorSpace;
     holder.appendChild(renderer.domElement);
     const scene=new THREE.Scene(); scene.background=new THREE.Color(0x26202b);
