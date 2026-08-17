@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-i18n-title="ptitle">Eneko Navarrete — Aplicaciones web técnicas a medida</title>
-<meta name="description" content="Design engineer. 3D en tiempo real e ingeniería que llega a producción. Mira cómo se construye una herramienta a medida, paso a paso.">
+<title data-i18n-title="ptitle">enekodevs — Eneko Navarrete, apps web técnicas a medida</title>
+<meta name="description" content="enekodevs — Design engineer. 3D en tiempo real e ingeniería que llega a producción. Mira cómo se construye una herramienta a medida, paso a paso.">
 <link rel="canonical" href="https://enekodevs.com/">
 <link rel="alternate" hreflang="es" href="https://enekodevs.com/">
 <link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/">
@@ -13,8 +13,8 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Eneko Navarrete">
 <meta property="og:url" content="https://enekodevs.com/">
-<meta property="og:title" content="Eneko Navarrete — Aplicaciones web técnicas a medida">
-<meta property="og:description" content="Diseño y construyo aplicaciones web a medida —calculadoras, configuradores, 3D— y las dejo en producción: probadas, desplegadas y con código auditable.">
+<meta property="og:title" content="enekodevs — Eneko Navarrete, apps web técnicas a medida">
+<meta property="og:description" content="enekodevs — Diseño y construyo aplicaciones web a medida —calculadoras, configuradores, 3D— y las dejo en producción: probadas, desplegadas y con código auditable.">
 <meta property="og:image" content="https://enekodevs.com/screenshots/editor-3d.png">
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="900">
@@ -22,8 +22,8 @@
 <meta property="og:locale:alternate" content="ca_ES">
 <meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Eneko Navarrete — Aplicaciones web técnicas a medida">
-<meta name="twitter:description" content="Aplicaciones web técnicas a medida: calculadoras, configuradores y 3D en producción.">
+<meta name="twitter:title" content="enekodevs — Eneko Navarrete, apps web técnicas a medida">
+<meta name="twitter:description" content="enekodevs — Aplicaciones web técnicas a medida: calculadoras, configuradores y 3D en producción.">
 <meta name="twitter:image" content="https://enekodevs.com/screenshots/editor-3d.png">
 <script type="application/ld+json">
 {
@@ -46,12 +46,25 @@
       "address": {"@type": "PostalAddress", "addressCountry": "ES"}
     },
     {
+      "@type": "Organization",
+      "@id": "https://enekodevs.com/#organization",
+      "name": "enekodevs",
+      "legalName": "Eneko Navarrete",
+      "url": "https://enekodevs.com/",
+      "logo": "https://enekodevs.com/favicon.svg",
+      "founder": {"@id": "https://enekodevs.com/#person"},
+      "sameAs": [
+        "https://github.com/enekodevs",
+        "https://www.linkedin.com/in/eneko-navarrete"
+      ]
+    },
+    {
       "@type": "WebSite",
       "@id": "https://enekodevs.com/#website",
       "url": "https://enekodevs.com/",
       "name": "Eneko Navarrete — Aplicaciones web técnicas a medida",
       "inLanguage": "es",
-      "publisher": {"@id": "https://enekodevs.com/#person"}
+      "publisher": {"@id": "https://enekodevs.com/#organization"}
     },
     {
       "@type": "ProfessionalService",
@@ -206,6 +219,10 @@
   @media (prefers-reduced-motion: reduce){.hero-photo,.hero-photo-dither{animation:none!important;clip-path:none!important;transform:scale(1.04)}
     .hero h1 .ln>span{animation:none!important;transform:none!important;opacity:1!important;-webkit-text-fill-color:var(--ink);color:var(--ink)}}
   .hero h1{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(3rem,11vw,9rem);letter-spacing:-.045em;line-height:.9;text-transform:uppercase;color:var(--ink)}
+  /* texto real para rastreadores/lectores de pantalla: "enekodevs" contiguo.
+     Las líneas .ln de abajo son solo la puesta en escena visual (animación
+     por línea) y quedan aria-hidden para no duplicar el titular al oído. */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   /* título: sube por líneas (fade) + brillo DIAGONAL L→D que SE QUEDA (ámbar permanente) */
   .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
   .hero h1 .ln > span{display:block;transform:translateY(110%);opacity:0;
@@ -213,8 +230,8 @@
     background-size:220% 100%;background-position:0% 0;
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
   body.entered .hero h1 .ln > span{animation:titleUp 2.9s var(--ease) forwards, titleShine 1.3s linear 0s forwards}
-  .hero h1 .ln:nth-child(2) > span{animation-delay:.6s,.6s}
-  .hero h1 .ln:nth-child(3) > span{animation-delay:1.05s,1.05s}
+  .hero h1 .ln:nth-child(3) > span{animation-delay:.6s,.6s}
+  .hero h1 .ln:nth-child(4) > span{animation-delay:1.05s,1.05s}
   /* segunda línea del h1: la propuesta de valor, visible y en registro menor */
   .hero h1 .tag{margin-top:.3em;padding-bottom:.14em;margin-bottom:-.14em}
   .hero h1 .tag > span{font-family:'IBM Plex Mono',monospace;font-weight:400;
@@ -312,6 +329,12 @@
 
   footer{background:var(--ink);color:rgba(242,240,234,.55);border-top:1px solid rgba(242,240,234,.12)}
   .foot{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center;padding:30px var(--gut);max-width:var(--ample);margin:0 auto;font-family:'IBM Plex Mono',monospace;font-size:.76rem;letter-spacing:.04em}
+  /* enlaces internos a /negocios/: evita que el hub y sus nichos queden huérfanos */
+  .foot-sectors{max-width:var(--ample);margin:0 auto;padding:26px var(--gut) 0;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.02em;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline}
+  .foot-sectors b{color:rgba(242,240,234,.85);font-weight:500}
+  [data-theme="dark"] .foot-sectors b{color:var(--d-fg)}
+  .foot-sectors a{color:inherit;text-decoration:underline;text-decoration-color:rgba(242,240,234,.35)}
+  .foot-sectors a:hover{color:var(--amber);text-decoration-color:currentColor}
   .foot .n{color:#fff;font-family:'Archivo',sans-serif;font-weight:700}
 
   /* ---------- HERO CTA ---------- */
@@ -410,7 +433,7 @@
   <div class="hero-photo-dither" aria-hidden="true"></div>
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
-    <h1><span class="ln"><span>Eneko</span></span><span class="ln"><span>Devs.</span></span><span class="ln tag"><span data-i18n="hero.eyebrow">Aplicaciones web técnicas a medida · España</span></span></h1>
+    <h1><span class="sr-only">enekodevs</span><span class="ln" aria-hidden="true"><span>Eneko</span></span><span class="ln" aria-hidden="true"><span>Devs.</span></span><span class="ln tag"><span data-i18n="hero.eyebrow">Aplicaciones web técnicas a medida · España</span></span></h1>
     <div class="sub">
       <p class="lead" data-i18n-html="hero.lead">¿Necesitas una herramienta que un SaaS genérico no cubre? Diseño y construyo tu aplicación web a medida —calculadoras, configuradores, 3D— y la dejo <b>en producción</b>: probada, desplegada y con código que puedes auditar.</p>
       <div class="hero-cta">
@@ -547,7 +570,19 @@
   </div>
 </section>
 
-<footer><div class="foot"><span class="n">ENEKO NAVARRETE</span><span>eneko.devs@gmail.com · +34 617 575 495</span><span><a href="https://www.linkedin.com/in/eneko-navarrete" target="_blank" rel="noopener">LinkedIn</a></span><span><a href="/aviso-legal">Aviso legal</a></span></div></footer>
+<footer>
+  <nav class="foot-sectors" aria-label="Páginas por sector">
+    <b>Para tu negocio:</b>
+    <a href="/negocios/">Webs para negocios pequeños</a>
+    <a href="/negocios/pagina-web-gimnasios/">Web para gimnasios, yoga y pilates</a>
+    <a href="/negocios/pagina-web-psicologos/">Web para consultas de psicología</a>
+    <a href="/negocios/pagina-web-centros-ecuestres/">Web para centros ecuestres</a>
+    <a href="/negocios/pagina-web-kayak-turismo-acuatico/">Web para kayak y turismo acuático</a>
+    <a href="/negocios/pagina-web-rocodromos/">Web para rocódromos</a>
+    <a href="/negocios/pagina-web-turismo-activo-barranquismo/">Web para turismo activo y barranquismo</a>
+  </nav>
+  <div class="foot"><span class="n">ENEKO NAVARRETE</span><span>eneko.devs@gmail.com · +34 617 575 495</span><span><a href="https://www.linkedin.com/in/eneko-navarrete" target="_blank" rel="noopener">LinkedIn</a></span><span><a href="/aviso-legal">Aviso legal</a></span></div>
+</footer>
 
 <!-- UI motion -->
 <script>
@@ -591,7 +626,7 @@
 (function(){
   var I18N={
    es:{
-    "ptitle":"Eneko Navarrete — Aplicaciones web técnicas a medida",
+    "ptitle":"enekodevs — Eneko Navarrete, apps web técnicas a medida",
     "nav.home":"Inicio","nav.work":"Trabajo","nav.services":"Servicios","nav.caso":"Caso DomesLab","nav.contact":"Contacto","nav.cta":"Hablemos","nav.theme":"Cambiar entre tema claro y oscuro",
     "pre.enter":"Entrar",
     "hero.eyebrow":"Aplicaciones web técnicas a medida · España",
@@ -619,7 +654,7 @@
     "cta.eyebrow":"Siguiente paso","cta.title":"Construyamos tu <em>herramienta.</em>","cta.lead":"Cuéntame qué necesita tu equipo o tus clientes. En menos de 48 horas te respondo con un diagnóstico, una estimación de alcance y la siguiente decisión.","cta.btn":"Empieza tu proyecto"
    },
    ca:{
-    "ptitle":"Eneko Navarrete — Aplicacions web tècniques a mida",
+    "ptitle":"enekodevs — Eneko Navarrete, apps web tècniques a mida",
     "nav.home":"Inici","nav.work":"Feina","nav.services":"Serveis","nav.caso":"Cas DomesLab","nav.contact":"Contacte","nav.cta":"Parlem-ne","nav.theme":"Canviar entre tema clar i fosc",
     "pre.enter":"Entrar",
     "hero.eyebrow":"Aplicacions web tècniques a mida · Espanya",
@@ -647,7 +682,7 @@
     "cta.eyebrow":"Següent pas","cta.title":"Construïm la teva <em>eina.</em>","cta.lead":"Explica'm què necessita el teu equip o els teus clients. En menys de 48 hores et responc amb un diagnòstic, una estimació d'abast i la següent decisió.","cta.btn":"Comença el teu projecte"
    },
    en:{
-    "ptitle":"Eneko Navarrete — Custom technical web apps",
+    "ptitle":"enekodevs — Eneko Navarrete, custom technical web apps",
     "nav.home":"Home","nav.work":"Work","nav.services":"Services","nav.caso":"DomesLab case","nav.contact":"Contact","nav.cta":"Let's talk","nav.theme":"Toggle light / dark theme",
     "pre.enter":"Enter",
     "hero.eyebrow":"Custom technical web apps · Spain",
