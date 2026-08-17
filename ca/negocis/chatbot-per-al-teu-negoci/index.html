@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<script>try{var _t=localStorage.getItem("eneko.theme");if(_t==="light"){document.documentElement.setAttribute("data-theme","light")}else if(_t!=="dark"&&matchMedia("(prefers-color-scheme: light)").matches){document.documentElement.setAttribute("data-theme","light")}}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chatbot per al teu negoci, disponible a qualsevol hora · Eneko Navarrete</title>
+<meta name="description" content="Contesta les preguntes repetides, capta el lead de les onze de la nit i avisa sempre que parla amb una IA. Des de 700 € + 79 €/mes, preu tancat. El bot d'aquesta web és ell: obre'l i pregunta-li.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#221b2e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f2f0ea" media="(prefers-color-scheme: light)">
+
+<link rel="canonical" href="https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/">
+<link rel="alternate" hreflang="es" href="https://enekodevs.com/negocios/chatbot-para-tu-negocio/">
+<link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/">
+<link rel="alternate" hreflang="en" href="https://enekodevs.com/en/small-business/chatbot-for-your-business/">
+<link rel="alternate" hreflang="x-default" href="https://enekodevs.com/negocios/chatbot-para-tu-negocio/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Eneko Navarrete">
+<meta property="og:url" content="https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/">
+<meta property="og:title" content="Deixa de contestar vint vegades al dia el mateix">
+<meta property="og:description" content="Un assistent que contesta les preguntes repetides, capta el lead de fora d'horari i avisa que parla amb una IA. Preu tancat des de 700 € + 79 €/mes.">
+<meta property="og:image" content="https://enekodevs.com/negocios/og-ca.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Fons lila fosc amb quadrats dispersos i el titular «He obert 203 webs de negocis petits».">
+<meta property="og:locale" content="ca_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Deixa de contestar vint vegades al dia el mateix">
+<meta name="twitter:description" content="Un assistent que contesta les preguntes repetides, capta el lead de fora d'horari i avisa que parla amb una IA. Preu tancat des de 700 € + 79 €/mes.">
+<meta name="twitter:image" content="https://enekodevs.com/negocios/og-ca.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23221b2e'/%3E%3Crect x='6' y='6' width='8' height='8' fill='%23e3a93a'/%3E%3Crect x='18' y='6' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='6' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='18' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3C/svg%3E">
+
+<link rel="preload" href="/negocios/fuentes/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<style>
+/* Archivo variable, AUTOALOJADA (OFL-1.1, licencia en /negocios/fuentes/).
+   Mismas rutas absolutas que la madre: un solo juego de ficheros para todo
+   /negocios/, asi la hija no descarga nada nuevo si ya vienes de la madre. */
+@font-face{
+  font-family:'Archivo Variable'; font-style:normal; font-display:swap;
+  font-weight:100 900; font-stretch:62% 125%;
+  src:url(/negocios/fuentes/archivo-latin-standard-normal.woff2) format('woff2-variations');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Archivo Variable'; font-style:normal; font-display:swap;
+  font-weight:100 900; font-stretch:62% 125%;
+  src:url(/negocios/fuentes/archivo-latin-ext-standard-normal.woff2) format('woff2-variations');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+:root{
+  --fondo:#221b2e; --fondo-2:#2b2339; --filete:rgba(242,240,234,.10); --filete-2:rgba(242,240,234,.26);
+  --tinta:#f2f0ea; --tinta-2:#bcb4c8; --tinta-3:#948ca4;
+  --amarillo:#e3a93a; --sobre-amarillo:#1d1505; --amarillo-texto:#e3a93a; --amarillo-claro:#f0bc57;
+  --azul:#a08cc8; --azul-apagado:#3a3049;
+  --reticula:rgba(242,240,234,.045); --celda:76px; --radio:12px;
+  --tec:"Archivo Variable","Bahnschrift","DIN Alternate","Segoe UI Variable Display",system-ui,sans-serif;
+  --margen:clamp(20px,5.5vw,88px);
+  --paso:clamp(58px,9vh,116px);
+}
+:root[data-theme="light"]{
+  --fondo:#f2f0ea; --fondo-2:#e8e5dc; --filete:rgba(34,27,46,.13); --filete-2:rgba(34,27,46,.32);
+  --tinta:#1c1626; --tinta-2:#524a60; --tinta-3:#6f6780;
+  --amarillo:#d99a22; --sobre-amarillo:#1d1505; --amarillo-texto:#8a6414; --amarillo-claro:#eeb43e;
+  --azul:#6a5590; --azul-apagado:#d6d1c6;
+  --reticula:rgba(34,27,46,.06);
+  color-scheme:light;
+}
+*,::before,::after{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--fondo); color:var(--tinta);
+  font-family:var(--tec); font-size:17px; line-height:1.55;
+  font-variation-settings:"wght" 400,"wdth" 100;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-weight:400;line-height:1.02;letter-spacing:-.02em;font-variation-settings:"wght" 500,"wdth" 95;text-wrap:balance}
+a{color:inherit}
+p,li{text-wrap:pretty}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:3px solid var(--amarillo-texto);outline-offset:3px}
+section[id]{scroll-margin-top:96px}
+.oculto{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* ---------- reticula de fondo (heredada de la madre) ---------- */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(to right, var(--reticula) 0 1px, transparent 1px var(--celda)),
+    repeating-linear-gradient(to bottom, var(--reticula) 0 1px, transparent 1px var(--celda));
+  mask-image:radial-gradient(135% 110% at 50% 24%, #000 55%, rgba(0,0,0,.35) 100%);
+}
+.capa{position:relative;z-index:1}
+
+/* ---------- cabecera ---------- */
+.cabecera{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:12px var(--margen);
+  font-size:14px;color:var(--tinta-2);
+  background:color-mix(in srgb,var(--fondo) 86%,transparent);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--filete);
+}
+.cabecera b{color:var(--tinta);font-variation-settings:"wght" 600,"wdth" 92}
+.cabecera nav{display:flex;align-items:center;gap:14px}
+.cabecera nav a{color:var(--tinta-2);font-size:14px}
+.cabecera nav a:hover{color:var(--tinta)}
+@media (max-width:700px){.cabecera .sufijo{display:none}}
+.tema{border:1px solid var(--tinta-3);border-radius:var(--radio);padding:7px 13px;min-height:44px;display:inline-flex;align-items:center;font-size:14px}
+.tema:hover{border-color:var(--tinta);background:var(--fondo-2)}
+
+/* ---------- rejilla base ---------- */
+.hoja{max-width:1180px;margin-inline:auto;padding-inline:var(--margen)}
+section{padding-block:var(--paso)}
+
+/* ---------- miga de pan ---------- */
+.miga{font-size:14.5px;color:var(--tinta-3);padding-top:clamp(22px,4vh,40px)}
+.miga ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.miga li+li::before{content:"/";margin-right:8px;color:var(--filete-2)}
+.miga a{color:var(--tinta-2);text-underline-offset:3px}
+.miga a:hover{color:var(--amarillo-texto)}
+.miga [aria-current]{color:var(--tinta-3)}
+
+/* ---------- portada ---------- */
+.portada{padding-top:clamp(18px,3vh,34px)}
+.portada-caja{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr);gap:clamp(24px,5vw,64px);align-items:center}
+h1{font-size:clamp(38px,6.4vw,82px);max-width:16ch;font-variation-settings:"wght" 550,"wdth" 88;line-height:1.0}
+h1 em{font-style:normal;color:var(--amarillo-texto)}
+.bajada{margin-top:24px;font-size:clamp(17px,1.9vw,21px);color:var(--tinta-2);max-width:40ch}
+.fila-cta{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.accion{
+  display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 26px;border-radius:var(--radio);
+  background:var(--amarillo);color:var(--sobre-amarillo);text-decoration:none;
+  font-variation-settings:"wght" 650,"wdth" 92;font-size:17px;
+  transition:transform .2s,background .2s;
+}
+.accion:hover{background:var(--amarillo-claro);transform:translateY(-2px)}
+.accion .fl{transition:transform .25s}
+.accion:hover .fl{transform:translateX(5px)}
+.accion-2{
+  display:inline-flex;align-items:center;min-height:56px;padding:0 22px;border-radius:var(--radio);
+  border:1px solid var(--tinta-3);color:var(--tinta-2);text-decoration:none;font-size:16.5px;
+}
+.accion-2:hover{border-color:var(--tinta);color:var(--tinta)}
+
+/* visual de portada: sin dades d'auditoria per inventar aqui, aixi que en lloc
+   de la dispersio de quadrats de les germanes fem servir el mateix motiu
+   tipografic de numeros grans que ja apareix a preus i a la mare. */
+.portada-visual{border:1px solid var(--filete-2);border-radius:var(--radio);padding:clamp(28px,4vw,44px);text-align:center}
+.pv-hora{font-size:clamp(56px,9vw,104px);line-height:.9;font-variation-settings:"wght" 600,"wdth" 85;font-variant-numeric:tabular-nums;color:var(--amarillo-texto)}
+.pv-cap{margin-top:14px;color:var(--tinta-2);font-size:15.5px}
+@media (max-width:820px){
+  .portada-caja{grid-template-columns:1fr}
+  .portada-visual{max-width:340px}
+}
+
+/* ---------- leyenda / cifras ---------- */
+.titulo-seccion{font-size:clamp(30px,4.6vw,58px);max-width:18ch}
+.entradilla{margin-top:18px;color:var(--tinta-2);max-width:52ch;font-size:17px}
+.cifras{margin-top:clamp(28px,5vh,52px);border-top:1px solid var(--filete-2)}
+.cifra-fila{
+  display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:clamp(16px,3vw,36px);
+  padding:22px 4px;border-bottom:1px solid var(--filete);transition:background .2s;
+}
+.cifra-fila:hover{background:var(--fondo-2);border-radius:var(--radio)}
+.cifra-fila .n{
+  font-size:clamp(36px,5.6vw,64px);line-height:.9;min-width:2.6ch;
+  font-variation-settings:"wght" 600,"wdth" 85;font-variant-numeric:tabular-nums;
+}
+.cifra-fila h3{font-size:clamp(18px,2vw,23px)}
+.cifra-fila p{color:var(--tinta-2);font-size:16.5px;margin-top:7px;max-width:54ch}
+.nota{margin-top:22px;font-size:15px;color:var(--tinta-3);max-width:56ch}
+
+/* ---------- lista de requisitos (què fa / què no fa) ---------- */
+.subtitulo{margin-top:clamp(28px,5vh,50px);font-size:clamp(20px,2.4vw,27px);font-variation-settings:"wght" 550,"wdth" 90}
+.debe{margin-top:clamp(18px,3vh,30px);list-style:none;display:grid;gap:0;border-top:1px solid var(--filete-2)}
+.debe li{padding:22px 4px;border-bottom:1px solid var(--filete);display:grid;grid-template-columns:auto 1fr;gap:clamp(14px,2.5vw,28px);align-items:start}
+.debe .k{font-size:13.5px;letter-spacing:.12em;color:var(--tinta-3);font-variant-numeric:tabular-nums;padding-top:5px}
+.debe h3{font-size:clamp(18px,2vw,23px)}
+.debe p{color:var(--tinta-2);font-size:16.5px;margin-top:7px;max-width:58ch}
+.no-hace .k{color:var(--tinta-3)}
+
+/* ---------- precios (paquets amb quota, no pagament únic) ---------- */
+.tarifas{margin-top:clamp(28px,5vh,56px);border-top:1px solid var(--filete-2)}
+.tarifa{
+  display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:20px;
+  padding:24px 4px;border-bottom:1px solid var(--filete);transition:background .2s;
+}
+.tarifa:hover{background:var(--fondo-2);border-radius:var(--radio)}
+.tarifa h3,.tarifa p{transition:translate .3s cubic-bezier(.2,.9,.2,1)}
+.tarifa:hover h3,.tarifa:hover p{translate:18px 0}
+.tarifa h3{font-size:clamp(19px,2.2vw,26px)}
+.tarifa p{grid-column:1;color:var(--tinta-2);font-size:16.5px;margin-top:6px;max-width:46ch}
+.tarifa .n{grid-row:1/3;text-align:right;font-size:clamp(26px,3.8vw,44px);line-height:.9;font-variation-settings:"wght" 600,"wdth" 85;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tarifa .n small{display:block;margin-top:6px;font-size:.4em;color:var(--tinta-3);font-variation-settings:"wght" 500,"wdth" 90}
+.cierre{margin-top:24px;font-size:clamp(17px,2vw,21px)}
+.marca{background:var(--amarillo);color:var(--sobre-amarillo);padding:2px 8px;font-variation-settings:"wght" 600,"wdth" 92;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* ---------- pasos ---------- */
+.pasos{margin-top:clamp(28px,5vh,52px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,44px);list-style:none}
+.paso{border-top:2px solid var(--tinta);padding-top:18px}
+.paso .k{font-size:13.5px;letter-spacing:.12em;color:var(--tinta-3)}
+.paso h3{font-size:clamp(19px,2.2vw,25px);margin-top:10px}
+.paso p{color:var(--tinta-2);font-size:16.5px;margin-top:8px}
+@media (max-width:860px){.pasos{grid-template-columns:1fr;gap:26px}}
+
+/* ---------- preguntes ---------- */
+.faq{margin-top:clamp(26px,4vh,46px);border-top:1px solid var(--filete-2)}
+.faq-item{padding:22px 4px;border-bottom:1px solid var(--filete)}
+.faq-item h3{font-size:clamp(18px,2vw,23px)}
+.faq-item p{color:var(--tinta-2);font-size:16.5px;margin-top:9px;max-width:62ch}
+
+/* ---------- contacte ---------- */
+.contacto h2{font-size:clamp(34px,6vw,78px);font-variation-settings:"wght" 550,"wdth" 88;max-width:14ch}
+.contacto-pie{margin-top:24px;color:var(--tinta-2);font-size:16.5px}
+.contacto-pie a{color:var(--tinta)}
+
+/* ---------- altres idiomes ---------- */
+.hermanas{border-top:1px solid var(--filete)}
+.hermanas h2{font-size:clamp(22px,2.6vw,30px)}
+.hermanas .idioma{margin-top:20px;font-size:15.5px;color:var(--tinta-3)}
+.hermanas .idioma a{display:inline;padding:0;color:var(--tinta-2)}
+
+.pie{border-top:1px solid var(--filete);padding:26px 0;display:flex;flex-wrap:wrap;gap:22px;font-size:14.5px;color:var(--tinta-3)}
+
+@media (max-width:560px){
+  body{font-size:16px}
+  .cifra-fila{grid-template-columns:1fr;gap:8px}
+  .tarifa{grid-template-columns:1fr}
+  .tarifa .n{text-align:left;margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,::before,::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+@media print{
+  :root{
+    --fondo:#f2f0ea;--fondo-2:#f2f0ea;--filete:rgba(34,27,46,.3);--filete-2:rgba(34,27,46,.5);
+    --tinta:#1c1626;--tinta-2:#3a3346;--tinta-3:#4d4559;--reticula:transparent;
+    --amarillo-texto:#8a6414;color-scheme:light;
+  }
+  .cabecera,body::before{display:none!important}
+  section{padding-block:16px;break-inside:avoid}
+}
+</style>
+<script src="/vendor/consent.js" defer></script>
+    <script src="https://chatbot-eneko.chatbot-eneko.workers.dev/widget.js" data-cliente="enekodevs" defer></script>
+</head>
+<body>
+
+<header class="cabecera capa">
+  <div><b>Eneko Navarrete</b><span class="sufijo"> · desenvolupament web · Berguedà</span></div>
+  <nav>
+    <a href="/ca/negocis/">Els 9 problemes</a>
+    <button class="tema" id="tema" type="button" hidden>Mode clar</button>
+  </nav>
+</header>
+
+<div class="capa">
+
+<nav class="miga hoja" aria-label="Miga de pa">
+  <ol>
+    <li><a href="/ca/">enekodevs.com</a></li>
+    <li><a href="/ca/negocis/">Webs de negocis petits</a></li>
+    <li><span aria-current="page">Chatbot per al teu negoci</span></li>
+  </ol>
+</nav>
+
+<main>
+
+  <!-- 1. portada -->
+  <section class="portada hoja" id="portada">
+    <div class="portada-caja">
+      <div>
+        <h1>Deixa de contestar <em>vint vegades al dia</em> el mateix.</h1>
+        <p class="bajada">La reserva que arriba a les onze de la nit, la pregunta en anglès de qui ve de fora, el telèfon que no pots agafar mentre fas la classe. Res d'això hauria de dependre que tu estiguis despert.</p>
+        <div class="fila-cta">
+          <a class="accion" href="#contacto">Demana'm un pressupost tancat <span class="fl">→</span></a>
+          <a class="accion-2" href="#hace">Veure què fa, i què no</a>
+        </div>
+      </div>
+      <div class="portada-visual">
+        <div class="pv-hora">23:00</div>
+        <p class="pv-cap">L'hora a la qual avui es perd la reserva, si no contesta ningú.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. el dolor real -->
+  <section class="hoja" id="evidencia">
+    <h2 class="titulo-seccion">El que et passa ara mateix, no el que promet la tecnologia.</h2>
+    <p class="entradilla">Res d'això surt d'una enquesta: és el que es repeteix quan parlo amb negocis petits sobre la seva web i el seu telèfon.</p>
+    <div class="cifras">
+      <div class="cifra-fila">
+        <div class="n">20</div>
+        <div>
+          <h3>Les mateixes vint preguntes, cada dia</h3>
+          <p>Horari, preu, com arribar, si queda plaça. Ningú les escriu la primera vegada que les contestes per WhatsApp: les escriu la número dos-cents, i per llavors ja t'ha robat mig matí.</p>
+        </div>
+      </div>
+      <div class="cifra-fila">
+        <div class="n">23:00</div>
+        <div>
+          <h3>L'hora a la qual arriba la reserva que avui perds</h3>
+          <p>Fora del teu horari no contesta ningú. Qui pregunta a aquesta hora no espera que obris: prova amb el següent negoci de la llista, i aquest sí que li contesta.</p>
+        </div>
+      </div>
+      <div class="cifra-fila">
+        <div class="n">0</div>
+        <div>
+          <h3>Els idiomes que parles mentre fas una classe</h3>
+          <p>El client de fora escriu en anglès a les nou del matí. El teu telèfon no vibra: és a la butxaca, i tu estàs fent la classe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. què fa i què no fa -->
+  <section class="hoja" id="hace">
+    <h2 class="titulo-seccion">Què fa l'assistent. I què no fa.</h2>
+    <p class="entradilla">Prometre màgia és fàcil. Preferim dir l'abast exacte, perquè sàpigues què esperar abans de contractar-lo.</p>
+
+    <h3 class="subtitulo">El que sí que fa</h3>
+    <ol class="debe">
+      <li>
+        <span class="k">01</span>
+        <div>
+          <h3>Contesta a l'instant les preguntes que es repeteixen</h3>
+          <p>Horari, preu, com arribar, si queda plaça. També a les onze de la nit o un diumenge, que és quan més es perden.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">02</span>
+        <div>
+          <h3>Capta el lead que avui es perd</h3>
+          <p>Nom i contacte de qui escriu fora del teu horari, perquè no hagis d'estar despert per no perdre'l.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">03</span>
+        <div>
+          <h3>Agenda o deriva, segons el paquet que contractis</h3>
+          <p>El paquet Reserves connecta amb el sistema de cites que ja fas servir. La resta capta el contacte i te'l passa a tu.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">04</span>
+        <div>
+          <h3>Contesta en l'idioma de qui escriu</h3>
+          <p>Útil si tens clientela de fora i tu no estàs disponible en aquest idioma a aquesta hora.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">05</span>
+        <div>
+          <h3>Avisa sempre que parla amb un assistent, no una persona</h3>
+          <p>Per llei, no per elecció: la normativa europea obliga a dir-ho des d'agost de 2026, sense excepció per la mida del negoci. Es veu sempre, sense amagar-ho.</p>
+        </div>
+      </li>
+    </ol>
+
+    <h3 class="subtitulo">El que no fa, a propòsit</h3>
+    <ol class="debe no-hace">
+      <li>
+        <span class="k">01</span>
+        <div>
+          <h3>No assessora ni dona consell professional</h3>
+          <p>Mai en temes de salut, legals o financers. Si pregunten això, deriva a una persona.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">02</span>
+        <div>
+          <h3>No tanca preus a mida ni negocia condicions</h3>
+          <p>Per a un pressupost personalitzat te'l passa a tu. No improvisa xifres que després hagis de desdir.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">03</span>
+        <div>
+          <h3>No s'inventa el que no sap</h3>
+          <p>Si la resposta no és a la teva web o als teus documents, ho diu i deriva, en comptes d'improvisar alguna cosa que soni bé.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">04</span>
+        <div>
+          <h3>No substitueix el teu WhatsApp en queixes o casos delicats</h3>
+          <p>Això sempre passa a tu. L'assistent filtra el repetitiu, no l'important.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 4. precios -->
+  <section class="hoja" id="precios">
+    <h2 class="titulo-seccion">El que costa</h2>
+    <p class="entradilla">Preu publicat aquí a propòsit: és el que diferencia un pressupost real d'un d'inventat sobre la marxa.</p>
+    <div class="tarifas">
+      <div class="tarifa">
+        <h3>Recepció 24 h</h3>
+        <p>Preguntes freqüents, horaris, captació del lead nocturn, widget a la teva web. Sense integracions.</p>
+        <div class="n">700 €<small>+ 79 €/mes</small></div>
+      </div>
+      <div class="tarifa">
+        <h3>Reserves</h3>
+        <p>Agenda cites, connecta amb el sistema de reserves que ja fas servir, i WhatsApp.</p>
+        <div class="n">2.200 €<small>+ 220 €/mes</small></div>
+      </div>
+      <div class="tarifa">
+        <h3>A mida</h3>
+        <p>CRM, diversos idiomes, gestió documental i el nivell de servei que acordem.</p>
+        <div class="n">des de 5.000 €<small>+ 400 €/mes</small></div>
+      </div>
+    </div>
+    <p class="cierre">Preu tancat per escrit, abans de començar. <span class="marca">Si hi ha cost variable de WhatsApp o d'una altra integració, es diu a part i per endavant.</span></p>
+  </section>
+
+  <!-- 5. cómo va -->
+  <section class="hoja" id="como">
+    <h2 class="titulo-seccion">Com funciona això</h2>
+    <ol class="pasos">
+      <li class="paso"><div class="k">01</div><h3>M'escrius</h3><p>El teu negoci i què t'està passant ara mateix amb les preguntes repetides o les reserves fora d'horari.</p></li>
+      <li class="paso"><div class="k">02</div><h3>Et dic què necessites</h3><p>Miro la teva web i la teva manera de treballar, i et dic què pot resoldre l'assistent i què no. Sense compromís.</p></li>
+      <li class="paso"><div class="k">03</div><h3>Pressupost tancat</h3><p>Per escrit, amb el paquet que encaixi. Si no encaixa, no deus res.</p></li>
+    </ol>
+  </section>
+
+  <!-- 6. preguntes -->
+  <section class="hoja" id="preguntas">
+    <h2 class="titulo-seccion">El que em solen preguntar</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <h3>Puc provar-lo abans de contractar-lo?</h3>
+        <p>L'assistent de la bombolla que tens oberta en aquesta mateixa web és ell: el mateix que instal·laria a la teva. Obre'l i pregunta-li sobre enekodevs o com treballo, així parles amb el producte real, no amb una maqueta a part.</p>
+      </div>
+      <div class="faq-item">
+        <h3>I si diu alguna cosa malament?</h3>
+        <p>L'abast queda tancat per contracte: agenda i preguntes freqüents, mai assessorament. Hi ha un avís visible que és una IA, i la veracitat del contingut que se li entrega queda sota la teva aprovació abans de publicar-se.</p>
+      </div>
+      <div class="faq-item">
+        <h3>És obligatori l'avís que és una IA?</h3>
+        <p>Sí. La normativa europea (AI Act, article 50) exigeix dir-ho des del 2 d'agost de 2026, sense excepció per la mida del negoci. El portem sempre visible, no a la lletra petita.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Ja tinc WhatsApp per a això, per a què vull un chatbot?</h3>
+        <p>El manual no contesta a les onze de la nit ni capta el contacte abans que tu et despertis. L'assistent s'encarrega d'això; el que de veritat importa te'l continua passant a tu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. contacto -->
+  <section class="contacto hoja" id="contacto">
+    <h2>Explica'm què et passa i et preparo el pressupost.</h2>
+    <div class="fila-cta">
+      <a class="accion" href="https://wa.me/34617575495?text=Hola%20Eneko%2C%20vull%20un%20chatbot%20per%20al%20meu%20negoci.%20Et%20explico%3A%20">WhatsApp <span class="fl">→</span></a>
+      <a class="accion-2" href="mailto:eneko.devs@gmail.com?subject=Chatbot%20per%20al%20meu%20negoci">eneko.devs@gmail.com</a>
+    </div>
+    <p class="contacto-pie">Et contesto en menys de 24 h. Si prefereixes trucar: <a href="tel:+34617575495">617 575 495</a>.</p>
+  </section>
+
+  <!-- 8. altres idiomes -->
+  <section class="hermanas hoja" id="idiomas">
+    <h2>En altres idiomes</h2>
+    <p class="idioma">En español: <a href="/negocios/chatbot-para-tu-negocio/">chatbot para tu negocio</a>. In English: <a href="/en/small-business/chatbot-for-your-business/">chatbot for your business</a>.</p>
+  </section>
+
+</main>
+
+<footer class="pie hoja">
+  <span>Eneko Navarrete</span><span>desenvolupament web</span><span>Berguedà, Barcelona</span>
+  <span><a href="/ca/negocis/">Els 9 problemes</a></span>
+  <span><a href="/ca/">enekodevs.com</a></span>
+</footer>
+
+</div>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@graph":[
+  {
+   "@type":"Service",
+   "@id":"https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/#servicio",
+   "name":"Chatbot per a negocis petits",
+   "serviceType":"Desenvolupament d'assistent conversacional per a atenció i captació de clients",
+   "description":"Assistent conversacional que contesta preguntes freqüents, capta el contacte fora d'horari i, segons el paquet, gestiona reserves. Avís legal d'IA sempre visible. Preu tancat des de 700 € més 79 €/mes.",
+   "url":"https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/",
+   "inLanguage":"ca",
+   "provider":{
+    "@type":"Person",
+    "@id":"https://enekodevs.com/#person",
+    "name":"Eneko Navarrete",
+    "alternateName":"enekodevs",
+    "jobTitle":"Desenvolupador web",
+    "url":"https://enekodevs.com/",
+    "email":"eneko.devs@gmail.com",
+    "telephone":"+34617575495",
+    "address":{"@type":"PostalAddress","addressRegion":"Berguedà","addressLocality":"Barcelona","addressCountry":"ES"},
+    "sameAs":["https://github.com/enekodevs","https://www.linkedin.com/in/eneko-navarrete"]
+   },
+   "areaServed":{"@type":"Country","name":"Espanya"},
+   "audience":{"@type":"Audience","audienceType":"Negocis petits amb atenció al públic"},
+   "offers":[
+    {"@type":"Offer","name":"Recepció 24 h","description":"Preguntes freqüents, horaris, captació del lead nocturn, widget a la teva web. Sense integracions. Més 79 €/mes.","price":"700","priceCurrency":"EUR","url":"https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/#precios"},
+    {"@type":"Offer","name":"Reserves","description":"Agenda cites, connecta amb el sistema de reserves que ja fas servir, i WhatsApp. Més 220 €/mes.","price":"2200","priceCurrency":"EUR","url":"https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/#precios"},
+    {"@type":"Offer","name":"A mida","description":"CRM, diversos idiomes, gestió documental i nivell de servei acordat. Des de 5.000 € més 400 €/mes.","price":"5000","priceCurrency":"EUR","url":"https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/#precios"}
+   ]
+  },
+  {
+   "@type":"FAQPage",
+   "@id":"https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/#faq",
+   "mainEntity":[
+    {"@type":"Question","name":"Puc provar-lo abans de contractar-lo?","acceptedAnswer":{"@type":"Answer","text":"L'assistent de la bombolla d'aquesta mateixa web és ell: el mateix que instal·laria a la teva. Obre'l i pregunta-li sobre enekodevs o com treballo."}},
+    {"@type":"Question","name":"I si diu alguna cosa malament?","acceptedAnswer":{"@type":"Answer","text":"L'abast queda tancat per contracte: agenda i preguntes freqüents, mai assessorament. Hi ha un avís visible que és una IA, i la veracitat del contingut queda sota la teva aprovació abans de publicar-se."}},
+    {"@type":"Question","name":"És obligatori l'avís que és una IA?","acceptedAnswer":{"@type":"Answer","text":"Sí. La normativa europea (AI Act, article 50) exigeix dir-ho des del 2 d'agost de 2026, sense excepció per la mida del negoci."}},
+    {"@type":"Question","name":"Ja tinc WhatsApp per a això, per a què vull un chatbot?","acceptedAnswer":{"@type":"Answer","text":"El manual no contesta a les onze de la nit ni capta el contacte abans que tu et despertis. El que de veritat importa el continua portant una persona."}}
+   ]
+  },
+  {
+   "@type":"BreadcrumbList",
+   "itemListElement":[
+    {"@type":"ListItem","position":1,"name":"enekodevs.com","item":"https://enekodevs.com/ca/"},
+    {"@type":"ListItem","position":2,"name":"Webs de negocis petits","item":"https://enekodevs.com/ca/negocis/"},
+    {"@type":"ListItem","position":3,"name":"Chatbot per al teu negoci","item":"https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/"}
+   ]
+  }
+ ]
+}
+</script>
+
+<script>
+/* L'única cosa que fa JavaScript en aquesta pàgina: el botó de tema.
+   Va ocult per defecte (atribut hidden) i només apareix si l'script corre,
+   perquè sense JS no quedi un botó mort que no fa res. */
+(function(){
+  var r=document.documentElement, b=document.getElementById('tema');
+  var pinta=function(){ b.textContent = r.getAttribute('data-theme')==='light' ? 'Mode fosc' : 'Mode clar'; };
+  pinta(); b.hidden=false;
+  b.addEventListener('click',function(){
+    var claro = r.getAttribute('data-theme')==='light';
+    if(claro){ r.removeAttribute('data-theme'); } else { r.setAttribute('data-theme','light'); }
+    try{localStorage.setItem('eneko.theme', claro ? 'dark' : 'light')}catch(e){}
+    pinta();
+  });
+})();
+</script>
+</body>
+</html>

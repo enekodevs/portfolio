@@ -177,4 +177,28 @@
     <loc>https://enekodevs.com/en/small-business/outdoor-activity-booking-website/</loc>
     <lastmod>2026-08-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://enekodevs.com/negocios/chatbot-para-tu-negocio/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/negocios/chatbot-para-tu-negocio/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/small-business/chatbot-for-your-business/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/negocios/chatbot-para-tu-negocio/"/>
+    <lastmod>2026-08-17</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/negocios/chatbot-para-tu-negocio/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/small-business/chatbot-for-your-business/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/negocios/chatbot-para-tu-negocio/"/>
+    <lastmod>2026-08-17</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://enekodevs.com/en/small-business/chatbot-for-your-business/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enekodevs.com/negocios/chatbot-para-tu-negocio/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enekodevs.com/en/small-business/chatbot-for-your-business/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://enekodevs.com/negocios/chatbot-para-tu-negocio/"/>
+    <lastmod>2026-08-17</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
 </urlset>

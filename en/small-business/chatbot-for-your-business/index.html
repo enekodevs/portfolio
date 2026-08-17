@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>try{var _t=localStorage.getItem("eneko.theme");if(_t==="light"){document.documentElement.setAttribute("data-theme","light")}else if(_t!=="dark"&&matchMedia("(prefers-color-scheme: light)").matches){document.documentElement.setAttribute("data-theme","light")}}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A chatbot for your business, awake when you're not · Eneko Navarrete</title>
+<meta name="description" content="Answers the questions you repeat all day, catches the 11pm booking, and always discloses it's an AI. Fixed price from 700 € + 79 €/month. The bot on this site is it: open it and ask.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#221b2e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f2f0ea" media="(prefers-color-scheme: light)">
+
+<link rel="canonical" href="https://enekodevs.com/en/small-business/chatbot-for-your-business/">
+<link rel="alternate" hreflang="es" href="https://enekodevs.com/negocios/chatbot-para-tu-negocio/">
+<link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/">
+<link rel="alternate" hreflang="en" href="https://enekodevs.com/en/small-business/chatbot-for-your-business/">
+<link rel="alternate" hreflang="x-default" href="https://enekodevs.com/negocios/chatbot-para-tu-negocio/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Eneko Navarrete">
+<meta property="og:url" content="https://enekodevs.com/en/small-business/chatbot-for-your-business/">
+<meta property="og:title" content="Stop answering the same question twenty times a day">
+<meta property="og:description" content="An assistant that answers repeat questions, catches the after-hours lead, and always discloses it's an AI. Fixed price from 700 € + 79 €/month.">
+<meta property="og:image" content="https://enekodevs.com/negocios/og-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Dark lilac background with scattered squares and the headline «I opened 203 small-business websites».">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Stop answering the same question twenty times a day">
+<meta name="twitter:description" content="An assistant that answers repeat questions, catches the after-hours lead, and always discloses it's an AI. Fixed price from 700 € + 79 €/month.">
+<meta name="twitter:image" content="https://enekodevs.com/negocios/og-en.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23221b2e'/%3E%3Crect x='6' y='6' width='8' height='8' fill='%23e3a93a'/%3E%3Crect x='18' y='6' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='6' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='18' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3C/svg%3E">
+
+<link rel="preload" href="/negocios/fuentes/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<style>
+/* Archivo variable, self-hosted (OFL-1.1, license in /negocios/fuentes/).
+   Same absolute paths as the ES site: one single set of files for all of
+   /negocios/ and /en/small-business/, so nothing new gets downloaded if
+   you already came from the other language. */
+@font-face{
+  font-family:'Archivo Variable'; font-style:normal; font-display:swap;
+  font-weight:100 900; font-stretch:62% 125%;
+  src:url(/negocios/fuentes/archivo-latin-standard-normal.woff2) format('woff2-variations');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Archivo Variable'; font-style:normal; font-display:swap;
+  font-weight:100 900; font-stretch:62% 125%;
+  src:url(/negocios/fuentes/archivo-latin-ext-standard-normal.woff2) format('woff2-variations');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+:root{
+  --fondo:#221b2e; --fondo-2:#2b2339; --filete:rgba(242,240,234,.10); --filete-2:rgba(242,240,234,.26);
+  --tinta:#f2f0ea; --tinta-2:#bcb4c8; --tinta-3:#948ca4;
+  --amarillo:#e3a93a; --sobre-amarillo:#1d1505; --amarillo-texto:#e3a93a; --amarillo-claro:#f0bc57;
+  --azul:#a08cc8; --azul-apagado:#3a3049;
+  --reticula:rgba(242,240,234,.045); --celda:76px; --radio:12px;
+  --tec:"Archivo Variable","Bahnschrift","DIN Alternate","Segoe UI Variable Display",system-ui,sans-serif;
+  --margen:clamp(20px,5.5vw,88px);
+  --paso:clamp(58px,9vh,116px);
+}
+:root[data-theme="light"]{
+  --fondo:#f2f0ea; --fondo-2:#e8e5dc; --filete:rgba(34,27,46,.13); --filete-2:rgba(34,27,46,.32);
+  --tinta:#1c1626; --tinta-2:#524a60; --tinta-3:#6f6780;
+  --amarillo:#d99a22; --sobre-amarillo:#1d1505; --amarillo-texto:#8a6414; --amarillo-claro:#eeb43e;
+  --azul:#6a5590; --azul-apagado:#d6d1c6;
+  --reticula:rgba(34,27,46,.06);
+  color-scheme:light;
+}
+*,::before,::after{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--fondo); color:var(--tinta);
+  font-family:var(--tec); font-size:17px; line-height:1.55;
+  font-variation-settings:"wght" 400,"wdth" 100;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-weight:400;line-height:1.02;letter-spacing:-.02em;font-variation-settings:"wght" 500,"wdth" 95;text-wrap:balance}
+a{color:inherit}
+p,li{text-wrap:pretty}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:3px solid var(--amarillo-texto);outline-offset:3px}
+section[id]{scroll-margin-top:96px}
+.oculto{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* ---------- background grid (inherited from the mother page) ---------- */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(to right, var(--reticula) 0 1px, transparent 1px var(--celda)),
+    repeating-linear-gradient(to bottom, var(--reticula) 0 1px, transparent 1px var(--celda));
+  mask-image:radial-gradient(135% 110% at 50% 24%, #000 55%, rgba(0,0,0,.35) 100%);
+}
+.capa{position:relative;z-index:1}
+
+/* ---------- header ---------- */
+.cabecera{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:12px var(--margen);
+  font-size:14px;color:var(--tinta-2);
+  background:color-mix(in srgb,var(--fondo) 86%,transparent);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--filete);
+}
+.cabecera b{color:var(--tinta);font-variation-settings:"wght" 600,"wdth" 92}
+.cabecera nav{display:flex;align-items:center;gap:14px}
+.cabecera nav a{color:var(--tinta-2);font-size:14px}
+.cabecera nav a:hover{color:var(--tinta)}
+@media (max-width:700px){.cabecera .sufijo{display:none}}
+.tema{border:1px solid var(--tinta-3);border-radius:var(--radio);padding:7px 13px;min-height:44px;display:inline-flex;align-items:center;font-size:14px}
+.tema:hover{border-color:var(--tinta);background:var(--fondo-2)}
+
+/* ---------- base grid ---------- */
+.hoja{max-width:1180px;margin-inline:auto;padding-inline:var(--margen)}
+section{padding-block:var(--paso)}
+
+/* ---------- breadcrumb ---------- */
+.miga{font-size:14.5px;color:var(--tinta-3);padding-top:clamp(22px,4vh,40px)}
+.miga ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.miga li+li::before{content:"/";margin-right:8px;color:var(--filete-2)}
+.miga a{color:var(--tinta-2);text-underline-offset:3px}
+.miga a:hover{color:var(--amarillo-texto)}
+.miga [aria-current]{color:var(--tinta-3)}
+
+/* ---------- hero ---------- */
+.portada{padding-top:clamp(18px,3vh,34px)}
+.portada-caja{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr);gap:clamp(24px,5vw,64px);align-items:center}
+h1{font-size:clamp(38px,6.4vw,82px);max-width:16ch;font-variation-settings:"wght" 550,"wdth" 88;line-height:1.0}
+h1 em{font-style:normal;color:var(--amarillo-texto)}
+.bajada{margin-top:24px;font-size:clamp(17px,1.9vw,21px);color:var(--tinta-2);max-width:40ch}
+.fila-cta{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.accion{
+  display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 26px;border-radius:var(--radio);
+  background:var(--amarillo);color:var(--sobre-amarillo);text-decoration:none;
+  font-variation-settings:"wght" 650,"wdth" 92;font-size:17px;
+  transition:transform .2s,background .2s;
+}
+.accion:hover{background:var(--amarillo-claro);transform:translateY(-2px)}
+.accion .fl{transition:transform .25s}
+.accion:hover .fl{transform:translateX(5px)}
+.accion-2{
+  display:inline-flex;align-items:center;min-height:56px;padding:0 22px;border-radius:var(--radio);
+  border:1px solid var(--tinta-3);color:var(--tinta-2);text-decoration:none;font-size:16.5px;
+}
+.accion-2:hover{border-color:var(--tinta);color:var(--tinta)}
+
+/* hero visual: no audit data to draw here, so instead of the sibling pages'
+   scattered squares we reuse the same big-number motif that already shows
+   up in pricing and on the mother page. */
+.portada-visual{border:1px solid var(--filete-2);border-radius:var(--radio);padding:clamp(28px,4vw,44px);text-align:center}
+.pv-hora{font-size:clamp(56px,9vw,104px);line-height:.9;font-variation-settings:"wght" 600,"wdth" 85;font-variant-numeric:tabular-nums;color:var(--amarillo-texto)}
+.pv-cap{margin-top:14px;color:var(--tinta-2);font-size:15.5px}
+@media (max-width:820px){
+  .portada-caja{grid-template-columns:1fr}
+  .portada-visual{max-width:340px}
+}
+
+/* ---------- section titles / stats ---------- */
+.titulo-seccion{font-size:clamp(30px,4.6vw,58px);max-width:18ch}
+.entradilla{margin-top:18px;color:var(--tinta-2);max-width:52ch;font-size:17px}
+.cifras{margin-top:clamp(28px,5vh,52px);border-top:1px solid var(--filete-2)}
+.cifra-fila{
+  display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:clamp(16px,3vw,36px);
+  padding:22px 4px;border-bottom:1px solid var(--filete);transition:background .2s;
+}
+.cifra-fila:hover{background:var(--fondo-2);border-radius:var(--radio)}
+.cifra-fila .n{
+  font-size:clamp(36px,5.6vw,64px);line-height:.9;min-width:2.6ch;
+  font-variation-settings:"wght" 600,"wdth" 85;font-variant-numeric:tabular-nums;
+}
+.cifra-fila h3{font-size:clamp(18px,2vw,23px)}
+.cifra-fila p{color:var(--tinta-2);font-size:16.5px;margin-top:7px;max-width:54ch}
+.nota{margin-top:22px;font-size:15px;color:var(--tinta-3);max-width:56ch}
+
+/* ---------- what it does / doesn't ---------- */
+.subtitulo{margin-top:clamp(28px,5vh,50px);font-size:clamp(20px,2.4vw,27px);font-variation-settings:"wght" 550,"wdth" 90}
+.debe{margin-top:clamp(18px,3vh,30px);list-style:none;display:grid;gap:0;border-top:1px solid var(--filete-2)}
+.debe li{padding:22px 4px;border-bottom:1px solid var(--filete);display:grid;grid-template-columns:auto 1fr;gap:clamp(14px,2.5vw,28px);align-items:start}
+.debe .k{font-size:13.5px;letter-spacing:.12em;color:var(--tinta-3);font-variant-numeric:tabular-nums;padding-top:5px}
+.debe h3{font-size:clamp(18px,2vw,23px)}
+.debe p{color:var(--tinta-2);font-size:16.5px;margin-top:7px;max-width:58ch}
+.no-hace .k{color:var(--tinta-3)}
+
+/* ---------- pricing (setup + monthly, not a one-off) ---------- */
+.tarifas{margin-top:clamp(28px,5vh,56px);border-top:1px solid var(--filete-2)}
+.tarifa{
+  display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:20px;
+  padding:24px 4px;border-bottom:1px solid var(--filete);transition:background .2s;
+}
+.tarifa:hover{background:var(--fondo-2);border-radius:var(--radio)}
+.tarifa h3,.tarifa p{transition:translate .3s cubic-bezier(.2,.9,.2,1)}
+.tarifa:hover h3,.tarifa:hover p{translate:18px 0}
+.tarifa h3{font-size:clamp(19px,2.2vw,26px)}
+.tarifa p{grid-column:1;color:var(--tinta-2);font-size:16.5px;margin-top:6px;max-width:46ch}
+.tarifa .n{grid-row:1/3;text-align:right;font-size:clamp(26px,3.8vw,44px);line-height:.9;font-variation-settings:"wght" 600,"wdth" 85;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tarifa .n small{display:block;margin-top:6px;font-size:.4em;color:var(--tinta-3);font-variation-settings:"wght" 500,"wdth" 90}
+.cierre{margin-top:24px;font-size:clamp(17px,2vw,21px)}
+.marca{background:var(--amarillo);color:var(--sobre-amarillo);padding:2px 8px;font-variation-settings:"wght" 600,"wdth" 92;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* ---------- steps ---------- */
+.pasos{margin-top:clamp(28px,5vh,52px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,44px);list-style:none}
+.paso{border-top:2px solid var(--tinta);padding-top:18px}
+.paso .k{font-size:13.5px;letter-spacing:.12em;color:var(--tinta-3)}
+.paso h3{font-size:clamp(19px,2.2vw,25px);margin-top:10px}
+.paso p{color:var(--tinta-2);font-size:16.5px;margin-top:8px}
+@media (max-width:860px){.pasos{grid-template-columns:1fr;gap:26px}}
+
+/* ---------- FAQ ---------- */
+.faq{margin-top:clamp(26px,4vh,46px);border-top:1px solid var(--filete-2)}
+.faq-item{padding:22px 4px;border-bottom:1px solid var(--filete)}
+.faq-item h3{font-size:clamp(18px,2vw,23px)}
+.faq-item p{color:var(--tinta-2);font-size:16.5px;margin-top:9px;max-width:62ch}
+
+/* ---------- contact ---------- */
+.contacto h2{font-size:clamp(34px,6vw,78px);font-variation-settings:"wght" 550,"wdth" 88;max-width:14ch}
+.contacto-pie{margin-top:24px;color:var(--tinta-2);font-size:16.5px}
+.contacto-pie a{color:var(--tinta)}
+
+/* ---------- other languages ---------- */
+.hermanas{border-top:1px solid var(--filete)}
+.hermanas h2{font-size:clamp(22px,2.6vw,30px)}
+.hermanas .idioma{margin-top:20px;font-size:15.5px;color:var(--tinta-3)}
+.hermanas .idioma a{display:inline;padding:0;color:var(--tinta-2)}
+
+.pie{border-top:1px solid var(--filete);padding:26px 0;display:flex;flex-wrap:wrap;gap:22px;font-size:14.5px;color:var(--tinta-3)}
+
+@media (max-width:560px){
+  body{font-size:16px}
+  .cifra-fila{grid-template-columns:1fr;gap:8px}
+  .tarifa{grid-template-columns:1fr}
+  .tarifa .n{text-align:left;margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,::before,::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+@media print{
+  :root{
+    --fondo:#f2f0ea;--fondo-2:#f2f0ea;--filete:rgba(34,27,46,.3);--filete-2:rgba(34,27,46,.5);
+    --tinta:#1c1626;--tinta-2:#3a3346;--tinta-3:#4d4559;--reticula:transparent;
+    --amarillo-texto:#8a6414;color-scheme:light;
+  }
+  .cabecera,body::before{display:none!important}
+  section{padding-block:16px;break-inside:avoid}
+}
+</style>
+<script src="/vendor/consent.js" defer></script>
+    <script src="https://chatbot-eneko.chatbot-eneko.workers.dev/widget.js" data-cliente="enekodevs" defer></script>
+</head>
+<body>
+
+<header class="cabecera capa">
+  <div><b>Eneko Navarrete</b><span class="sufijo"> · web development · Berguedà</span></div>
+  <nav>
+    <a href="/en/small-business/">The 9 problems</a>
+    <button class="tema" id="tema" type="button" hidden>Light mode</button>
+  </nav>
+</header>
+
+<div class="capa">
+
+<nav class="miga hoja" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/en/">enekodevs.com</a></li>
+    <li><a href="/en/small-business/">Small business websites</a></li>
+    <li><span aria-current="page">Chatbot for your business</span></li>
+  </ol>
+</nav>
+
+<main>
+
+  <!-- 1. hero -->
+  <section class="portada hoja" id="portada">
+    <div class="portada-caja">
+      <div>
+        <h1>Stop answering the <em>same question twenty times a day</em>.</h1>
+        <p class="bajada">The booking that comes in at eleven at night, the question in English from a customer abroad, the phone you can't pick up mid-class. None of that should depend on you being awake.</p>
+        <div class="fila-cta">
+          <a class="accion" href="#contacto">Ask for a fixed quote <span class="fl">→</span></a>
+          <a class="accion-2" href="#hace">See what it does, and doesn't</a>
+        </div>
+      </div>
+      <div class="portada-visual">
+        <div class="pv-hora">11pm</div>
+        <p class="pv-cap">The time the booking you lose today comes in, if nobody answers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. the real pain -->
+  <section class="hoja" id="evidencia">
+    <h2 class="titulo-seccion">What's actually happening to you, not what the technology promises.</h2>
+    <p class="entradilla">None of this comes from a survey: it's what keeps coming up when I talk to small businesses about their website and their phone.</p>
+    <div class="cifras">
+      <div class="cifra-fila">
+        <div class="n">20</div>
+        <div>
+          <h3>The same twenty questions, every day</h3>
+          <p>Hours, price, how to get there, whether there's a slot free. Nobody writes them the first time you answer on WhatsApp: it's the two-hundredth person who does, and by then it's already eaten your morning.</p>
+        </div>
+      </div>
+      <div class="cifra-fila">
+        <div class="n">11pm</div>
+        <div>
+          <h3>The time the booking you lose today comes in</h3>
+          <p>Outside your hours, nobody answers. Whoever asks at that time doesn't wait for you to open: they try the next business on the list, and that one answers.</p>
+        </div>
+      </div>
+      <div class="cifra-fila">
+        <div class="n">0</div>
+        <div>
+          <h3>The languages you speak while you're teaching a class</h3>
+          <p>The customer from abroad writes in English at nine in the morning. Your phone doesn't buzz: it's in your pocket, and you're mid-class.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. what it does and doesn't -->
+  <section class="hoja" id="hace">
+    <h2 class="titulo-seccion">What the assistant does. And what it doesn't.</h2>
+    <p class="entradilla">Promising magic is easy. We'd rather state the exact scope, so you know what to expect before you hire it.</p>
+
+    <h3 class="subtitulo">What it does</h3>
+    <ol class="debe">
+      <li>
+        <span class="k">01</span>
+        <div>
+          <h3>Answers repeat questions instantly</h3>
+          <p>Hours, price, how to get there, whether there's a slot free. Also at eleven at night or on a Sunday, which is when most of them are lost.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">02</span>
+        <div>
+          <h3>Catches the lead you'd otherwise lose</h3>
+          <p>Name and contact for whoever writes outside your hours, so you don't have to be awake to not miss it.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">03</span>
+        <div>
+          <h3>Books or hands off, depending on the package</h3>
+          <p>The Bookings package connects with whatever booking system you already use. The others capture the contact and pass it to you.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">04</span>
+        <div>
+          <h3>Answers in the language of whoever's writing</h3>
+          <p>Useful if you have customers from abroad and you're not available in that language at that hour.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">05</span>
+        <div>
+          <h3>Always discloses it's an assistant, not a person</h3>
+          <p>By law, not by choice: EU rules require it from August 2026, with no exemption for business size. It's always visible, never hidden.</p>
+        </div>
+      </li>
+    </ol>
+
+    <h3 class="subtitulo">What it doesn't do, on purpose</h3>
+    <ol class="debe no-hace">
+      <li>
+        <span class="k">01</span>
+        <div>
+          <h3>It doesn't give professional advice</h3>
+          <p>Never on health, legal or financial matters. If someone asks that, it hands off to a person.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">02</span>
+        <div>
+          <h3>It doesn't quote custom prices or negotiate terms</h3>
+          <p>For a bespoke quote it passes it to you. It doesn't improvise figures you'd later have to walk back.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">03</span>
+        <div>
+          <h3>It doesn't make up what it doesn't know</h3>
+          <p>If the answer isn't on your website or in your documents, it says so and hands off, instead of improvising something that sounds right.</p>
+        </div>
+      </li>
+      <li>
+        <span class="k">04</span>
+        <div>
+          <h3>It doesn't replace your WhatsApp for complaints or sensitive cases</h3>
+          <p>Those always go to you. The assistant filters the repetitive, not the important.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 4. pricing -->
+  <section class="hoja" id="precios">
+    <h2 class="titulo-seccion">What it costs</h2>
+    <p class="entradilla">Price published here on purpose: it's what tells a real quote apart from one made up on the spot.</p>
+    <div class="tarifas">
+      <div class="tarifa">
+        <h3>24h Front Desk</h3>
+        <p>FAQs, opening hours, catching the after-hours lead, widget on your site. No integrations.</p>
+        <div class="n">700 €<small>+ 79 €/month</small></div>
+      </div>
+      <div class="tarifa">
+        <h3>Bookings</h3>
+        <p>Books appointments, connects with the booking system you already use, and WhatsApp.</p>
+        <div class="n">2,200 €<small>+ 220 €/month</small></div>
+      </div>
+      <div class="tarifa">
+        <h3>Bespoke</h3>
+        <p>CRM, multiple languages, document handling and whatever service level we agree on.</p>
+        <div class="n">from 5,000 €<small>+ 400 €/month</small></div>
+      </div>
+    </div>
+    <p class="cierre">Fixed price in writing, before we start. <span class="marca">Any variable cost for WhatsApp or another integration is stated separately, upfront.</span></p>
+  </section>
+
+  <!-- 5. how it works -->
+  <section class="hoja" id="como">
+    <h2 class="titulo-seccion">How this works</h2>
+    <ol class="pasos">
+      <li class="paso"><div class="k">01</div><h3>You message me</h3><p>Your business, and what's actually happening right now with the repeat questions or the after-hours bookings.</p></li>
+      <li class="paso"><div class="k">02</div><h3>I tell you what you need</h3><p>I look at your site and how you work, and tell you what the assistant can solve and what it can't. No obligation.</p></li>
+      <li class="paso"><div class="k">03</div><h3>Fixed quote</h3><p>In writing, with the package that fits. If it doesn't work for you, you owe nothing.</p></li>
+    </ol>
+  </section>
+
+  <!-- 6. FAQ -->
+  <section class="hoja" id="preguntas">
+    <h2 class="titulo-seccion">What people usually ask me</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <h3>Can I try it before hiring it?</h3>
+        <p>The assistant in the bubble open on this very site is it: the same one that would go on yours. Open it and ask about enekodevs or how I work — that way you're talking to the real product, not a separate mock-up.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What if it says something wrong?</h3>
+        <p>The scope is fixed by contract: bookings and FAQs, never advice. There's a visible disclosure that it's an AI, and the accuracy of the content it's given stays under your approval before it goes live.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is the AI disclosure a legal requirement?</h3>
+        <p>Yes. EU rules (the AI Act, Article 50) require it from 2 August 2026, with no exemption for business size. We keep it visible at all times, not in the small print.</p>
+      </div>
+      <div class="faq-item">
+        <h3>I already have WhatsApp for this, why would I need a chatbot?</h3>
+        <p>The manual version doesn't answer at eleven at night or catch the contact before you wake up. The assistant handles that; what actually matters still goes to you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. contact -->
+  <section class="contacto hoja" id="contacto">
+    <h2>Tell me what's going on and I'll put together the quote.</h2>
+    <div class="fila-cta">
+      <a class="accion" href="https://wa.me/34617575495?text=Hi%20Eneko%2C%20I%20want%20a%20chatbot%20for%20my%20business.%20Here%27s%20the%20context%3A%20">WhatsApp <span class="fl">→</span></a>
+      <a class="accion-2" href="mailto:eneko.devs@gmail.com?subject=Chatbot%20for%20my%20business">eneko.devs@gmail.com</a>
+    </div>
+    <p class="contacto-pie">I'll get back to you within 24 hours. If you'd rather call: <a href="tel:+34617575495">617 575 495</a>.</p>
+  </section>
+
+  <!-- 8. other languages -->
+  <section class="hermanas hoja" id="idiomas">
+    <h2>In other languages</h2>
+    <p class="idioma">En español: <a href="/negocios/chatbot-para-tu-negocio/">chatbot para tu negocio</a>. En català: <a href="/ca/negocis/chatbot-per-al-teu-negoci/">chatbot pel teu negoci</a>.</p>
+  </section>
+
+</main>
+
+<footer class="pie hoja">
+  <span>Eneko Navarrete</span><span>web development</span><span>Berguedà, Barcelona</span>
+  <span><a href="/en/small-business/">The 9 problems</a></span>
+  <span><a href="/en/">enekodevs.com</a></span>
+</footer>
+
+</div>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@graph":[
+  {
+   "@type":"Service",
+   "@id":"https://enekodevs.com/en/small-business/chatbot-for-your-business/#servicio",
+   "name":"Chatbot for small businesses",
+   "serviceType":"Conversational assistant development for customer support and lead capture",
+   "description":"Conversational assistant that answers FAQs, captures the after-hours contact and, depending on the package, handles bookings. AI disclosure always visible. Fixed price from 700 € plus 79 €/month.",
+   "url":"https://enekodevs.com/en/small-business/chatbot-for-your-business/",
+   "inLanguage":"en",
+   "provider":{
+    "@type":"Person",
+    "@id":"https://enekodevs.com/#person",
+    "name":"Eneko Navarrete",
+    "alternateName":"enekodevs",
+    "jobTitle":"Web developer",
+    "url":"https://enekodevs.com/",
+    "email":"eneko.devs@gmail.com",
+    "telephone":"+34617575495",
+    "address":{"@type":"PostalAddress","addressRegion":"Berguedà","addressLocality":"Barcelona","addressCountry":"ES"},
+    "sameAs":["https://github.com/enekodevs","https://www.linkedin.com/in/eneko-navarrete"]
+   },
+   "areaServed":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Ireland"},{"@type":"Country","name":"Spain"}],
+   "audience":{"@type":"Audience","audienceType":"Small businesses handling their own customer contact"},
+   "offers":[
+    {"@type":"Offer","name":"24h Front Desk","description":"FAQs, opening hours, catching the after-hours lead, widget on your site. No integrations. Plus 79 €/month.","price":"700","priceCurrency":"EUR","url":"https://enekodevs.com/en/small-business/chatbot-for-your-business/#precios"},
+    {"@type":"Offer","name":"Bookings","description":"Books appointments, connects with the booking system you already use, and WhatsApp. Plus 220 €/month.","price":"2200","priceCurrency":"EUR","url":"https://enekodevs.com/en/small-business/chatbot-for-your-business/#precios"},
+    {"@type":"Offer","name":"Bespoke","description":"CRM, multiple languages, document handling and agreed service level. From 5,000 € plus 400 €/month.","price":"5000","priceCurrency":"EUR","url":"https://enekodevs.com/en/small-business/chatbot-for-your-business/#precios"}
+   ]
+  },
+  {
+   "@type":"FAQPage",
+   "@id":"https://enekodevs.com/en/small-business/chatbot-for-your-business/#faq",
+   "mainEntity":[
+    {"@type":"Question","name":"Can I try it before hiring it?","acceptedAnswer":{"@type":"Answer","text":"The assistant in the bubble on this very site is it: the same one that would go on yours. Open it and ask about enekodevs or how I work."}},
+    {"@type":"Question","name":"What if it says something wrong?","acceptedAnswer":{"@type":"Answer","text":"The scope is fixed by contract: bookings and FAQs, never advice. There's a visible disclosure that it's an AI, and the accuracy of the content stays under your approval before it goes live."}},
+    {"@type":"Question","name":"Is the AI disclosure a legal requirement?","acceptedAnswer":{"@type":"Answer","text":"Yes. EU rules (the AI Act, Article 50) require it from 2 August 2026, with no exemption for business size."}},
+    {"@type":"Question","name":"I already have WhatsApp for this, why would I need a chatbot?","acceptedAnswer":{"@type":"Answer","text":"The manual version doesn't answer at eleven at night or catch the contact before you wake up. What actually matters still goes to a person."}}
+   ]
+  },
+  {
+   "@type":"BreadcrumbList",
+   "itemListElement":[
+    {"@type":"ListItem","position":1,"name":"enekodevs.com","item":"https://enekodevs.com/en/"},
+    {"@type":"ListItem","position":2,"name":"Small business websites","item":"https://enekodevs.com/en/small-business/"},
+    {"@type":"ListItem","position":3,"name":"Chatbot for your business","item":"https://enekodevs.com/en/small-business/chatbot-for-your-business/"}
+   ]
+  }
+ ]
+}
+</script>
+
+<script>
+/* The only thing JavaScript does on this page: the theme button.
+   It's hidden by default (hidden attribute) and only appears if the
+   script runs, so no dead button shows up with JS disabled. */
+(function(){
+  var r=document.documentElement, b=document.getElementById('tema');
+  var pinta=function(){ b.textContent = r.getAttribute('data-theme')==='light' ? 'Dark mode' : 'Light mode'; };
+  pinta(); b.hidden=false;
+  b.addEventListener('click',function(){
+    var claro = r.getAttribute('data-theme')==='light';
+    if(claro){ r.removeAttribute('data-theme'); } else { r.setAttribute('data-theme','light'); }
+    try{localStorage.setItem('eneko.theme', claro ? 'dark' : 'light')}catch(e){}
+    pinta();
+  });
+})();
+</script>
+</body>
+</html>
