@@ -81,46 +81,79 @@
 
   function injectStyles() {
     if (document.getElementById(STYLE_ID)) return;
+    // Paleta: primero las variables de la home (--card/--ink/--amber/--plum),
+    // luego las de /negocios/ y sus nichos (--fondo-2/--tinta/--amarillo...),
+    // y de ultimo un color literal. Asi el banner sigue el tema claro/oscuro
+    // de cualquiera de las dos familias de paginas.
+    var BG = "var(--card,var(--fondo-2,#26222b))";
+    var FG = "var(--ink,var(--tinta,#efece4))";
+    var LINE = "var(--line,var(--filete,rgba(242,240,234,.14)))";
+    var LINE2 = "var(--line-2,var(--filete-2,rgba(242,240,234,.32)))";
+    var AMBER = "var(--amber,var(--amarillo,#e6a92e))";
+    var AMBER_TXT = "var(--amber,var(--amarillo-texto,#e6a92e))";
+    var ON_AMBER = "var(--plum,var(--sobre-amarillo,#26202b))";
+    // El ancho se ata al viewport, no al bloque contenedor: si alguna pagina
+    // desborda en horizontal, el navegador movil ensancha el viewport de
+    // maquetacion y un `left/right` a secas dejaria los botones fuera de
+    // pantalla. Con min(...,100vw) el banner nunca puede pasarse.
     var css =
       "#" +
       ROOT_ID +
       "{position:fixed;left:16px;right:16px;bottom:16px;z-index:999999;" +
-      "max-width:420px;margin:0;font-family:inherit;" +
-      "background:var(--card,#26222b);color:var(--ink,#efece4);" +
-      "border:1px solid var(--line,rgba(242,240,234,.14));" +
+      "width:auto;max-width:min(420px,calc(100vw - 32px));margin:0;font-family:inherit;" +
+      "background:" + BG + ";color:" + FG + ";" +
+      "border:1px solid " + LINE + ";" +
       "border-radius:16px;padding:20px 22px;" +
       "box-shadow:var(--shadow,0 30px 60px -30px rgba(0,0,0,.55));" +
       "animation:eneko-consent-in .32s cubic-bezier(.2,.7,.2,1)}" +
+      "#" +
+      ROOT_ID +
+      ",#" +
+      ROOT_ID +
+      " *{box-sizing:border-box}" +
       "@keyframes eneko-consent-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}" +
       "#" +
       ROOT_ID +
-      " .ec-msg{margin:0 0 14px;font-size:.92rem;line-height:1.55;color:var(--ink,#efece4)}" +
+      " .ec-msg{margin:0 0 14px;font-size:.92rem;line-height:1.55;color:" + FG + ";" +
+      "overflow-wrap:break-word}" +
       "#" +
       ROOT_ID +
-      " .ec-msg a{color:var(--amber,#e6a92e);text-decoration:underline;text-underline-offset:2px}" +
+      " .ec-msg a{color:" + AMBER_TXT + ";text-decoration:underline;text-underline-offset:2px}" +
       "#" +
       ROOT_ID +
-      " .ec-actions{display:flex;gap:10px;flex-wrap:wrap}" +
+      " .ec-actions{display:flex;gap:10px;flex-wrap:wrap;max-width:100%}" +
       "#" +
       ROOT_ID +
       " button{font-family:inherit;font-size:.86rem;font-weight:600;line-height:1;" +
       "padding:11px 18px;border-radius:999px;cursor:pointer;flex:1 1 auto;" +
-      "min-width:100px;transition:transform .18s cubic-bezier(.2,.7,.2,1),opacity .18s}" +
+      "min-width:110px;max-width:100%;" +
+      "transition:transform .18s cubic-bezier(.2,.7,.2,1),opacity .18s}" +
       "#" +
       ROOT_ID +
       " button:hover{transform:translateY(-1px)}" +
       "#" +
       ROOT_ID +
-      " button:focus-visible{outline:2.5px solid var(--amber,#e6a92e);outline-offset:2px}" +
+      " button:focus-visible{outline:2.5px solid " + AMBER_TXT + ";outline-offset:2px}" +
       "#" +
       ROOT_ID +
-      " .ec-accept{background:var(--amber,#e6a92e);color:var(--plum,#26202b);border:1px solid transparent}" +
+      " .ec-accept{background:" + AMBER + ";color:" + ON_AMBER + ";border:1px solid transparent}" +
       "#" +
       ROOT_ID +
-      " .ec-reject{background:transparent;color:var(--ink,#efece4);border:1px solid var(--line-2,rgba(242,240,234,.32))}" +
+      " .ec-reject{background:transparent;color:" + FG + ";border:1px solid " + LINE2 + "}" +
       "@media(max-width:480px){#" +
       ROOT_ID +
-      "{left:12px;right:12px;bottom:12px;max-width:none;padding:18px}}";
+      "{left:12px;right:12px;bottom:12px;max-width:calc(100vw - 24px);padding:18px}}" +
+      // Movil estrecho (iPhone SE y por debajo): los dos botones a linea completa.
+      "@media(max-width:359px){#" +
+      ROOT_ID +
+      " button{flex:1 1 100%}}" +
+      "@media(prefers-reduced-motion:reduce){#" +
+      ROOT_ID +
+      "{animation:none}#" +
+      ROOT_ID +
+      " button{transition:none}#" +
+      ROOT_ID +
+      " button:hover{transform:none}}";
     var style = document.createElement("style");
     style.id = STYLE_ID;
     style.textContent = css;

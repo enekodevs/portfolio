@@ -93,6 +93,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* el titular queda debajo de la cabecera fija si se salta por ancla */
 section[id]{scroll-margin-top:96px}
 .oculto{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+/* Una <table> no baja del ancho minimo de su contenido: aun con width:1px la
+   tabla de respaldo media 881px, y el navegador movil ensancha el viewport de
+   maquetacion hasta el elemento mas ancho. Resultado: scroll horizontal y el
+   banner de cookies con el boton de rechazar fuera de pantalla. Como bloque si
+   obedece al ancho (se le devuelve display:table al mostrarla). */
+table.oculto{display:block;max-width:1px}
 
 /* ---------- retícula de fondo (enekodevs) ---------- */
 :root.cargando body::before{opacity:0}
@@ -333,6 +339,7 @@ h1 em{font-style:normal;color:var(--amarillo-texto)}
    Hay que deshacer TODO lo de .oculto, tambien overflow y white-space: con
    nowrap la tabla salia en una sola linea kilometrica. */
 .sin-js .respaldo,main:has(#lista:empty) .respaldo{
+  display:table;max-width:none;
   position:static!important;width:auto;height:auto;overflow:visible;clip-path:none;white-space:normal;
   border-collapse:collapse;margin-top:8px;
 }
@@ -350,7 +357,7 @@ main:has(#lista:empty) .solo-js,main:has(#lista:empty) .encabezados{display:none
     --amarillo-texto:#8a6414;color-scheme:light;
   }
   #lienzo,#carga,#burbuja,.cabecera,.flotante,.desliza,body::before{display:none!important}
-  .respaldo{position:static!important;width:auto;height:auto;overflow:visible;clip-path:none;white-space:normal;border-collapse:collapse}
+  table.respaldo{display:table;max-width:none;position:static!important;width:auto;height:auto;overflow:visible;clip-path:none;white-space:normal;border-collapse:collapse}
   .respaldo td,.respaldo th{padding:8px 10px;border-bottom:1px solid var(--filete);text-align:left;vertical-align:top}
   .lista,.encabezados,.solo-js{display:none}
   section{padding-block:18px;break-inside:avoid}
