@@ -230,8 +230,12 @@
     background-size:220% 100%;background-position:0% 0;
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
   body.entered .hero h1 .ln > span{animation:titleUp 2.9s var(--ease) forwards, titleShine 1.3s linear 0s forwards}
-  .hero h1 .ln:nth-child(3) > span{animation-delay:.6s,.6s}
-  .hero h1 .ln:nth-child(4) > span{animation-delay:1.05s,1.05s}
+  /* 17-ago: sin el prefijo, estas dos reglas valen (0,3,2) y la de arriba,
+     que lleva body.entered, vale (0,3,3) — ganaba el atajo animation con su
+     delay implicito de 0s y las tres lineas entraban a la vez: el escalonado
+     del hero no se llego a ver nunca. Con el mismo prefijo valen (0,4,3). */
+  body.entered .hero h1 .ln:nth-child(3) > span{animation-delay:.6s,.6s}
+  body.entered .hero h1 .ln:nth-child(4) > span{animation-delay:1.05s,1.05s}
   /* segunda línea del h1: la propuesta de valor, visible y en registro menor */
   .hero h1 .tag{margin-top:.3em;padding-bottom:.14em;margin-bottom:-.14em}
   .hero h1 .tag > span{font-family:'IBM Plex Mono',monospace;font-weight:400;
