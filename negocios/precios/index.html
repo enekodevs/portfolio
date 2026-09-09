@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<script>try{var _t=localStorage.getItem("eneko.theme");if(_t==="light"){document.documentElement.setAttribute("data-theme","light")}else if(_t!=="dark"&&matchMedia("(prefers-color-scheme: light)").matches){document.documentElement.setAttribute("data-theme","light")}}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Precios: tu web y tus reservas · Eneko Navarrete</title>
+<meta name="description" content="Webs y reservas para negocios de deporte y ocio. En 24 cuotas o de una vez. Al terminar de pagar, la web es tuya. Todos los precios con el IVA incluido.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#141019" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f2f0ea" media="(prefers-color-scheme: light)">
+
+<!-- Canonical CON barra final: Cloudflare Pages sirve negocios/precios/index.html
+     en /negocios/precios/ y devuelve un 308 desde /negocios/precios (comprobado
+     el 9-sep-2026 contra la web viva con /negocios/pagina-web-rocodromos). Un
+     canonical que apunta a una redireccion es un fallo de SEO, asi que aqui va
+     la URL que el servidor sirve de verdad, igual que en el resto del sitio. -->
+<link rel="canonical" href="https://enekodevs.com/negocios/precios/">
+<link rel="alternate" hreflang="es" href="https://enekodevs.com/negocios/precios/">
+<link rel="alternate" hreflang="x-default" href="https://enekodevs.com/negocios/precios/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Eneko Navarrete">
+<meta property="og:url" content="https://enekodevs.com/negocios/precios/">
+<meta property="og:title" content="Una web tuya. Dos formas de pagarla.">
+<meta property="og:description" content="Webs y reservas para negocios de deporte y ocio. En 24 cuotas o de una vez. Al terminar de pagar, la web es tuya por escrito.">
+<meta property="og:image" content="https://enekodevs.com/negocios/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Fondo lila oscuro con cuadrados dispersos y el titular «Abrí 203 webs de negocios pequeños».">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Una web tuya. Dos formas de pagarla.">
+<meta name="twitter:description" content="Webs y reservas para negocios de deporte y ocio. En 24 cuotas o de una vez. Al terminar de pagar, la web es tuya por escrito.">
+<meta name="twitter:image" content="https://enekodevs.com/negocios/og.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23221b2e'/%3E%3Crect x='6' y='6' width='8' height='8' fill='%23e3a93a'/%3E%3Crect x='18' y='6' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='6' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='18' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3C/svg%3E">
+
+<link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+
+<style>
+/* Fuentes autoalojadas, las mismas que sirve el resto del sitio desde /fonts/.
+   El prototipo aprobado las llevaba incrustadas en base64; son byte a byte
+   estos mismos cuatro ficheros, asi que aqui se enlazan y no se duplican. */
+@font-face { font-family: "Archivo"; font-style: normal; font-weight: 500 900; font-display: swap; src: url(/fonts/archivo-var.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 100 700; font-display: swap; src: url(/fonts/ibm-plex-sans-var.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/ibm-plex-mono-400.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url(/fonts/ibm-plex-mono-500.woff2) format("woff2"); }
+
+/* ---------------------------------------------------------------------------
+   Tema. El resto del sitio es oscuro por defecto y el modo claro se pide con
+   data-theme="light" (lo pone el guion de arriba, antes de pintar). El
+   prototipo venia al reves, con prefers-color-scheme. Aqui se invierte para
+   que el boton de tema del sitio mande en esta pagina igual que en las demas.
+   Los valores de color son los del prototipo, sin tocar.
+--------------------------------------------------------------------------- */
+:root {
+  color-scheme: dark;
+  --bg: #141019;
+  --surface: #221b2b;
+  --ink: #efece4;
+  --muted: #c6c1cc;
+  --line: rgba(242, 240, 234, .26);
+  --accent: #e6a92e;
+  --accent-ink: #26202b;
+  --recommended: color-mix(in srgb, var(--accent) 12%, var(--bg));
+  --hover: #221b2b;
+  --focus: #e6a92e;
+  /* alias para la cabecera, la miga y el pie copiados del resto del sitio */
+  --fondo: var(--bg);
+  --fondo-2: #2b2339;
+  --tinta: var(--ink);
+  --tinta-2: var(--muted);
+  --tinta-3: #9d97a6;
+  --filete: var(--line);
+  --filete-2: rgba(242, 240, 234, .42);
+  --amarillo-texto: var(--focus);
+  --radio: 12px;
+
+  --body: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --display: "Archivo", "Segoe UI", sans-serif;
+  --numbers: "Archivo", "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+  --width: 76rem;
+  --gutter: clamp(1.125rem, 4vw, 3.5rem);
+  --margen: var(--gutter);
+  /* Los bloques de contraste (cabecera del heroe y contacto) son oscuros en
+     los dos temas: es la direccion visual aprobada. */
+  --night: #1b1620;
+  --night-ink: #f2f0ea;
+  --night-muted: #c6c1cc;
+  --section-space: clamp(3.5rem, 7vw, 6.5rem);
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f2f0ea;
+  --surface: #fbfaf6;
+  --ink: #15171a;
+  --muted: #3c4147;
+  --line: rgba(21, 23, 26, .24);
+  --hover: #eae7df;
+  --focus: #946412;
+  --fondo-2: #e8e5dc;
+  --tinta-3: #5f646a;
+  --filete-2: rgba(21, 23, 26, .42);
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 5.5rem; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 1.0625rem/1.55 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-underline-offset: .25em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 5px; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; }
+h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); letter-spacing: -.035em; }
+h2 { font-size: clamp(1.6rem, 3vw, 2.25rem); letter-spacing: -.025em; }
+h3 { font-size: 1.375rem; }
+p, li { text-wrap: pretty; }
+img { max-width: 100%; }
+.wrap, .hoja { width: min(100% - 2 * var(--gutter), var(--width)); margin-inline: auto; }
+.capa { position: relative; z-index: 1; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+.skip { position: absolute; left: 1rem; top: -6rem; padding: .75rem 1rem; background: var(--surface); z-index: 30; }
+.skip:focus { top: 1rem; }
+
+/* ---------- cabecera del sitio (copiada de /negocios/, con el boton de tema) ---------- */
+.cabecera {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 12px var(--margen);
+  font-size: 14px; color: var(--tinta-2);
+  background: color-mix(in srgb, var(--fondo) 86%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--filete);
+}
+.cabecera b { color: var(--tinta); font-weight: 600; font-family: var(--display); }
+.cabecera nav { display: flex; align-items: center; gap: 14px; }
+.cabecera nav a { color: var(--tinta-2); font-size: 14px; }
+.cabecera nav a:hover { color: var(--tinta); }
+@media (max-width: 700px) { .cabecera .sufijo { display: none; } }
+/* Esta pagina lleva dos enlaces de ancla mas que las hermanas de /negocios/,
+   asi que la cabecera se queda sin sitio antes: los opcionales se retiran a
+   860px para que la barra siga siendo de una sola linea. */
+@media (max-width: 860px) { .cabecera nav .nav-optional { display: none; } }
+.tema { border: 1px solid var(--tinta-3); border-radius: var(--radio); padding: 7px 13px; min-height: 44px; display: inline-flex; align-items: center; font-size: 14px; }
+.tema:hover { border-color: var(--tinta); background: var(--fondo-2); }
+
+/* ---------- miga de pan ---------- */
+.miga { font-size: 14.5px; color: var(--tinta-3); padding-top: clamp(22px, 4vh, 40px); }
+.miga ol { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; }
+.miga li + li::before { content: "/"; margin-right: 8px; color: var(--filete-2); }
+.miga a { color: var(--tinta-2); text-underline-offset: 3px; }
+.miga a:hover { color: var(--amarillo-texto); }
+.miga [aria-current] { color: var(--tinta-3); }
+
+/* ---------- botones ---------- */
+.button { display: inline-flex; align-items: center; justify-content: center; gap: .75rem; padding: .875rem 1.375rem; min-height: 48px; border: 1px solid transparent; border-radius: 100px; font-family: var(--body); font-size: 1rem; font-weight: 600; line-height: 1.4; text-decoration: none; background: var(--accent); color: var(--accent-ink); }
+.button:hover { background: #f2bc51; text-decoration: none; }
+.button.secondary { border-color: #86788f; background: transparent; color: var(--night-ink); }
+.button.secondary:hover { background: #352c3c; }
+.arrow { width: 1.1rem; height: 1.1rem; flex: 0 0 1.1rem; }
+
+/* ---------- heroe ---------- */
+.masthead { background: var(--night); color: var(--night-ink); }
+.masthead :focus-visible, .contact :focus-visible { outline-color: var(--accent); }
+.hero { display: grid; grid-template-columns: 1fr 1.08fr; align-items: center; gap: clamp(2rem, 4vw, 4rem); padding-block: clamp(2.5rem, 5vw, 4.5rem) 3.5rem; }
+.hero h1 { max-width: 12ch; font-size: clamp(2.5rem, 5.1vw, 4.875rem); font-weight: 750; line-height: 1.03; letter-spacing: -.04em; }
+.hero h1 span { color: var(--accent); }
+.hero-copy > p { max-width: 42ch; margin-top: 1.5rem; color: var(--night-muted); font-size: clamp(1.0625rem, 1.6vw, 1.1875rem); line-height: 1.6; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+.hero-visual { margin: 0; min-width: 0; }
+.hero-visual img { display: block; width: 100%; height: auto; border-radius: 16px; }
+.hero-visual figcaption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .25rem 1rem; margin-top: .875rem; color: var(--night-muted); font-size: .875rem; }
+.hero-visual figcaption strong { color: var(--night-ink); font-weight: 500; }
+
+/* ---------- sectores ---------- */
+.sectors { display: flex; align-items: baseline; gap: 1.25rem 2rem; padding-block: 1.625rem; border-bottom: 1px solid var(--line); }
+.sectors p { flex: 0 0 auto; font-weight: 600; }
+.sectors ul { display: flex; flex-wrap: wrap; gap: .375rem 1.25rem; list-style: none; margin: 0; padding: 0; color: var(--muted); }
+
+/* ---------- desplegables ---------- */
+details { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary::marker { content: ""; }
+summary:hover { background: var(--hover); }
+summary:focus-visible { outline-offset: -4px; }
+.toggle { grid-area: toggle; width: 1.25rem; height: 1.25rem; position: relative; flex: 0 0 1.25rem; }
+.toggle::before, .toggle::after { content: ""; position: absolute; background: currentColor; }
+.toggle::before { width: 1rem; height: 2px; left: .125rem; top: calc(50% - 1px); }
+.toggle::after { height: 1rem; width: 2px; top: .125rem; left: calc(50% - 1px); }
+details[open] > summary .toggle::after { display: none; }
+
+/* ---------- escaparate ---------- */
+.showcase { padding-top: var(--section-space); }
+.section-intro { display: grid; grid-template-columns: 1.15fr 1fr; gap: 2rem 4rem; align-items: end; margin-bottom: 2.5rem; }
+.section-intro h2, .pricing-intro h2 { font-size: clamp(2rem, 3.8vw, 3.5rem); line-height: 1.08; letter-spacing: -.035em; }
+.section-intro p { color: var(--muted); max-width: 45ch; }
+.story { display: grid; grid-template-columns: .88fr 1.12fr; align-items: center; gap: clamp(1.5rem, 4vw, 4rem); padding: clamp(1.5rem, 4vw, 3rem); background: var(--surface); border: 1px solid var(--line); border-radius: 16px; margin-top: 1.5rem; }
+.story h3 { font-size: clamp(1.875rem, 3vw, 2.875rem); line-height: 1.09; letter-spacing: -.03em; max-width: 15ch; }
+.story-copy > p { margin-top: 1.25rem; color: var(--muted); max-width: 38ch; }
+.story-copy > a { display: inline-flex; align-items: center; gap: .625rem; margin-top: 1.5rem; min-height: 44px; font-weight: 600; }
+.story figure { margin: 0; min-width: 0; }
+.story img { display: block; width: 100%; height: auto; border-radius: 10px; }
+.story figcaption { margin-top: .625rem; color: var(--muted); font-size: .8125rem; }
+.story-reverse { grid-template-columns: 1.12fr .88fr; background: var(--recommended); }
+.story-reverse .story-copy { grid-column: 2; grid-row: 1; }
+.story-reverse figure { grid-column: 1; grid-row: 1; }
+.showcase-note { margin-top: 1rem; color: var(--muted); font-size: .875rem; }
+
+/* ---------- planes ---------- */
+.pricing-section { padding-top: var(--section-space); }
+.pricing-intro { display: grid; grid-template-columns: 1.15fr 1fr; align-items: end; gap: 1.5rem 4rem; margin-bottom: 2rem; }
+.pricing-intro p { max-width: 43ch; color: var(--muted); }
+.pricing-meta { display: flex; justify-content: space-between; gap: .75rem 2rem; flex-wrap: wrap; margin-bottom: 1.25rem; font-size: .9375rem; }
+.pricing-meta p:last-child { color: var(--muted); }
+.tax { color: var(--ink); font-weight: 650; }
+.plans { display: grid; gap: 1rem; }
+.plans > details { border: 1px solid var(--line); border-radius: 16px; }
+.plans > details.recommended { border-color: var(--focus); }
+.plan-summary {
+  display: grid;
+  grid-template-columns: minmax(10rem, 1fr) 13rem minmax(12rem, 1.7fr) 1.25rem;
+  grid-template-areas: "name price line toggle";
+  gap: 1.5rem;
+  align-items: center;
+  padding: 2rem 1.75rem;
+  border-radius: 16px;
+}
+details[open] > .plan-summary { border-radius: 16px 16px 0 0; }
+.plan-summary h3 { font-size: 1.4rem; }
+.plan-name { grid-area: name; }
+.badge { display: table; margin-top: .625rem; padding: .2rem .55rem; border-radius: 4px; background: var(--accent); color: var(--accent-ink); font: 500 .8125rem/1.4 var(--mono); }
+.unavailable { display: block; margin-top: .625rem; font: 600 .875rem/1.4 var(--body); color: var(--muted); }
+.price {
+  grid-area: price;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: .2rem;
+  font-family: var(--numbers);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+  white-space: nowrap;
+  text-align: right;
+  line-height: 1.1;
+}
+.amount { font-size: clamp(2.4rem, 4.8vw, 3.75rem); font-weight: 700; letter-spacing: -.04em; }
+.unit { flex: 0 0 3.5rem; text-align: left; font: 400 1rem var(--mono); }
+.tagline { grid-area: line; color: var(--muted); }
+.recommended { background: var(--recommended); }
+.plan-body { padding: 0 1.75rem 2rem; }
+.terms { padding-block: 1.5rem 1rem; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.terms p + p { margin-top: .75rem; }
+.payment { margin: 0; }
+.payment > div { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding-block: .75rem; max-width: 42rem; }
+.payment dt { font-weight: 600; }
+.payment dt span { display: block; margin-top: .15rem; color: var(--muted); font-size: .9375rem; font-weight: 400; }
+.payment dd { flex-shrink: 0; margin: 0; text-align: right; font-family: var(--numbers); font-weight: 600; white-space: nowrap; font-variant-numeric: lining-nums tabular-nums; }
+.payment .payment-total { margin-top: .375rem; padding-block: 1rem; border-block: 1px solid var(--line); }
+.payment-total dd { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 700; }
+.ownership { margin-top: 1rem; max-width: 65ch; }
+.purchase-copy { max-width: 60ch; margin-bottom: .5rem; }
+.columns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1rem, 4vw, 4rem); }
+.columns h4 { margin: .75rem 0 .5rem; font-size: 1rem; }
+.columns ul { padding-left: 1.1rem; margin: 0; }
+.columns li { padding-left: .2rem; margin-top: .5rem; overflow-wrap: anywhere; }
+.columns .excluded { color: var(--muted); }
+
+/* ---------- al terminar de pagar ---------- */
+.upkeep { margin-top: 1.5rem; padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 1.75rem); border: 1px solid var(--line); border-radius: 16px; }
+.upkeep h3 { font-size: 1.4rem; }
+.upkeep > p { margin-top: .625rem; max-width: 60ch; color: var(--muted); }
+.upkeep .payment { margin-top: .75rem; font-variant-numeric: tabular-nums; }
+
+/* ---------- modulos ---------- */
+.modules-section { margin-top: var(--section-space); }
+.section-head { display: flex; justify-content: space-between; align-items: baseline; gap: .75rem 2rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.section-head p { color: var(--muted); font-size: 1rem; }
+.modules-section .section-head h2 { font-size: clamp(1.75rem, 3vw, 2.75rem); }
+.scroll-hint { margin: -.25rem 0 1rem; color: var(--muted); font-size: .9375rem; }
+.module-strip {
+  display: flex; align-items: flex-start; gap: 1.125rem;
+  overflow-x: auto; padding: .375rem .375rem 1.375rem;
+  scroll-snap-type: x proximity;
+  scrollbar-color: var(--ink) var(--bg);
+}
+.module {
+  flex: 0 0 17rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  scroll-snap-align: start;
+}
+.module summary { padding: 1.25rem; position: relative; border-radius: 12px; }
+.module h3 { min-height: 2.75rem; padding-right: 1.5rem; font-size: 1.125rem; }
+.module .toggle { position: absolute; right: 1.25rem; top: 1.25rem; }
+.module .price { display: block; text-align: left; margin-block: .625rem 1rem; }
+.module .amount { font-size: 2.25rem; }
+.module .tagline { display: block; min-height: 5rem; font-size: 1rem; }
+.module-body { margin-inline: 1.25rem; padding-block: 1rem 1.25rem; border-top: 1px solid var(--line); font-size: 1rem; font-variant-numeric: tabular-nums; }
+.module-body p + p { margin-top: .75rem; }
+
+/* ---------- proximamente ---------- */
+.future { padding-top: 2rem; margin-top: 1.5rem; }
+.future h2 { margin-bottom: .875rem; color: var(--muted); font-size: 1.25rem; }
+.future > details { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.future-summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.125rem 1.25rem; }
+.future-summary h3 { font-size: 1.125rem; }
+.future-summary .tagline { display: block; margin-top: .375rem; font-size: 1rem; }
+.future .unavailable { font-size: .875rem; margin-top: .375rem; }
+.future .terms { margin-top: .25rem; }
+.future-intro { margin-bottom: 1rem; }
+.future-intro .price { justify-content: flex-start; }
+.future-intro .amount { font-size: 2.5rem; }
+.product-figure { margin: 0 0 1.5rem; max-width: 44rem; }
+.product-figure img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; border-radius: 10px; }
+.product-figure figcaption { margin-top: .625rem; color: var(--muted); font-size: 1rem; max-width: 65ch; }
+.product-figure figcaption span { display: block; margin-top: .25rem; font-size: .875rem; }
+
+/* ---------- preguntas ---------- */
+.questions-area { padding-block: var(--section-space); display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+.questions-intro h2 { font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.1; }
+.questions-intro p { margin-top: 1rem; max-width: 29ch; color: var(--muted); }
+.faq { min-width: 0; }
+.faq details:first-of-type { border-top: 1px solid var(--line); }
+.faq summary { min-height: 76px; padding: 1.125rem .25rem; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; font-weight: 600; }
+.faq details p { padding: 0 2rem 1.25rem .25rem; max-width: 68ch; }
+
+/* ---------- contacto ---------- */
+.contact { background: var(--night); color: var(--night-ink); padding-block: clamp(3.5rem, 6vw, 5.5rem); }
+.contact-inner { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 2rem 5rem; }
+.contact h2 { max-width: 17ch; font-size: clamp(2.25rem, 4.5vw, 4rem); letter-spacing: -.035em; line-height: 1.06; }
+.contact p { margin-bottom: 1.5rem; color: var(--night-muted); max-width: 37ch; }
+.contact small { display: block; margin-top: 1rem; color: var(--night-muted); font-size: .875rem; }
+
+/* ---------- pie del sitio ---------- */
+.pie { border-top: 1px solid var(--filete); padding: 26px 0; display: flex; flex-wrap: wrap; gap: 22px; font-size: 14.5px; color: var(--tinta-3); }
+.pie a { color: var(--tinta-2); }
+.pie a:hover { color: var(--amarillo-texto); }
+
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .hero h1 { font-size: clamp(2.5rem, 5.5vw, 3.5rem); }
+  .story { gap: 1.5rem; }
+  .questions-area { grid-template-columns: 1fr; }
+  .questions-intro p { max-width: 50ch; }
+  .section-intro, .pricing-intro { gap: 2rem; }
+}
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; padding-block: 2.5rem; gap: 2rem; }
+  .hero h1 { max-width: 17ch; font-size: clamp(2.375rem, 8vw, 3.25rem); }
+  .hero-copy > p { margin-top: 1.125rem; font-size: 1.0625rem; }
+  .hero-actions { margin-top: 1.375rem; }
+  .hero-visual { max-width: 30rem; }
+  .hero-visual figcaption { font-size: .8125rem; }
+  .hero-visual figcaption strong { display: none; }
+  .sectors { flex-direction: column; gap: .625rem; font-size: .9375rem; }
+  .section-intro, .pricing-intro { grid-template-columns: 1fr; gap: 1rem; }
+  .story, .story-reverse { grid-template-columns: 1fr; padding: 1.375rem; gap: 1.5rem; }
+  .story-reverse .story-copy, .story-reverse figure { grid-column: auto; grid-row: auto; }
+  .story h3 { max-width: 22ch; }
+  .story-copy > p { margin-top: .875rem; }
+  .story-copy > a { margin-top: .75rem; }
+  .plan-summary {
+    grid-template-columns: minmax(0, 1fr) auto 1.25rem;
+    grid-template-areas: "name price toggle" "line line line";
+    gap: .875rem .75rem; padding: 1.5rem 1rem;
+  }
+  .plan-summary h3 { font-size: 1.25rem; }
+  .plan-summary .amount { font-size: clamp(2rem, 6.7vw, 3rem); }
+  .plan-summary .unit { font-size: .875rem; }
+  .plan-body { padding-inline: 1rem; }
+  .columns { font-size: 1rem; }
+  .module { flex-basis: min(17rem, 86%); }
+  .modules-section { margin-top: 3rem; }
+  .contact-inner { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .columns { grid-template-columns: 1fr; gap: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .button { transition: background-color 160ms ease-out; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  html { scroll-behavior: auto !important; }
+  .module-strip { scroll-snap-type: none; }
+}
+@media (forced-colors: active) {
+  .toggle::before, .toggle::after { background: ButtonText; }
+  .badge { border: 1px solid currentColor; }
+}
+@media print {
+  .masthead, .contact { background: white; color: black; }
+  .hero h1 span { color: black; }
+  .hero-copy > p, .contact p { color: #3c4147; }
+  .cabecera { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="cabecera capa">
+  <div><b>Eneko Navarrete</b><span class="sufijo"> · desarrollo web · Berguedà</span></div>
+  <nav>
+    <a href="/negocios/">Los 9 problemas</a>
+    <a class="nav-optional" href="#producto">Qué recibes</a>
+    <a class="nav-optional" href="#preguntas">Preguntas</a>
+    <button class="tema" id="tema" type="button" hidden>Modo claro</button>
+  </nav>
+</header>
+
+<div class="capa">
+
+<nav class="miga hoja" aria-label="Miga de pan">
+  <ol>
+    <li><a href="/">enekodevs.com</a></li>
+    <li><a href="/negocios/">Webs de negocios pequeños</a></li>
+    <li><span aria-current="page">Precios</span></li>
+  </ol>
+</nav>
+
+<section class="masthead" id="inicio" aria-labelledby="titulo-principal">
+  <div class="hero wrap">
+    <div class="hero-copy">
+      <h1 id="titulo-principal">Tú llevas la actividad.<br><span>Tu web, las reservas.</span></h1>
+      <p>Webs y reservas para negocios de deporte y ocio. Tus clientes encuentran la información y eligen su turno, aunque tú estés dando clase.</p>
+      <div class="hero-actions">
+        <a class="button" href="#precios">Ver precios <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+        <a class="button secondary" href="#producto">Ver qué recibes</a>
+      </div>
+    </div>
+    <figure class="hero-visual">
+      <img src="/negocios/precios/img/reservas-kayak.webp" width="1536" height="1024" fetchpriority="high" decoding="async" alt="Ejemplo ilustrativo de reservas de kayak: turnos con aforo y confirmación en el móvil.">
+      <figcaption><strong>Turnos, aforo y confirmaciones.</strong><span>Ejemplo ilustrativo · Escuela de kayak</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<main id="contenido">
+  <div class="wrap">
+
+    <div class="sectors">
+      <p>Para tu actividad.</p>
+      <ul aria-label="Tipos de negocio"><li>Yoga y gimnasios</li><li>Kayak y surf</li><li>Hípica</li><li>Rocódromos</li><li>Escuelas de esquí</li></ul>
+    </div>
+
+    <section class="showcase" id="producto" aria-labelledby="producto-titulo">
+      <div class="section-intro">
+        <h2 id="producto-titulo">Tu negocio tiene mucho que enseñar.</h2>
+        <p>Una web para explicar lo que haces. Un sistema de reservas si lo necesitas. Y las condiciones claras desde el principio.</p>
+      </div>
+      <article class="story">
+        <div class="story-copy">
+          <h3>Que te encuentren.<br>Y sepan cómo venir.</h3>
+          <p>Tus actividades, horarios y ubicación, con formas claras de llamarte o escribirte. Una web que se lee bien desde el móvil.</p>
+          <a href="#precios">Ver el plan Presencia <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+        </div>
+        <figure>
+          <img src="/negocios/precios/img/web-centro-yoga.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Ejemplo de una web para un centro de yoga, con horarios, mapa, llamada y WhatsApp en ordenador y móvil.">
+          <figcaption>Ejemplo ilustrativo · Centro de yoga</figcaption>
+        </figure>
+      </article>
+      <article class="story story-reverse">
+        <div class="story-copy">
+          <h3>Pagas tu web.<br>Te quedas con ella.</h3>
+          <p>Si pagas de una vez, es tuya desde el primer día. Si eliges las 24 cuotas, pasa a ser tuya al terminar. Después puedes contratar el mantenimiento si quieres.</p>
+          <a href="#precios">Ver las formas de pago <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+        </div>
+        <figure>
+          <img src="/negocios/precios/img/web-centro-ecuestre.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Ejemplo de web de un centro ecuestre y entrega de su propiedad con la opción de pago único.">
+          <figcaption>Ejemplo ilustrativo · Centro ecuestre · Pago único</figcaption>
+        </figure>
+      </article>
+      <p class="showcase-note">Las imágenes muestran ejemplos de producto. Los negocios, las pantallas y sus datos son ficticios.</p>
+    </section>
+
+    <section class="pricing-section" id="precios" aria-labelledby="planes-titulo">
+      <div class="pricing-intro">
+        <h2 id="planes-titulo">Una web tuya.<br>Dos formas de pagarla.</h2>
+        <p>De una vez o en 24 cuotas. Al terminar de pagar, la web es tuya. Seguir con el mantenimiento es opcional.</p>
+      </div>
+      <div class="pricing-meta"><p class="tax">Todos los precios llevan el IVA incluido.</p><p>Abre cada opción para ver el alta, el total y qué incluye.</p></div>
+      <div class="plans">
+        <details>
+          <summary class="plan-summary">
+            <h3 class="plan-name">Presencia</h3>
+            <span class="price"><span class="amount">29</span><span class="unit"> €/mes</span></span>
+            <span class="tagline">Que te encuentren y que te llamen.</span>
+            <span class="toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="plan-body">
+            <div class="terms">
+              <dl class="payment">
+                <div><dt>Para empezar<span>Alta, una sola vez</span></dt><dd>39 €</dd></div>
+                <div><dt>24 cuotas mensuales<span>Compra de tu web a plazos</span></dt><dd>29 €/mes</dd></div>
+                <div class="payment-total"><dt>Total de los 24 meses<span>Alta e IVA incluidos</span></dt><dd>735 €</dd></div>
+              </dl>
+              <p class="ownership"><strong>Al terminar las 24 cuotas, la web es tuya por escrito.</strong> A partir de ahí, seguir con mantenimiento es opcional y se paga por separado: <a href="#al-terminar">desde 0 €</a>.</p>
+            </div>
+            <div class="columns">
+              <div><h4>Incluye</h4><ul>
+                <li>Una página con hasta 5 secciones.</li>
+                <li>WhatsApp, llamada, formulario y mapa.</li>
+                <li>Dominio a tu nombre, alojamiento y certificado.</li>
+                <li>Los textos escritos por nosotros.</li>
+                <li>Entrega en 5 días laborables.</li>
+              </ul></div>
+              <div class="excluded"><h4>No incluye</h4><ul>
+                <li>Reservas.</li><li>Páginas extra.</li><li>Diseño a medida.</li>
+              </ul></div>
+            </div>
+          </div>
+        </details>
+        <details class="recommended">
+          <summary class="plan-summary">
+            <h3 class="plan-name">Negocio<span class="badge">Recomendado</span></h3>
+            <span class="price"><span class="amount">44</span><span class="unit"> €/mes</span></span>
+            <span class="tagline">Tus clientes reservan solos, de noche y en domingo.</span>
+            <span class="toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="plan-body">
+            <div class="terms">
+              <dl class="payment">
+                <div><dt>Para empezar<span>Alta, una sola vez</span></dt><dd>69 €</dd></div>
+                <div><dt>24 cuotas mensuales<span>Compra de tu web a plazos</span></dt><dd>44 €/mes</dd></div>
+                <div class="payment-total"><dt>Total de los 24 meses<span>Alta e IVA incluidos</span></dt><dd>1.125 €</dd></div>
+              </dl>
+              <p class="ownership"><strong>Al terminar las 24 cuotas, la web es tuya por escrito.</strong> A partir de ahí, seguir con mantenimiento es opcional y se paga por separado: <a href="#al-terminar">desde 0 €</a>.</p>
+            </div>
+            <div class="columns">
+              <div><h4>Incluye</h4><ul>
+                <li>Todo lo incluido en Presencia.</li>
+                <li>Descargo de responsabilidad firmado con fecha y hora.</li>
+                <li>Aforo por turno que se cierra solo.</li>
+                <li>Autorización para menores.</li>
+                <li>Confirmación y recordatorio por correo.</li>
+                <li>Cancelar un turno entero y avisar a todos.</li>
+                <li>Hasta 500 reservas al mes.</li>
+              </ul></div>
+              <div class="excluded"><h4>No incluye</h4><ul>
+                <li>Bonos de diez sesiones.</li><li>Abonados con cuota.</li>
+                <li>Asignar monitor y caballo a la vez.</li>
+                <li>Páginas extra y diseño a medida.</li>
+              </ul></div>
+            </div>
+          </div>
+        </details>
+        <details>
+          <summary class="plan-summary">
+            <h3 class="plan-name">De una vez</h3>
+            <span class="price"><span class="amount">590</span><span class="unit"> €</span></span>
+            <span class="tagline">Pagas una vez. La web es tuya desde el primer día.</span>
+            <span class="toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="plan-body">
+            <div class="terms">
+              <p class="purchase-copy">Pagas por la entrega de tu web. Sin cuota por la compra y sin permanencia.</p>
+              <dl class="payment">
+                <div><dt>Web con diseño propio<span>Pago único, IVA incluido</span></dt><dd>590 €</dd></div>
+                <div><dt>Versión editable<span>Para cambiarla tú. Pago único, IVA incluido</span></dt><dd>1.190 €</dd></div>
+              </dl>
+              <!-- ================================================================
+                   PENDIENTE DE DECISION COMERCIAL — DECIDE ENEKO, NO CLAUDE.
+                   Que incluye exactamente el pago unico respecto a dominio,
+                   alojamiento, mantenimiento y reservas, y que gastos posteriores
+                   le quedan al cliente.
+
+                   Nota literal del prototipo aprobado, que aqui se conserva sin
+                   convertirla en promesa y sin inventar la respuesta:
+                     «Por definir antes de publicar: si este precio incluye
+                      dominio, alojamiento, mantenimiento o reservas, y que
+                      gastos seguirian existiendo.»
+
+                   Cuando Eneko lo concrete: escribirlo como texto visible aqui
+                   (un <p class="ownership"> o una fila mas en la <dl>) y borrar
+                   este comentario.
+                   ================================================================ -->
+            </div>
+            <div class="columns">
+              <div><h4>Incluye</h4><ul>
+                <li>La web es tuya desde el primer día.</li>
+                <li>Más secciones.</li><li>Diseño propio.</li>
+              </ul></div>
+              <div class="excluded"><h4>No incluye</h4><ul>
+                <li>Edición por tu cuenta en la versión de 590 €: la versión editable cuesta 1.190 €.</li>
+              </ul></div>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <section class="upkeep" id="al-terminar" aria-labelledby="al-terminar-titulo">
+        <h3 id="al-terminar-titulo">Cuando terminas de pagar</h3>
+        <p>Al pagar la cuota 24 la web pasa a ser tuya por escrito. Desde el mes 25 eliges, y puedes no elegir nada:</p>
+        <dl class="payment">
+          <div><dt>Me llevo mi web<span>Te la exportamos entera. El dominio ya era tuyo desde el primer día</span></dt><dd>0 €</dd></div>
+          <div><dt>Web Segura<span>Alojamiento, certificado, copias y mantenimiento técnico</span></dt><dd>9 €/mes</dd></div>
+          <div><dt>Web Activa<span>Todo lo anterior y 30 minutos al mes de cambios</span></dt><dd>39 €/mes</dd></div>
+        </dl>
+      </section>
+    </section>
+
+    <section id="modulos" class="modules-section" aria-labelledby="modulos-titulo">
+      <div class="section-head">
+        <h2 id="modulos-titulo">¿Ya tienes web?</h2>
+        <p>Módulos separados. Sin permanencia.</p>
+      </div>
+      <p class="scroll-hint" id="scroll-ayuda">Desliza para ver los 6 módulos. Con teclado, usa las flechas al enfocar la fila.</p>
+      <div class="module-strip" role="region" aria-label="Módulos para tu web" aria-describedby="scroll-ayuda" tabindex="0">
+        <details class="module">
+          <summary>
+            <h3>Reservas</h3><span class="toggle" aria-hidden="true"></span>
+            <span class="price"><span class="amount">15</span><span class="unit"> €/mes</span></span>
+            <span class="tagline">Aforo por turno, descargo firmado, recordatorios.</span>
+          </summary>
+          <div class="module-body"><p><strong>Alta: 30 €.</strong> Sin permanencia.</p></div>
+        </details>
+        <details class="module">
+          <summary>
+            <h3>Cobro con tarjeta</h3><span class="toggle" aria-hidden="true"></span>
+            <span class="price"><span class="amount">2,5</span><span class="unit"> % de lo cobrado</span></span>
+            <span class="tagline">El dinero entra en tu cuenta, no en la nuestra.</span>
+          </summary>
+          <div class="module-body"><p><strong>Sin alta.</strong> Sin permanencia.</p></div>
+        </details>
+        <details class="module">
+          <summary>
+            <h3>Lo cambias tú</h3><span class="toggle" aria-hidden="true"></span>
+            <span class="price"><span class="amount">9</span><span class="unit"> €/mes</span></span>
+            <span class="tagline">Textos, precios, horarios y fotos.</span>
+          </summary>
+          <div class="module-body"><p><strong>Alta: 29 €.</strong> Sin permanencia.</p></div>
+        </details>
+        <details class="module">
+          <summary>
+            <h3>Google al día</h3><span class="toggle" aria-hidden="true"></span>
+            <span class="price"><span class="amount">19</span><span class="unit"> €/mes</span></span>
+            <span class="tagline">Ficha cuidada y hasta 10 reseñas contestadas.</span>
+          </summary>
+          <div class="module-body"><p><strong>Alta: 39 €.</strong> Sin permanencia.</p></div>
+        </details>
+        <details class="module">
+          <summary>
+            <h3>Segundo idioma</h3><span class="toggle" aria-hidden="true"></span>
+            <span class="price"><span class="amount">5</span><span class="unit"> €/mes</span></span>
+            <span class="tagline">La web entera, y los cambios también.</span>
+          </summary>
+          <div class="module-body"><p><strong>Alta: 29 €.</strong> Sin permanencia.</p></div>
+        </details>
+        <details class="module">
+          <summary>
+            <h3>Bolsa de cambios</h3><span class="toggle" aria-hidden="true"></span>
+            <span class="price"><span class="amount">19</span><span class="unit"> €/mes · 15 min</span></span>
+            <span class="tagline">Lo que no se gasta se guarda un mes.</span>
+          </summary>
+          <div class="module-body">
+            <p><strong>También 35 € por 30 min y 69 € por una hora.</strong></p>
+            <p>Sin permanencia.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="future" aria-labelledby="future-title">
+      <h2 id="future-title">Próximamente</h2>
+      <details>
+        <summary class="future-summary">
+          <div><h3>Completo</h3><span class="tagline">Un contestador para cuando tú no puedes.</span><span class="unavailable">Aún no está a la venta</span></div>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="plan-body">
+          <figure class="product-figure"><img src="/negocios/precios/img/contestador-automatico.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Ejemplo de un asistente que se identifica como automático y avisa al equipo cuando una persona pide contacto. Marcado como próximo lanzamiento."><figcaption>Un contestador que se identifica como máquina y avisa cuando hace falta una persona. Aún no está a la venta.<span>Ejemplo ilustrativo. Negocio, pantallas y datos ficticios.</span></figcaption></figure>
+          <div class="future-intro"><p class="price"><span class="amount">93</span><span class="unit"> €/mes</span></p></div>
+          <div class="terms">
+            <dl class="payment">
+              <div><dt>Para empezar<span>Alta, una sola vez</span></dt><dd>168 €</dd></div>
+              <div><dt>24 cuotas mensuales<span>Compra de tu web a plazos</span></dt><dd>93 €/mes</dd></div>
+              <div class="payment-total"><dt>Total de los 24 meses<span>Alta e IVA incluidos</span></dt><dd>2.400 €</dd></div>
+            </dl>
+            <p class="ownership"><strong>Al terminar las 24 cuotas, la web es tuya por escrito.</strong> A partir de ahí, seguir con mantenimiento es opcional y se paga por separado: <a href="#al-terminar">desde 0 €</a>.</p>
+          </div>
+          <div class="columns">
+            <div><h4>Incluye</h4><ul>
+              <li>Todo lo incluido en Negocio.</li>
+              <li>Un contestador 24 h para horarios, precios y dudas.</li>
+              <li>Hasta 300 conversaciones al mes.</li>
+              <li>Avisa cuando alguien quiere hablar con una persona.</li>
+              <li>Dice siempre que es una máquina.</li>
+            </ul></div>
+            <div class="excluded"><h4>No incluye</h4><ul>
+              <li>Bonos de diez sesiones.</li><li>Abonados con cuota.</li>
+              <li>Asignar monitor y caballo a la vez.</li>
+              <li>Páginas extra y diseño a medida.</li>
+            </ul></div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section class="questions-area" id="preguntas" aria-labelledby="preguntas-titulo">
+      <div class="questions-intro"><h2 id="preguntas-titulo">Las cosas claras.<br>Antes de empezar.</h2><p>De quién es la web, cómo la pagas y qué pasa si necesitas ayuda.</p></div>
+      <div class="faq">
+        <details>
+          <summary>¿De quién es la web mientras la pago?<span class="toggle" aria-hidden="true"></span></summary>
+          <p>El dominio es tuyo desde el primer día. Compras la web a plazos: es nuestra hasta que termines de pagar las 24 cuotas; después es tuya por escrito. Puedes seguir contratando el mantenimiento si quieres, pero es opcional y se paga por separado. Si un mes no puedes pagar, te avisamos y tienes 15 días.</p>
+        </details>
+        <details>
+          <summary>¿Y si me la llevo antes?<span class="toggle" aria-hidden="true"></span></summary>
+          <p>Sin penalización: 25 € por cada mes que quede.</p>
+        </details>
+        <details>
+          <summary>¿Hacéis bonos o abonados?<span class="toggle" aria-hidden="true"></span></summary>
+          <p>Todavía no, y lo decimos antes en vez de después.</p>
+        </details>
+        <details>
+          <summary>¿Cómo paso mis clientes y mis reservas?<span class="toggle" aria-hidden="true"></span></summary>
+          <p>La lista va incluida en el alta; las reservas ya pagadas no se pasan solas, los dos sistemas conviven unas semanas y no hay ningún día sin poder reservar.</p>
+        </details>
+        <details>
+          <summary>¿Qué arregláis gratis?<span class="toggle" aria-hidden="true"></span></summary>
+          <p>Si algo del servicio contratado falla, lo arreglamos sin gastar tu bolsa de cambios. Cambiar textos, fotos, precios o funciones va aparte. Los cambios se descuentan de la bolsa; una página nueva es un proyecto aparte.</p>
+        </details>
+        <details>
+          <summary>¿Atendéis los fines de semana?<span class="toggle" aria-hidden="true"></span></summary>
+          <p>No: L-V de 9 a 18, y en agosto cerramos del 1 al 21. Lo decimos antes de firmar.</p>
+        </details>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="contact" id="contacto" aria-labelledby="contact-title">
+    <div class="contact-inner wrap">
+      <h2 id="contact-title">Cuéntame cómo funciona tu negocio.</h2>
+      <div><p>Qué actividad haces, si ya tienes web y cómo recibes las reservas. Empezamos por ahí.</p>
+        <a class="button" href="mailto:hola@eneko-devs.com?subject=Web%20y%20reservas%20para%20mi%20negocio">Escribir a Eneko <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+        <small>Atención L-V de 9 a 18. En agosto, cerrado del 1 al 21. Todos los precios llevan el IVA incluido.</small>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie hoja">
+  <span>Eneko Navarrete</span><span>desarrollo web</span><span>Berguedà, Barcelona</span>
+  <span><a href="/negocios/">Los 9 problemas</a></span>
+  <span><a href="/">enekodevs.com</a></span>
+  <span><a href="/aviso-legal">Aviso legal</a></span><span><a href="/condiciones">Condiciones</a></span>
+</footer>
+
+</div>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@graph":[
+  {
+   "@type":"BreadcrumbList",
+   "itemListElement":[
+    {"@type":"ListItem","position":1,"name":"enekodevs.com","item":"https://enekodevs.com/"},
+    {"@type":"ListItem","position":2,"name":"Webs de negocios pequeños","item":"https://enekodevs.com/negocios/"},
+    {"@type":"ListItem","position":3,"name":"Precios","item":"https://enekodevs.com/negocios/precios/"}
+   ]
+  },
+  {
+   "@type":"FAQPage",
+   "@id":"https://enekodevs.com/negocios/precios/#faq",
+   "mainEntity":[
+    {"@type":"Question","name":"¿De quién es la web mientras la pago?","acceptedAnswer":{"@type":"Answer","text":"El dominio es tuyo desde el primer día. Compras la web a plazos: es nuestra hasta que termines de pagar las 24 cuotas; después es tuya por escrito. Puedes seguir contratando el mantenimiento si quieres, pero es opcional y se paga por separado. Si un mes no puedes pagar, te avisamos y tienes 15 días."}},
+    {"@type":"Question","name":"¿Y si me la llevo antes?","acceptedAnswer":{"@type":"Answer","text":"Sin penalización: 25 € por cada mes que quede."}},
+    {"@type":"Question","name":"¿Hacéis bonos o abonados?","acceptedAnswer":{"@type":"Answer","text":"Todavía no, y lo decimos antes en vez de después."}},
+    {"@type":"Question","name":"¿Cómo paso mis clientes y mis reservas?","acceptedAnswer":{"@type":"Answer","text":"La lista va incluida en el alta; las reservas ya pagadas no se pasan solas, los dos sistemas conviven unas semanas y no hay ningún día sin poder reservar."}},
+    {"@type":"Question","name":"¿Qué arregláis gratis?","acceptedAnswer":{"@type":"Answer","text":"Si algo del servicio contratado falla, lo arreglamos sin gastar tu bolsa de cambios. Cambiar textos, fotos, precios o funciones va aparte. Los cambios se descuentan de la bolsa; una página nueva es un proyecto aparte."}},
+    {"@type":"Question","name":"¿Atendéis los fines de semana?","acceptedAnswer":{"@type":"Answer","text":"No: L-V de 9 a 18, y en agosto cerramos del 1 al 21. Lo decimos antes de firmar."}}
+   ]
+  }
+ ]
+}
+</script>
+<!-- Sin JSON-LD de tipo Offer a proposito: las 8 paginas de /negocios/ todavia
+     declaran ofertas de 300 €, 750 €, 150 €, 100 € y 50 € en sus datos
+     estructurados. Anadir aqui precios nuevos multiplicaria la contradiccion
+     delante de Google. Se anade cuando Eneko decida que hacer con las viejas. -->
+
+<script>
+/* Lo unico que hace JavaScript en esta pagina: el boton de tema.
+   Va oculto por defecto (atributo hidden) y solo aparece si el guion corre,
+   para que sin JS no quede un boton muerto que no hace nada. */
+(function(){
+  var r=document.documentElement, b=document.getElementById('tema');
+  var pinta=function(){ b.textContent = r.getAttribute('data-theme')==='light' ? 'Modo oscuro' : 'Modo claro'; };
+  pinta(); b.hidden=false;
+  b.addEventListener('click',function(){
+    var claro = r.getAttribute('data-theme')==='light';
+    if(claro){ r.removeAttribute('data-theme'); } else { r.setAttribute('data-theme','light'); }
+    try{localStorage.setItem('eneko.theme', claro ? 'dark' : 'light')}catch(e){}
+    pinta();
+  });
+})();
+</script>
+</body>
+</html>

@@ -21,3 +21,6 @@
 
 /negocios/og*.png
   Cache-Control: public, max-age=604800
+
+/negocios/precios/img/*
+  Cache-Control: public, max-age=604800
