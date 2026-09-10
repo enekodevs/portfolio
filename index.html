@@ -199,9 +199,6 @@
   .mono-mark img{display:block;width:24px;height:24px}.mono-mark .mk-dark{display:none}[data-theme="dark"] .mono-mark .mk-light{display:none}[data-theme="dark"] .mono-mark .mk-dark{display:block}
   .brand .n{font-family:'Archivo',sans-serif;font-weight:700;font-size:.95rem}
   .brand .n span{font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:.64rem;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase;display:block}
-  .menu-pill{display:inline-flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:9px 10px 9px 18px;font-family:'Archivo',sans-serif;font-weight:700;font-size:.86rem}
-  .menu-pill .ic{width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center}
-  .menu-pill .ic svg{width:13px;height:13px}
   .nlinks{display:flex;gap:22px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
   .nlinks a{color:var(--ink-2);transition:color .2s}.nlinks a:hover{color:var(--ink)}.nlinks a.on{color:var(--cobalt)}
   /* En movil la navegacion NO se esconde: baja a una segunda fila que se
@@ -295,32 +292,9 @@
   section{position:relative}.pad{padding:clamp(70px,12vh,120px) 0}
   .kicker-h2{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(2rem,5vw,3.4rem);text-transform:uppercase;letter-spacing:-.035em;max-width:20ch;margin:.34em 0 0}
   .kicker-h2 em{font-style:normal;color:var(--cobalt)}
-  .spec{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper-2)}
-  .spec .grid{display:grid;grid-template-columns:1fr}
-  .spec .cell{padding:30px var(--gut);border-bottom:1px solid var(--line)}
-  .spec .k{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cobalt)}
-  .spec .v{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.3rem;margin-top:12px;text-transform:uppercase;letter-spacing:-.02em}
-  .spec .u{font-size:.85rem;color:var(--ink-3);margin-top:6px}
 
-  .sobre{background:var(--paper)}
-  .sobre .grid{display:grid;gap:48px;align-items:start}
-  .sobre .big{font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1.16;letter-spacing:-.025em;margin-top:18px}
-  .sobre .big em{font-style:normal;color:var(--cobalt)}
-  .sobre p{margin-bottom:14px;color:var(--ink-2)}.sobre p.first{margin-top:24px}
-  .meta{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-  .meta div{background:var(--card);padding:20px}
-  .meta .k{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
-  .meta .v{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.02rem;margin-top:7px}
-  .avail{display:inline-flex;align-items:center;gap:9px;font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--ink-2);margin-bottom:18px;border:1px solid var(--line);border-radius:999px;padding:7px 14px;background:var(--card)}
-  .avail .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(47,158,99,.22)}
 
   /* panel oscuro redondeado (guiño NRG) */
-  .panel{padding:clamp(40px,8vh,90px) var(--gut)}
-  .panel .inner{max-width:var(--ample);margin:0 auto;background:var(--plum);color:var(--d-fg);border-radius:clamp(20px,3vw,40px);padding:clamp(44px,8vw,100px);position:relative;overflow:hidden}
-  .panel .inner::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--d-line) 1px,transparent 1px),linear-gradient(90deg,var(--d-line) 1px,transparent 1px);background-size:52px 52px;-webkit-mask-image:radial-gradient(90% 90% at 80% 10%,#000,transparent 72%);mask-image:radial-gradient(90% 90% at 80% 10%,#000,transparent 72%)}
-  .panel blockquote{position:relative;z-index:2;font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(1.7rem,4.4vw,3rem);line-height:1.08;letter-spacing:-.03em;max-width:20ch;text-transform:uppercase}
-  .panel blockquote em{font-style:normal;color:var(--amber)}
-  .panel cite{position:relative;z-index:2;display:block;margin-top:26px;font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--d-fg-2)}
 
   .stack{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:36px}
@@ -360,20 +334,11 @@
   .hero-cta{display:flex;flex-wrap:nowrap;gap:12px;margin-top:20px;flex-basis:100%}
   @media(max-width:520px){.hero-cta{flex-wrap:wrap}}
   /* ---------- PROOF · EN PRODUCCIÓN ---------- */
-  .proof{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(48px,8vh,84px) 0}
-  .proof .proof-grid{display:grid;gap:14px;margin-top:26px}
-  .proof-item{display:flex;flex-direction:column;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 22px 20px;position:relative;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease)}
-  .proof-item:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line-2)}
-  .proof-item .pi-k{font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cobalt)}
-  .proof-item .pi-t{font-family:'Archivo',sans-serif;font-weight:800;font-size:1.35rem;letter-spacing:-.02em}
-  .proof-item .pi-d{font-size:.9rem;color:var(--ink-2)}
-  .proof-item .pi-live{display:inline-flex;align-items:center;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-top:2px}
-  .proof-item .pi-live .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(201,150,43,.2)}
   @media(min-width:720px){.proof .proof-grid{grid-template-columns:repeat(3,1fr)}}
   .scrollbar{position:fixed;top:0;left:0;height:2.5px;width:100%;z-index:60;background:linear-gradient(90deg,var(--cobalt),var(--amber));transform:scaleX(0);transform-origin:0 50%;transition:transform .1s linear}
   .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease);transition-delay:var(--rd,0ms)}
   /* títulos de sección: entran más despacio */
-  .kicker-h2.reveal,.b-title.reveal,.contacto h2.reveal,.panel blockquote.reveal,.sobre .big.reveal{transition-duration:1.25s,1.25s}
+  .kicker-h2.reveal,.b-title.reveal,.contacto h2.reveal{transition-duration:1.25s,1.25s}
   /* ---------- BARRIDO ÁMBAR (estilo NRG) ----------
      Un resalte ámbar recorre el texto de izquierda a derecha ligado al scroll
      (JS actualiza background-position-x) y el texto se ASIENTA en su color base.
@@ -384,8 +349,6 @@
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
   .sweep em{-webkit-text-fill-color:var(--em);background:none}
   .b-title.sweep{--sw-base:var(--d-fg)}
-  .sobre p.sweep{--sw-base:var(--ink-2)}
-  .panel blockquote.sweep{--sw-base:#fff;--em:var(--amber)}
   .contacto h2.sweep{--sw-base:#fff;--em:var(--amber)}
   .contacto p.sweep{--sw-base:rgba(242,240,234,.72)}
   @media (prefers-reduced-motion: reduce){.sweep{-webkit-text-fill-color:currentColor!important;color:inherit!important;background:none!important}}
@@ -579,12 +542,12 @@
   setTimeout(function(){ if(!ent.classList.contains("show")){ent.classList.add("show");num.textContent="100%";} }, 4000);
   if(reduce) return;
   var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.14});
-  document.querySelectorAll(".eyebrow,.kicker-h2,.sobre .big,.sobre p,.meta,.avail,.chip,.ncard,.spec .cell,.panel blockquote,.panel cite,.contacto h2,.contacto p").forEach(function(el){el.classList.add("reveal");io.observe(el);});
-  document.querySelectorAll(".chips,.cards,.spec .grid").forEach(function(g){Array.prototype.forEach.call(g.children,function(c,i){c.style.setProperty("--rd",(i*50)+"ms");});});
+  document.querySelectorAll(".eyebrow,.kicker-h2,.chip,.ncard,.contacto h2,.contacto p").forEach(function(el){el.classList.add("reveal");io.observe(el);});
+  document.querySelectorAll(".chips,.cards").forEach(function(g){Array.prototype.forEach.call(g.children,function(c,i){c.style.setProperty("--rd",(i*50)+"ms");});});
 
   // --- BARRIDO ÁMBAR ligado al scroll (estilo NRG): el resalte recorre el texto y se asienta ---
   var sw=[];
-  document.querySelectorAll(".kicker-h2,.b-title,.sobre .big,.panel blockquote,.contacto h2,.sobre p,.contacto p").forEach(function(el){el.classList.add("sweep");sw.push(el);});
+  document.querySelectorAll(".kicker-h2,.b-title,.contacto h2,.contacto p").forEach(function(el){el.classList.add("sweep");sw.push(el);});
   function updateSweeps(){
     var vh=innerHeight, start=vh*0.92, end=vh*0.34, span=start-end;
     for(var i=0;i<sw.length;i++){
@@ -615,12 +578,6 @@
     "build.tag":"Caso de estudio · DomesLab","build.title":"Se construye<br>mientras bajas.","build.phase":"Fase",
     "build.p1.t":"Estructura geodésica","build.p1.d":"— barras calculadas por longitud","build.p2.t":"Nodos","build.p2.d":"— hubs de unión","build.p3.t":"Paneles","build.p3.d":"— cerramiento de vidrio","build.p4.t":"Configurador en vivo","build.p4.d":"— 3D en tiempo real, en producción",
     "build.ph1":"Estructura","build.ph2":"Nodos","build.ph3":"Paneles","build.ph4":"Configurador en vivo",
-    "about.eyebrow":"Sobre mí","about.big":"Ingeniería de software aplicada a <em>problemas reales de negocio.</em>",
-    "about.p1":"Soy Eneko Navarrete. Construyo aplicaciones web a medida para quien tiene un problema técnico concreto y necesita una herramienta para su caso — no un SaaS genérico que solo cubre el 60%.",
-    "about.p2":"No hago plantillas ni landings genéricas: diseño aplicaciones donde la lógica importa —cálculos correctos, datos persistentes y exportaciones que un cliente puede llevarse al taller.",
-    "about.avail":"Disponible para nuevos proyectos","about.k1":"Base","about.v1":"España · remoto","about.k2":"Foco","about.v2":"Web técnica","about.k3":"Idiomas","about.k4":"Respuesta",
-    "quote.text":"Aplicaciones web <em>técnicas</em> a medida.",
-    "stack.eyebrow":"Stack","stack.title":"Herramientas para entregar <em>producto.</em>",
     "explora.eyebrow":"Explora","explora.title":"En <em>cuatro páginas.</em>",
     "explora.c1.t":"Trabajo y caso de estudio","explora.c1.p":"DomesLab a fondo, la galería real de la app y una selección de webs y visualizadores 3D.","explora.c1.go":"Ver trabajo",
     "explora.c2.t":"Servicios y proceso","explora.c2.p":"Qué construyo —calculadoras, configuradores, dashboards— y cómo trabajo hasta producción.","explora.c2.go":"Ver servicios",
@@ -638,12 +595,6 @@
     "build.tag":"Cas d'estudi · DomesLab","build.title":"Es construeix<br>mentre baixes.","build.phase":"Fase",
     "build.p1.t":"Estructura geodèsica","build.p1.d":"— barres calculades per longitud","build.p2.t":"Nodes","build.p2.d":"— hubs d'unió","build.p3.t":"Panells","build.p3.d":"— tancament de vidre","build.p4.t":"Configurador en directe","build.p4.d":"— 3D en temps real, en producció",
     "build.ph1":"Estructura","build.ph2":"Nodes","build.ph3":"Panells","build.ph4":"Configurador en directe",
-    "about.eyebrow":"Sobre mi","about.big":"Enginyeria de programari aplicada a <em>problemes reals de negoci.</em>",
-    "about.p1":"Sóc l'Eneko Navarrete. Construeixo aplicacions web a mida per a qui té un problema tècnic concret i necessita una eina per al seu cas — no un SaaS genèric que només cobreix el 60%.",
-    "about.p2":"No faig plantilles ni landings genèriques: dissenyo aplicacions on la lògica importa —càlculs correctes, dades persistents i exportacions que un client es pot endur al taller.",
-    "about.avail":"Disponible per a nous projectes","about.k1":"Base","about.v1":"Espanya · remot","about.k2":"Focus","about.v2":"Web tècnica","about.k3":"Idiomes","about.k4":"Resposta",
-    "quote.text":"Aplicacions web <em>tècniques</em> a mida.",
-    "stack.eyebrow":"Stack","stack.title":"Eines per lliurar <em>producte.</em>",
     "explora.eyebrow":"Explora","explora.title":"En <em>quatre pàgines.</em>",
     "explora.c1.t":"Feina i cas d'estudi","explora.c1.p":"DomesLab a fons, la galeria real de l'app i una selecció de webs i visualitzadors 3D.","explora.c1.go":"Veure la feina",
     "explora.c2.t":"Serveis i procés","explora.c2.p":"Què construeixo —calculadores, configuradors, dashboards— i com treballo fins a producció.","explora.c2.go":"Veure serveis",
@@ -661,12 +612,6 @@
     "build.tag":"Case study · DomesLab","build.title":"It builds<br>as you scroll.","build.phase":"Phase",
     "build.p1.t":"Geodesic structure","build.p1.d":"— struts sized by length","build.p2.t":"Nodes","build.p2.d":"— connection hubs","build.p3.t":"Panels","build.p3.d":"— glass cladding","build.p4.t":"Live configurator","build.p4.d":"— real-time 3D, in production",
     "build.ph1":"Structure","build.ph2":"Nodes","build.ph3":"Panels","build.ph4":"Live configurator",
-    "about.eyebrow":"About me","about.big":"Software engineering applied to <em>real business problems.</em>",
-    "about.p1":"I'm Eneko Navarrete. I build custom web apps for people with a specific technical problem who need a tool for their case — not a generic SaaS that only covers 60%.",
-    "about.p2":"I don't do templates or generic landing pages: I design apps where the logic matters —correct calculations, persistent data and exports a client can take to the workshop.",
-    "about.avail":"Available for new projects","about.k1":"Based in","about.v1":"Spain · remote","about.k2":"Focus","about.v2":"Technical web","about.k3":"Languages","about.k4":"Response",
-    "quote.text":"Custom <em>technical</em> web applications.",
-    "stack.eyebrow":"Stack","stack.title":"Tools to ship <em>product.</em>",
     "explora.eyebrow":"Explore","explora.title":"In <em>four pages.</em>",
     "explora.c1.t":"Work and case study","explora.c1.p":"DomesLab in depth, the app's real gallery and a selection of websites and 3D viewers.","explora.c1.go":"See work",
     "explora.c2.t":"Services and process","explora.c2.p":"What I build —calculators, configurators, dashboards— and how I work all the way to production.","explora.c2.go":"See services",
