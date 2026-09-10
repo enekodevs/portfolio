@@ -30,7 +30,11 @@
 <meta name="twitter:title" content="Stop answering the same question twenty times a day">
 <meta name="twitter:description" content="An assistant that answers repeat questions, catches the after-hours lead, and always discloses it's an AI. Fixed price from 700 € + 79 €/month.">
 <meta name="twitter:image" content="https://enekodevs.com/negocios/og-en.png">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23221b2e'/%3E%3Crect x='6' y='6' width='8' height='8' fill='%23e3a93a'/%3E%3Crect x='18' y='6' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='6' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='18' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3C/svg%3E">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
 <link rel="preload" href="/negocios/fuentes/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -239,6 +243,8 @@ h1 em{font-style:normal;color:var(--amarillo-texto)}
 }
 @media print{
   :root{
+    /* Sube la burbuja del chat: en la esquina hay etiquetas y se solapaban. */
+    --acg-abajo:88px;
     --fondo:#f2f0ea;--fondo-2:#f2f0ea;--filete:rgba(34,27,46,.3);--filete-2:rgba(34,27,46,.5);
     --tinta:#1c1626;--tinta-2:#3a3346;--tinta-3:#4d4559;--reticula:transparent;
     --amarillo-texto:#8a6414;color-scheme:light;

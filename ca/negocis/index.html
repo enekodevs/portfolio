@@ -33,7 +33,11 @@
 <meta name="twitter:title" content="He obert 203 webs de negocis petits. Això és el que els passa.">
 <meta name="twitter:description" content="Nou problemes que es repeteixen, ordenats per freqüència, amb preu tancat. Pagament únic, sense quota mensual.">
 <meta name="twitter:image" content="https://enekodevs.com/negocios/og-ca.png">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23221b2e'/%3E%3Crect x='6' y='6' width='8' height='8' fill='%23e3a93a'/%3E%3Crect x='18' y='6' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='6' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3Crect x='18' y='18' width='8' height='8' fill='%23a08cc8'/%3E%3C/svg%3E">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
 <link rel="preload" href="/negocios/fuentes/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -352,6 +356,8 @@ main:has(#lista:empty) .solo-js,main:has(#lista:empty) .encabezados{display:none
 /* ---------- papel ---------- */
 @media print{
   :root{
+    /* Sube la burbuja del chat: en la esquina hay etiquetas (FASE/NODOS) y se solapaban. */
+    --acg-abajo:88px;
     --fondo:#f2f0ea;--fondo-2:#f2f0ea;--filete:rgba(34,27,46,.3);--filete-2:rgba(34,27,46,.5);
     --tinta:#1c1626;--tinta-2:#3a3346;--tinta-3:#4d4559;--reticula:transparent;
     --amarillo-texto:#8a6414;color-scheme:light;
@@ -441,12 +447,12 @@ setTimeout(function(){
   <section class="hoja" id="precios">
     <h2 class="titulo-seccion">I si vols la web sencera</h2>
     <div class="tarifas">
-      <div class="tarifa"><h3>Web senzilla</h3><p>Amb el sistema que necessiti el teu negoci: reserves, cites o el que sigui.</p><div class="n">300 €</div></div>
-      <div class="tarifa"><h3>Web que edites tu</h3><p>Panell propi: canvies textos, preus i fotos sense trucar a ningú.</p><div class="n">750 €</div></div>
-      <div class="tarifa"><h3>Canvis quan els demanis</h3><p>Primera hora 50 €. Les següents, 35 €.</p><div class="n">des de 50 €</div></div>
-      <div class="tarifa"><h3>Revisió de temporada</h3><p>Abans d'estiu, abans de Nadal. La demanes tu.</p><div class="n">50 €</div></div>
+      <div class="tarifa"><h3>A terminis</h3><p>39 € per començar. Als 24 mesos la quota s'acaba i la web és teva, amb el seu codi i el seu domini.</p><div class="n">29 €/mes</div></div>
+      <div class="tarifa"><h3>D'un sol cop</h3><p>La web sencera pagada de cop. Teva des del primer dia, sense cap quota.</p><div class="n">590 €</div></div>
+      <div class="tarifa"><h3>Que l'editis tu</h3><p>Amb panell propi: canvies textos, preus i fotos sense trucar a ningú.</p><div class="n">1.190 €</div></div>
+      <div class="tarifa"><h3>Reserves per internet</h3><p>Agenda, confirmacions i recordatoris. Sense alta a part.</p><div class="n">15 €/mes</div></div>
     </div>
-    <p class="cierre">Tot pagament únic. <span class="marca">Sense quota, sense permanència, sense comissió.</span></p>
+    <p class="cierre">Tots els preus porten l'IVA inclòs. <span class="marca">A terminis hi ha quota durant 24 mesos; d'un sol cop, cap.</span> Si cobres el senyal per internet, m'enduc un 2,5 % del que es cobri.</p>
   </section>
 
   <!-- 5. cómo va -->
