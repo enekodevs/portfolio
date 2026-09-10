@@ -15,16 +15,18 @@
 <meta property="og:url" content="https://enekodevs.com/ca/domeslab">
 <meta property="og:title" content="Com vaig construir DomesLab — cas tècnic | Eneko Navarrete">
 <meta property="og:description" content="De full de càlcul legacy a SaaS en producció: motor geodèsic testat, 3D en temps real, plànols PDF i BOM exportable. El cas tècnic, pas a pas.">
-<meta property="og:image" content="https://enekodevs.com/screenshots/editor-3d.png">
-<meta property="og:image:width" content="1600">
-<meta property="og:image:height" content="900">
+<meta property="og:image" content="https://enekodevs.com/brand/enekodevs-open-graph-1200x630.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="enekodevs — Aplicaciones web técnicas a medida">
 <meta property="og:locale" content="ca_ES">
 <meta property="og:locale:alternate" content="es_ES">
 <meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Com vaig construir DomesLab — cas tècnic | Eneko Navarrete">
 <meta name="twitter:description" content="De full de càlcul legacy a SaaS en producció: el cas tècnic de DomesLab.">
-<meta name="twitter:image" content="https://enekodevs.com/screenshots/editor-3d.png">
+<meta name="twitter:image" content="https://enekodevs.com/brand/enekodevs-open-graph-1200x630.png">
+<meta name="twitter:image:alt" content="enekodevs — Aplicaciones web técnicas a medida">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -80,6 +82,8 @@
 
   /* enekodevs — CASO TÉCNICO DomesLab (híbrido). Artículo editorial, mismos tokens. */
   :root{
+    /* Sube la burbuja del chat: en la esquina hay etiquetas (FASE/NODOS) y se solapaban. */
+    --acg-abajo:88px;
     --paper:#f2f0ea;--paper-2:#eae7df;--card:#fbfaf6;--ink:#15171a;--ink-2:#3c4147;--ink-3:#727880;
     --plum:#26202b;--plum-2:#1b1620;
     --cobalt:#946412;--cobalt-2:#6f4b0c;--amber:#e6a92e;--amber-soft:#c9962b;--green:#c9962b;
@@ -132,11 +136,21 @@
   .nav{display:flex;align-items:center;justify-content:space-between;padding:16px var(--gut);max-width:var(--ample);margin:0 auto}
   .brand{display:flex;align-items:center;gap:11px}
   .mono-mark{width:34px;height:34px;border:1.5px solid var(--ink);border-radius:8px;display:grid;place-items:center;font-family:'Archivo',sans-serif;font-weight:900;font-size:.82rem}
+  .mono-mark img{display:block;width:24px;height:24px}.mono-mark .mk-dark{display:none}[data-theme="dark"] .mono-mark .mk-light{display:none}[data-theme="dark"] .mono-mark .mk-dark{display:block}
   .brand .n{font-family:'Archivo',sans-serif;font-weight:700;font-size:.95rem}
   .brand .n span{font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:.64rem;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase;display:block}
   .nlinks{display:flex;gap:22px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
   .nlinks a{color:var(--ink-2);transition:color .2s}.nlinks a:hover{color:var(--ink)}.nlinks a.on{color:var(--cobalt)}
-  @media(max-width:820px){.nlinks{display:none}}
+  /* En movil la navegacion NO se esconde: baja a una segunda fila que se
+     desliza con el dedo. Antes era display:none y no habia hamburguesa, asi que
+     por debajo de 820px los seis destinos eran inalcanzables. Sin JavaScript. */
+  @media(max-width:820px){
+    .nav{flex-wrap:wrap;row-gap:0}
+    .nlinks{order:9;flex-basis:100%;gap:18px;font-size:.68rem;margin-top:8px;padding:9px 0 3px;
+      border-top:1px solid var(--line);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}
+    .nlinks::-webkit-scrollbar{display:none}
+    .nlinks a{white-space:nowrap}
+  }
 
   /* ---------- ARTÍCULO ---------- */
   .a-hero{padding:150px 0 30px}
@@ -191,7 +205,11 @@
   .reveal.in{opacity:1;transform:none}
   @media (prefers-reduced-motion: reduce){.reveal{opacity:1!important;transform:none!important;transition:none}html{scroll-behavior:auto}}
 </style>
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#f2f0ea">
 <script src="/vendor/consent.js" defer></script>
     <script src="https://chatbot-eneko.chatbot-eneko.workers.dev/widget.js" data-cliente="enekodevs" defer></script>
@@ -200,12 +218,13 @@
 
 <header>
   <div class="nav">
-    <a class="brand" href="/ca/"><span class="mono-mark">EN</span><span class="n">Eneko Navarrete<span>Design Engineer</span></span></a>
+    <a class="brand" href="/ca/"><span class="mono-mark" aria-hidden="true"><img class="mk-light" src="/brand/enekodevs-icon-primary.svg" alt="" width="24" height="24" decoding="async"><img class="mk-dark" src="/brand/enekodevs-icon-reversed.svg" alt="" width="24" height="24" decoding="async"></span><span class="n">Eneko Navarrete<span>Design Engineer</span></span></a>
     <nav class="nlinks">
       <a href="/ca/" data-i18n="nav.home">Inici</a>
       <a href="/ca/trabajo" data-i18n="nav.work">Feina</a>
       <a href="/ca/servicios" data-i18n="nav.services">Serveis</a>
       <a href="/ca/domeslab" class="on" data-i18n="nav.caso">Cas DomesLab</a>
+      <a href="/ca/sobre" data-i18n="nav.about">Sobre mi</a>
       <a href="/ca/contacto" data-i18n="nav.contact">Contacte</a>
     </nav>
     <div class="nav-ctl">
@@ -340,7 +359,7 @@
   var I18N={
    es:{
     "ptitle":"Cómo construí DomesLab — caso técnico | Eneko Navarrete",
-    "nav.home":"Inicio","nav.work":"Trabajo","nav.services":"Servicios","nav.caso":"Caso DomesLab","nav.contact":"Contacto","nav.cta":"Enviar email","nav.theme":"Cambiar entre tema claro y oscuro",
+    "nav.home":"Inicio","nav.work":"Trabajo","nav.services":"Servicios","nav.caso":"Caso DomesLab","nav.about":"Sobre mí","nav.contact":"Contacto","nav.cta":"Enviar email","nav.theme":"Cambiar entre tema claro y oscuro",
     "art.back":"← Todo el trabajo",
     "art.eyebrow":"Caso técnico · 2025–2026 · en producción",
     "art.h1":"Cómo construí <em>DomesLab.</em>",
@@ -385,7 +404,7 @@
    },
    ca:{
     "ptitle":"Com vaig construir DomesLab — cas tècnic | Eneko Navarrete",
-    "nav.home":"Inici","nav.work":"Feina","nav.services":"Serveis","nav.caso":"Cas DomesLab","nav.contact":"Contacte","nav.cta":"Enviar email","nav.theme":"Canviar entre tema clar i fosc",
+    "nav.home":"Inici","nav.work":"Feina","nav.services":"Serveis","nav.caso":"Cas DomesLab","nav.about":"Sobre mi","nav.contact":"Contacte","nav.cta":"Enviar email","nav.theme":"Canviar entre tema clar i fosc",
     "art.back":"← Tota la feina",
     "art.eyebrow":"Cas tècnic · 2025–2026 · en producció",
     "art.h1":"Com vaig construir <em>DomesLab.</em>",
@@ -430,7 +449,7 @@
    },
    en:{
     "ptitle":"How I built DomesLab — technical case study | Eneko Navarrete",
-    "nav.home":"Home","nav.work":"Work","nav.services":"Services","nav.caso":"DomesLab case","nav.contact":"Contact","nav.cta":"Send email","nav.theme":"Toggle light / dark theme",
+    "nav.home":"Home","nav.work":"Work","nav.services":"Services","nav.caso":"DomesLab case","nav.about":"About","nav.contact":"Contact","nav.cta":"Send email","nav.theme":"Toggle light / dark theme",
     "art.back":"← All work",
     "art.eyebrow":"Technical case study · 2025–2026 · in production",
     "art.h1":"How I built <em>DomesLab.</em>",

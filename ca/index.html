@@ -15,16 +15,18 @@
 <meta property="og:url" content="https://enekodevs.com/ca/">
 <meta property="og:title" content="enekodevs — Eneko Navarrete, apps web tècniques a mida">
 <meta property="og:description" content="enekodevs — Dissenyo i construeixo aplicacions web a mida —calculadores, configuradors, 3D— i les deixo en producció: provades, desplegades i amb codi auditable.">
-<meta property="og:image" content="https://enekodevs.com/screenshots/editor-3d.png">
-<meta property="og:image:width" content="1600">
-<meta property="og:image:height" content="900">
+<meta property="og:image" content="https://enekodevs.com/brand/enekodevs-open-graph-1200x630.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="enekodevs — Aplicaciones web técnicas a medida">
 <meta property="og:locale" content="ca_ES">
 <meta property="og:locale:alternate" content="es_ES">
 <meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="enekodevs — Eneko Navarrete, apps web tècniques a mida">
 <meta name="twitter:description" content="enekodevs — Aplicacions web tècniques a mida: calculadores, configuradors i 3D en producció.">
-<meta name="twitter:image" content="https://enekodevs.com/screenshots/editor-3d.png">
+<meta name="twitter:image" content="https://enekodevs.com/brand/enekodevs-open-graph-1200x630.png">
+<meta name="twitter:image:alt" content="enekodevs — Aplicaciones web técnicas a medida">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -51,7 +53,7 @@
       "name": "enekodevs",
       "legalName": "Eneko Navarrete",
       "url": "https://enekodevs.com/",
-      "logo": "https://enekodevs.com/favicon.svg",
+      "logo": "https://enekodevs.com/brand/pwa-icon-512.png",
       "founder": {"@id": "https://enekodevs.com/#person"},
       "sameAs": [
         "https://github.com/enekodevs",
@@ -112,6 +114,8 @@
      el cuerpo. Reutiliza la geometría real de dome-3d.html.
      ============================================================ */
   :root{
+    /* Sube la burbuja del chat: en la esquina hay etiquetas (FASE/NODOS) y se solapaban. */
+    --acg-abajo:88px;
     --paper:#f2f0ea;--paper-2:#eae7df;--card:#fbfaf6;--ink:#15171a;--ink-2:#3c4147;--ink-3:#727880;
     --plum:#26202b;--plum-2:#1b1620;
     /* PALETA ÚNICA CÁLIDA — coherencia cromática: papel + tinta + plum + ámbar.
@@ -180,6 +184,7 @@
   #pre.gone{opacity:0;visibility:hidden;pointer-events:none}
   .pre-c{text-align:center}
   .pre-logo{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.03em}
+  .pre-logo img{display:block;width:min(320px,72vw);height:auto;margin:0 auto}
   .pre-logo em{font-style:normal;color:var(--amber)}
   .pre-num{font-family:'IBM Plex Mono',monospace;font-size:.9rem;color:var(--d-fg-2);margin-top:18px;letter-spacing:.1em}
   .pre-enter{margin-top:26px;display:inline-flex;align-items:center;gap:10px;background:var(--amber);color:var(--plum);border:0;cursor:pointer;
@@ -191,6 +196,7 @@
   .nav{display:flex;align-items:center;justify-content:space-between;padding:18px var(--gut);max-width:var(--ample);margin:0 auto}
   .brand{display:flex;align-items:center;gap:11px}
   .mono-mark{width:34px;height:34px;border:1.5px solid var(--ink);border-radius:8px;display:grid;place-items:center;font-family:'Archivo',sans-serif;font-weight:900;font-size:.82rem}
+  .mono-mark img{display:block;width:24px;height:24px}.mono-mark .mk-dark{display:none}[data-theme="dark"] .mono-mark .mk-light{display:none}[data-theme="dark"] .mono-mark .mk-dark{display:block}
   .brand .n{font-family:'Archivo',sans-serif;font-weight:700;font-size:.95rem}
   .brand .n span{font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:.64rem;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase;display:block}
   .menu-pill{display:inline-flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:9px 10px 9px 18px;font-family:'Archivo',sans-serif;font-weight:700;font-size:.86rem}
@@ -198,7 +204,16 @@
   .menu-pill .ic svg{width:13px;height:13px}
   .nlinks{display:flex;gap:22px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
   .nlinks a{color:var(--ink-2);transition:color .2s}.nlinks a:hover{color:var(--ink)}.nlinks a.on{color:var(--cobalt)}
-  @media(max-width:820px){.nlinks{display:none}}
+  /* En movil la navegacion NO se esconde: baja a una segunda fila que se
+     desliza con el dedo. Antes era display:none y no habia hamburguesa, asi que
+     por debajo de 820px los seis destinos eran inalcanzables. Sin JavaScript. */
+  @media(max-width:820px){
+    .nav{flex-wrap:wrap;row-gap:0}
+    .nlinks{order:9;flex-basis:100%;gap:18px;font-size:.68rem;margin-top:8px;padding:9px 0 3px;
+      border-top:1px solid var(--line);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}
+    .nlinks::-webkit-scrollbar{display:none}
+    .nlinks a{white-space:nowrap}
+  }
 
   /* ---------- HERO ---------- */
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding:120px 0 80px;overflow:hidden}
@@ -383,9 +398,40 @@
     .cards{grid-template-columns:repeat(4,1fr)}
   }
   @media(min-width:560px) and (max-width:899px){.spec .grid{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(2,1fr)}}
+  .stack3d{position:relative;min-height:100svh;display:grid;place-items:center;
+    background:#141019;color:#efece4;overflow:hidden;isolation:isolate;
+    border-top:1px solid rgba(230,169,46,.16);border-bottom:1px solid rgba(230,169,46,.16)}
+  .stack3d .s3-lienzo{position:absolute;inset:0;z-index:0}
+  .stack3d .s3-lienzo canvas{display:block;width:100%;height:100%}
+  .stack3d .s3-copy{position:relative;z-index:2;text-align:center;padding:0 24px;
+    pointer-events:none;transform:translateY(-6vh)}
+  .stack3d .eyebrow{color:#e6a92e;justify-content:center}
+  .stack3d .kicker-h2{margin-top:14px;color:#efece4;text-wrap:balance}
+  .stack3d .kicker-h2 em{color:#e6a92e}
+
+  /* Sin JavaScript: las 12 siguen siendo una fila de etiquetas legible. */
+  .stack3d .s3-techs{position:relative;z-index:2;list-style:none;margin:34px 0 0;padding:0 24px;
+    display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:760px}
+  .stack3d .s3-techs li{font-family:'IBM Plex Mono',monospace;font-size:.72rem;
+    color:#efece4;border:1px solid rgba(230,169,46,.3);border-radius:8px;padding:6px 10px;white-space:nowrap}
+
+  /* Con JavaScript: cada una se sienta en su vertice. */
+  .stack3d.viva .s3-techs{position:absolute;inset:0;max-width:none;margin:0;padding:0;display:block}
+  .stack3d.viva .s3-techs li{position:absolute;left:0;top:0;border:0;padding:0;
+    font-size:.74rem;letter-spacing:.04em;white-space:nowrap;
+    transform-origin:0 0;will-change:transform,opacity;
+    text-shadow:0 1px 10px rgba(20,16,25,.9)}
+  @media (max-width:820px){
+    .stack3d{min-height:88svh}
+    .stack3d.viva .s3-techs li{font-size:.64rem}
+  }
+
 </style>
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#f2f0ea">
 <script src="/vendor/consent.js" defer></script>
     <script src="https://chatbot-eneko.chatbot-eneko.workers.dev/widget.js" data-cliente="enekodevs" defer></script>
@@ -397,7 +443,7 @@
 <!-- PRELOADER -->
 <div id="pre">
   <div class="pre-c">
-    <div class="pre-logo">EN<em>(E)</em>KO</div>
+    <div class="pre-logo"><img src="/brand/enekodevs-logo-horizontal-reversed.svg" alt="enekodevs — Aplicacions web tècniques a mida" width="320" height="76" decoding="async"></div>
     <div class="pre-num" id="preNum">0%</div>
     <button class="pre-enter" id="preEnter"><span data-i18n="pre.enter">Entrar</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -408,12 +454,13 @@
 <!-- TOPBAR -->
 <header>
   <div class="nav">
-    <a class="brand" href="#top"><span class="mono-mark">EN</span><span class="n">Eneko Navarrete<span>Design Engineer</span></span></a>
+    <a class="brand" href="#top"><span class="mono-mark" aria-hidden="true"><img class="mk-light" src="/brand/enekodevs-icon-primary.svg" alt="" width="24" height="24" decoding="async"><img class="mk-dark" src="/brand/enekodevs-icon-reversed.svg" alt="" width="24" height="24" decoding="async"></span><span class="n">Eneko Navarrete<span>Design Engineer</span></span></a>
     <nav class="nlinks">
       <a href="/ca/" class="on" data-i18n="nav.home">Inici</a>
       <a href="/ca/trabajo" data-i18n="nav.work">Feina</a>
       <a href="/ca/servicios" data-i18n="nav.services">Serveis</a>
       <a href="/ca/domeslab" data-i18n="nav.caso">Cas DomesLab</a>
+      <a href="/ca/sobre" data-i18n="nav.about">Sobre mi</a>
       <a href="/ca/contacto" data-i18n="nav.contact">Contacte</a>
     </nav>
     <div class="nav-ctl">
@@ -440,7 +487,7 @@
   <div class="wrap">
     <h1><span class="sr-only">enekodevs</span><span class="ln" aria-hidden="true"><span>Eneko</span></span><span class="ln" aria-hidden="true"><span>Devs.</span></span><span class="ln tag"><span data-i18n="hero.eyebrow">Aplicacions web tècniques a mida · Espanya</span></span></h1>
     <div class="sub">
-      <p class="lead" data-i18n-html="hero.lead">Necessites una eina que un SaaS genèric no cobreix? Dissenyo i construeixo la teva aplicació web a mida —calculadores, configuradors, 3D— i la deixo <b>en producció</b>: provada, desplegada i amb codi que pots auditar.</p>
+      <p class="lead" data-i18n-html="hero.lead">Calculadores, configuradors i 3D a mida. En <b>producció</b>, no en demo.</p>
       <div class="hero-cta">
         <a class="btn" href="#contacto"><span data-i18n="hero.cta1">Explica'm el teu problema</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -450,32 +497,6 @@
   </div>
 </section>
 
-<!-- PROOF · EN PRODUCCIÓN -->
-<section class="proof" id="proof">
-  <div class="wrap">
-    <span class="eyebrow" data-i18n="proof.eyebrow">En producció ara — no són maquetes</span>
-    <div class="proof-grid">
-      <a class="proof-item" href="https://domeslab.com/" target="_blank" rel="noopener">
-        <span class="pi-k" data-i18n="proof.1.k">SaaS · 3D en temps real</span>
-        <span class="pi-t">DomesLab</span>
-        <span class="pi-d" data-i18n="proof.1.d">Configurador-calculadora de cúpules geodèsiques: 3D en directe, plànols PDF, BOM i pagaments amb Stripe.</span>
-        <span class="pi-live"><span class="dot"></span><span data-i18n="proof.1.live">En directe · domeslab.com</span></span>
-      </a>
-      <a class="proof-item" href="https://calniu.com/" target="_blank" rel="noopener">
-        <span class="pi-k" data-i18n="proof.2.k">Web · 5 idiomes</span>
-        <span class="pi-t">Cal Niu</span>
-        <span class="pi-d" data-i18n="proof.2.d">Web en producció per a un projecte rural de cultura i bioconstrucció del Berguedà.</span>
-        <span class="pi-live"><span class="dot"></span><span data-i18n="proof.2.live">En directe · calniu.com</span></span>
-      </a>
-      <a class="proof-item" href="https://cupo-app.pages.dev/" target="_blank" rel="noopener">
-        <span class="pi-k" data-i18n="proof.3.k">Producte propi · Reserves</span>
-        <span class="pi-t">Cupo</span>
-        <span class="pi-d" data-i18n="proof.3.d">Reserves per a turisme actiu sense comissions: places en temps real i senyal amb Stripe.</span>
-        <span class="pi-live"><span class="dot"></span><span data-i18n="proof.3.live">Demo en directe</span></span>
-      </a>
-    </div>
-  </div>
-</section>
 
 <!-- BUILD (domo que se ensambla con el scroll) -->
 <section class="build" id="build">
@@ -499,55 +520,9 @@
   </div>
 </section>
 
-<!-- SPEC -->
-<section class="spec">
-  <div class="grid">
-    <div class="cell"><div class="k">01 · SaaS</div><div class="v" data-i18n="spec.1.v">En producció</div><div class="u" data-i18n="spec.1.u">amb pagaments Stripe</div></div>
-    <div class="cell"><div class="k">02 · 3D</div><div class="v" data-i18n="spec.2.v">Temps real</div><div class="u">Three.js</div></div>
-    <div class="cell"><div class="k">03 · PWA</div><div class="v" data-i18n="spec.3.v">Offline</div><div class="u" data-i18n="spec.3.u">instal·lable</div></div>
-    <div class="cell"><div class="k">04 · TS</div><div class="v" data-i18n="spec.4.v">Amb tests</div><div class="u" data-i18n="spec.4.u">CI continu</div></div>
-  </div>
-</section>
 
-<!-- SOBRE -->
-<section class="sobre pad" id="sobre">
-  <div class="wrap"><div class="grid">
-    <div>
-      <span class="eyebrow" data-i18n="about.eyebrow">Sobre mi</span>
-      <p class="big" data-i18n-html="about.big">Enginyeria de programari aplicada a <em>problemes reals de negoci.</em></p>
-      <p class="first" data-i18n="about.p1">Sóc l'Eneko Navarrete. Construeixo aplicacions web a mida per a qui té un problema tècnic concret i necessita una eina per al seu cas — no un SaaS genèric que només cobreix el 60%.</p>
-      <p data-i18n="about.p2">No faig plantilles ni landings genèriques: dissenyo aplicacions on la lògica importa —càlculs correctes, dades persistents i exportacions que un client es pot endur al taller.</p>
-    </div>
-    <div>
-      <span class="avail"><span class="dot"></span><span data-i18n="about.avail">Disponible per a nous projectes</span></span>
-      <div class="meta">
-        <div><div class="k" data-i18n="about.k1">Base</div><div class="v" data-i18n="about.v1">Espanya · remot</div></div>
-        <div><div class="k" data-i18n="about.k2">Focus</div><div class="v" data-i18n="about.v2">Web tècnica</div></div>
-        <div><div class="k" data-i18n="about.k3">Idiomes</div><div class="v">ES · CA · EN</div></div>
-        <div><div class="k" data-i18n="about.k4">Resposta</div><div class="v">&lt; 48 h</div></div>
-      </div>
-    </div>
-  </div></div>
-</section>
 
-<!-- PANEL OSCURO (guiño NRG) -->
-<section class="panel">
-  <div class="inner">
-    <blockquote data-i18n-html="quote.text">Producte, <em>no demos.</em> Amb tests, desplegament continu i codi que pots auditar.</blockquote>
-    <cite>Eneko Navarrete · Design Engineer</cite>
-  </div>
-</section>
 
-<!-- STACK -->
-<section class="stack pad" id="stack">
-  <div class="wrap">
-    <span class="eyebrow" data-i18n="stack.eyebrow">Stack</span>
-    <h2 class="kicker-h2" data-i18n-html="stack.title">Eines per lliurar <em>producte.</em></h2>
-    <div class="chips">
-      <span class="chip">TypeScript</span><span class="chip">React 18</span><span class="chip">Three.js / r3f</span><span class="chip">Vite</span><span class="chip">Tailwind</span><span class="chip">Zustand</span><span class="chip">Supabase</span><span class="chip">Stripe</span><span class="chip">Playwright</span><span class="chip">Vitest</span><span class="chip">PWA</span><span class="chip">Cloudflare</span>
-    </div>
-  </div>
-</section>
 
 <!-- EXPLORA -->
 <section class="explora pad" id="explora">
@@ -626,24 +601,19 @@
   var I18N={
    es:{
     "ptitle":"enekodevs — Eneko Navarrete, apps web técnicas a medida",
-    "nav.home":"Inicio","nav.work":"Trabajo","nav.services":"Servicios","nav.caso":"Caso DomesLab","nav.contact":"Contacto","nav.cta":"Hablemos","nav.theme":"Cambiar entre tema claro y oscuro",
+    "nav.home":"Inicio","nav.work":"Trabajo","nav.services":"Servicios","nav.caso":"Caso DomesLab","nav.about":"Sobre mí","nav.contact":"Contacto","nav.cta":"Hablemos","nav.theme":"Cambiar entre tema claro y oscuro",
     "pre.enter":"Entrar",
     "hero.eyebrow":"Aplicaciones web técnicas a medida · España",
-    "hero.lead":"¿Necesitas una herramienta que un SaaS genérico no cubre? Diseño y construyo tu aplicación web a medida —calculadoras, configuradores, 3D— y la dejo <b>en producción</b>: probada, desplegada y con código que puedes auditar.",
+    "hero.lead":"Calculadoras, configuradores y 3D a medida. En <b>producción</b>, no en demo.",
     "hero.cta1":"Cuéntame tu problema","hero.cta2":"Ver DomesLab en vivo",
-    "proof.eyebrow":"En producción ahora — no son mockups",
-    "proof.1.k":"SaaS · 3D en tiempo real","proof.1.d":"Configurador-calculadora de domos geodésicos: 3D en vivo, planos PDF, BOM y pagos con Stripe.","proof.1.live":"En vivo · domeslab.com",
-    "proof.2.k":"Web · 5 idiomas","proof.2.d":"Web en producción para un proyecto rural de cultura y bioconstrucción del Berguedà.","proof.2.live":"En vivo · calniu.com",
-    "proof.3.k":"Producto propio · Reservas","proof.3.d":"Reservas para turismo activo sin comisiones: plazas en tiempo real y señal con Stripe.","proof.3.live":"Demo en vivo",
     "build.tag":"Caso de estudio · DomesLab","build.title":"Se construye<br>mientras bajas.","build.phase":"Fase",
     "build.p1.t":"Estructura geodésica","build.p1.d":"— barras calculadas por longitud","build.p2.t":"Nodos","build.p2.d":"— hubs de unión","build.p3.t":"Paneles","build.p3.d":"— cerramiento de vidrio","build.p4.t":"Configurador en vivo","build.p4.d":"— 3D en tiempo real, en producción",
     "build.ph1":"Estructura","build.ph2":"Nodos","build.ph3":"Paneles","build.ph4":"Configurador en vivo",
-    "spec.1.v":"En producción","spec.1.u":"con pagos Stripe","spec.2.v":"Tiempo real","spec.3.v":"Offline","spec.3.u":"instalable","spec.4.v":"Con tests","spec.4.u":"CI continuo",
     "about.eyebrow":"Sobre mí","about.big":"Ingeniería de software aplicada a <em>problemas reales de negocio.</em>",
     "about.p1":"Soy Eneko Navarrete. Construyo aplicaciones web a medida para quien tiene un problema técnico concreto y necesita una herramienta para su caso — no un SaaS genérico que solo cubre el 60%.",
     "about.p2":"No hago plantillas ni landings genéricas: diseño aplicaciones donde la lógica importa —cálculos correctos, datos persistentes y exportaciones que un cliente puede llevarse al taller.",
     "about.avail":"Disponible para nuevos proyectos","about.k1":"Base","about.v1":"España · remoto","about.k2":"Foco","about.v2":"Web técnica","about.k3":"Idiomas","about.k4":"Respuesta",
-    "quote.text":"Producto, <em>no demos.</em> Con tests, despliegue continuo y código que puedes auditar.",
+    "quote.text":"Aplicaciones web <em>técnicas</em> a medida.",
     "stack.eyebrow":"Stack","stack.title":"Herramientas para entregar <em>producto.</em>",
     "explora.eyebrow":"Explora","explora.title":"En <em>cuatro páginas.</em>",
     "explora.c1.t":"Trabajo y caso de estudio","explora.c1.p":"DomesLab a fondo, la galería real de la app y una selección de webs y visualizadores 3D.","explora.c1.go":"Ver trabajo",
@@ -654,24 +624,19 @@
    },
    ca:{
     "ptitle":"enekodevs — Eneko Navarrete, apps web tècniques a mida",
-    "nav.home":"Inici","nav.work":"Feina","nav.services":"Serveis","nav.caso":"Cas DomesLab","nav.contact":"Contacte","nav.cta":"Parlem-ne","nav.theme":"Canviar entre tema clar i fosc",
+    "nav.home":"Inici","nav.work":"Feina","nav.services":"Serveis","nav.caso":"Cas DomesLab","nav.about":"Sobre mi","nav.contact":"Contacte","nav.cta":"Parlem-ne","nav.theme":"Canviar entre tema clar i fosc",
     "pre.enter":"Entrar",
     "hero.eyebrow":"Aplicacions web tècniques a mida · Espanya",
-    "hero.lead":"Necessites una eina que un SaaS genèric no cobreix? Dissenyo i construeixo la teva aplicació web a mida —calculadores, configuradors, 3D— i la deixo <b>en producció</b>: provada, desplegada i amb codi que pots auditar.",
+    "hero.lead":"Calculadores, configuradors i 3D a mida. En <b>producció</b>, no en demo.",
     "hero.cta1":"Explica'm el teu problema","hero.cta2":"Veure DomesLab en directe",
-    "proof.eyebrow":"En producció ara — no són maquetes",
-    "proof.1.k":"SaaS · 3D en temps real","proof.1.d":"Configurador-calculadora de cúpules geodèsiques: 3D en directe, plànols PDF, BOM i pagaments amb Stripe.","proof.1.live":"En directe · domeslab.com",
-    "proof.2.k":"Web · 5 idiomes","proof.2.d":"Web en producció per a un projecte rural de cultura i bioconstrucció del Berguedà.","proof.2.live":"En directe · calniu.com",
-    "proof.3.k":"Producte propi · Reserves","proof.3.d":"Reserves per a turisme actiu sense comissions: places en temps real i senyal amb Stripe.","proof.3.live":"Demo en directe",
     "build.tag":"Cas d'estudi · DomesLab","build.title":"Es construeix<br>mentre baixes.","build.phase":"Fase",
     "build.p1.t":"Estructura geodèsica","build.p1.d":"— barres calculades per longitud","build.p2.t":"Nodes","build.p2.d":"— hubs d'unió","build.p3.t":"Panells","build.p3.d":"— tancament de vidre","build.p4.t":"Configurador en directe","build.p4.d":"— 3D en temps real, en producció",
     "build.ph1":"Estructura","build.ph2":"Nodes","build.ph3":"Panells","build.ph4":"Configurador en directe",
-    "spec.1.v":"En producció","spec.1.u":"amb pagaments Stripe","spec.2.v":"Temps real","spec.3.v":"Offline","spec.3.u":"instal·lable","spec.4.v":"Amb tests","spec.4.u":"CI continu",
     "about.eyebrow":"Sobre mi","about.big":"Enginyeria de programari aplicada a <em>problemes reals de negoci.</em>",
     "about.p1":"Sóc l'Eneko Navarrete. Construeixo aplicacions web a mida per a qui té un problema tècnic concret i necessita una eina per al seu cas — no un SaaS genèric que només cobreix el 60%.",
     "about.p2":"No faig plantilles ni landings genèriques: dissenyo aplicacions on la lògica importa —càlculs correctes, dades persistents i exportacions que un client es pot endur al taller.",
     "about.avail":"Disponible per a nous projectes","about.k1":"Base","about.v1":"Espanya · remot","about.k2":"Focus","about.v2":"Web tècnica","about.k3":"Idiomes","about.k4":"Resposta",
-    "quote.text":"Producte, <em>no demos.</em> Amb tests, desplegament continu i codi que pots auditar.",
+    "quote.text":"Aplicacions web <em>tècniques</em> a mida.",
     "stack.eyebrow":"Stack","stack.title":"Eines per lliurar <em>producte.</em>",
     "explora.eyebrow":"Explora","explora.title":"En <em>quatre pàgines.</em>",
     "explora.c1.t":"Feina i cas d'estudi","explora.c1.p":"DomesLab a fons, la galeria real de l'app i una selecció de webs i visualitzadors 3D.","explora.c1.go":"Veure la feina",
@@ -682,24 +647,19 @@
    },
    en:{
     "ptitle":"enekodevs — Eneko Navarrete, custom technical web apps",
-    "nav.home":"Home","nav.work":"Work","nav.services":"Services","nav.caso":"DomesLab case","nav.contact":"Contact","nav.cta":"Let's talk","nav.theme":"Toggle light / dark theme",
+    "nav.home":"Home","nav.work":"Work","nav.services":"Services","nav.caso":"DomesLab case","nav.about":"About","nav.contact":"Contact","nav.cta":"Let's talk","nav.theme":"Toggle light / dark theme",
     "pre.enter":"Enter",
     "hero.eyebrow":"Custom technical web apps · Spain",
-    "hero.lead":"Need a tool a generic SaaS doesn't cover? I design and build your custom web app —calculators, configurators, 3D— and ship it <b>to production</b>: tested, deployed and with code you can audit.",
+    "hero.lead":"Custom calculators, configurators and 3D. Shipped <b>to production</b>, not to a demo.",
     "hero.cta1":"Tell me your problem","hero.cta2":"See DomesLab live",
-    "proof.eyebrow":"Live in production now — not mockups",
-    "proof.1.k":"SaaS · real-time 3D","proof.1.d":"Configurator-calculator for geodesic domes: live 3D, PDF plans, BOM and Stripe payments.","proof.1.live":"Live · domeslab.com",
-    "proof.2.k":"Website · 5 languages","proof.2.d":"Production website for a rural culture and natural-building project in the Berguedà.","proof.2.live":"Live · calniu.com",
-    "proof.3.k":"Own product · Bookings","proof.3.d":"Commission-free bookings for active tourism: real-time slots and deposits with Stripe.","proof.3.live":"Live demo",
     "build.tag":"Case study · DomesLab","build.title":"It builds<br>as you scroll.","build.phase":"Phase",
     "build.p1.t":"Geodesic structure","build.p1.d":"— struts sized by length","build.p2.t":"Nodes","build.p2.d":"— connection hubs","build.p3.t":"Panels","build.p3.d":"— glass cladding","build.p4.t":"Live configurator","build.p4.d":"— real-time 3D, in production",
     "build.ph1":"Structure","build.ph2":"Nodes","build.ph3":"Panels","build.ph4":"Live configurator",
-    "spec.1.v":"In production","spec.1.u":"with Stripe payments","spec.2.v":"Real time","spec.3.v":"Offline","spec.3.u":"installable","spec.4.v":"Tested","spec.4.u":"Continuous CI",
     "about.eyebrow":"About me","about.big":"Software engineering applied to <em>real business problems.</em>",
     "about.p1":"I'm Eneko Navarrete. I build custom web apps for people with a specific technical problem who need a tool for their case — not a generic SaaS that only covers 60%.",
     "about.p2":"I don't do templates or generic landing pages: I design apps where the logic matters —correct calculations, persistent data and exports a client can take to the workshop.",
     "about.avail":"Available for new projects","about.k1":"Based in","about.v1":"Spain · remote","about.k2":"Focus","about.v2":"Technical web","about.k3":"Languages","about.k4":"Response",
-    "quote.text":"Product, <em>not demos.</em> With tests, continuous deployment and code you can audit.",
+    "quote.text":"Custom <em>technical</em> web applications.",
     "stack.eyebrow":"Stack","stack.title":"Tools to ship <em>product.</em>",
     "explora.eyebrow":"Explore","explora.title":"In <em>four pages.</em>",
     "explora.c1.t":"Work and case study","explora.c1.p":"DomesLab in depth, the app's real gallery and a selection of websites and 3D viewers.","explora.c1.go":"See work",
@@ -855,6 +815,7 @@
   if('requestIdleCallback' in window) requestIdleCallback(function(){startDome();},{timeout:2000}); else setTimeout(startDome,1200);
   }
 </script>
+
 
 </body>
 </html>

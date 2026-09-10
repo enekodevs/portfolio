@@ -129,7 +129,16 @@
   .brand .n span{font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:.64rem;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase;display:block}
   .nlinks{display:flex;gap:22px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
   .nlinks a{color:var(--ink-2);transition:color .2s}.nlinks a:hover{color:var(--ink)}.nlinks a.on{color:var(--cobalt)}
-  @media(max-width:820px){.nlinks{display:none}}
+  /* En movil la navegacion NO se esconde: baja a una segunda fila que se
+     desliza con el dedo. Antes era display:none y no habia hamburguesa, asi que
+     por debajo de 820px los seis destinos eran inalcanzables. Sin JavaScript. */
+  @media(max-width:820px){
+    .nav{flex-wrap:wrap;row-gap:0}
+    .nlinks{order:9;flex-basis:100%;gap:18px;font-size:.68rem;margin-top:8px;padding:9px 0 3px;
+      border-top:1px solid var(--line);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}
+    .nlinks::-webkit-scrollbar{display:none}
+    .nlinks a{white-space:nowrap}
+  }
 
   main{flex:1;display:flex;align-items:center;padding:130px 0 70px}
   .c-grid{display:grid;gap:44px;align-items:center}
