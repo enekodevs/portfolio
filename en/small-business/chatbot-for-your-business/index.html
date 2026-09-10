@@ -517,12 +517,7 @@ h1 em{font-style:normal;color:var(--amarillo-texto)}
     "sameAs":["https://github.com/enekodevs","https://www.linkedin.com/in/eneko-navarrete"]
    },
    "areaServed":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Ireland"},{"@type":"Country","name":"Spain"}],
-   "audience":{"@type":"Audience","audienceType":"Small businesses handling their own customer contact"},
-   "offers":[
-    {"@type":"Offer","name":"24h Front Desk","description":"FAQs, opening hours, catching the after-hours lead, widget on your site. No integrations. Plus 79 €/month.","price":"700","priceCurrency":"EUR","url":"https://enekodevs.com/en/small-business/chatbot-for-your-business/#precios"},
-    {"@type":"Offer","name":"Bookings","description":"Books appointments, connects with the booking system you already use, and WhatsApp. Plus 220 €/month.","price":"2200","priceCurrency":"EUR","url":"https://enekodevs.com/en/small-business/chatbot-for-your-business/#precios"},
-    {"@type":"Offer","name":"Bespoke","description":"CRM, multiple languages, document handling and agreed service level. From 5,000 € plus 400 €/month.","price":"5000","priceCurrency":"EUR","url":"https://enekodevs.com/en/small-business/chatbot-for-your-business/#precios"}
-   ]
+   "audience":{"@type":"Audience","audienceType":"Small businesses handling their own customer contact"}
   },
   {
    "@type":"FAQPage",
@@ -545,6 +540,10 @@ h1 em{font-style:normal;color:var(--amarillo-texto)}
  ]
 }
 </script>
+<!-- Sin JSON-LD de tipo Offer a proposito: aqui declarabamos ofertas viejas
+     de 700 €, 2.200 € y 5.000 € que ya no se cobran. Se quitaron el
+     11-sep-2026 para no contradecir lo que ve el cliente en pantalla; se
+     anade un Offer nuevo cuando Eneko fije el precio de este servicio. -->
 
 <script>
 /* The only thing JavaScript does on this page: the theme button.

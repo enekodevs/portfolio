@@ -516,12 +516,7 @@ h1 em{font-style:normal;color:var(--amarillo-texto)}
     "sameAs":["https://github.com/enekodevs","https://www.linkedin.com/in/eneko-navarrete"]
    },
    "areaServed":{"@type":"Country","name":"España"},
-   "audience":{"@type":"Audience","audienceType":"Negocios pequeños con atención al público"},
-   "offers":[
-    {"@type":"Offer","name":"Recepción 24 h","description":"Preguntas frecuentes, horarios, captación del lead nocturno, widget en tu web. Sin integraciones. Más 79 €/mes.","price":"700","priceCurrency":"EUR","url":"https://enekodevs.com/negocios/chatbot-para-tu-negocio/#precios"},
-    {"@type":"Offer","name":"Reservas","description":"Agenda citas, conecta con el sistema de reservas que ya usas, y WhatsApp. Más 220 €/mes.","price":"2200","priceCurrency":"EUR","url":"https://enekodevs.com/negocios/chatbot-para-tu-negocio/#precios"},
-    {"@type":"Offer","name":"A medida","description":"CRM, varios idiomas, gestión documental y nivel de servicio acordado. Desde 5.000 € más 400 €/mes.","price":"5000","priceCurrency":"EUR","url":"https://enekodevs.com/negocios/chatbot-para-tu-negocio/#precios"}
-   ]
+   "audience":{"@type":"Audience","audienceType":"Negocios pequeños con atención al público"}
   },
   {
    "@type":"FAQPage",
@@ -544,6 +539,10 @@ h1 em{font-style:normal;color:var(--amarillo-texto)}
  ]
 }
 </script>
+<!-- Sin JSON-LD de tipo Offer a proposito: aqui declarabamos ofertas viejas
+     de 700 €, 2.200 € y 5.000 € que ya no se cobran. Se quitaron el
+     11-sep-2026 para no contradecir lo que ve el cliente en pantalla; se
+     anade un Offer nuevo cuando Eneko fije el precio de este servicio. -->
 
 <script>
 /* Lo unico que hace JavaScript en esta pagina: el boton de tema.
