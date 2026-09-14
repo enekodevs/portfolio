@@ -24,3 +24,12 @@
 
 /negocios/precios/img/*
   Cache-Control: public, max-age=604800
+
+# Identidad de marca: los ficheros llevan nombre estable, se cachean una semana.
+/brand/*
+  Cache-Control: public, max-age=604800
+
+# Algunos hosts no adivinan el tipo del manifest y el navegador lo descarta.
+/site.webmanifest
+  Content-Type: application/manifest+json
+  Cache-Control: public, max-age=86400

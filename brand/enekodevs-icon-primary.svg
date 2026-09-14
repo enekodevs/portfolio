@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title desc">
   <title id="title">Icono de enekodevs</title>
   <desc id="desc">Monograma EN modular con un nodo ámbar que representa ingeniería y conexión.</desc>
-  <rect width="100" height="100" rx="22" fill="#26202B"/>
-  <g fill="#EFECE4">
+  
+  <g fill="#15171A">
     <path d="M16 18h36v10H26v17h21v10H26v17h26v10H16z"/>
     <path d="M51 18h10v64H51zM76 18h10v64H76zM51 18h10l25 54-10 10z"/>
   </g>

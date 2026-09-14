@@ -22,3 +22,6 @@ $RECYCLE.BIN/
 # Misc
 *.bak
 *.tmp
+
+# Herramientas de sesión (servidor de vista previa). No forman parte del sitio.
+.claude/
