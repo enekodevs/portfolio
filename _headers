@@ -6,6 +6,10 @@
 
 # La versión va en la ruta (/vendor/three-0.160.0/), así que subir de versión
 # cambia la URL: nunca hay que invalidar esta caché.
+# consent.js no tiene versión en la ruta: la lleva en la query
+# (/vendor/consent.js?v=AAAAMMDD) y hay que subirla en TODAS las páginas cada
+# vez que cambie. Sin eso, Cloudflare y los navegadores siguen sirviendo la
+# copia vieja hasta un año (el 15-sep-2026 el borde daba la del 8-ago).
 /vendor/*
   Cache-Control: public, max-age=31536000, immutable
 
