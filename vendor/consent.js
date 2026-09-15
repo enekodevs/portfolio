@@ -8,9 +8,10 @@
  *
  * Además, FUERA del consentimiento porque no usa cookies, ni identificadores,
  * ni guarda nada en el navegador, lleva el contador de /api/m
- * (functions/api/m.js): llegadas desde un enlace propio (utm_source) y clics
- * en correo, teléfono, WhatsApp y agenda. Solo en las páginas en castellano:
- * el aviso legal que lo explica aún no existe en catalán ni en inglés.
+ * (functions/api/m.js): llegadas desde un enlace propio (utm_source envio,
+ * malt o linkedin) y clics en correo, teléfono, WhatsApp y agenda. Solo en
+ * las páginas en castellano: el aviso legal que lo explica aún no existe en
+ * catalán ni en inglés.
  * La familia del origen vive en una variable de esta carga de página y nada
  * más: ni sessionStorage ni localStorage. Al pasar a otra página se pierde.
  * Tráfico propio: `?yo=1` marca este navegador (`localStorage.eneko.yo`) y
@@ -37,6 +38,8 @@
   var FUENTE = "";
 
   // utm_source -> familia cerrada. La Function rechaza cualquier otro valor.
+  // «otra» es un utm_source que no ponemos nosotros (chatgpt.com, un
+  // boletín...): no arma llegada, pero va en los clics y en Clarity.
   function familiaDeFuente(valor) {
     var v = String(valor || "")
       .replace(/^\s+|\s+$/g, "")
@@ -120,10 +123,10 @@
   }
 
   // Llegada: una vez por carga de página, solo si esta página se cargó con
-  // utm_source, y solo tras la primera señal de persona (tocar, teclear,
-  // desplazarse de verdad o 5 s seguidos con la página visible). Los
-  // escáneres de enlaces del correo abren la página pero no hacen nada de
-  // eso, así que no cuentan como llegada.
+  // un utm_source nuestro (envio, malt o linkedin), y solo tras la primera
+  // señal de persona (tocar, teclear, desplazarse de verdad o 5 s seguidos
+  // con la página visible). Los escáneres de enlaces del correo abren la
+  // página pero no hacen nada de eso, así que no cuentan como llegada.
   function armarLlegada() {
     var EVENTOS = ["pointerdown", "keydown", "wheel", "touchstart"];
     var hecho = false;
@@ -167,7 +170,10 @@
     alCambiarVisibilidad();
   }
 
-  if (CUENTA && FUENTE) armarLlegada();
+  // Solo los enlaces que ponemos nosotros: el aviso legal cuenta «las
+  // llegadas por uno de esos enlaces», no las de un utm_source ajeno.
+  var LLEGADA_PROPIA = { envio: 1, malt: 1, linkedin: 1 };
+  if (CUENTA && LLEGADA_PROPIA[FUENTE] === 1) armarLlegada();
 
   function destinoDeEnlace(href) {
     var h = String(href || "")

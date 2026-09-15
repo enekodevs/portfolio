@@ -11,17 +11,22 @@
  *   dia      YYYY-MM-DD en Europe/Madrid, sin hora
  *   ruta     la página (≤ 96 bytes, sin query ni hash)
  *   tipo     llegada | clic
- *   fuente   envio | malt | linkedin | otra | sin
+ *   fuente   envio | malt | linkedin | otra | sin   (en llegadas, solo las
+ *            tres primeras: «otra» es un utm_source que no ponemos nosotros)
  *   destino  mailto | tel | whatsapp | cal | —   («—» en llegadas)
  *   n        cuántas llegadas o clics ha habido ese día con esa combinación
  * y en la misma escritura se borra todo lo que tenga más de 90 días. D1 no
  * caduca filas por sí mismo: el borrado va con cada suma, así que si un día
- * no llega ninguna, lo viejo espera a la siguiente.
+ * no llega ninguna, lo viejo espera a la siguiente. El aviso legal lo dice
+ * así; si algún día hay un borrado diario aparte, se cambian los dos.
  *
  * Lo que NO se guarda, a propósito: ni la hora, ni IP, ni user-agent, ni
  * dispositivo, ni país, ni campaña. El user-agent solo se mira aquí dentro
  * para descartar bots y no sale de la petición. Tampoco se leen cookies ni
- * se pone ninguna. Una fila dice cuántos, nunca cuándo ni quién.
+ * se pone ninguna. Una fila dice cuántos, nunca cuándo ni quién. Ojo: D1
+ * tiene Time Travel siempre encendido (7 días en el plan gratuito, 30 en el
+ * de pago) y restaura la base a cualquier minuto, así que quien tenga la
+ * cuenta podría ver en qué minuto subió cada n. El aviso legal también lo dice.
  *
  * El lector (el motor, con un token de solo lectura de D1) solo puede leer
  * esos totales por día: no hay nada más fino que consultar. La tabla es el
@@ -31,6 +36,9 @@
 const ORIGENES = new Set(["https://enekodevs.com", "https://www.enekodevs.com"]);
 const TIPOS = new Set(["llegada", "clic"]);
 const FUENTES = new Set(["envio", "malt", "linkedin", "otra", "sin"]);
+// Una llegada solo cuenta por un enlace nuestro. «otra» (un utm_source que
+// pone un tercero: chatgpt.com, un boletín...) y «sin» valen en los clics.
+const FUENTES_LLEGADA = new Set(["envio", "malt", "linkedin"]);
 const DESTINOS_CLIC = new Set(["mailto", "tel", "whatsapp", "cal"]);
 // El cuerpo es cerrado: cualquier otro campo (una hora, un dispositivo...) es
 // 400, para que nadie crea que se guarda algo que aquí se tira.
@@ -123,6 +131,7 @@ export function validar(texto) {
   if (RUTA_OTRO_IDIOMA.test(ruta)) return null;
   if (tipo === "clic" && !DESTINOS_CLIC.has(destino)) return null;
   if (tipo === "llegada" && destino !== SIN_DESTINO) return null;
+  if (tipo === "llegada" && !FUENTES_LLEGADA.has(fuente)) return null;
 
   return { ruta, tipo, fuente, destino };
 }
