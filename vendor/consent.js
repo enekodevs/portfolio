@@ -96,10 +96,14 @@
     // desborda en horizontal, el navegador movil ensancha el viewport de
     // maquetacion y un `left/right` a secas dejaria los botones fuera de
     // pantalla. Con min(...,100vw) el banner nunca puede pasarse.
+    // z-index al maximo posible: la burbuja del chatbot (widget.js, que viene
+    // de fuera y no se toca) va a 2147483000 y en movil tapaba el lado derecho
+    // de «Rechazar». Mientras el banner esta, queda por encima de ella; al
+    // quitarse el banner la burbuja sigue donde estaba, sin tocar nada mas.
     var css =
       "#" +
       ROOT_ID +
-      "{position:fixed;left:16px;right:16px;bottom:16px;z-index:999999;" +
+      "{position:fixed;left:16px;right:16px;bottom:16px;z-index:2147483647;" +
       "width:auto;max-width:min(420px,calc(100vw - 32px));margin:0;font-family:inherit;" +
       "background:" + BG + ";color:" + FG + ";" +
       "border:1px solid " + LINE + ";" +
