@@ -804,7 +804,8 @@ details[open] > .plan-summary { border-radius: 16px 16px 0 0; }
      delante de Google. Se anade cuando Eneko decida que hacer con las viejas. -->
 
 <script>
-/* Lo unico que hace JavaScript en esta pagina: el boton de tema.
+/* El boton de tema (el banner de cookies y el contador van aparte, en
+   /vendor/consent.js, como en el resto del sitio).
    Va oculto por defecto (atributo hidden) y solo aparece si el guion corre,
    para que sin JS no quede un boton muerto que no hace nada. */
 (function(){
@@ -819,5 +820,6 @@ details[open] > .plan-summary { border-radius: 16px 16px 0 0; }
   });
 })();
 </script>
+<script src="/vendor/consent.js" defer></script>
 </body>
 </html>
