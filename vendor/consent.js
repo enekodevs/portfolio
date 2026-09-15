@@ -5,6 +5,17 @@
  * 'no' -> no hace nada, sin valor -> muestra el banner y espera decisión.
  * Se adapta al idioma por ruta (/ca/, /en/, resto castellano) y al tema
  * claro/oscuro del sitio (variables CSS existentes si las hay).
+ *
+ * Además, FUERA del consentimiento porque no usa cookies ni identificadores,
+ * lleva el contador de /api/m (functions/api/m.js): llegadas desde un enlace
+ * propio (utm_source) y clics en correo, teléfono, WhatsApp y agenda.
+ * Guarda solo la familia del origen en sessionStorage (`eneko.fuente`) y qué
+ * páginas ya se contaron en esta pestaña (`eneko.llegadas`); las dos se
+ * borran al cerrar la pestaña.
+ * Tráfico propio: `?yo=1` marca este navegador (`localStorage.eneko.yo`) y
+ * `?yo=0` lo desmarca. Con la marca, o en cualquier host que no sea
+ * enekodevs.com (localhost, *.pages.dev), no hay banner, ni Clarity, ni
+ * contador.
  */
 (function () {
   "use strict";
@@ -13,6 +24,206 @@
   var CLARITY_ID = "xzb1omaf7o";
   var STYLE_ID = "eneko-consent-style";
   var ROOT_ID = "eneko-consent";
+
+  var YO_KEY = "eneko.yo";
+  var FUENTE_KEY = "eneko.fuente";
+  var CONTADAS_KEY = "eneko.llegadas";
+  var CONTADOR_URL = "/api/m";
+  var HOSTS_REALES = { "enekodevs.com": 1, "www.enekodevs.com": 1 };
+
+  // ---- Medición sin cookies ----
+
+  // utm_source -> familia cerrada. La Function rechaza cualquier otro valor.
+  function familiaDeFuente(valor) {
+    var v = String(valor || "")
+      .replace(/^\s+|\s+$/g, "")
+      .toLowerCase()
+      .replace("í", "i");
+    if (v === "envio") return "envio";
+    if (v === "malt") return "malt";
+    if (v === "linkedin" || v === "lnkd" || v === "linkedin.com" || v === "lnkd.in") return "linkedin";
+    return "otra";
+  }
+
+  function leerSesion(clave) {
+    try {
+      return sessionStorage.getItem(clave);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function escribirSesion(clave, valor) {
+    try {
+      sessionStorage.setItem(clave, valor);
+    } catch (e) {}
+  }
+
+  function fuenteDeSesion() {
+    var f = leerSesion(FUENTE_KEY);
+    return f === "envio" || f === "malt" || f === "linkedin" || f === "otra" ? f : "";
+  }
+
+  // Lee ?utm_source y ?yo, guarda lo que toca y los quita de la barra sin
+  // recargar (el hash se conserva). Así la URL que se copia o se comparte ya
+  // no lleva la etiqueta, y Clarity, si se acepta, tampoco la ve.
+  function leerYLimpiarUrl() {
+    var params;
+    try {
+      params = new URLSearchParams(location.search);
+    } catch (e) {
+      return;
+    }
+    if (params.has("utm_source")) {
+      escribirSesion(FUENTE_KEY, familiaDeFuente(params.get("utm_source")));
+    }
+    var yo = params.get("yo");
+    try {
+      if (yo === "1") localStorage.setItem(YO_KEY, "1");
+      if (yo === "0") localStorage.removeItem(YO_KEY);
+    } catch (e) {}
+
+    var quitar = [];
+    params.forEach(function (_, clave) {
+      if (clave === "yo" || clave.indexOf("utm_") === 0) quitar.push(clave);
+    });
+    if (!quitar.length) return;
+    for (var i = 0; i < quitar.length; i++) params["delete"](quitar[i]);
+    var resto = params.toString();
+    try {
+      history.replaceState(
+        history.state,
+        "",
+        location.pathname + (resto ? "?" + resto : "") + location.hash
+      );
+    } catch (e) {}
+  }
+
+  function esPropio() {
+    if (!HOSTS_REALES[location.hostname]) return true;
+    try {
+      return localStorage.getItem(YO_KEY) === "1";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  leerYLimpiarUrl();
+  var PROPIO = esPropio();
+
+  // Nunca rompe la navegación ni lanza: si no se puede avisar, no se avisa.
+  function avisar(datos) {
+    if (PROPIO) return;
+    try {
+      var cuerpo = JSON.stringify(datos);
+      if (navigator.sendBeacon && navigator.sendBeacon(CONTADOR_URL, cuerpo)) return;
+      if (window.fetch) {
+        window
+          .fetch(CONTADOR_URL, {
+            method: "POST",
+            body: cuerpo,
+            keepalive: true,
+            credentials: "omit",
+            headers: { "Content-Type": "text/plain;charset=UTF-8" }
+          })
+          ["catch"](function () {});
+      }
+    } catch (e) {}
+  }
+
+  // Llegada: una vez por pestaña y página, solo si se llegó por un enlace
+  // con utm_source, y solo tras la primera señal de persona (tocar, teclear,
+  // desplazarse de verdad o 5 s seguidos con la página visible). Los
+  // escáneres de enlaces del correo abren la página pero no hacen nada de
+  // eso, así que no cuentan como llegada.
+  function armarLlegada() {
+    var ruta = location.pathname;
+    var contadas;
+    try {
+      contadas = JSON.parse(leerSesion(CONTADAS_KEY) || "[]");
+      if (!(contadas instanceof Array)) contadas = [];
+    } catch (e) {
+      contadas = [];
+    }
+    if (contadas.indexOf(ruta) !== -1) return;
+
+    var EVENTOS = ["pointerdown", "keydown", "wheel", "touchstart"];
+    var hecho = false;
+    var reloj = null;
+    var y0 = window.scrollY || 0;
+
+    function quitar() {
+      for (var i = 0; i < EVENTOS.length; i++) {
+        window.removeEventListener(EVENTOS[i], disparar, true);
+      }
+      window.removeEventListener("scroll", alDesplazar, true);
+      document.removeEventListener("visibilitychange", alCambiarVisibilidad);
+      clearTimeout(reloj);
+    }
+
+    function disparar() {
+      if (hecho) return;
+      hecho = true;
+      quitar();
+      contadas.push(ruta);
+      escribirSesion(CONTADAS_KEY, JSON.stringify(contadas.slice(-50)));
+      avisar({ t: "llegada", p: ruta, f: fuenteDeSesion() });
+    }
+
+    // Un scroll programático (ancla, restaurar posición) mueve poco o nada;
+    // uno de persona pasa enseguida de 64 px.
+    function alDesplazar() {
+      if (Math.abs((window.scrollY || 0) - y0) >= 64) disparar();
+    }
+
+    // 5 s SEGUIDOS visible: si la pestaña se oculta, la cuenta vuelve a cero.
+    function alCambiarVisibilidad() {
+      clearTimeout(reloj);
+      reloj = null;
+      if (document.visibilityState === "visible") reloj = setTimeout(disparar, 5000);
+    }
+
+    for (var i = 0; i < EVENTOS.length; i++) {
+      window.addEventListener(EVENTOS[i], disparar, { capture: true, passive: true });
+    }
+    window.addEventListener("scroll", alDesplazar, { capture: true, passive: true });
+    document.addEventListener("visibilitychange", alCambiarVisibilidad);
+    alCambiarVisibilidad();
+  }
+
+  if (!PROPIO && fuenteDeSesion()) armarLlegada();
+
+  function destinoDeEnlace(href) {
+    var h = String(href || "")
+      .replace(/^\s+/, "")
+      .toLowerCase();
+    if (h.indexOf("mailto:") === 0) return "mailto";
+    if (h.indexOf("tel:") === 0) return "tel";
+    if (h.indexOf("whatsapp:") === 0) return "whatsapp";
+    if (/^https?:\/\/(wa\.me|api\.whatsapp\.com)([\/?#]|$)/.test(h)) return "whatsapp";
+    if (/^https?:\/\/(app\.)?cal\.com([\/?#]|$)/.test(h)) return "cal";
+    return "";
+  }
+
+  // Clics de contacto: delegado en document y en captura, así vale para
+  // todas las páginas y se oye aunque otro guion pare la propagación.
+  document.addEventListener(
+    "click",
+    function (ev) {
+      try {
+        var el = ev.target;
+        if (el && el.nodeType !== 1) el = el.parentElement;
+        var a = el && el.closest ? el.closest("a[href]") : null;
+        if (!a) return;
+        var destino = destinoDeEnlace(a.getAttribute("href"));
+        if (!destino) return;
+        avisar({ t: "clic", p: location.pathname, f: fuenteDeSesion() || "sin", d: destino });
+      } catch (e) {}
+    },
+    true
+  );
+
+  // ---- Consentimiento y Clarity ----
 
   function getConsent() {
     try {
@@ -29,6 +240,7 @@
   }
 
   function injectClarity() {
+    if (PROPIO) return;
     if (window.clarity || document.getElementById("eneko-clarity-tag")) return;
     (function (c, l, a, r, i, t, y) {
       c[a] =
@@ -240,7 +452,11 @@
   };
 
   var consent = getConsent();
-  if (consent === "yes") {
+  if (PROPIO) {
+    // Navegador de Eneko o host que no es el de verdad: ni banner ni Clarity.
+    // enekoConsent.reset() sí enseña el banner (lo pide la persona), pero
+    // aceptar no carga Clarity: injectClarity() también mira PROPIO.
+  } else if (consent === "yes") {
     injectClarity();
   } else if (consent !== "no") {
     showBanner();
