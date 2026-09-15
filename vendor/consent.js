@@ -218,6 +218,10 @@
         var destino = destinoDeEnlace(a.getAttribute("href"));
         if (!destino) return;
         avisar({ t: "clic", p: location.pathname, f: fuenteDeSesion() || "sin", d: destino });
+        // En Clarity, solo si ya está cargado (es decir, si se aceptó).
+        if (!PROPIO && typeof window.clarity === "function") {
+          window.clarity("event", "contacto_" + destino);
+        }
       } catch (e) {}
     },
     true
@@ -255,6 +259,30 @@
       y = l.getElementsByTagName(r)[0];
       y.parentNode.insertBefore(t, y);
     })(window, document, "clarity", "script", CLARITY_ID);
+  }
+
+  // Solo se llega aquí tras «Aceptar» o con eneko.consent = 'yes'.
+  // Desde el 31-oct-2025 Clarity exige en la UE la señal de consentimiento
+  // (consentv2); sin ella da un id por página vista y no hay sesiones de
+  // varias páginas. El banner pregunta por analítica, no por publicidad, así
+  // que ad_Storage va denegado. Sintaxis literal de Microsoft:
+  // https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-consent-api-v2
+  // Se manda en cada activación, no solo al inyectar: si en la misma página
+  // se rechaza y luego se vuelve a aceptar, Clarity ya está y hay que avisarle.
+  function activarClarity() {
+    if (PROPIO) return;
+    injectClarity();
+    if (typeof window.clarity !== "function") return;
+    window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: "granted" });
+    var fuente = fuenteDeSesion();
+    if (fuente) window.clarity("set", "fuente", fuente);
+  }
+
+  // Rechazar con Clarity ya cargado en esta página (se aceptó antes): borra
+  // sus cookies y deja de grabar hasta un nuevo consentimiento. Misma página
+  // de Microsoft, apartado «Erase cookies».
+  function retirarClarity() {
+    if (typeof window.clarity === "function") window.clarity("consent", false);
   }
 
   function currentLang() {
@@ -409,7 +437,7 @@
     accept.textContent = t.accept;
     accept.addEventListener("click", function () {
       setConsent("yes");
-      injectClarity();
+      activarClarity();
       removeBanner();
     });
 
@@ -419,6 +447,7 @@
     reject.textContent = t.reject;
     reject.addEventListener("click", function () {
       setConsent("no");
+      retirarClarity();
       removeBanner();
     });
 
@@ -435,11 +464,12 @@
     get: getConsent,
     accept: function () {
       setConsent("yes");
-      injectClarity();
+      activarClarity();
       removeBanner();
     },
     reject: function () {
       setConsent("no");
+      retirarClarity();
       removeBanner();
     },
     reset: function () {
@@ -455,9 +485,9 @@
   if (PROPIO) {
     // Navegador de Eneko o host que no es el de verdad: ni banner ni Clarity.
     // enekoConsent.reset() sí enseña el banner (lo pide la persona), pero
-    // aceptar no carga Clarity: injectClarity() también mira PROPIO.
+    // aceptar no carga Clarity: activarClarity() también mira PROPIO.
   } else if (consent === "yes") {
-    injectClarity();
+    activarClarity();
   } else if (consent !== "no") {
     showBanner();
   }
