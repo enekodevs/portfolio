@@ -7,10 +7,19 @@
  * Engine: binding CONTADOR, dataset enekodevs_contador.
  *
  * Lo que NO se guarda, a propósito: ni IP, ni user-agent, ni país, ni
- * campaña, ni hora propia. La marca de tiempo la pone Analytics Engine y la
- * lectura agrupa por día. El user-agent solo se mira aquí dentro para
- * descartar bots y para decir «movil» o «escritorio», y no sale de la
- * petición. Tampoco se leen cookies ni se pone ninguna.
+ * campaña. El user-agent solo se mira aquí dentro para descartar bots y para
+ * decir «movil» o «escritorio», y no sale de la petición. Tampoco se leen
+ * cookies ni se pone ninguna.
+ *
+ * Lo que SÍ queda aunque no lo mandemos: la hora. Analytics Engine guarda
+ * cada punto por separado, uno por petición, con su marca de tiempo exacta;
+ * aquí no hay nada que agregue por día ni forma de quitarla. Con unos 6
+ * correos al día a páginas de nicho, ruta + fuente «envio» + minuto puede
+ * señalar a una persona. Por eso el lector (el motor, cuando exista) lleva
+ * dos reglas que el aviso legal promete, y cada una con su prueba:
+ *   1. consulta siempre truncada a día, nunca por hora ni por minuto;
+ *   2. nunca une estos puntos con el ledger de envíos, ni por hora ni por
+ *      lead: solo compara totales.
  *
  * Forma del punto (el motor lo lee en este orden, no cambiarlo sin él):
  *   index1 = ruta (≤ 96 bytes)
