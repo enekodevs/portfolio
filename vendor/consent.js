@@ -6,12 +6,13 @@
  * Se adapta al idioma por ruta (/ca/, /en/, resto castellano) y al tema
  * claro/oscuro del sitio (variables CSS existentes si las hay).
  *
- * Además, FUERA del consentimiento porque no usa cookies ni identificadores,
- * lleva el contador de /api/m (functions/api/m.js): llegadas desde un enlace
- * propio (utm_source) y clics en correo, teléfono, WhatsApp y agenda.
- * Guarda solo la familia del origen en sessionStorage (`eneko.fuente`) y qué
- * páginas ya se contaron en esta pestaña (`eneko.llegadas`); las dos se
- * borran al cerrar la pestaña.
+ * Además, FUERA del consentimiento porque no usa cookies, ni identificadores,
+ * ni guarda nada en el navegador, lleva el contador de /api/m
+ * (functions/api/m.js): llegadas desde un enlace propio (utm_source) y clics
+ * en correo, teléfono, WhatsApp y agenda. Solo en las páginas en castellano:
+ * el aviso legal que lo explica aún no existe en catalán ni en inglés.
+ * La familia del origen vive en una variable de esta carga de página y nada
+ * más: ni sessionStorage ni localStorage. Al pasar a otra página se pierde.
  * Tráfico propio: `?yo=1` marca este navegador (`localStorage.eneko.yo`) y
  * `?yo=0` lo desmarca. Con la marca, o en cualquier host que no sea
  * enekodevs.com (localhost, *.pages.dev), no hay banner, ni Clarity, ni
@@ -26,12 +27,14 @@
   var ROOT_ID = "eneko-consent";
 
   var YO_KEY = "eneko.yo";
-  var FUENTE_KEY = "eneko.fuente";
-  var CONTADAS_KEY = "eneko.llegadas";
   var CONTADOR_URL = "/api/m";
   var HOSTS_REALES = { "enekodevs.com": 1, "www.enekodevs.com": 1 };
 
   // ---- Medición sin cookies ----
+
+  // Familia del utm_source con el que se cargó ESTA página, o "" si no traía.
+  // Solo en memoria, a propósito: no se guarda en ningún almacén.
+  var FUENTE = "";
 
   // utm_source -> familia cerrada. La Function rechaza cualquier otro valor.
   function familiaDeFuente(valor) {
@@ -45,28 +48,10 @@
     return "otra";
   }
 
-  function leerSesion(clave) {
-    try {
-      return sessionStorage.getItem(clave);
-    } catch (e) {
-      return null;
-    }
-  }
-
-  function escribirSesion(clave, valor) {
-    try {
-      sessionStorage.setItem(clave, valor);
-    } catch (e) {}
-  }
-
-  function fuenteDeSesion() {
-    var f = leerSesion(FUENTE_KEY);
-    return f === "envio" || f === "malt" || f === "linkedin" || f === "otra" ? f : "";
-  }
-
-  // Lee ?utm_source y ?yo, guarda lo que toca y los quita de la barra sin
-  // recargar (el hash se conserva). Así la URL que se copia o se comparte ya
-  // no lleva la etiqueta, y Clarity, si se acepta, tampoco la ve.
+  // Lee ?utm_source (a FUENTE, en memoria) y ?yo, y los quita de la barra sin
+  // recargar (el hash y el resto de la query se conservan). Así la URL que se
+  // copia o se comparte ya no lleva la etiqueta, Clarity, si se acepta,
+  // tampoco la ve, y al recargar la página ya no vuelve a contar.
   function leerYLimpiarUrl() {
     var params;
     try {
@@ -75,7 +60,7 @@
       return;
     }
     if (params.has("utm_source")) {
-      escribirSesion(FUENTE_KEY, familiaDeFuente(params.get("utm_source")));
+      FUENTE = familiaDeFuente(params.get("utm_source"));
     }
     var yo = params.get("yo");
     try {
@@ -110,10 +95,13 @@
 
   leerYLimpiarUrl();
   var PROPIO = esPropio();
+  // El contador solo avisa desde las páginas en castellano (la misma regla de
+  // idioma que el banner). Clarity no depende de esto: va por consentimiento.
+  var CUENTA = !PROPIO && currentLang() === "es";
 
   // Nunca rompe la navegación ni lanza: si no se puede avisar, no se avisa.
   function avisar(datos) {
-    if (PROPIO) return;
+    if (!CUENTA) return;
     try {
       var cuerpo = JSON.stringify(datos);
       if (navigator.sendBeacon && navigator.sendBeacon(CONTADOR_URL, cuerpo)) return;
@@ -131,22 +119,12 @@
     } catch (e) {}
   }
 
-  // Llegada: una vez por pestaña y página, solo si se llegó por un enlace
-  // con utm_source, y solo tras la primera señal de persona (tocar, teclear,
+  // Llegada: una vez por carga de página, solo si esta página se cargó con
+  // utm_source, y solo tras la primera señal de persona (tocar, teclear,
   // desplazarse de verdad o 5 s seguidos con la página visible). Los
   // escáneres de enlaces del correo abren la página pero no hacen nada de
   // eso, así que no cuentan como llegada.
   function armarLlegada() {
-    var ruta = location.pathname;
-    var contadas;
-    try {
-      contadas = JSON.parse(leerSesion(CONTADAS_KEY) || "[]");
-      if (!(contadas instanceof Array)) contadas = [];
-    } catch (e) {
-      contadas = [];
-    }
-    if (contadas.indexOf(ruta) !== -1) return;
-
     var EVENTOS = ["pointerdown", "keydown", "wheel", "touchstart"];
     var hecho = false;
     var reloj = null;
@@ -165,9 +143,7 @@
       if (hecho) return;
       hecho = true;
       quitar();
-      contadas.push(ruta);
-      escribirSesion(CONTADAS_KEY, JSON.stringify(contadas.slice(-50)));
-      avisar({ t: "llegada", p: ruta, f: fuenteDeSesion() });
+      avisar({ t: "llegada", p: location.pathname, f: FUENTE });
     }
 
     // Un scroll programático (ancla, restaurar posición) mueve poco o nada;
@@ -191,7 +167,7 @@
     alCambiarVisibilidad();
   }
 
-  if (!PROPIO && fuenteDeSesion()) armarLlegada();
+  if (CUENTA && FUENTE) armarLlegada();
 
   function destinoDeEnlace(href) {
     var h = String(href || "")
@@ -207,6 +183,8 @@
 
   // Clics de contacto: delegado en document y en captura, así vale para
   // todas las páginas y se oye aunque otro guion pare la propagación.
+  // Cuentan se llegue como se llegue (dentro de CUENTA); llevan la fuente solo
+  // si esta página se cargó con ella, y si no, «sin».
   document.addEventListener(
     "click",
     function (ev) {
@@ -217,7 +195,7 @@
         if (!a) return;
         var destino = destinoDeEnlace(a.getAttribute("href"));
         if (!destino) return;
-        avisar({ t: "clic", p: location.pathname, f: fuenteDeSesion() || "sin", d: destino });
+        avisar({ t: "clic", p: location.pathname, f: FUENTE || "sin", d: destino });
         // En Clarity, solo si ya está cargado (es decir, si se aceptó).
         if (!PROPIO && typeof window.clarity === "function") {
           window.clarity("event", "contacto_" + destino);
@@ -274,8 +252,7 @@
     injectClarity();
     if (typeof window.clarity !== "function") return;
     window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: "granted" });
-    var fuente = fuenteDeSesion();
-    if (fuente) window.clarity("set", "fuente", fuente);
+    if (FUENTE) window.clarity("set", "fuente", FUENTE);
   }
 
   // Rechazar con Clarity ya cargado en esta página (se aceptó antes): borra
