@@ -155,15 +155,18 @@
   /* ---------- SERVICIOS (tarjetas) ---------- */
   .servicios{background:var(--paper)}
   .cards{display:grid;gap:16px;margin-top:48px}
-  .ncard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 28px;position:relative;overflow:hidden;transition:.32s var(--ease)}
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 28px 30px;position:relative;overflow:hidden;transition:.32s var(--ease)}
   .ncard::before{content:"";position:absolute;left:0;top:0;height:3px;width:0;background:var(--cobalt);transition:width .35s var(--ease)}
   .ncard:hover{transform:translateY(-5px);box-shadow:var(--shadow)}.ncard:hover::before{width:100%}
-  .ncard .ic{width:42px;height:42px;border-radius:11px;border:1px solid var(--line);display:grid;place-items:center;color:var(--cobalt);background:var(--paper)}
-  .ncard .ic svg{width:20px;height:20px}
-  .ncard h3{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.22rem;margin:16px 0 9px;letter-spacing:-.02em}
+  .service-visual{height:190px;display:grid;place-items:center;position:relative;isolation:isolate;margin:-4px -8px 0}
+  .service-visual::before{content:"";position:absolute;inset:14% 8%;z-index:-1;background:radial-gradient(circle,rgba(230,169,46,.11),transparent 68%);filter:blur(12px)}
+  .service-visual img{display:block;width:min(88%,210px);height:auto;filter:drop-shadow(0 22px 22px rgba(21,23,26,.14));transition:transform .45s var(--ease)}
+  .ncard:hover .service-visual img{transform:translateY(-4px) scale(1.025)}
+  .ncard h3{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.22rem;margin:2px 0 9px;letter-spacing:-.02em}
   .ncard p{font-size:.94rem;color:var(--ink-2)}
   @media(min-width:600px){.cards{grid-template-columns:repeat(2,1fr)}}
   @media(min-width:940px){.cards{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:599px){.service-visual{height:170px}.service-visual img{width:min(74%,190px)}}
 
   /* ---------- PROCESO · intro + SCROLL-THROUGH DE FASES ---------- */
   .prun-intro{background:var(--plum);color:var(--d-fg);padding:clamp(74px,13vh,120px) 0 clamp(26px,5vh,44px)}
@@ -310,12 +313,12 @@
     <span class="eyebrow" data-i18n="serv.eyebrow">Qué construyo</span>
     <h2 class="kicker-h2 sweep" data-i18n-html="serv.title">Productos, no <em>plantillas.</em></h2>
     <div class="cards">
-      <article class="ncard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg></div><h3 data-i18n="serv.1.t">Aplicaciones de cálculo</h3><p data-i18n="serv.1.p">Calculadoras de ingeniería, costes, dimensionado o energía. Motor matemático testeado y resultados en tiempo real.</p></article>
-      <article class="ncard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3 data-i18n="serv.2.t">Herramientas de presupuesto</h3><p data-i18n="serv.2.p">Cotizadores con tarifas, descuentos, IVA y exportación a PDF/XLSX. Tu comercial cierra venta desde el móvil.</p></article>
-      <article class="ncard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/></svg></div><h3 data-i18n="serv.3.t">Configuradores de producto</h3><p data-i18n="serv.3.p">El cliente elige medidas, materiales y acabados; la app calcula precio y envía el pedido al ERP o por email.</p></article>
-      <article class="ncard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4.9V17L12 22 3 17V6.9z"/><path d="M3 7l9 5 9-5"/></svg></div><h3 data-i18n="serv.4.t">Visualizadores 3D técnicos</h3><p data-i18n="serv.4.p">Modelos paramétricos en navegador con Three.js: rotación, capas, mediciones y exportación a OBJ/DXF.</p></article>
-      <article class="ncard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><h3 data-i18n="serv.5.t">Dashboards y back-office</h3><p data-i18n="serv.5.p">Paneles de operación: usuarios, métricas, facturación, auth con OAuth, planes y permisos. Supabase + RLS desde el día uno.</p></article>
-      <article class="ncard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><h3 data-i18n="serv.6.t">PWA + despliegue continuo</h3><p data-i18n="serv.6.p">Apps instalables, modo offline, despliegue automático en Cloudflare o Vercel, dominio propio y SEO técnico cuidado.</p></article>
+      <article class="ncard reveal"><div class="service-visual" aria-hidden="true"><img src="/visuals/services/service-calculation.png" width="720" height="720" alt="" loading="lazy" decoding="async"></div><h3 data-i18n="serv.1.t">Aplicaciones de cálculo</h3><p data-i18n="serv.1.p">Calculadoras de ingeniería, costes, dimensionado o energía. Motor matemático testeado y resultados en tiempo real.</p></article>
+      <article class="ncard reveal"><div class="service-visual" aria-hidden="true"><img src="/visuals/services/service-quoting.png" width="720" height="720" alt="" loading="lazy" decoding="async"></div><h3 data-i18n="serv.2.t">Herramientas de presupuesto</h3><p data-i18n="serv.2.p">Cotizadores con tarifas, descuentos, IVA y exportación a PDF/XLSX. Tu comercial cierra venta desde el móvil.</p></article>
+      <article class="ncard reveal"><div class="service-visual" aria-hidden="true"><img src="/visuals/services/service-configurator.png" width="720" height="720" alt="" loading="lazy" decoding="async"></div><h3 data-i18n="serv.3.t">Configuradores de producto</h3><p data-i18n="serv.3.p">El cliente elige medidas, materiales y acabados; la app calcula precio y envía el pedido al ERP o por email.</p></article>
+      <article class="ncard reveal"><div class="service-visual" aria-hidden="true"><img src="/visuals/services/service-3d-viewer.png" width="720" height="720" alt="" loading="lazy" decoding="async"></div><h3 data-i18n="serv.4.t">Visualizadores 3D técnicos</h3><p data-i18n="serv.4.p">Modelos paramétricos en navegador con Three.js: rotación, capas, mediciones y exportación a OBJ/DXF.</p></article>
+      <article class="ncard reveal"><div class="service-visual" aria-hidden="true"><img src="/visuals/services/service-dashboard.png" width="720" height="720" alt="" loading="lazy" decoding="async"></div><h3 data-i18n="serv.5.t">Dashboards y back-office</h3><p data-i18n="serv.5.p">Paneles de operación: usuarios, métricas, facturación, auth con OAuth, planes y permisos. Supabase + RLS desde el día uno.</p></article>
+      <article class="ncard reveal"><div class="service-visual" aria-hidden="true"><img src="/visuals/services/service-pwa.png" width="720" height="720" alt="" loading="lazy" decoding="async"></div><h3 data-i18n="serv.6.t">PWA + despliegue continuo</h3><p data-i18n="serv.6.p">Apps instalables, modo offline, despliegue automático en Cloudflare o Vercel, dominio propio y SEO técnico cuidado.</p></article>
     </div>
   </div>
 </section>
