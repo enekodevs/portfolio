@@ -3,7 +3,7 @@
  *
  * Cuenta dos cosas, por página: llegadas desde un enlace propio y clics en
  * los enlaces de contacto (correo, teléfono, WhatsApp y agenda). Lo manda
- * vendor/consent.js con sendBeacon, solo desde las páginas en castellano, y
+ * vendor/consent.js con sendBeacon, desde las páginas de los tres idiomas, y
  * aquí se suma +1 a un total del día en D1: binding CONTADOR_DB, base
  * enekodevs-contador (cuenta de Lasaifusta).
  *
@@ -50,10 +50,6 @@ export const DIAS_CONSERVADOS = 90;
 
 // Rutas del sitio: ASCII, sin query ni hash. Todo lo demás se rechaza.
 const RUTA_VALIDA = /^\/[A-Za-z0-9._~\/-]*$/;
-
-// Solo páginas en castellano: el aviso legal que lo explica aún no está en
-// catalán ni en inglés. Misma regla de idioma que currentLang() en consent.js.
-const RUTA_OTRO_IDIOMA = /^\/(ca|en)(\/|$)/;
 
 // Bots y clientes que no son un navegador de persona. No pretende ser una
 // lista completa: los escáneres de enlaces del correo que se hacen pasar por
@@ -128,7 +124,6 @@ export function validar(texto) {
   if (!FUENTES.has(fuente)) return null;
   if (typeof ruta !== "string" || !RUTA_VALIDA.test(ruta)) return null;
   if (new TextEncoder().encode(ruta).length > MAX_RUTA) return null;
-  if (RUTA_OTRO_IDIOMA.test(ruta)) return null;
   if (tipo === "clic" && !DESTINOS_CLIC.has(destino)) return null;
   if (tipo === "llegada" && destino !== SIN_DESTINO) return null;
   if (tipo === "llegada" && !FUENTES_LLEGADA.has(fuente)) return null;

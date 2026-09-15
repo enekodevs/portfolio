@@ -9,9 +9,9 @@
  * Además, FUERA del consentimiento porque no usa cookies, ni identificadores,
  * ni guarda nada en el navegador, lleva el contador de /api/m
  * (functions/api/m.js): llegadas desde un enlace propio (utm_source envio,
- * malt o linkedin) y clics en correo, teléfono, WhatsApp y agenda. Solo en
- * las páginas en castellano: el aviso legal que lo explica aún no existe en
- * catalán ni en inglés.
+ * malt o linkedin) y clics en correo, teléfono, WhatsApp y agenda. En los
+ * tres idiomas: cada uno tiene su aviso legal que lo explica (/aviso-legal,
+ * /ca/aviso-legal y /en/aviso-legal).
  * La familia del origen vive en una variable de esta carga de página y nada
  * más: ni sessionStorage ni localStorage. Al pasar a otra página se pierde.
  * Tráfico propio: `?yo=1` marca este navegador (`localStorage.eneko.yo`) y
@@ -98,9 +98,9 @@
 
   leerYLimpiarUrl();
   var PROPIO = esPropio();
-  // El contador solo avisa desde las páginas en castellano (la misma regla de
-  // idioma que el banner). Clarity no depende de esto: va por consentimiento.
-  var CUENTA = !PROPIO && currentLang() === "es";
+  // El contador avisa en los tres idiomas: cada uno tiene ya su aviso legal
+  // (MKT-27). Clarity no depende de esto: va por consentimiento.
+  var CUENTA = !PROPIO;
 
   // Nunca rompe la navegación ni lanza: si no se puede avisar, no se avisa.
   function avisar(datos) {
@@ -281,6 +281,7 @@
       msg:
         "Usamos Microsoft Clarity para entender cómo se usa la web (mapas de calor y grabaciones anónimas). ¿Lo aceptas?",
       link: "Más información",
+      aviso: "/aviso-legal",
       accept: "Aceptar",
       reject: "Rechazar"
     },
@@ -289,6 +290,7 @@
       msg:
         "Fem servir Microsoft Clarity per entendre com s'usa la web (mapes de calor i gravacions anònimes). Ho acceptes?",
       link: "Més informació",
+      aviso: "/ca/aviso-legal",
       accept: "Acceptar",
       reject: "Rebutjar"
     },
@@ -297,6 +299,7 @@
       msg:
         "We use Microsoft Clarity to understand how the site is used (heatmaps and anonymous session recordings). Do you accept?",
       link: "Learn more",
+      aviso: "/en/aviso-legal",
       accept: "Accept",
       reject: "Reject"
     }
@@ -407,7 +410,7 @@
     msg.className = "ec-msg";
     msg.textContent = t.msg + " ";
     var link = document.createElement("a");
-    link.href = "/aviso-legal.html";
+    link.href = t.aviso;
     link.textContent = t.link;
     msg.appendChild(link);
 
