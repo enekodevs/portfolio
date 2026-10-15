@@ -156,15 +156,17 @@
   .brand{display:flex;align-items:center;gap:11px}
   .mono-mark{width:34px;height:34px;border:1.5px solid var(--ink);border-radius:8px;display:grid;place-items:center;font-family:'Archivo',sans-serif;font-weight:900;font-size:.82rem}
   .mono-mark img{display:block;width:24px;height:24px}.mono-mark .mk-dark{display:none}[data-theme="dark"] .mono-mark .mk-light{display:none}[data-theme="dark"] .mono-mark .mk-dark{display:block}
-  .brand .n{font-family:'Archivo',sans-serif;font-weight:700;font-size:.95rem}
+  .brand .n{font-family:'Archivo',sans-serif;font-weight:700;font-size:.95rem;white-space:nowrap}
   .brand .n span{font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:.64rem;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase;display:block}
   .nlinks{display:flex;gap:22px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
-  .nlinks a{color:var(--ink-2);transition:color .2s}.nlinks a:hover{color:var(--ink)}
+  .nlinks a{color:var(--ink-2);transition:color .2s;white-space:nowrap}.nlinks a:hover{color:var(--ink)}
   .nlinks a.on{color:var(--cobalt)}
   /* En movil la navegacion NO se esconde: baja a una segunda fila que se
      desliza con el dedo. Antes era display:none y no habia hamburguesa, asi que
-     por debajo de 820px los seis destinos eran inalcanzables. Sin JavaScript. */
-  @media(max-width:820px){
+     por debajo de 820px los seis destinos eran inalcanzables. Sin JavaScript.
+     El corte esta en 1140px y no en 820: entre medias el menu en una sola fila
+     no cabia, partia «CASO / DOMESLAB» y montaba el nombre con el menu. */
+  @media(max-width:1140px){
     .nav{flex-wrap:wrap;row-gap:0}
     .nlinks{order:9;flex-basis:100%;gap:18px;font-size:.68rem;margin-top:8px;padding:9px 0 3px;
       border-top:1px solid var(--line);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}
@@ -248,27 +250,38 @@
   .work-gallery h2 em{ color:var(--amber); font-style:italic; }
   .work-gallery .sec-lead{ color:#b7b1aa; max-width:640px; margin-top:14px; font-size:1rem; line-height:1.6; }
   .work-gallery .note{ text-align:center; color:#8b857f; font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.04em; margin-top:6px; }
-  .g3d{ position:relative; width:100vw; margin-left:calc(50% - 50vw); height:clamp(500px,72vh,860px); margin-top:2.6rem; overflow:hidden; perspective:1700px; perspective-origin:50% 50%; touch-action:pan-y; cursor:grab; user-select:none; }
+  /* La galeria cabe en la pantalla: --g3d-w (ancho de la tarjeta base) sale del
+     ancho Y del alto libre bajo la cabecera fija (--g3d-cab). El alto del
+     escenario se deriva de el con sitio para la tarjeta levantada al pasar el
+     raton (x1,19) y su pie (insignia + nombre). La perspectiva escala con la
+     tarjeta, asi el efecto 3D se ve igual en cualquier tamano. */
+  .g3d{ --g3d-cab:92px;
+    --g3d-libre:max(240px, calc(100svh - var(--g3d-cab) - 16px));
+    --g3d-w:min(max(44vw, min(300px, 74vw)), 820px, calc(var(--g3d-libre) * 1.3 - 150px));
+    position:relative; width:100vw; margin-left:calc(50% - 50vw); height:calc(var(--g3d-w) * .77 + 115px); margin-top:2.6rem; overflow:hidden; perspective:calc(var(--g3d-w) * 3.02); perspective-origin:50% 50%; touch-action:pan-y; cursor:grab; user-select:none; }
+  @media(max-width:1140px){ .g3d{ --g3d-cab:130px; } }
+  @media(max-width:520px){ .g3d{ --g3d-cab:115px; } }
   .g3d.dragging{ cursor:grabbing; }
   /* pointer-events:none: el plano del stage (z=0) intercepta el hit-test 3D por
      delante de las tarjetas (z<0); fuera del hit-test, las tarjetas reciben
      hover/clic directamente y el cursor pasa a "pointer" encima de ellas. */
   .g3d__stage{ position:absolute; inset:0; transform-style:preserve-3d; pointer-events:none; }
-  .g3d-frame{ position:absolute; top:50%; left:50%; width:clamp(300px,44vw,820px); margin:0; transform-style:preserve-3d; will-change:transform,filter,opacity; backface-visibility:hidden; cursor:pointer; }
-  .g3d-media{ position:relative; border-radius:22px; overflow:hidden; box-shadow:0 44px 100px -30px rgba(0,0,0,.8); background:#0c0a10; }
-  .g3d-frame img, .g3d-frame video{ display:block; width:100%; aspect-ratio:16/9; object-fit:cover; pointer-events:none; -webkit-user-drag:none; }
-  .g3d-overlay{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:16px; padding:clamp(18px,3vw,40px); text-align:center; background:rgba(9,7,13,.9); color:#ece8e0; opacity:0; transition:opacity .4s ease; pointer-events:none; }
+  .g3d-frame{ position:absolute; top:50%; left:50%; width:var(--g3d-w); margin:0; transform-style:preserve-3d; will-change:transform,filter,opacity; backface-visibility:hidden; cursor:pointer; }
+  .g3d-media{ position:relative; container-type:inline-size; border-radius:22px; overflow:hidden; box-shadow:0 44px 100px -30px rgba(0,0,0,.8); background:#0c0a10; }
+  .g3d-frame img, .g3d-frame video{ display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; pointer-events:none; -webkit-user-drag:none; }
+  .g3d-frame img{ object-position:50% 0; }
+  .g3d-overlay{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; justify-content:safe center; align-items:center; gap:16px; padding:clamp(12px,4.5cqw,40px); overflow-y:auto; scrollbar-width:thin; text-align:center; background:rgba(9,7,13,.9); color:#ece8e0; opacity:0; transition:opacity .4s ease; pointer-events:none; }
   .g3d-frame.active .g3d-overlay{ opacity:1; pointer-events:auto; }
-  .g3d-overlay .g3d-odesc{ font-size:clamp(.85rem,1.5vw,1.06rem); line-height:1.55; color:#d9d4cb; max-width:46ch; }
-  .g3d-overlay .g3d-olink{ color:var(--amber); font-weight:600; font-size:.92rem; text-decoration:none; border-bottom:1px solid rgba(230,169,46,.45); }
+  .g3d-overlay .g3d-odesc{ font-size:clamp(.78rem,2.8cqw,1.06rem); line-height:1.55; color:#d9d4cb; max-width:46ch; }
+  .g3d-overlay .g3d-olink{ color:var(--amber); font-weight:600; font-size:clamp(.74rem,2.6cqw,.92rem); text-decoration:none; border-bottom:1px solid rgba(230,169,46,.45); }
   /* Variante insignia (DomesLab): tag + titular + chips dentro del overlay */
-  .g3d-overlay--case{ gap:10px; }
-  .g3d-otag{ font-family:'IBM Plex Mono',monospace; font-size:clamp(.55rem,.9vw,.66rem); letter-spacing:.18em; text-transform:uppercase; color:var(--amber); }
-  .g3d-otitle{ font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(1.05rem,2.4vw,1.9rem); letter-spacing:-.03em; line-height:1.05; color:#f2efe8; max-width:22ch; text-wrap:balance; }
+  .g3d-overlay--case{ gap:clamp(6px,1.8cqw,10px); }
+  .g3d-otag{ font-family:'IBM Plex Mono',monospace; font-size:clamp(.55rem,1.6cqw,.66rem); letter-spacing:.18em; text-transform:uppercase; color:var(--amber); }
+  .g3d-otitle{ font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(1rem,4.4cqw,1.9rem); letter-spacing:-.03em; line-height:1.05; color:#f2efe8; max-width:22ch; text-wrap:balance; }
   .g3d-otitle em{ font-style:normal; color:var(--amber); }
   .g3d-ochips{ display:flex; flex-wrap:wrap; justify-content:center; gap:7px; }
   .g3d-ochips span{ font-family:'IBM Plex Mono',monospace; font-size:.66rem; color:#ece8e0; border:1px solid rgba(242,240,234,.22); border-radius:7px; padding:4px 9px; }
-  @media(max-width:640px){ .g3d-ochips{ display:none; } .g3d-overlay--case{ gap:8px; } .g3d-overlay--case .g3d-odesc{ font-size:.78rem; line-height:1.45; } }
+  @container (max-width:480px){ .g3d-ochips{ display:none; } .g3d-overlay--case{ gap:8px; } .g3d-overlay--case .g3d-odesc{ font-size:.78rem; line-height:1.45; } }
   .g3d-frame figcaption{ margin-top:10px; display:flex; flex-direction:column; align-items:center; gap:7px; pointer-events:none; }
   .g3d-badge{ font-family:'IBM Plex Mono',monospace; font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--amber); border:1px solid rgba(230,169,46,.38); border-radius:999px; padding:3px 10px; }
   .g3d-badge.live::before{ content:""; display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--amber); margin-right:7px; vertical-align:1px; }
@@ -513,15 +526,42 @@
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var SPEED = 0.003, ANG = 50;
 
+  // El ancho base de la tarjeta (--g3d-w) lo fija el CSS segun el ancho Y el
+  // alto de la pantalla; aqui solo se multiplica por data-w.
+  var WS = [], WMAX = 1, caps = [];
   frames.forEach(function (f, i) {
     var w = parseFloat(f.getAttribute("data-w") || "1");
-    f.style.width = "calc(clamp(300px, 44vw, 820px) * " + w + ")";
+    WS[i] = w; WMAX = Math.max(WMAX, w);
+    caps[i] = f.querySelector("figcaption");
+    f.style.width = "calc(var(--g3d-w) * " + w + ")";
     f.setAttribute("data-vy", (i % 2 === 0 ? -1 : 1) * (8 + (i % 3) * 3));
   });
 
-  var W = scene.clientWidth;
-  function measure() { W = scene.clientWidth; }
+  // Todo va en proporcion a la tarjeta (cw): la profundidad (D, referencia 563 px,
+  // que es 44vw a 1280) y la separacion. La separacion se acorta lo justo para
+  // que las vecinas (a una posicion del centro) quepan enteras en la pantalla; si
+  // hay que apretarlas mucho (movil), solo se ve el pie de la tarjeta central.
+  // El pie de cualquier tarjeta se desvanece antes de tocar el borde: nunca se
+  // ve un titulo cortado.
+  var W, cw, D, P, GAP1, GAP2, DRAG, apretada, capW = [];
+  function measure() {
+    W = scene.clientWidth;
+    cw = frames[0].offsetWidth / WS[0];
+    D = cw / 563;
+    P = parseFloat(getComputedStyle(scene).perspective) || 1700;
+    caps.forEach(function (c, i) {
+      capW[i] = Math.max(c.querySelector(".g3d-badge").offsetWidth, c.querySelector(".g3d-name").offsetWidth);
+    });
+    var hw = 0.85 * WMAX * cw / 2, a = ANG * Math.PI / 180;
+    var ox = hw * Math.cos(a), oz = -300 * D + hw * Math.sin(a);
+    var ideal = cw * 0.42 / 0.44;
+    GAP1 = Math.max(0, Math.min(ideal, (W / 2 - 12) * (P - oz) / P - ox));
+    GAP2 = GAP1 * 0.28 / 0.42;
+    DRAG = Math.min(0.44 * W, cw);
+    apretada = GAP1 < 0.8 * ideal;
+  }
   window.addEventListener("resize", measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
 
   var p = 0, target = null, locked = -1, hover = -1, over = false;
   var dragging = false, moved = false, startX = 0, startP = 0;
@@ -530,14 +570,13 @@
   function wrapNear(d) { return d - N * Math.round(d / N); }
 
   function render() {
-    var GAP1 = 0.42 * W, GAP2 = 0.28 * W;
     for (var i = 0; i < N; i++) {
       var d = wrapNear(i - p), ad = Math.abs(d), sgn = (d > 0 ? 1 : d < 0 ? -1 : 0), cl = Math.min(ad, 1);
       var x = sgn * (cl * GAP1 + Math.max(0, ad - 1) * GAP2);
-      var z = -(cl * 300 + Math.max(0, ad - 1) * 230);
+      var z = -(cl * 300 + Math.max(0, ad - 1) * 230) * D;
       var ry = -sgn * cl * ANG;
       var sc = Math.max(0.5, 1 - Math.min(ad, 3) * 0.15);
-      var k = pop[i]; z += k * 180; sc += k * 0.06; ry *= (1 - k * 0.85);
+      var k = pop[i]; z += k * 180 * D; sc += k * 0.06; ry *= (1 - k * 0.85);
       var op = ad <= 1 ? 1 : ad >= 2.4 ? 0 : 1 - (ad - 1) / 1.4; op = Math.max(op, k);
       var f = frames[i], vy = parseFloat(f.getAttribute("data-vy") || 0);
       f.style.transform = "translate(-50%,-50%) translateX(" + x.toFixed(1) + "px) translateY(" + vy + "px) translateZ(" + z.toFixed(1) + "px) rotateY(" + ry.toFixed(2) + "deg) scale(" + sc.toFixed(3) + ")";
@@ -545,6 +584,11 @@
       f.style.filter = "brightness(" + (0.72 + 0.28 * Math.max(0, 1 - ad * 0.5)).toFixed(3) + ")";
       f.style.zIndex = String(Math.round((3 - ad) * 100) + Math.round(k * 400));
       f.style.pointerEvents = op > 0.05 ? "auto" : "none";
+      var ch = sc * capW[i] / 2, rr = Math.abs(ry) * Math.PI / 180;
+      var edge = (Math.abs(x) + ch * Math.cos(rr)) * P / (P - (z + ch * Math.sin(rr)));
+      var co = Math.max(0, Math.min(1, (W / 2 - 4 - edge) / 30));
+      if (apretada) co = Math.min(co, Math.max(k, Math.min(1, Math.max(0, 1.6 - 2.2 * ad))));
+      caps[i].style.opacity = co.toFixed(2);
     }
   }
 
@@ -587,7 +631,7 @@
     if (!pressed) return;
     var dx = e.clientX - startX;
     if (!moved && Math.abs(dx) > 8) { moved = true; scene.classList.add("dragging"); closeOverlay(); }
-    if (moved) p = startP - dx / (0.44 * W);
+    if (moved) p = startP - dx / DRAG;
   });
   function endPress(cancelled) {
     if (!pressed) return;
