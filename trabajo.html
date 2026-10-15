@@ -167,6 +167,9 @@
      El corte esta en 1140px y no en 820: entre medias el menu en una sola fila
      no cabia, partia «CASO / DOMESLAB» y montaba el nombre con el menu. */
   @media(max-width:1140px){
+    /* Con el menu en segunda fila, el degradado de la cabecera dejaba esa fila
+       sobre fondo transparente y, con la galeria oscura debajo, no se leia. */
+    header,[data-theme="dark"] header{background:var(--paper)}
     .nav{flex-wrap:wrap;row-gap:0}
     .nlinks{order:9;flex-basis:100%;gap:18px;font-size:.68rem;margin-top:8px;padding:9px 0 3px;
       border-top:1px solid var(--line);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}
@@ -227,7 +230,7 @@
   footer{background:var(--ink);color:rgba(242,240,234,.55);border-top:1px solid rgba(242,240,234,.12)}
   .foot{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;padding:28px var(--gut);max-width:var(--ample);margin:0 auto;font-family:'IBM Plex Mono',monospace;font-size:.74rem}
   .foot .n{color:#fff;font-family:'Archivo',sans-serif;font-weight:700}
-  .foot-nav{display:flex;gap:16px}
+  .foot-nav{display:flex;flex-wrap:wrap;gap:16px}
 
   .scrollbar{position:fixed;top:0;left:0;height:2.5px;width:100%;z-index:60;background:linear-gradient(90deg,var(--cobalt),var(--amber));transform:scaleX(0);transform-origin:0 50%;transition:transform .1s linear}
   .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--rd,0ms)}
@@ -253,8 +256,9 @@
   /* La galeria cabe en la pantalla: --g3d-w (ancho de la tarjeta base) sale del
      ancho Y del alto libre bajo la cabecera fija (--g3d-cab). El alto del
      escenario se deriva de el con sitio para la tarjeta levantada al pasar el
-     raton (x1,19) y su pie (insignia + nombre). La perspectiva escala con la
-     tarjeta, asi el efecto 3D se ve igual en cualquier tamano. */
+     raton y su pie (insignia + nombre); cuanto crece de verdad lo ajusta el JS
+     para que, con el pie en dos lineas, siga cabiendo. La perspectiva escala con
+     la tarjeta, asi el efecto 3D se ve igual en cualquier tamano. */
   .g3d{ --g3d-cab:92px;
     --g3d-libre:max(240px, calc(100svh - var(--g3d-cab) - 16px));
     --g3d-w:min(max(44vw, min(300px, 74vw)), 820px, calc(var(--g3d-libre) * 1.3 - 150px));
@@ -266,8 +270,8 @@
      delante de las tarjetas (z<0); fuera del hit-test, las tarjetas reciben
      hover/clic directamente y el cursor pasa a "pointer" encima de ellas. */
   .g3d__stage{ position:absolute; inset:0; transform-style:preserve-3d; pointer-events:none; }
-  .g3d-frame{ position:absolute; top:50%; left:50%; width:var(--g3d-w); margin:0; transform-style:preserve-3d; will-change:transform,filter,opacity; backface-visibility:hidden; cursor:pointer; }
-  .g3d-media{ position:relative; container-type:inline-size; border-radius:22px; overflow:hidden; box-shadow:0 44px 100px -30px rgba(0,0,0,.8); background:#0c0a10; }
+  .g3d-frame{ position:absolute; top:50%; left:50%; width:var(--g3d-w); margin:0; container-type:inline-size; transform-style:preserve-3d; will-change:transform,filter,opacity; backface-visibility:hidden; cursor:pointer; }
+  .g3d-media{ position:relative; border-radius:22px; overflow:hidden; box-shadow:0 44px 100px -30px rgba(0,0,0,.8); background:#0c0a10; }
   .g3d-frame img, .g3d-frame video{ display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; pointer-events:none; -webkit-user-drag:none; }
   .g3d-frame img{ object-position:50% 0; }
   .g3d-overlay{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; justify-content:safe center; align-items:center; gap:16px; padding:clamp(12px,4.5cqw,40px); overflow-y:auto; scrollbar-width:thin; text-align:center; background:rgba(9,7,13,.9); color:#ece8e0; opacity:0; transition:opacity .4s ease; pointer-events:none; }
@@ -282,6 +286,22 @@
   .g3d-ochips{ display:flex; flex-wrap:wrap; justify-content:center; gap:7px; }
   .g3d-ochips span{ font-family:'IBM Plex Mono',monospace; font-size:.66rem; color:#ece8e0; border:1px solid rgba(242,240,234,.22); border-radius:7px; padding:4px 9px; }
   @container (max-width:480px){ .g3d-ochips{ display:none; } .g3d-overlay--case{ gap:8px; } .g3d-overlay--case .g3d-odesc{ font-size:.78rem; line-height:1.45; } }
+  /* Si el texto de una tarjeta abierta no cabe en la imagen, el JS lo encaja por
+     pasos y para en el primero que basta: sin chips; ocupando tambien el pie;
+     sin la etiqueta; descripcion recortada a las lineas que quepan (dos como
+     minimo); en DomesLab, que ya lleva titular, sin descripcion; y por ultimo,
+     letra y margenes algo menores. Nunca hay que desplazar dentro de la tarjeta. */
+  .g3d-overlay.ov-1 .g3d-ochips, .g3d-overlay.ov-2 .g3d-otag{ display:none; }
+  .g3d-overlay.ov-3 .g3d-odesc{ display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:var(--lineas,3); line-clamp:var(--lineas,3); overflow:hidden; }
+  .g3d-overlay--case.ov-6 .g3d-odesc{ display:none; }
+  .g3d-overlay.ov-7{ gap:6px; padding:8px 10px; }
+  .g3d-overlay.ov-7 .g3d-otitle{ font-size:.88rem; }
+  .g3d-overlay.ov-7 .g3d-odesc{ font-size:.74rem; line-height:1.4; }
+  .g3d-overlay.ov-7 .g3d-olink{ font-size:.7rem; }
+  .g3d-frame.ov-pie .g3d-media{ position:static; }
+  .g3d-frame.ov-pie .g3d-overlay{ border-radius:22px; }
+  .g3d-frame.ov-pie figcaption{ transition:visibility 0s .4s; }
+  .g3d-frame.ov-pie.active figcaption{ visibility:hidden; transition:none; }
   .g3d-frame figcaption{ margin-top:10px; display:flex; flex-direction:column; align-items:center; gap:7px; pointer-events:none; }
   .g3d-badge{ font-family:'IBM Plex Mono',monospace; font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--amber); border:1px solid rgba(230,169,46,.38); border-radius:999px; padding:3px 10px; }
   .g3d-badge.live::before{ content:""; display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--amber); margin-right:7px; vertical-align:1px; }
@@ -528,30 +548,84 @@
 
   // El ancho base de la tarjeta (--g3d-w) lo fija el CSS segun el ancho Y el
   // alto de la pantalla; aqui solo se multiplica por data-w.
-  var WS = [], WMAX = 1, caps = [];
+  var WS = [], WMAX = 1, caps = [], medias = [], ovs = [], partes = [];
   frames.forEach(function (f, i) {
     var w = parseFloat(f.getAttribute("data-w") || "1");
     WS[i] = w; WMAX = Math.max(WMAX, w);
     caps[i] = f.querySelector("figcaption");
+    medias[i] = f.querySelector(".g3d-media");
+    ovs[i] = f.querySelector(".g3d-overlay");
+    partes[i] = [caps[i].querySelector(".g3d-badge"), caps[i].querySelector(".g3d-name")];
     f.style.width = "calc(var(--g3d-w) * " + w + ")";
     f.setAttribute("data-vy", (i % 2 === 0 ? -1 : 1) * (8 + (i % 3) * 3));
   });
 
   // Todo va en proporcion a la tarjeta (cw): la profundidad (D, referencia 563 px,
-  // que es 44vw a 1280) y la separacion. La separacion se acorta lo justo para
-  // que las vecinas (a una posicion del centro) quepan enteras en la pantalla; si
-  // hay que apretarlas mucho (movil), solo se ve el pie de la tarjeta central.
-  // El pie de cualquier tarjeta se desvanece antes de tocar el borde: nunca se
-  // ve un titulo cortado.
-  var W, cw, D, P, GAP1, GAP2, DRAG, apretada, capW = [];
+  // que es 44vw a 1280), el escalonado vertical y la separacion. La separacion se
+  // acorta lo justo para que las vecinas (a una posicion del centro) quepan
+  // enteras en la pantalla; si hay que apretarlas mucho (movil), solo se ve el pie
+  // de la tarjeta central.
+  // Cada tarjeta se ancla por el centro de su imagen y todas las imagenes
+  // comparten una linea (LINE), a la que mira la perspectiva: el pie cuelga
+  // debajo y la franja de los pies queda libre de imagenes vecinas. Lo que crece
+  // una tarjeta al pasar el raton o al abrirla (AMP) sale del alto real del
+  // escenario: crecida y con su pie, siempre cabe.
+  // Un pie se apaga antes de tocar el borde, si su tarjeta esta lejos del centro
+  // o si le pasa por encima algo con mas prioridad (la tarjeta crecida, la
+  // central, una que va por delante o la burbuja del chat): nunca se ve un
+  // titulo cortado ni tapado.
+  var W, H, cw, D, P, LINE, GAP1, GAP2, DRAG, apretada, G = [], AMP = [], chat = null, chatSucio = true;
+  var M = 3;
+  // El texto de la tarjeta abierta se encaja por pasos (ver el CSS, ov-*).
+  function encajar(f, i) {
+    var ov = ovs[i], de = ov.querySelector(".g3d-odesc");
+    var pasos = ["ov-1", "pie", "ov-2", "lineas", "ov-6", "ov-7", "lineas"];
+    function sobra() { return ov.scrollHeight - ov.clientHeight; }
+    function lineas() {
+      if (!de || getComputedStyle(de).display === "none") return;
+      var lh = parseFloat(getComputedStyle(de).lineHeight) || 18;
+      var n = Math.max(2, Math.floor((de.offsetHeight - sobra()) / lh));
+      ov.classList.add("ov-3");
+      ov.style.setProperty("--lineas", n);
+      while (sobra() > 1 && n > 2) ov.style.setProperty("--lineas", --n);
+    }
+    f.classList.remove("ov-pie");
+    ov.classList.remove("ov-1", "ov-2", "ov-3", "ov-6", "ov-7");
+    ov.style.removeProperty("--lineas");
+    for (var s = 0; s < pasos.length && sobra() > 1; s++) {
+      if (pasos[s] === "pie") f.classList.add("ov-pie");
+      else if (pasos[s] === "lineas") lineas();
+      else ov.classList.add(pasos[s]);
+    }
+  }
+  function cabe(g, a) {
+    var f = P / (P - 180 * D * a), s = (1 + 0.06 * a) * f, y = LINE + g.vy * f;
+    return y - s * g.hm >= M && y + s * (g.hm + g.cap) <= H - M && s * g.hw <= W / 2 - M;
+  }
+  function amplitud(g) {
+    if (cabe(g, 1)) return 1;
+    var lo = 0, hi = 1;
+    for (var n = 0; n < 12; n++) { var mid = (lo + hi) / 2; if (cabe(g, mid)) lo = mid; else hi = mid; }
+    return lo;
+  }
   function measure() {
-    W = scene.clientWidth;
+    W = scene.clientWidth; H = scene.clientHeight;
     cw = frames[0].offsetWidth / WS[0];
     D = cw / 563;
     P = parseFloat(getComputedStyle(scene).perspective) || 1700;
-    caps.forEach(function (c, i) {
-      capW[i] = Math.max(c.querySelector(".g3d-badge").offsetWidth, c.querySelector(".g3d-name").offsetWidth);
+    var hmMax = 0, capMax = 0;
+    frames.forEach(function (f, i) {
+      encajar(f, i);
+      var fw = f.offsetWidth, mh = medias[i].offsetHeight;
+      var g = { hw: fw / 2, hm: mh / 2, cap: f.offsetHeight - mh, vy: parseFloat(f.getAttribute("data-vy")) * D, partes: [] };
+      partes[i].forEach(function (e) {
+        g.partes.push([e.offsetLeft - g.hw, e.offsetTop - g.hm, e.offsetLeft + e.offsetWidth - g.hw, e.offsetTop + e.offsetHeight - g.hm]);
+      });
+      G[i] = g; hmMax = Math.max(hmMax, g.hm); capMax = Math.max(capMax, g.cap);
+      f.style.transformOrigin = "50% " + g.hm.toFixed(1) + "px";
     });
+    LINE = M + (H - 2 * M) * hmMax / (2 * hmMax + capMax);
+    scene.style.perspectiveOrigin = "50% " + LINE.toFixed(1) + "px";
     var hw = 0.85 * WMAX * cw / 2, a = ANG * Math.PI / 180;
     var ox = hw * Math.cos(a), oz = -300 * D + hw * Math.sin(a);
     var ideal = cw * 0.42 / 0.44;
@@ -559,9 +633,29 @@
     GAP2 = GAP1 * 0.28 / 0.42;
     DRAG = Math.min(0.44 * W, cw);
     apretada = GAP1 < 0.8 * ideal;
+    for (var i = 0; i < N; i++) AMP[i] = amplitud(G[i]);
+    chatSucio = true;
   }
-  window.addEventListener("resize", measure);
+  var midePendiente = false;
+  window.addEventListener("resize", function () {
+    if (midePendiente) return;
+    midePendiente = true;
+    requestAnimationFrame(function () { midePendiente = false; measure(); });
+  });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+
+  // La burbuja del chat flota fija abajo a la derecha: se mide al hacer scroll,
+  // en el siguiente fotograma y antes de escribir estilos. Si aun no ha
+  // aparecido (el widget carga tarde), se vuelve a buscar cada segundo.
+  function medirChat() {
+    chatSucio = false; chat = null;
+    var host = document.querySelector("[data-acg-tema]");
+    var b = host && host.shadowRoot && host.shadowRoot.querySelector(".acg-burbuja");
+    if (!b) return;
+    var r = b.getBoundingClientRect(), s = scene.getBoundingClientRect();
+    if (r.width) chat = { l: r.left - s.left, t: r.top - s.top, r: r.right - s.left, b: r.bottom - s.top };
+  }
+  window.addEventListener("scroll", function () { chatSucio = true; }, { passive: true });
 
   var p = 0, target = null, locked = -1, hover = -1, over = false;
   var dragging = false, moved = false, startX = 0, startP = 0;
@@ -569,30 +663,68 @@
 
   function wrapNear(d) { return d - N * Math.round(d / N); }
 
+  // Caja en pantalla (coordenadas del escenario) de un rectangulo de la tarjeta,
+  // dado en coordenadas locales respecto al centro de su imagen.
+  function caja(T, r) {
+    var c = { l: 1e9, t: 1e9, r: -1e9, b: -1e9 };
+    for (var n = 0; n < 4; n++) {
+      var lx = n & 1 ? r[2] : r[0], ly = n & 2 ? r[3] : r[1];
+      var f = P / (P - (T.z - T.sc * lx * T.sn));
+      var X = W / 2 + (T.x + T.sc * lx * T.cs) * f, Y = LINE + (T.vy + T.sc * ly) * f;
+      c.l = Math.min(c.l, X); c.r = Math.max(c.r, X); c.t = Math.min(c.t, Y); c.b = Math.max(c.b, Y);
+    }
+    return c;
+  }
+  // 1 si las cajas quedan a 10 px o mas; 0 si se tocan.
+  function despeje(a, b) {
+    return (Math.max(b.l - a.r, a.l - b.r, b.t - a.b, a.t - b.b) - 2) / 8;
+  }
+
   function render() {
+    var st = [], orden = [];
     for (var i = 0; i < N; i++) {
       var d = wrapNear(i - p), ad = Math.abs(d), sgn = (d > 0 ? 1 : d < 0 ? -1 : 0), cl = Math.min(ad, 1);
       var x = sgn * (cl * GAP1 + Math.max(0, ad - 1) * GAP2);
       var z = -(cl * 300 + Math.max(0, ad - 1) * 230) * D;
       var ry = -sgn * cl * ANG;
       var sc = Math.max(0.5, 1 - Math.min(ad, 3) * 0.15);
-      var k = pop[i]; z += k * 180 * D; sc += k * 0.06; ry *= (1 - k * 0.85);
+      var k = pop[i], ka = k * AMP[i]; z += ka * 180 * D; sc += ka * 0.06; ry *= (1 - k * 0.85);
       var op = ad <= 1 ? 1 : ad >= 2.4 ? 0 : 1 - (ad - 1) / 1.4; op = Math.max(op, k);
-      var f = frames[i], vy = parseFloat(f.getAttribute("data-vy") || 0);
-      f.style.transform = "translate(-50%,-50%) translateX(" + x.toFixed(1) + "px) translateY(" + vy + "px) translateZ(" + z.toFixed(1) + "px) rotateY(" + ry.toFixed(2) + "deg) scale(" + sc.toFixed(3) + ")";
+      var f = frames[i], g = G[i];
+      f.style.transform = "translate(-50%," + (-g.hm).toFixed(1) + "px) translate3d(" + x.toFixed(1) + "px," + (LINE - H / 2 + g.vy).toFixed(1) + "px," + z.toFixed(1) + "px) rotateY(" + ry.toFixed(2) + "deg) scale(" + sc.toFixed(3) + ")";
       f.style.opacity = op.toFixed(3);
       f.style.filter = "brightness(" + (0.72 + 0.28 * Math.max(0, 1 - ad * 0.5)).toFixed(3) + ")";
       f.style.zIndex = String(Math.round((3 - ad) * 100) + Math.round(k * 400));
       f.style.pointerEvents = op > 0.05 ? "auto" : "none";
-      var ch = sc * capW[i] / 2, rr = Math.abs(ry) * Math.PI / 180;
-      var edge = (Math.abs(x) + ch * Math.cos(rr)) * P / (P - (z + ch * Math.sin(rr)));
-      var co = Math.max(0, Math.min(1, (W / 2 - 4 - edge) / 30));
-      if (apretada) co = Math.min(co, Math.max(k, Math.min(1, Math.max(0, 1.6 - 2.2 * ad))));
-      caps[i].style.opacity = co.toFixed(2);
+      var rad = ry * Math.PI / 180, T = { x: x, vy: g.vy, z: z, sc: sc, cs: Math.cos(rad), sn: Math.sin(rad) };
+      var pie = caja(T, g.partes[0]), nom = caja(T, g.partes[1]);
+      var abajo = i === openIndex && f.classList.contains("ov-pie") ? g.hm + g.cap : g.hm;
+      st[i] = { ad: ad, k: k, op: op, z: z, rango: ad - 3 * k, img: caja(T, [-g.hw, -g.hm, g.hw, abajo]),
+        pie: { l: Math.min(pie.l, nom.l), t: Math.min(pie.t, nom.t), r: Math.max(pie.r, nom.r), b: Math.max(pie.b, nom.b) } };
+      orden.push(i);
+    }
+    orden.sort(function (a, b) { return st[a].rango - st[b].rango; });
+    for (var n = 0; n < N; n++) {
+      var s = st[orden[n]], c = s.pie;
+      var co = Math.min(1, (Math.min(c.l, W - c.r) - 4) / 30, Math.min(c.t, H - c.b) / M);
+      co = Math.min(co, Math.max(s.k, (1.4 - s.ad) / 0.3));
+      if (apretada) co = Math.min(co, Math.max(s.k, 1 - 2.6 * s.ad));
+      for (var j = 0; j < N; j++) {
+        var o = st[j];
+        if (o === s || o.op < 0.06) continue;
+        if (o.rango < s.rango || o.z > s.z + 1) co = Math.min(co, despeje(c, o.img));
+        if (o.rango < s.rango && o.vis > 0.06) co = Math.min(co, despeje(c, o.pie));
+      }
+      if (chat) co = Math.min(co, despeje(c, chat));
+      co = Math.max(0, co);
+      s.vis = co * s.op;
+      caps[orden[n]].style.opacity = co.toFixed(2);
     }
   }
 
+  var fotogramas = 0;
   function tick() {
+    if (chatSucio || (!chat && ++fotogramas % 60 === 0)) medirChat();
     if (locked > -1) p += wrapNear(locked - p) * 0.1;
     else if (target !== null) { p += wrapNear(target - p) * 0.12; if (Math.abs(wrapNear(target - p)) < 0.003) target = null; }
     else if (!over && !dragging && !reduce) p += SPEED;
