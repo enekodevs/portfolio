@@ -544,7 +544,7 @@
   var N = frames.length;
   if (!N) return;
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var SPEED = 0.003, ANG = 50;
+  var SPEED = 0.003, ANG = 50, PAUSA = 120;
 
   // El ancho base de la tarjeta (--g3d-w) lo fija el CSS segun el ancho Y el
   // alto de la pantalla; aqui solo se multiplica por data-w.
@@ -630,7 +630,11 @@
     var ox = hw * Math.cos(a), oz = -300 * D + hw * Math.sin(a);
     var ideal = cw * 0.42 / 0.44;
     GAP1 = Math.max(0, Math.min(ideal, (W / 2 - 12) * (P - oz) / P - ox));
-    GAP2 = GAP1 * 0.28 / 0.42;
+    // Lo mismo para las que se alejan del centro (de una posicion a 2,4, donde se
+    // apagan del todo): mas pequenas y mas al fondo, GAP2 se acorta para que su
+    // imagen no pase del borde ni en reposo ni girando.
+    var hw2 = 0.64 * WMAX * cw / 2, ox2 = hw2 * Math.cos(a), oz2 = -622 * D + hw2 * Math.sin(a);
+    GAP2 = Math.max(0, Math.min(GAP1 * 0.28 / 0.42, ((W / 2 - 12) * (P - oz2) / P - ox2 - GAP1) / 1.4));
     DRAG = Math.min(0.44 * W, cw);
     apretada = GAP1 < 0.8 * ideal;
     for (var i = 0; i < N; i++) AMP[i] = amplitud(G[i]);
@@ -708,11 +712,14 @@
       var s = st[orden[n]], c = s.pie;
       var co = Math.min(1, (Math.min(c.l, W - c.r) - 4) / 30, Math.min(c.t, H - c.b) / M);
       co = Math.min(co, Math.max(s.k, (1.4 - s.ad) / 0.3));
-      if (apretada) co = Math.min(co, Math.max(s.k, 1 - 2.6 * s.ad));
+      // En el movil solo se ve un pie: el de la mas cercana al centro, entero hasta
+      // 0,35 y apagado en 0,5, justo donde lo releva el de la siguiente.
+      if (apretada) co = Math.min(co, Math.max(s.k, (0.5 - s.ad) / 0.15));
       for (var j = 0; j < N; j++) {
         var o = st[j];
         if (o === s || o.op < 0.06) continue;
-        if (o.rango < s.rango || o.z > s.z + 1) co = Math.min(co, despeje(c, o.img));
+        // En el movil tampoco se pinta sobre la imagen de la que va por detras.
+        if (o.rango < s.rango || o.z > s.z + 1 || (apretada && s.k < 0.5)) co = Math.min(co, despeje(c, o.img));
         if (o.rango < s.rango && o.vis > 0.06) co = Math.min(co, despeje(c, o.pie));
       }
       if (chat) co = Math.min(co, despeje(c, chat));
@@ -722,12 +729,24 @@
     }
   }
 
-  var fotogramas = 0;
+  // En el movil (apretada) solo se ve el pie de la tarjeta del centro: el giro
+  // automatico se para unos 2 s (PAUSA fotogramas) en cada tarjeta para leerlo quieto.
+  var fotogramas = 0, pausa = PAUSA;
   function tick() {
     if (chatSucio || (!chat && ++fotogramas % 60 === 0)) medirChat();
     if (locked > -1) p += wrapNear(locked - p) * 0.1;
-    else if (target !== null) { p += wrapNear(target - p) * 0.12; if (Math.abs(wrapNear(target - p)) < 0.003) target = null; }
-    else if (!over && !dragging && !reduce) p += SPEED;
+    else if (target !== null) { p += wrapNear(target - p) * 0.12; if (Math.abs(wrapNear(target - p)) < 0.003) { p += wrapNear(target - p); target = null; pausa = PAUSA; } }
+    else if (!over && !dragging && !reduce) {
+      if (apretada && pausa > 0) pausa--;
+      else {
+        // Entre una y otra arranca y frena suave: la vuelta dura casi lo mismo y el
+        // relevo de un pie al siguiente pasa mas deprisa.
+        var antes = Math.floor(p), v = SPEED;
+        if (apretada) { var sn = Math.sin(Math.PI * (p - antes)); v *= 0.7 + 2.7 * sn * sn; }
+        p += v;
+        if (apretada && Math.floor(p) !== antes) { p = Math.floor(p); pausa = PAUSA; }
+      }
+    }
     if (p > N) p -= N; if (p < 0) p += N;
     for (var i = 0; i < N; i++) { var want = (!dragging && (i === hover || i === locked)) ? 1 : 0; pop[i] += (want - pop[i]) * 0.15; }
     render();
