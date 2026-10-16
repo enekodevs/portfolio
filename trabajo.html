@@ -114,7 +114,6 @@
     --shadow:0 40px 80px -46px rgba(0,0,0,.72);
   }
   html.theme-anim,html.theme-anim *{transition:background-color .45s var(--ease),color .45s var(--ease),border-color .45s var(--ease)!important}
-  [data-theme="dark"] header{background:linear-gradient(var(--paper),rgba(20,16,25,0))}
   [data-theme="dark"] .contacto{background:var(--plum-2)}
   [data-theme="dark"] footer{background:var(--plum-2);color:var(--d-fg-2);border-top-color:var(--line)}
   [data-theme="dark"] .btn{background:var(--ink);color:var(--plum-2)}
@@ -151,7 +150,9 @@
   .btn-line:hover{background:rgba(21,23,26,.05)}
 
   /* TOPBAR */
-  header{position:fixed;top:0;left:0;right:0;z-index:50;background:linear-gradient(var(--paper),rgba(242,240,234,0))}
+  /* Cabecera opaca en todos los anchos: con el degradado, el subtitulo y el menu
+     se perdian sobre la galeria oscura al desplazar. var(--paper) ya cambia con el tema. */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--paper)}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:16px var(--gut);max-width:var(--ample);margin:0 auto}
   .brand{display:flex;align-items:center;gap:11px}
   .mono-mark{width:34px;height:34px;border:1.5px solid var(--ink);border-radius:8px;display:grid;place-items:center;font-family:'Archivo',sans-serif;font-weight:900;font-size:.82rem}
@@ -167,9 +168,6 @@
      El corte esta en 1140px y no en 820: entre medias el menu en una sola fila
      no cabia, partia «CASO / DOMESLAB» y montaba el nombre con el menu. */
   @media(max-width:1140px){
-    /* Con el menu en segunda fila, el degradado de la cabecera dejaba esa fila
-       sobre fondo transparente y, con la galeria oscura debajo, no se leia. */
-    header,[data-theme="dark"] header{background:var(--paper)}
     .nav{flex-wrap:wrap;row-gap:0}
     .nlinks{order:9;flex-basis:100%;gap:18px;font-size:.68rem;margin-top:8px;padding:9px 0 3px;
       border-top:1px solid var(--line);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}
