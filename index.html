@@ -189,12 +189,16 @@
   .brand .n span{font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:.64rem;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase;display:block}
   .nlinks{display:flex;gap:22px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
   .nlinks a{color:var(--ink-2);transition:color .2s;white-space:nowrap}.nlinks a:hover{color:var(--ink)}.nlinks a.on{color:var(--cobalt)}
+  /* Al saltar a un ancla (#servicios, #contacto) el destino se para debajo de la
+     cabecera fija y no detras de ella: 96px con el menu en una fila y 140px con dos. */
+  html{scroll-padding-top:96px}
   /* En movil la navegacion NO se esconde: baja a una segunda fila que se
      desliza con el dedo. Antes era display:none y no habia hamburguesa, asi que
      por debajo de 820px los seis destinos eran inalcanzables. Sin JavaScript.
      El corte esta en 1140px y no en 820: entre medias el menu en una sola fila
      no cabia, partia «CASO / DOMESLAB» y montaba el nombre con el menu. */
   @media(max-width:1140px){
+    html{scroll-padding-top:140px}
     /* Con el menu en segunda fila, el degradado de la cabecera dejaba esa fila
        sobre fondo transparente y el contenido que pasa por debajo se montaba con el menu. */
     header,[data-theme="dark"] header{background:var(--paper)}

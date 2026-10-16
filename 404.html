@@ -69,6 +69,12 @@ header .in{display:flex;align-items:center;justify-content:space-between;gap:20p
 .langs a{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.05em;color:var(--fg-3);
   padding:5px 9px;border-radius:999px;transition:color .2s var(--ease),background .2s var(--ease)}
 .langs a:hover{color:var(--fg);background:rgba(230,169,46,.12)}
+/* El nombre no se parte («Eneko / Navarrete»): por debajo de 400px se aprieta el
+   hueco, y si aun asi no cabe, los idiomas bajan a una segunda fila. */
+.brand .n{white-space:nowrap}
+header .in{flex-wrap:wrap;row-gap:14px}
+.langs{margin-left:auto}
+@media (max-width:400px){header .in{column-gap:12px}.langs a{padding-inline:7px}}
 
 main{position:relative;z-index:1;flex:1;display:flex;align-items:center;padding:clamp(56px,12vh,140px) 0}
 .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;

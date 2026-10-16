@@ -161,6 +161,12 @@ img { max-width: 100%; }
 @media (max-width: 860px) { .cabecera nav .nav-optional { display: none; } }
 .tema { border: 1px solid var(--tinta-3); border-radius: var(--radio); padding: 7px 13px; min-height: 44px; display: inline-flex; align-items: center; font-size: 14px; }
 .tema:hover { border-color: var(--tinta); background: var(--fondo-2); }
+/* La cabecera no parte palabras («Eneko / Navarrete», «Los 9 / problemas»): por debajo
+   de 400px se aprieta, y si aun asi no cabe, el menu baja entero a una segunda fila. */
+.cabecera{flex-wrap:wrap;row-gap:6px}
+.cabecera b,.cabecera nav a,.tema{white-space:nowrap}
+.cabecera nav{margin-left:auto}
+@media (max-width:400px){.cabecera{column-gap:10px}.cabecera nav{gap:10px}.cabecera b,.cabecera nav a,.tema{font-size:13px}.tema{padding-inline:10px}}
 
 /* ---------- miga de pan ---------- */
 .miga { font-size: 14.5px; color: var(--tinta-3); padding-top: clamp(22px, 4vh, 40px); }

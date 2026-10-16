@@ -59,6 +59,10 @@ header.site{position:sticky;top:0;z-index:40;background:rgba(10,12,15,.86);backd
 .brand .mark{width:34px;height:34px;color:var(--acento)}
 .brand .name{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
 .brand .name small{display:block;font-family:'Inter',sans-serif;font-size:.56rem;letter-spacing:.22em;font-weight:600;opacity:.65}
+/* El nombre no se parte («Indar / Studio»): si no cabe, los idiomas y el menu bajan a una segunda fila. */
+.brand .name,.brand .name small{white-space:nowrap}
+.nav{flex-wrap:wrap;row-gap:10px}
+@media(max-width:819px){.nav-right{margin-left:auto}}
 .menu{display:none;align-items:center;gap:24px;font-size:.9rem}
 .menu a{opacity:.82;transition:opacity .2s}
 .menu a:hover{opacity:1;color:var(--acento)}
