@@ -572,8 +572,8 @@
   // o si le pasa por encima algo con mas prioridad (la tarjeta crecida, la
   // central, una que va por delante o la burbuja del chat): nunca se ve un
   // titulo cortado ni tapado.
-  var W, H, cw, D, P, LINE, GAP1, GAP2, DRAG, apretada, G = [], AMP = [], chat = null, chatSucio = true;
-  var M = 3;
+  var W, H, VW, cw, D, P, LINE, GAP1, GAP2, DRAG, apretada, G = [], AMP = [], chat = null, chatSucio = true;
+  var M = 3, BORDE = 12;
   // El texto de la tarjeta abierta se encaja por pasos (ver el CSS, ov-*).
   function encajar(f, i) {
     var ov = ovs[i], de = ov.querySelector(".g3d-odesc");
@@ -608,6 +608,9 @@
   }
   function measure() {
     W = scene.clientWidth; H = scene.clientHeight;
+    // Ancho que se ve de verdad: el escenario mide 100vw y, con barra de
+    // desplazamiento clasica, su franja derecha queda debajo de ella.
+    VW = Math.min(W, document.documentElement.clientWidth - scene.getBoundingClientRect().left);
     cw = frames[0].offsetWidth / WS[0];
     D = cw / 563;
     P = parseFloat(getComputedStyle(scene).perspective) || 1700;
@@ -682,26 +685,48 @@
     return (Math.max(b.l - a.r, a.l - b.r, b.t - a.b, a.t - b.b) - 2) / 8;
   }
 
+  // Pose de la tarjeta a d posiciones del centro, levantada k (0 en reposo, 1 con
+  // el raton encima o abierta): se acerca, crece y se endereza.
+  function pose(g, d, k, amp) {
+    var ad = Math.abs(d), sgn = (d > 0 ? 1 : d < 0 ? -1 : 0), cl = Math.min(ad, 1);
+    var x = sgn * (cl * GAP1 + Math.max(0, ad - 1) * GAP2);
+    var z = -(cl * 300 + Math.max(0, ad - 1) * 230) * D;
+    var ry = -sgn * cl * ANG;
+    var sc = Math.max(0.5, 1 - Math.min(ad, 3) * 0.15);
+    var ka = k * amp; z += ka * 180 * D; sc += ka * 0.06; ry *= (1 - k * 0.85);
+    var rad = ry * Math.PI / 180;
+    return { x: x, vy: g.vy, z: z, sc: sc, ry: ry, cs: Math.cos(rad), sn: Math.sin(rad) };
+  }
+  // AMP solo asegura que la tarjeta crecida cabe en el centro. Una lateral, que
+  // ademas se endereza, se salia hasta 100 px por el borde: se mira su caja ya
+  // transformada (imagen y pie) y, si no cabe entre BORDE y el ancho visible
+  // menos BORDE, se levanta solo lo que quepa. En reposo no cambia nada.
+  function cabeEnPantalla(g, T) {
+    var c = caja(T, [-g.hw, -g.hm, g.hw, g.hm + g.cap]);
+    return c.l >= BORDE && c.r <= VW - BORDE && c.t >= M && c.b <= H - M;
+  }
+  function levantar(g, d, k, amp) {
+    var T = pose(g, d, k, amp);
+    if (k < 0.001 || cabeEnPantalla(g, T)) return T;
+    var lo = 0, hi = k;
+    for (var n = 0; n < 10; n++) { var mid = (lo + hi) / 2; if (cabeEnPantalla(g, pose(g, d, mid, amp))) lo = mid; else hi = mid; }
+    return pose(g, d, lo, amp);
+  }
+
   function render() {
     var st = [], orden = [];
     for (var i = 0; i < N; i++) {
-      var d = wrapNear(i - p), ad = Math.abs(d), sgn = (d > 0 ? 1 : d < 0 ? -1 : 0), cl = Math.min(ad, 1);
-      var x = sgn * (cl * GAP1 + Math.max(0, ad - 1) * GAP2);
-      var z = -(cl * 300 + Math.max(0, ad - 1) * 230) * D;
-      var ry = -sgn * cl * ANG;
-      var sc = Math.max(0.5, 1 - Math.min(ad, 3) * 0.15);
-      var k = pop[i], ka = k * AMP[i]; z += ka * 180 * D; sc += ka * 0.06; ry *= (1 - k * 0.85);
+      var d = wrapNear(i - p), ad = Math.abs(d), k = pop[i];
+      var f = frames[i], g = G[i], T = levantar(g, d, k, AMP[i]);
       var op = ad <= 1 ? 1 : ad >= 2.4 ? 0 : 1 - (ad - 1) / 1.4; op = Math.max(op, k);
-      var f = frames[i], g = G[i];
-      f.style.transform = "translate(-50%," + (-g.hm).toFixed(1) + "px) translate3d(" + x.toFixed(1) + "px," + (LINE - H / 2 + g.vy).toFixed(1) + "px," + z.toFixed(1) + "px) rotateY(" + ry.toFixed(2) + "deg) scale(" + sc.toFixed(3) + ")";
+      f.style.transform = "translate(-50%," + (-g.hm).toFixed(1) + "px) translate3d(" + T.x.toFixed(1) + "px," + (LINE - H / 2 + g.vy).toFixed(1) + "px," + T.z.toFixed(1) + "px) rotateY(" + T.ry.toFixed(2) + "deg) scale(" + T.sc.toFixed(3) + ")";
       f.style.opacity = op.toFixed(3);
       f.style.filter = "brightness(" + (0.72 + 0.28 * Math.max(0, 1 - ad * 0.5)).toFixed(3) + ")";
       f.style.zIndex = String(Math.round((3 - ad) * 100) + Math.round(k * 400));
       f.style.pointerEvents = op > 0.05 ? "auto" : "none";
-      var rad = ry * Math.PI / 180, T = { x: x, vy: g.vy, z: z, sc: sc, cs: Math.cos(rad), sn: Math.sin(rad) };
       var pie = caja(T, g.partes[0]), nom = caja(T, g.partes[1]);
       var abajo = i === openIndex && f.classList.contains("ov-pie") ? g.hm + g.cap : g.hm;
-      st[i] = { ad: ad, k: k, op: op, z: z, rango: ad - 3 * k, img: caja(T, [-g.hw, -g.hm, g.hw, abajo]),
+      st[i] = { ad: ad, k: k, op: op, z: T.z, rango: ad - 3 * k, img: caja(T, [-g.hw, -g.hm, g.hw, abajo]),
         pie: { l: Math.min(pie.l, nom.l), t: Math.min(pie.t, nom.t), r: Math.max(pie.r, nom.r), b: Math.max(pie.b, nom.b) } };
       orden.push(i);
     }
