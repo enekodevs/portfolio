@@ -208,9 +208,20 @@
     .nlinks::-webkit-scrollbar{display:none}
     .nlinks a{white-space:nowrap}
   }
+  /* R8 · Cabecera según el fondo: sobre una zona marcada data-nav="dark" la cabecera toma la tinta clara
+     (la paleta del tema oscuro, solo dentro del header). Con <=1140px su fondo es var(--paper), que aquí
+     pasa a ser el ciruela hondo: fondo y tinta siguen casando. */
+  html.nav-dark header{color:var(--ink);--paper:#141019;--card:#221b2b;--ink:#efece4;--ink-2:#c6c1cc;--ink-3:#a7a1ae;--cobalt:#e6a92e;
+    --line:rgba(242,240,234,.16);--line-2:rgba(242,240,234,.3)}
+  html.nav-dark .mono-mark .mk-light{display:none}html.nav-dark .mono-mark .mk-dark{display:block}
+  header,header .brand .n,header .brand .n span,header .mono-mark,header .lang{transition:color .35s var(--ease),border-color .35s var(--ease),background-color .35s var(--ease)}
 
   /* ---------- HERO ---------- */
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding:120px 0 80px;overflow:hidden}
+  /* R2 · La tarjeta del domo asoma bajo el hero ya en la primera pantalla: el hero deja libre --asoma de alto. */
+  :root{--asoma:clamp(150px,24vh,240px)}
+  @media(max-width:760px){:root{--asoma:112px}}
+  .hero{min-height:calc(100vh - var(--asoma));min-height:calc(100svh - var(--asoma))}
   /* retrato B/N a sangre — FIJO, sin transiciones */
   .hero-photo{position:absolute;inset:0;z-index:0;background:url('/screenshots/eneko.jpg') no-repeat;background-size:cover;background-position:76% 28%;
     filter:grayscale(1) contrast(1.12) brightness(1.02);mix-blend-mode:multiply;opacity:.92;transform:scale(1.05)}
@@ -275,7 +286,8 @@
   .build .b-title{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(2.2rem,6vw,4.4rem);text-transform:uppercase;letter-spacing:-.04em;margin-top:14px;max-width:16ch}
   .build .phases{position:absolute;left:var(--gut);bottom:40px;z-index:3;display:flex;gap:8px;width:min(520px,60vw)}
   .build .phases i{flex:1;height:2px;background:rgba(242,240,234,.24);position:relative;overflow:hidden}
-  .build .phases i b{position:absolute;inset:0;background:var(--amber);transform:scaleX(0);transform-origin:0 50%;transition:transform .2s linear}
+  /* R3 · Sin transición CSS: el suavizado ya lo hace pShown en el bucle del domo; sumar los dos dejaba las barras a destiempo. */
+  .build .phases i b{position:absolute;inset:0;background:var(--amber);transform:scaleX(0);transform-origin:0 50%}
   .build .phase-lab{position:absolute;right:var(--gut);bottom:34px;z-index:3;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--d-fg-2)}
   .build .phase-lab b{color:var(--d-fg);font-weight:500;display:block;font-size:1rem;margin-top:4px;font-family:'Archivo',sans-serif;letter-spacing:-.01em}
   /* fallback estático: lista de fases */
@@ -284,6 +296,15 @@
   body:not(.run) .build .phases,body:not(.run) .build .phase-lab{display:none}
   .fall-phases div{border-top:1px solid var(--d-line);padding:14px 0;display:flex;gap:16px;font-family:'IBM Plex Mono',monospace;font-size:.86rem;color:var(--d-fg-2)}
   .fall-phases div b{color:var(--d-fg);font-weight:500}
+  /* R2 · Tarjeta oscura sobre papel: con el domo vivo (body.run) la sección es papel y el ciruela queda solo en
+     la escena, así el recorte redondeado se lee como una tarjeta que crece. Sin WebGL sigue el bloque ciruela.
+     --insx/--insy (los pone el domo) meten el HUD de fases dentro de la tarjeta mientras se abre. */
+  body.run .build,body.run .build .sticky{background:var(--paper)}
+  body.run .build .phases{left:calc(var(--gut) + var(--insx,0px));bottom:calc(40px + var(--insy,0px))}
+  body.run .build .phase-lab{right:calc(var(--gut) + var(--insx,0px));bottom:calc(34px + var(--insy,0px))}
+  /* R8 · Marca de zona oscura que sigue el borde de arriba y de abajo de la tarjeta, no el de la sección. */
+  .nav-card{display:none;position:absolute;left:0;right:0;top:var(--insy,0px);bottom:var(--insy,0px);pointer-events:none}
+  body.run .nav-card{display:block}
 
   /* ---------- CUERPO CLARO ---------- */
   section{position:relative}.pad{padding:clamp(70px,12vh,120px) 0}
@@ -386,6 +407,28 @@
     .stack3d.viva .s3-techs li{font-size:.64rem}
   }
 
+  /* R6 · Títulos que se encienden: cada línea sube tras su máscara (.line > .inner) y una banda ámbar nítida
+     la lleva de apagada (25 %) a sólida. --lit es el borde de esa banda; va registrada para que el navegador
+     la anime. El ::after es una copia sin voz (alt "") que solo pinta la banda. */
+  @property --lit{syntax:'<percentage>';inherits:true;initial-value:0%}
+  .lit .line{display:block;overflow:hidden;padding:.16em .1em .12em;margin:-.16em -.1em -.12em}
+  .lit .inner{--lit:-14%;display:inline-block;position:relative;white-space:nowrap;padding:.16em .08em .12em;margin:-.16em -.08em -.12em;
+    transform:translateY(110%);
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(var(--lit) - .4%),rgba(0,0,0,.25) calc(var(--lit) + .4%));
+            mask-image:linear-gradient(90deg,#000 calc(var(--lit) - .4%),rgba(0,0,0,.25) calc(var(--lit) + .4%))}
+  .lit .inner::after{content:attr(data-t);content:attr(data-t) / "";position:absolute;inset:0;padding:.16em .08em .12em;white-space:nowrap;pointer-events:none;
+    color:transparent;-webkit-text-fill-color:transparent;
+    background:linear-gradient(90deg,transparent calc(var(--lit) - 11%),var(--amber) calc(var(--lit) - 11%),var(--amber) var(--lit),transparent var(--lit));
+    -webkit-background-clip:text;background-clip:text}
+  body.entered .lit.in .inner{--lit:114%;transform:none;
+    transition:transform 1.05s var(--ease) var(--ld,0s),--lit 1.4s cubic-bezier(.5,0,.25,1) calc(var(--ld,0s) + .25s)}
+  @media (prefers-reduced-motion: reduce){
+    .lit .inner{transform:none!important;-webkit-mask-image:none!important;mask-image:none!important;transition:none!important}
+    .lit .inner::after{content:none!important}
+  }
+  /* R4 · Al saltar a un ancla, el foco pasa a la sección (tabindex=-1) para que el teclado siga desde ahí; sin marco. */
+  section[tabindex="-1"]:focus{outline:none}
+
 </style>
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
@@ -394,6 +437,7 @@
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#f2f0ea">
 <script src="/vendor/consent.js?v=20260915c" defer></script>
+<link rel="stylesheet" href="/vendor/lenis-1.3.27/lenis.css">
     <script src="https://chatbot-eneko.chatbot-eneko.workers.dev/widget.js" data-cliente="enekodevs" defer></script>
 </head>
 <body class="preloading">
@@ -459,9 +503,10 @@
 
 
 <!-- BUILD (domo que se ensambla con el scroll) -->
-<section class="build" id="build">
+<section class="build" id="build" data-nav="dark">
   <div class="sticky">
     <div id="domeBuild" aria-hidden="true"></div>
+    <div class="nav-card" data-nav="dark" aria-hidden="true"></div>
     <div class="svgfall" aria-hidden="true">
       <svg viewBox="0 0 440 360"><ellipse cx="220" cy="300" rx="180" ry="36"/><path d="M40 300 Q58 138 220 70 Q382 138 400 300 M96 300 Q108 156 220 70 Q332 156 344 300 M158 300 Q164 146 220 70 Q276 146 282 300 M220 300V70"/><path d="M60 266 Q220 322 380 266 M92 214 Q220 264 348 214 M126 160 Q220 200 314 160 M164 114 Q220 138 276 114"/></svg>
     </div>
@@ -499,7 +544,7 @@
 </section>
 
 <!-- CONTACTO -->
-<section class="contacto" id="contacto">
+<section class="contacto" id="contacto" data-nav="dark">
   <div class="inner">
     <span class="eyebrow" data-i18n="cta.eyebrow">Següent pas</span>
     <h2 data-i18n-html="cta.title">Construïm la teva <em>eina.</em></h2>
@@ -510,13 +555,47 @@
   </div>
 </section>
 
-<footer>
+<footer data-nav="dark">
   <nav class="foot-sectors" aria-label="Pàgines per sector">
     <b>Pel teu negoci:</b>
     <a href="/ca/negocis/">Pàgines web per a negocis petits</a>
   </nav>
   <div class="foot"><span class="n">ENEKO NAVARRETE</span><span>eneko.devs@gmail.com · +34 617 575 495</span><span><a href="/ca/aviso-legal">Avís legal</a></span><span><a href="/condiciones">Condiciones</a></span></div>
 </footer>
+
+<!-- R4 · Lenis autoalojado -->
+<script src="/vendor/lenis-1.3.27/lenis.min.js"></script>
+<script>
+/* R4 · Lenis (1.3.27, en /vendor, MIT): rueda con inercia en toda la página. No se crea con prefers-reduced-motion.
+   El chat (el host con data-acg-tema que inyecta widget.js) queda fuera, para que su lista haga scroll propio.
+   Teclado y táctil siguen nativos. Durante el preloader está parado; lo arranca el botón Entrar. */
+(function(){
+  if(!window.Lenis||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
+  var lenis;
+  try{
+    lenis=new Lenis({lerp:.085,wheelMultiplier:.95,autoRaf:true,
+      prevent:function(n){return !!(n.hasAttribute&&n.hasAttribute("data-acg-tema"));}});
+  }catch(e){ return; }
+  window.__lenis=lenis;
+  if(document.body.classList.contains("preloading")) lenis.stop();
+  // Anclas de esta página: lenis.scrollTo con offset = -scroll-padding-top (-96 px, o -140 px con <=1140 px),
+  // el mismo sitio donde las deja el salto nativo, bajo la cabecera fija.
+  document.addEventListener("click",function(ev){
+    if(ev.defaultPrevented||ev.button!==0||ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.altKey) return;
+    var a=ev.target&&ev.target.closest?ev.target.closest('a[href^="#"]'):null; if(!a) return;
+    var id=decodeURIComponent(a.getAttribute("href").slice(1)), dest=id?document.getElementById(id):null;
+    if(!dest) return;
+    ev.preventDefault();
+    var pad=parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)||0;
+    // En píxeles enteros: con un destino fraccionario Lenis no da nunca la animación por acabada y retiene el teclado.
+    lenis.scrollTo(Math.round(dest.getBoundingClientRect().top+window.scrollY),{offset:-Math.round(pad),onComplete:function(){
+      if(!dest.hasAttribute("tabindex")) dest.setAttribute("tabindex","-1");
+      try{dest.focus({preventScroll:true});}catch(e){}
+    }});
+    try{history.pushState(null,"","#"+id);}catch(e){}
+  });
+})();
+</script>
 
 <!-- UI motion -->
 <script>
@@ -526,19 +605,45 @@
   addEventListener("scroll",function(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;if(bar)bar.style.transform="scaleX("+(m>0?h.scrollTop/m:0)+")";},{passive:true});
   // preloader
   var pre=document.getElementById("pre"),num=document.getElementById("preNum"),ent=document.getElementById("preEnter");
-  function done(){ pre.classList.add("gone"); document.body.classList.remove("preloading"); document.body.classList.add("entered"); }
+  // R4 · Al entrar, Lenis arranca (estaba parado tras el preloader).
+  function done(){ pre.classList.add("gone"); document.body.classList.remove("preloading"); document.body.classList.add("entered"); if(window.__lenis) window.__lenis.start(); }
   ent.addEventListener("click",done);
   if(reduce){ num.textContent="100%"; ent.classList.add("show"); }
   else{ var n=0; var t=setInterval(function(){ n+=Math.random()*18; if(n>=100){n=100;clearInterval(t);ent.classList.add("show");} num.textContent=Math.floor(n)+"%"; },90); }
   setTimeout(function(){ if(!ent.classList.contains("show")){ent.classList.add("show");num.textContent="100%";} }, 4000);
+  // R8 · Cabecera según el fondo: una franja de 1 px a la altura de la cabecera (su mitad; con <=1140 px, su borde
+  // de abajo, porque ahí lleva fondo propio) mira qué zona data-nav="dark" pasa por debajo y pone html.nav-dark.
+  // Con el domo vivo la sección .build es papel: cuenta su marca .nav-card, que sigue el borde de la tarjeta.
+  (function(){
+    var hdr=document.querySelector("header"), html=document.documentElement, mq=matchMedia("(max-width:1140px)"), on=[], nio=null, rt;
+    if(!hdr||!("IntersectionObserver" in window)) return;
+    function oscura(t){ return !(t.classList.contains("build")&&document.body.classList.contains("run")); }
+    function pinta(){ html.classList.toggle("nav-dark",on.some(oscura)); }
+    function arma(){
+      if(nio) nio.disconnect(); on=[];
+      var h=hdr.offsetHeight||74, y=Math.max(1,Math.round(mq.matches?h-2:h/2)), resto=Math.max(0,innerHeight-y-1);
+      nio=new IntersectionObserver(function(es){
+        es.forEach(function(e){ var i=on.indexOf(e.target); if(e.isIntersecting){ if(i<0) on.push(e.target); } else if(i>=0) on.splice(i,1); });
+        pinta();
+      },{rootMargin:(-y)+"px 0px "+(-resto)+"px 0px",threshold:0});
+      document.querySelectorAll('[data-nav="dark"]').forEach(function(s){ nio.observe(s); });
+    }
+    arma();
+    addEventListener("resize",function(){ clearTimeout(rt); rt=setTimeout(arma,160); },{passive:true});
+    window.__navPinta=pinta;
+  })();
   if(reduce) return;
   var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.14});
-  document.querySelectorAll(".eyebrow,.kicker-h2,.chip,.ncard,.contacto h2,.contacto p").forEach(function(el){el.classList.add("reveal");io.observe(el);});
+  document.querySelectorAll(".eyebrow,.chip,.ncard,.contacto p").forEach(function(el){el.classList.add("reveal");io.observe(el);});
+  // R6 · Los títulos de sección ya no se desvanecen enteros: llevan .lit, y este mismo observador les pone .in,
+  // que dispara la subida por líneas y la banda ámbar (el troceado lo hace el bloque R6 de más abajo).
+  document.querySelectorAll(".kicker-h2,.b-title,.contacto h2").forEach(function(el){el.classList.add("lit");io.observe(el);});
   document.querySelectorAll(".chips,.cards").forEach(function(g){Array.prototype.forEach.call(g.children,function(c,i){c.style.setProperty("--rd",(i*50)+"ms");});});
 
   // --- BARRIDO ÁMBAR ligado al scroll (estilo NRG): el resalte recorre el texto y se asienta ---
   var sw=[];
-  document.querySelectorAll(".kicker-h2,.b-title,.contacto h2,.contacto p").forEach(function(el){el.classList.add("sweep");sw.push(el);});
+  // R6 · Los títulos se encienden con su banda propia; el barrido ligado al scroll queda solo para el párrafo de contacto.
+  document.querySelectorAll(".contacto p").forEach(function(el){el.classList.add("sweep");sw.push(el);});
   function updateSweeps(){
     var vh=innerHeight, start=vh*0.92, end=vh*0.34, span=start-end;
     for(var i=0;i<sw.length;i++){
@@ -646,6 +751,62 @@
 })();
 </script>
 
+<!-- R6 · Títulos que se encienden -->
+<script>
+/* R6 · Trocea cada título .lit en las líneas que de verdad pinta el navegador (.line > .inner).
+   applyLang reescribe su innerHTML al cambiar de idioma, así que se vuelve a trocear tras cada «langchange»,
+   cuando cargan las fuentes y si cambia su ancho. Con reduced-motion no se toca: el texto queda sólido. */
+(function(){
+  if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var els=[].slice.call(document.querySelectorAll(".lit"));
+  if(!els.length) return;
+  function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+  function trocear(el){
+    var src=el.querySelector(".line")?el.__src:(el.__src=el.innerHTML);
+    var tpl=document.createElement("template"); tpl.innerHTML=src;
+    var ws=[], sp=false;
+    (function walk(nodes,chain){
+      for(var i=0;i<nodes.length;i++){
+        var n=nodes[i];
+        if(n.nodeType===3){
+          n.nodeValue.split(/(\s+)/).forEach(function(part){
+            if(!part) return;
+            if(/^\s+$/.test(part)){ sp=true; return; }
+            var h=esc(part);
+            for(var j=chain.length-1;j>=0;j--){ var c=chain[j].cloneNode(false); c.innerHTML=h; h=c.outerHTML; }
+            ws.push({h:h,t:part,sp:sp}); sp=false;
+          });
+        }else if(n.nodeName==="BR"){ ws.push({br:true}); sp=false; }
+        else if(n.nodeType===1){ walk(n.childNodes,chain.concat(n)); }
+      }
+    })(tpl.content.childNodes,[]);
+    el.innerHTML=ws.map(function(w){return w.br?"<br>":(w.sp?" ":"")+'<span class="w">'+w.h+"</span>";}).join("");
+    var spans=el.querySelectorAll(".w"), k=0, lines=[], cur=null, top=0;
+    ws.forEach(function(w){
+      if(w.br){ cur=null; return; }
+      var y=spans[k++].getBoundingClientRect().top;
+      if(!cur||y>top+2){ cur=[]; lines.push(cur); top=y; }
+      cur.push(w);
+    });
+    el.innerHTML=lines.map(function(ln,i){
+      var h="",t="";
+      ln.forEach(function(w,j){ var s=j&&w.sp?" ":""; h+=s+w.h; t+=s+w.t; });
+      return '<span class="line"><span class="inner" style="--ld:'+(i*0.12).toFixed(2)+'s" data-t="'+esc(t)+'">'+h+"</span></span>";
+    }).join(" ");
+  }
+  var ancho=new WeakMap();
+  function uno(el){ try{ trocear(el); ancho.set(el,el.clientWidth); }catch(e){ if(el.__src!=null) el.innerHTML=el.__src; } }
+  function todos(){ els.forEach(uno); }
+  todos();
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(todos);
+  addEventListener("langchange",todos);
+  if("ResizeObserver" in window){
+    var ro=new ResizeObserver(function(es){ es.forEach(function(e){ var el=e.target; if(el.clientWidth!==ancho.get(el)) uno(el); }); });
+    els.forEach(function(el){ ro.observe(el); });
+  }
+})();
+</script>
+
 <!-- HERO 3D: domo que se ensambla con el scroll (reutiliza geometría de dome-3d.html) -->
 <script type="module">
   const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -710,6 +871,11 @@
     const pg=new THREE.BufferGeometry(); pg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); pg.computeVertexNormals();
     const pm=new THREE.MeshStandardMaterial({color:0xe6a92e,metalness:0.15,roughness:0.4,transparent:true,opacity:0,side:THREE.DoubleSide});
     g.add(new THREE.Mesh(pg,pm));
+    // R2 · Domo en fantasma: todas las barras como líneas finas desde p=0, para que la tarjeta nunca sea un bloque liso.
+    const gpos=[]; dEdges.forEach(e=>{const a=verts[e[0]],b=verts[e[1]];gpos.push(a.x,a.y,a.z,b.x,b.y,b.z);});
+    const gg=new THREE.BufferGeometry(); gg.setAttribute('position',new THREE.Float32BufferAttribute(gpos,3));
+    const ghostMat=new THREE.LineBasicMaterial({color:0xe6a92e,transparent:true,opacity:.22,depthWrite:false});
+    g.add(new THREE.LineSegments(gg,ghostMat));
 
     scene.add(new THREE.HemisphereLight(0xffffff,0xdfe6e9,0.5));
     const key=new THREE.DirectionalLight(0xffffff,2.4); key.position.set(6,9,6); scene.add(key);
@@ -717,41 +883,60 @@
 
     const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
     const map=(x,a,b)=>clamp((x-a)/(b-a),0,1);
-    let prog=0;
+    // R3 · Scroll suavizado: prog es el objetivo que marca la rueda y pShown lo que se pinta, que se le acerca un
+    // poco en cada fotograma (K, corregido por dt). Barras, nodos, paneles, cámara, recorte y HUD leen pShown.
+    // El bucle solo corre mientras falta camino (más de EPS) y la sección se ve: quieto, no gasta batería.
+    let prog=0, pShown=0, running=false, last=0, clock=0, drift=0, lastPh=-1;
+    const K=0.1, EPS=0.0005;
     function calcProg(){ const r=buildSec.getBoundingClientRect(); const total=buildSec.offsetHeight-window.innerHeight; const p=clamp((-r.top)/total,0,1); return p; }
     function updatePhases(p){
       const seg=[0,.25,.5,.75,1]; let active=0;
-      for(let i=0;i<4;i++){ const f=map(p,seg[i],seg[i+1]); phEls[i].style.transform="scaleX("+f+")"; if(p>=seg[i]) active=i; }
-      phNum.textContent=PHASES[active][0]; phName.textContent=PHASES[active][1];
+      for(let i=0;i<4;i++){ const f=map(p,seg[i],seg[i+1]); phEls[i].style.transform="scaleX("+f.toFixed(4)+")"; if(p>=seg[i]) active=i; }
+      if(active!==lastPh){ lastPh=active; phNum.textContent=PHASES[active][0]; phName.textContent=PHASES[active][1]; }
     }
     const overlay=buildSec.querySelector(".overlay");
+    // R2 · El recorte es la tarjeta: arranca con margen y esquinas redondeadas sobre el papel y se abre a pantalla
+    // completa hacia p=.34. --insx/--insy llevan el HUD y la marca de la cabecera (R8) al borde de la tarjeta.
+    // El margen lateral nunca llega al texto del título: como mucho 5vw y al menos 16 px antes de donde empieza.
+    let insMax=0;
+    const medirIns=()=>{ const o=overlay?overlay.getBoundingClientRect().left+parseFloat(getComputedStyle(overlay).paddingLeft):innerWidth*0.05; insMax=Math.min(innerWidth*0.05,Math.max(o-16,12)); };
+    medirIns();
     function updateImmersive(p){
       const e=1-map(p,0,.34);
-      const cp="inset("+(e*5).toFixed(2)+"vw round "+(e*30).toFixed(1)+"px)";
+      const ix=e*insMax, iy=e*Math.min(innerWidth*0.024,32);
+      const cp="inset("+iy.toFixed(1)+"px "+ix.toFixed(1)+"px round "+(e*28).toFixed(1)+"px)";
       holder.style.clipPath=cp; holder.style.webkitClipPath=cp;
+      buildSec.style.setProperty("--insx",ix.toFixed(1)+"px"); buildSec.style.setProperty("--insy",iy.toFixed(1)+"px");
       if(overlay) overlay.style.opacity=(1-map(p,.2,.55)).toFixed(3);
     }
-    addEventListener("scroll",()=>{prog=calcProg();updatePhases(prog);updateImmersive(prog);},{passive:true});
-    updateImmersive(0);
-    addEventListener("resize",()=>{W=holder.clientWidth;H=holder.clientHeight;camera.aspect=W/H;camera.updateProjectionMatrix();renderer.setSize(W,H);});
-    updatePhases(0);
-    addEventListener("langchange",()=>{ PHASES=phaseNames(); updatePhases(prog); },{passive:true});
-
     const camA=new THREE.Vector3(7.2,2.6,9.2), camB=new THREE.Vector3(5.2,4.4,7.2), tgt=new THREE.Vector3(0,1.1,0);
     let visible=true;
-    const vio=new IntersectionObserver(function(es){visible=es[0].isIntersecting;},{threshold:0}); vio.observe(buildSec);
-    (function loop(){
-      requestAnimationFrame(loop);
-      if(!visible) return;
-      const p=prog, t=performance.now();
+    function paint(p){
       bars.count=Math.max(0,Math.floor(map(p,.05,.55)*dEdges.length));
       hubs.count=Math.max(0,Math.floor(map(p,.12,.6)*hubKeep.length));
-      hubMat.emissiveIntensity=0.22+0.16*(0.5+0.5*Math.sin(t*0.006));
+      hubMat.emissiveIntensity=0.22+0.16*(0.5+0.5*Math.sin(clock*0.006));
       pm.opacity=map(p,.6,.85)*0.42;
-      g.rotation.y=p*Math.PI*0.5 + t*0.00006;
+      ghostMat.opacity=0.05+0.17*(1-map(p,.3,.6));
+      g.rotation.y=p*Math.PI*0.5 + drift;
       camera.position.lerpVectors(camA,camB,map(p,0,1)); camera.lookAt(tgt);
       renderer.render(scene,camera);
-    })();
+    }
+    function frame(now){
+      const dt=Math.min(100,Math.max(0,now-last)); last=now;
+      pShown+=(prog-pShown)*(1-Math.pow(1-K,dt/16.667));
+      const settled=Math.abs(prog-pShown)<EPS;
+      if(settled) pShown=prog;
+      clock+=dt; drift+=dt*0.00006;
+      updatePhases(pShown); updateImmersive(pShown); paint(pShown);
+      if(!settled&&visible) requestAnimationFrame(frame); else running=false;
+    }
+    function kick(){ if(running) return; running=true; last=performance.now(); requestAnimationFrame(frame); }
+    addEventListener("scroll",()=>{ prog=calcProg(); if(visible) kick(); },{passive:true});
+    addEventListener("resize",()=>{W=holder.clientWidth;H=holder.clientHeight;camera.aspect=W/H;camera.updateProjectionMatrix();renderer.setSize(W,H); medirIns(); prog=calcProg(); kick();});
+    addEventListener("langchange",()=>{ PHASES=phaseNames(); lastPh=-1; updatePhases(pShown); },{passive:true});
+    const vio=new IntersectionObserver(function(es){visible=es[0].isIntersecting; if(visible){ prog=calcProg(); kick(); }},{threshold:0}); vio.observe(buildSec);
+    prog=pShown=calcProg(); updatePhases(pShown); updateImmersive(pShown); kick();
+    if(window.__navPinta) window.__navPinta();
    }catch(err){ console.error('[dome] fallo en el setup 3D:', err); document.body.classList.remove("run"); }
   }).catch(function(err){ console.error('[dome] no se pudo cargar Three.js:', err); });
   if('requestIdleCallback' in window) requestIdleCallback(function(){startDome();},{timeout:2000}); else setTimeout(startDome,1200);
