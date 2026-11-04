@@ -279,7 +279,9 @@
   .build .svgfall svg{width:min(70vw,480px);stroke:var(--d-fg);fill:none;stroke-width:1;opacity:.6}
   #domeBuild{display:none;position:absolute;inset:0;z-index:1;overflow:hidden;will-change:border-radius,inset}
   #domeBuild canvas{display:block;width:100%;height:100%}
-  body.run .build{height:440vh}
+  /* CFG · 600vh (antes 440vh): las fases 01-03 recorren los mismos 255vh de antes y la 04 gana el espacio nuevo
+     para el configurador. El reparto vive en el JS del domo (Q_END). */
+  body.run .build{height:600vh}
   body.run .build .sticky{position:sticky;top:0;height:100vh;overflow:hidden;padding:0;display:flex;align-items:center}
   body.run .build .svgfall{display:none}
   body.run #domeBuild{display:block}
@@ -307,6 +309,99 @@
   /* R8 · Marca de zona oscura que sigue el borde de arriba y de abajo de la tarjeta, no el de la sección. */
   .nav-card{display:none;position:absolute;left:0;right:0;top:var(--insy,0px);bottom:var(--insy,0px);pointer-events:none}
   body.run .nav-card{display:block}
+  /* CFG · Configurador de la fase 04: seis tarjetas de cristal oscuro que entran una a una desde los lados, atadas
+     al scroll. Es una demostración decorativa (aria-hidden) y solo existe con el domo vivo: sin WebGL o con
+     reduced-motion no se pinta. El JS del domo escribe transform y opacity a partir de pShown; aquí solo va la forma.
+     Siempre paleta oscura: la escena es ciruela en los dos temas. --cfg-top lo pone el JS (alto real de la cabecera). */
+  .cfg{display:none;position:absolute;inset:0;z-index:2;pointer-events:none;perspective:1250px;perspective-origin:50% 50%;
+    --cfg-top:110px;--cfg-bot:170px;--cfg-w:clamp(258px,20.5vw,304px)}
+  body.run .cfg{display:block}
+  .cfg-guias{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  .cfg-guias g{opacity:0}
+  .cfg-guias path{fill:none;stroke:#e6a92e;stroke-width:1.15;stroke-opacity:.78;stroke-dasharray:1 1;stroke-dashoffset:1;stroke-linejoin:round}
+  .cfg-guias .cfg-o{fill:#e6a92e}
+  .cfg-guias .cfg-r{fill:rgba(230,169,46,.16);stroke:#e6a92e;stroke-width:1.2;opacity:0}
+  .cfg-col{position:absolute;top:var(--cfg-top);bottom:var(--cfg-bot);width:var(--cfg-w);display:flex;flex-direction:column;justify-content:center;
+    gap:clamp(10px,1.7vh,16px);transform-style:preserve-3d}
+  .cfg-in{left:var(--gut)}.cfg-out{right:var(--gut)}
+  .cfg-card{position:relative;overflow:hidden;min-height:104px;display:flex;flex-direction:column;justify-content:space-between;
+    padding:14px 16px 15px;border-radius:14px;color:#efece4;opacity:0;transform-origin:50% 50%;will-change:transform,opacity;backface-visibility:hidden;
+    background:linear-gradient(155deg,rgba(66,52,74,.8) 0%,rgba(40,32,47,.84) 48%,rgba(25,20,31,.9) 100%);
+    border:1px solid rgba(230,169,46,.24);
+    box-shadow:inset 0 1px 0 rgba(242,240,234,.1),0 32px 60px -30px rgba(0,0,0,.8),0 0 0 1px rgba(14,10,20,.35)}
+  /* CFG · Reflejo interior fijo: luz fría arriba a la izquierda y un rescoldo ámbar en la esquina contraria. */
+  .cfg-card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:linear-gradient(118deg,rgba(242,240,234,.09) 0%,rgba(242,240,234,0) 34%),radial-gradient(120% 90% at 100% 0%,rgba(230,169,46,.12),rgba(230,169,46,0) 58%)}
+  /* CFG · El brillo que barre la tarjeta al asentarse (lo mueve el JS con translateX, sin temporizadores). */
+  .cfg-sheen{position:absolute;top:-30%;bottom:-30%;left:0;width:60%;pointer-events:none;opacity:0;transform:translateX(-100%);
+    background:linear-gradient(100deg,rgba(255,228,176,0) 0%,rgba(255,228,176,.2) 50%,rgba(255,228,176,0) 100%)}
+  .cfg-lab{position:relative;display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.16em;
+    text-transform:uppercase;color:#a7a3ac;line-height:1.25}
+  .cfg-n{color:#e6a92e}
+  .cfg-res .cfg-lab{justify-content:space-between}
+  .cfg-calc{display:inline-flex;align-items:center;gap:6px;color:#e6a92e;font-size:.54rem;letter-spacing:.14em;white-space:nowrap}
+  .cfg-calc::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;box-shadow:0 0 8px rgba(230,169,46,.8)}
+  .cfg-chips{position:relative;display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .cfg-chip{position:relative;font-family:'Archivo',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:-.005em;line-height:1;
+    padding:7px 10px;border-radius:999px;border:1px solid rgba(242,240,234,.15);color:#a7a3ac;white-space:nowrap}
+  .cfg-chip.on{color:#efece4;padding-left:22px;border-color:rgba(242,240,234,.26)}
+  /* CFG · Anillo de «opción» siempre visible; el relleno ámbar (la <i>) se enciende al llegar la tarjeta. */
+  .cfg-chip.on::before{content:"";position:absolute;left:9px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(242,240,234,.4)}
+  .cfg-chip i{position:absolute;inset:-1px;border-radius:inherit;border:1px solid #e6a92e;opacity:0;
+    background:linear-gradient(180deg,rgba(230,169,46,.26),rgba(230,169,46,.12));box-shadow:0 0 22px -4px rgba(230,169,46,.7),inset 0 0 12px rgba(230,169,46,.16)}
+  .cfg-chip i::before{content:"";position:absolute;left:10px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:#e6a92e;box-shadow:0 0 8px #e6a92e}
+  .cfg-chip b{position:relative;font-weight:inherit}
+  .cfg-val{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-top:8px}
+  .cfg-num{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(1.75rem,2.3vw,2.25rem);letter-spacing:-.03em;line-height:.95;
+    font-variant-numeric:tabular-nums;color:#efece4}
+  .cfg-sw{display:flex;align-items:flex-end;gap:4px;height:24px;padding-bottom:3px}
+  .cfg-sw i{display:block;width:6px;border-radius:1.5px;transform:scaleY(0);transform-origin:50% 100%}
+  .cfg-meter{position:relative;height:2px;margin-top:12px;border-radius:2px;overflow:hidden;background:rgba(242,240,234,.12)}
+  .cfg-meter i{position:absolute;inset:0;background:linear-gradient(90deg,#c07f22,#e6a92e);transform:scaleX(0);transform-origin:0 50%}
+  /* CFG · Escritorio estrecho: chips algo más justos para que «Policarbonato» no salte de línea. */
+  @media(min-width:1100px) and (max-width:1299px){
+    .cfg-card{padding-left:14px;padding-right:14px}.cfg-chips{gap:5px}
+    .cfg-chip{font-size:.72rem;padding:6px 7px}.cfg-chip.on{padding-left:20px}
+    .cfg-chip.on::before{left:8px}.cfg-chip i::before{left:9px}
+  }
+  /* CFG · Las guías hasta el domo solo en escritorio ancho. */
+  @media(max-width:1099px){
+    .cfg{--cfg-w:clamp(196px,23vw,236px)}
+    .cfg-guias{display:none}
+    .cfg-card{min-height:94px;padding:12px 13px 13px;border-radius:12px}
+    .cfg-lab{font-size:.58rem;letter-spacing:.13em}
+    .cfg-calc{font-size:0;gap:0}
+    .cfg-chips{gap:5px;margin-top:10px}
+    .cfg-chip{font-size:.7rem;padding:6px 8px}.cfg-chip.on{padding-left:19px}
+    .cfg-chip.on::before{left:7px}.cfg-chip i::before{left:8px}
+    .cfg-num{font-size:1.6rem}
+  }
+  /* CFG · Pantallas bajas (portátil apaisado, tableta tumbada): tarjetas compactas para que las tres quepan. */
+  @media(min-width:761px) and (max-height:720px){
+    .cfg-col{gap:8px}
+    .cfg-card{min-height:0;padding:10px 13px 11px}
+    .cfg-chips{margin-top:8px}.cfg-chip{padding:5px 8px}.cfg-chip.on{padding-left:19px}
+    .cfg-chip.on::before{left:7px}.cfg-chip i::before{left:8px}
+    .cfg-num{font-size:1.45rem}.cfg-val{margin-top:5px}.cfg-meter{margin-top:8px}
+  }
+  /* CFG · Móvil: nada encima del domo por los lados. Las opciones en una fila arriba (bajo la cabecera) y los
+     resultados en otra abajo (por encima de las barras de fase y lejos del chat); entran girando en X. */
+  @media(max-width:760px){
+    .cfg{perspective:900px;--cfg-bot:116px}
+    .cfg-col{left:16px;right:16px;width:auto;top:auto;bottom:auto;flex-direction:row;justify-content:stretch;align-items:stretch;gap:6px}
+    .cfg-in{top:var(--cfg-top)}.cfg-out{bottom:var(--cfg-bot)}
+    .cfg-in .cfg-card{transform-origin:50% 0}.cfg-out .cfg-card{transform-origin:50% 100%}
+    .cfg-card{flex:1 1 0;min-width:0;min-height:0;padding:9px 9px 10px;border-radius:10px;justify-content:flex-start}
+    .cfg-lab{font-size:.52rem;letter-spacing:.08em;gap:6px}
+    .cfg-n,.cfg-calc,.cfg-sw{display:none}
+    .cfg-chips{margin-top:7px}
+    .cfg-chip:not(.on){display:none}
+    .cfg-chip{font-size:.72rem;padding:5px 8px 5px 18px}
+    .cfg-chip.on{padding-left:18px}.cfg-chip.on::before{left:7px}.cfg-chip i::before{left:8px}
+    .cfg-num{font-size:1.32rem}.cfg-val{margin-top:6px}.cfg-meter{margin-top:8px}
+  }
+  /* CFG · Si la pantalla no da para las tarjetas sin taparlo todo (móvil tumbado), no se muestran. */
+  @media(max-height:459px){.cfg{display:none!important}}
 
   /* ---------- CUERPO CLARO ---------- */
   section{position:relative}.pad{padding:clamp(70px,12vh,120px) 0}
@@ -524,6 +619,42 @@
     </div>
     <div class="phases" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
     <div class="phase-lab" aria-hidden="true"><span data-i18n="build.phase">Fase</span> <span id="phNum">01</span><b id="phName">Estructura</b></div>
+    <!-- CFG · Configurador de la fase 04. Izquierda: lo que elige el cliente (opciones ficticias). Derecha: lo que
+         calcula la app, con las cifras reales de esta geometría (las pone el JS del domo). Orden de entrada data-k. -->
+    <div class="cfg" aria-hidden="true">
+      <svg class="cfg-guias" xmlns="http://www.w3.org/2000/svg"><g data-k="0"><path pathLength="1"/><circle class="cfg-o" r="2"/><circle class="cfg-r" r="5"/></g><g data-k="1"><path pathLength="1"/><circle class="cfg-o" r="2"/><circle class="cfg-r" r="5"/></g><g data-k="2"><path pathLength="1"/><circle class="cfg-o" r="2"/><circle class="cfg-r" r="5"/></g><g data-k="3"><path pathLength="1"/><circle class="cfg-o" r="2"/><circle class="cfg-r" r="5"/></g><g data-k="4"><path pathLength="1"/><circle class="cfg-o" r="2"/><circle class="cfg-r" r="5"/></g><g data-k="5"><path pathLength="1"/><circle class="cfg-o" r="2"/><circle class="cfg-r" r="5"/></g></svg>
+      <div class="cfg-col cfg-in">
+        <div class="cfg-card" data-k="0"><i class="cfg-sheen"></i>
+          <div class="cfg-lab"><span class="cfg-n">01</span><span data-i18n="build.cfg.diam">Diámetro</span></div>
+          <div class="cfg-chips"><span class="cfg-chip">4 m</span><span class="cfg-chip on"><i></i><b>6 m</b></span><span class="cfg-chip">8 m</span></div>
+        </div>
+        <div class="cfg-card" data-k="2"><i class="cfg-sheen"></i>
+          <div class="cfg-lab"><span class="cfg-n">02</span><span data-i18n="build.cfg.est">Estructura</span></div>
+          <div class="cfg-chips"><span class="cfg-chip on"><i></i><b data-i18n="build.cfg.madera">Madera</b></span><span class="cfg-chip" data-i18n="build.cfg.acero">Acero</span></div>
+        </div>
+        <div class="cfg-card" data-k="4"><i class="cfg-sheen"></i>
+          <div class="cfg-lab"><span class="cfg-n">03</span><span data-i18n="build.cfg.cub">Cubierta</span></div>
+          <div class="cfg-chips"><span class="cfg-chip on"><i></i><b data-i18n="build.cfg.vidrio">Vidrio</b></span><span class="cfg-chip" data-i18n="build.cfg.lona">Lona</span><span class="cfg-chip" data-i18n="build.cfg.poli">Policarbonato</span></div>
+        </div>
+      </div>
+      <div class="cfg-col cfg-out">
+        <div class="cfg-card cfg-res" data-k="1"><i class="cfg-sheen"></i>
+          <div class="cfg-lab"><span data-i18n="build.cfg.barras">Barras</span><span class="cfg-calc" data-i18n="build.cfg.calc">Calculado</span></div>
+          <div class="cfg-val"><b class="cfg-num" data-n="barras">0</b></div>
+          <div class="cfg-meter"><i></i></div>
+        </div>
+        <div class="cfg-card cfg-res" data-k="3"><i class="cfg-sheen"></i>
+          <div class="cfg-lab"><span data-i18n="build.cfg.tipos">Tipos de barra</span><span class="cfg-calc" data-i18n="build.cfg.calc">Calculado</span></div>
+          <div class="cfg-val"><b class="cfg-num" data-n="tipos">0</b><span class="cfg-sw"></span></div>
+          <div class="cfg-meter"><i></i></div>
+        </div>
+        <div class="cfg-card cfg-res" data-k="5"><i class="cfg-sheen"></i>
+          <div class="cfg-lab"><span data-i18n="build.cfg.nodos">Nodos</span><span class="cfg-calc" data-i18n="build.cfg.calc">Calculado</span></div>
+          <div class="cfg-val"><b class="cfg-num" data-n="nodos">0</b></div>
+          <div class="cfg-meter"><i></i></div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="fall-phases">
     <div><span>01</span><b data-i18n="build.p1.t">Estructura geodésica</b> <span data-i18n="build.p1.d">— barras calculadas por longitud</span></div>
@@ -706,6 +837,7 @@
     "build.tag":"Caso de estudio · DomesLab","build.title":"Calculado<br>barra a barra.","build.phase":"Fase",
     "build.p1.t":"Estructura geodésica","build.p1.d":"— barras calculadas por longitud","build.p2.t":"Nodos","build.p2.d":"— hubs de unión","build.p3.t":"Paneles","build.p3.d":"— cerramiento de vidrio","build.p4.t":"Configurador en vivo","build.p4.d":"— 3D en tiempo real, en producción",
     "build.ph1":"Estructura","build.ph2":"Nodos","build.ph3":"Paneles","build.ph4":"Configurador en vivo",
+    "build.cfg.diam":"Diámetro","build.cfg.est":"Estructura","build.cfg.madera":"Madera","build.cfg.acero":"Acero","build.cfg.cub":"Cubierta","build.cfg.vidrio":"Vidrio","build.cfg.lona":"Lona","build.cfg.poli":"Policarbonato","build.cfg.barras":"Barras","build.cfg.tipos":"Tipos de barra","build.cfg.nodos":"Nodos","build.cfg.calc":"Calculado",
     "explora.eyebrow":"Explora","explora.title":"En <em>cuatro páginas.</em>",
     "explora.c1.t":"Trabajo y caso de estudio","explora.c1.p":"DomesLab a fondo, la galería real de la app y una selección de webs y visualizadores 3D.","explora.c1.go":"Ver trabajo",
     "explora.c2.t":"Servicios y proceso","explora.c2.p":"Qué construyo —calculadoras, configuradores, dashboards— y cómo trabajo hasta producción.","explora.c2.go":"Ver servicios",
@@ -723,6 +855,7 @@
     "build.tag":"Cas d'estudi · DomesLab","build.title":"Calculat<br>barra a barra.","build.phase":"Fase",
     "build.p1.t":"Estructura geodèsica","build.p1.d":"— barres calculades per longitud","build.p2.t":"Nodes","build.p2.d":"— hubs d'unió","build.p3.t":"Panells","build.p3.d":"— tancament de vidre","build.p4.t":"Configurador en directe","build.p4.d":"— 3D en temps real, en producció",
     "build.ph1":"Estructura","build.ph2":"Nodes","build.ph3":"Panells","build.ph4":"Configurador en directe",
+    "build.cfg.diam":"Diàmetre","build.cfg.est":"Estructura","build.cfg.madera":"Fusta","build.cfg.acero":"Acer","build.cfg.cub":"Coberta","build.cfg.vidrio":"Vidre","build.cfg.lona":"Lona","build.cfg.poli":"Policarbonat","build.cfg.barras":"Barres","build.cfg.tipos":"Tipus de barra","build.cfg.nodos":"Nodes","build.cfg.calc":"Calculat",
     "explora.eyebrow":"Explora","explora.title":"En <em>quatre pàgines.</em>",
     "explora.c1.t":"Feina i cas d'estudi","explora.c1.p":"DomesLab a fons, la galeria real de l'app i una selecció de webs i visualitzadors 3D.","explora.c1.go":"Veure la feina",
     "explora.c2.t":"Serveis i procés","explora.c2.p":"Què construeixo —calculadores, configuradors, dashboards— i com treballo fins a producció.","explora.c2.go":"Veure serveis",
@@ -740,6 +873,7 @@
     "build.tag":"Case study · DomesLab","build.title":"Calculated,<br>strut by strut.","build.phase":"Phase",
     "build.p1.t":"Geodesic structure","build.p1.d":"— struts sized by length","build.p2.t":"Nodes","build.p2.d":"— connection hubs","build.p3.t":"Panels","build.p3.d":"— glass cladding","build.p4.t":"Live configurator","build.p4.d":"— real-time 3D, in production",
     "build.ph1":"Structure","build.ph2":"Nodes","build.ph3":"Panels","build.ph4":"Live configurator",
+    "build.cfg.diam":"Diameter","build.cfg.est":"Frame","build.cfg.madera":"Timber","build.cfg.acero":"Steel","build.cfg.cub":"Cover","build.cfg.vidrio":"Glass","build.cfg.lona":"Canvas","build.cfg.poli":"Polycarbonate","build.cfg.barras":"Struts","build.cfg.tipos":"Strut types","build.cfg.nodos":"Nodes","build.cfg.calc":"Calculated",
     "explora.eyebrow":"Explore","explora.title":"In <em>four pages.</em>",
     "explora.c1.t":"Work and case study","explora.c1.p":"DomesLab in depth, the app's real gallery and a selection of websites and 3D viewers.","explora.c1.go":"See work",
     "explora.c2.t":"Services and process","explora.c2.p":"What I build —calculators, configurators, dashboards— and how I work all the way to production.","explora.c2.go":"See services",
@@ -930,8 +1064,14 @@
     let prog=0, pShown=0, running=false, last=0, clock=0, drift=0, lastPh=-1;
     const K=0.1, EPS=0.0005;
     function calcProg(){ const r=buildSec.getBoundingClientRect(); const total=buildSec.offsetHeight-window.innerHeight; const p=clamp((-r.top)/total,0,1); return p; }
+    // CFG · Reparto del recorrido con el pin de 600vh (500vh de scroll; antes 440vh y 340vh). Todo lo que ya había
+    // (barras, nodos, paneles, giro, cámara, tarjeta, título) lee q=p/Q_END, que en cada píxel de scroll vale lo mismo
+    // que el p de antes: las fases 01-03 duran los mismos 255vh y la 04 empieza en p=.51 con el espacio nuevo.
+    // Línea de tiempo de la 04: paneles completos en .578 · la cámara se aparta (.54-.615) · seis tarjetas desde .60,
+    // una cada .05 y .06 cada una · todo quieto de .91 a 1 antes de soltar el pin.
+    const Q_END=.68, CFG_S=.60, CFG_STEP=.05, CFG_DUR=.06, CFG_FIN=CFG_S+5*CFG_STEP+CFG_DUR, CFG_PULL0=.54, CFG_PULL1=.615;
     function updatePhases(p){
-      const seg=[0,.25,.5,.75,1]; let active=0;
+      const seg=[0,.25*Q_END,.5*Q_END,.75*Q_END,1]; let active=0;
       for(let i=0;i<4;i++){ const f=map(p,seg[i],seg[i+1]); phEls[i].style.transform="scaleX("+f.toFixed(4)+")"; if(p>=seg[i]) active=i; }
       if(active!==lastPh){ lastPh=active; phNum.textContent=PHASES[active][0]; phName.textContent=PHASES[active][1]; }
     }
@@ -944,26 +1084,173 @@
     medirIns();
     let lastCp="", lastIx="", lastIy="", lastOp="";
     function updateImmersive(p){
-      const e=1-map(p,0,.34);
+      const q=Math.min(1,p/Q_END);
+      const e=1-map(q,0,.34);
       const ix=e*insMax, iy=e*Math.min(innerWidth*0.024,32);
       const cp="inset("+iy.toFixed(1)+"px "+ix.toFixed(1)+"px round "+(e*28).toFixed(1)+"px)";
       if(cp!==lastCp){ lastCp=cp; holder.style.clipPath=cp; holder.style.webkitClipPath=cp; }
       const sx=ix.toFixed(1)+"px", sy=iy.toFixed(1)+"px";
       if(sx!==lastIx){ lastIx=sx; buildSec.style.setProperty("--insx",sx); }
       if(sy!==lastIy){ lastIy=sy; buildSec.style.setProperty("--insy",sy); }
-      const op=(1-map(p,.2,.55)).toFixed(3);
+      const op=(1-map(q,.2,.55)).toFixed(3);
       if(overlay&&op!==lastOp){ lastOp=op; overlay.style.opacity=op; }
     }
     const camA=new THREE.Vector3(7.2,2.6,9.2), camB=new THREE.Vector3(5.2,4.4,7.2), tgt=new THREE.Vector3(0,1.1,0);
     let visible=true;
+
+    // CFG · Configurador de la fase 04: seis tarjetas (I1,S1,I2,S2,I3,S3) que entran una a una alternando lados.
+    // Cada una tiene su ventana [CFG_S+k·CFG_STEP, +CFG_DUR] y todo lo que hace (entrar en 3D, el brillo, el chip que
+    // se enciende, la cuenta, la guía y la reacción del domo) sale de esa t local, que sale de pShown. Sin
+    // temporizadores: al subir salen en orden inverso y al bajar vuelven a su sitio. Las cifras son las de esta
+    // geometría: barras = dEdges, tipos de barra = longitudes distintas (lens), nodos = hubKeep.
+    const cfgEl=buildSec.querySelector(".cfg");
+    const CFG_RY_IN=56, CFG_RY_FIN=11, CFG_RX_IN=78, CFG_RX_FIN=4, CFG_Z=560, CFG_CRECE=.06, CFG_CODO=18;
+    const CFG_CIFRAS={barras:dEdges.length,tipos:lens.length,nodos:hubKeep.length};
+    const cfgPaso=t=>1-Math.pow(1-t,2.4), suave=t=>t*t*(3-2*t);
+    const cfgT=(p,k)=>map(p,CFG_S+k*CFG_STEP,CFG_S+k*CFG_STEP+CFG_DUR);
+    const cfg=cfgEl?[...cfgEl.querySelectorAll(".cfg-card")].map(el=>{
+      const k=+el.dataset.k, num=el.querySelector(".cfg-num"), gEl=cfgEl.querySelector('.cfg-guias g[data-k="'+k+'"]');
+      return {el,k,side:k%2?1:-1,dir:k%2?-1:1,sheen:el.querySelector(".cfg-sheen"),lit:el.querySelector(".cfg-chip.on i"),
+        num,N:num?(CFG_CIFRAS[num.dataset.n]||0):0,meter:el.querySelector(".cfg-meter i"),sw:[],
+        gEl,path:gEl&&gEl.querySelector("path"),dot:gEl&&gEl.querySelector(".cfg-o"),ring:gEl&&gEl.querySelector(".cfg-r"),
+        x:0,y:0,w:0,h:0,fuera:0,ax:0,ay:0,nodo:-1,l:{}};
+    }).sort((a,b)=>a.k-b.k):[];
+    // CFG · Tipos de barra: una muesca por longitud, con su color del domo y su altura relativa.
+    const cfgSw=cfgEl&&cfgEl.querySelector(".cfg-sw");
+    if(cfgSw){ const l0=lens[0], l1=lens[lens.length-1];
+      cfgSw.innerHTML=lens.map(l=>'<i style="height:'+Math.round(9+13*(l1>l0?(l-l0)/(l1-l0):1))+'px;background:#'+lc.get(l).toString(16).padStart(6,"0")+'"></i>').join("");
+      const c=cfg.find(o=>o.el.contains(cfgSw)); if(c) c.sw=[...cfgSw.children]; }
+    // CFG · Escrituras de estilo solo cuando cambia su valor en texto (como lastCp).
+    function cfgSt(c,key,el,prop,val){ if(c.l[key]!==val){ c.l[key]=val; el.style[prop]=val; } }
+    function cfgAt(c,key,el,attr,val){ if(c.l[key]!==val){ c.l[key]=val; el.setAttribute(attr,val); } }
+
+    // CFG · La cámara se aparta lo justo para que el domo quepa entre las dos columnas (en móvil, entre las dos filas)
+    // y se centra en ese hueco con setViewOffset. Se calcula al medir (carga, resize, idioma, fuentes), no por fotograma.
+    const fitCam=new THREE.PerspectiveCamera(35,1,0.1,100), fitM=new THREE.Matrix4(), fitS=new THREE.Matrix4(), fitV=new THREE.Vector3();
+    const mqFila=matchMedia("(max-width:760px)"), mqGuias=matchMedia("(min-width:1100px)");
+    let cfgVivo=false, cfgFila=false, cfgGuias=false, cfgF=1, cfgDx=0, cfgDy=0, lastVo="";
+    function domoCaja(f){
+      fitCam.aspect=W/H; fitCam.updateProjectionMatrix();
+      fitCam.position.copy(camB).sub(tgt).multiplyScalar(f).add(tgt); fitCam.lookAt(tgt); fitCam.updateMatrixWorld();
+      fitS.makeScale(1+CFG_CRECE,1+CFG_CRECE,1+CFG_CRECE);
+      let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;
+      for(let r=0;r<4;r++){ fitM.makeRotationY(Math.PI*.5+r*Math.PI/10).multiply(fitS);
+        for(const v of hubKeep){ fitV.copy(v).applyMatrix4(fitM).project(fitCam);
+          const sx=(fitV.x+1)*W/2, sy=(1-fitV.y)*H/2;
+          if(sx<x0)x0=sx; if(sx>x1)x1=sx; if(sy<y0)y0=sy; if(sy>y1)y1=sy; } }
+      return [x0,x1,y0,y1];
+    }
+    function cfgMedir(){
+      cfgF=1; cfgDx=0; cfgDy=0; lastVo="";
+      if(!cfgEl) return;
+      const hdr=document.querySelector("header"), top=Math.round((hdr?hdr.getBoundingClientRect().height:80)+14);
+      cfgEl.style.setProperty("--cfg-top",top+"px");
+      cfgFila=mqFila.matches; cfgGuias=mqGuias.matches;
+      cfgVivo=getComputedStyle(cfgEl).display!=="none";
+      cfg.forEach(c=>{ c.l={}; c.nodo=-1; });
+      if(!cfgVivo||cfg.length<6) return;
+      const Wc=cfgEl.clientWidth, Hc=cfgEl.clientHeight, P=parseFloat(getComputedStyle(cfgEl).perspective)||1250, ox=Wc/2, oy=Hc/2, a=CFG_RY_FIN*Math.PI/180;
+      cfg.forEach(c=>{ const col=c.el.parentElement;
+        c.x=col.offsetLeft+c.el.offsetLeft; c.y=col.offsetTop+c.el.offsetTop; c.w=c.el.offsetWidth; c.h=c.el.offsetHeight;
+        c.fuera=c.side<0?c.x+c.w+80:Wc-c.x+80;
+        // Salida de la guía: el canto interior de la tarjeta ya girada CFG_RY_FIN grados, proyectado con la perspectiva de .cfg.
+        const s=P/(P+c.w/2*Math.sin(a));
+        c.ax=ox+(c.x+c.w/2+c.dir*c.w/2*Math.cos(a)-ox)*s; c.ay=oy+(c.y+c.h/2-oy)*s;
+      });
+      const A=cfg[0], B=cfg[1];   // I1 (columna izquierda o fila de arriba) y S1 (columna derecha o fila de abajo)
+      const bx0=cfgFila?10:A.x+A.w+30, bx1=cfgFila?Wc-10:B.x-30, by0=cfgFila?A.y+A.h+12:top+4, by1=cfgFila?B.y-12:Hc-112;
+      const bw=bx1-bx0, bh=by1-by0;
+      if(bw<80||bh<80) return;
+      const cabe=b=>b[1]-b[0]<=bw*.94&&b[3]-b[2]<=bh*.94;
+      let f=1, bb=domoCaja(1);
+      if(!cabe(bb)){ let lo=1,hi=3.4; for(let i=0;i<16;i++){ const m=(lo+hi)/2; if(cabe(domoCaja(m))) hi=m; else lo=m; } f=hi; bb=domoCaja(f); }
+      cfgF=f; cfgDx=(bb[0]+bb[1])/2-(bx0+bx1)/2; cfgDy=(bb[2]+bb[3])/2-(by0+by1)/2;
+    }
+    function cfgCamara(p){
+      const e=suave(map(p,CFG_PULL0,CFG_PULL1));
+      if(e>0&&cfgF!==1) camera.position.sub(tgt).multiplyScalar(1+(cfgF-1)*e).add(tgt);
+      const ox=cfgDx*e, oy=cfgDy*e, vo=ox.toFixed(1)+","+oy.toFixed(1);
+      if(vo!==lastVo){ lastVo=vo; if(e<=0||(Math.abs(ox)<.05&&Math.abs(oy)<.05)) camera.clearViewOffset(); else camera.setViewOffset(W,H,ox,oy,W,H); }
+    }
+    // CFG · El domo responde a cada opción cuando se enciende su chip, sutil y reversible: el diámetro lo hace crecer
+    // un poco, la madera templa y mate las barras, y el vidrio aclara y pule los paneles.
+    const C_BLANCO=new THREE.Color(0xffffff), C_MADERA=new THREE.Color(0xd6b08a), C_AMBAR=new THREE.Color(0xe6a92e), C_VIDRIO=new THREE.Color(0xf2ead8);
+    function cfgReacciona(p){
+      const a=suave(map(cfgT(p,0),.72,1)), b=suave(map(cfgT(p,2),.72,1)), c=suave(map(cfgT(p,4),.72,1));
+      g.scale.setScalar(1+CFG_CRECE*a);
+      barMat.color.copy(C_BLANCO).lerp(C_MADERA,b); barMat.roughness=.32+.3*b; barMat.metalness=.3-.24*b;
+      pm.color.copy(C_AMBAR).lerp(C_VIDRIO,c*.85); pm.roughness=.4-.34*c; pm.metalness=.15-.07*c;
+      return c;
+    }
+    // CFG · Guías (solo >=1100 px): cada tarjeta elige al entrar el nodo visible más cercano a su canto y lo sigue
+    // mientras está; si el giro lo lleva a la cara de atrás, la guía se apaga.
+    const cfgCentro=new THREE.Vector3(0,-minY,0), cfgCw=new THREE.Vector3(), cfgV=new THREE.Vector3(), cfgPt={x:0,y:0,cara:0};
+    function cfgNodo(i){
+      cfgV.copy(hubKeep[i]).applyMatrix4(g.matrixWorld); cfgCw.copy(cfgCentro).applyMatrix4(g.matrixWorld);
+      const nx=cfgV.x-cfgCw.x, ny=cfgV.y-cfgCw.y, nz=cfgV.z-cfgCw.z;
+      const vx=camera.position.x-cfgV.x, vy=camera.position.y-cfgV.y, vz=camera.position.z-cfgV.z;
+      cfgPt.cara=(nx*vx+ny*vy+nz*vz)/((Math.hypot(nx,ny,nz)*Math.hypot(vx,vy,vz))||1);
+      cfgV.project(camera); cfgPt.x=(cfgV.x+1)*W/2; cfgPt.y=(1-cfgV.y)*H/2; return cfgPt;
+    }
+    function cfgElige(c){
+      let best=-1, bd=Infinity;
+      for(let i=0;i<hubKeep.length;i++){
+        if(cfg.some(o=>o!==c&&o.nodo===i)) continue;
+        const s=cfgNodo(i); if(s.cara<.3) continue;
+        const dx=s.x-c.ax, dy=s.y-c.ay, d=dx*dx+2.5*dy*dy;
+        if(d<bd){ bd=d; best=i; }
+      }
+      return best;
+    }
+    function cfgPinta(p){
+      if(!cfgVivo) return;
+      const guias=cfgGuias&&!cfgFila;
+      if(guias){ camera.updateMatrixWorld(); g.updateMatrixWorld(); }
+      for(const c of cfg){
+        const t=cfgT(p,c.k), u=1-cfgPaso(t);
+        // Entrada: desde fuera de pantalla, hundida en Z y girada 56° hacia el centro; acaba girada 11° hacia el domo,
+        // como los paneles de una pantalla curva. En móvil, fila de arriba y de abajo, abatiéndose en X.
+        const tr=cfgFila
+          ? "translate3d(0,"+(c.side*u*30).toFixed(1)+"px,"+(-u*CFG_Z*.4).toFixed(1)+"px) rotateX("+(c.side*(CFG_RX_FIN+(CFG_RX_IN-CFG_RX_FIN)*u)).toFixed(2)+"deg)"
+          : "translate3d("+(c.side*u*c.fuera).toFixed(1)+"px,0,"+(-u*CFG_Z).toFixed(1)+"px) rotateY("+(c.dir*(CFG_RY_FIN+(CFG_RY_IN-CFG_RY_FIN)*u)).toFixed(2)+"deg)";
+        cfgSt(c,"tr",c.el,"transform",tr);
+        cfgSt(c,"op",c.el,"opacity",t<=0?"0":Math.min(1,t/.35).toFixed(3));
+        if(c.sheen){ const sp=map(t,.5,1);
+          cfgSt(c,"st",c.sheen,"transform","translateX("+(-100+267*sp).toFixed(1)+"%)");
+          cfgSt(c,"so",c.sheen,"opacity",(sp>0&&sp<1?Math.sin(Math.PI*sp):0).toFixed(3)); }
+        if(c.lit) cfgSt(c,"li",c.lit,"opacity",suave(map(t,.72,.95)).toFixed(3));
+        if(c.num){ const f=cfgPaso(map(t,.38,.95)), n=Math.round(f*c.N);
+          if(c.l.n!==n){ c.l.n=n; c.num.textContent=n; }
+          if(c.meter) cfgSt(c,"me",c.meter,"transform","scaleX("+f.toFixed(4)+")");
+          for(let i=0;i<c.sw.length;i++) cfgSt(c,"sw"+i,c.sw[i],"transform","scaleY("+clamp(f*c.sw.length-i,0,1).toFixed(3)+")"); }
+        if(c.gEl){
+          const d=guias&&t>0?suave(map(t,.62,1)):0;
+          if(t<=0) c.nodo=-1;
+          if(d>0&&c.nodo<0) c.nodo=cfgElige(c);
+          if(d<=0||c.nodo<0){ cfgSt(c,"go",c.gEl,"opacity","0"); continue; }
+          const s=cfgNodo(c.nodo), ex=c.ax+c.dir*CFG_CODO;
+          cfgAt(c,"pd",c.path,"d","M"+c.ax.toFixed(1)+" "+c.ay.toFixed(1)+"L"+ex.toFixed(1)+" "+c.ay.toFixed(1)+"L"+s.x.toFixed(1)+" "+s.y.toFixed(1));
+          cfgSt(c,"pf",c.path,"strokeDashoffset",(1-d).toFixed(3));
+          cfgAt(c,"ox",c.dot,"cx",c.ax.toFixed(1)); cfgAt(c,"oy",c.dot,"cy",c.ay.toFixed(1));
+          cfgAt(c,"rx",c.ring,"cx",s.x.toFixed(1)); cfgAt(c,"ry",c.ring,"cy",s.y.toFixed(1));
+          cfgSt(c,"ro",c.ring,"opacity",map(d,.8,1).toFixed(3));
+          cfgSt(c,"go",c.gEl,"opacity",clamp(s.cara*4,0,1).toFixed(3));
+        }
+      }
+    }
+
     function paint(p){
-      bars.count=Math.max(0,Math.floor(map(p,.05,.55)*dEdges.length));
-      hubs.count=Math.max(0,Math.floor(map(p,.12,.6)*hubKeep.length));
+      const q=Math.min(1,p/Q_END);
+      bars.count=Math.max(0,Math.floor(map(q,.05,.55)*dEdges.length));
+      hubs.count=Math.max(0,Math.floor(map(q,.12,.6)*hubKeep.length));
       hubMat.emissiveIntensity=0.22+0.16*(0.5+0.5*Math.sin(clock*0.006));
-      pm.opacity=map(p,.6,.85)*0.42;
-      ghostMat.opacity=0.05+0.17*(1-map(p,.3,.6));
-      g.rotation.y=p*Math.PI*0.5 + drift;
-      camera.position.lerpVectors(camA,camB,map(p,0,1)); camera.lookAt(tgt);
+      const vidrio=cfgReacciona(p);
+      pm.opacity=map(q,.6,.85)*0.42*(1-.38*vidrio);
+      ghostMat.opacity=0.05+0.17*(1-map(q,.3,.6));
+      // CFG · En la 04 el domo sigue girando un poco mientras entran las tarjetas y se para con la última.
+      g.rotation.y=q*Math.PI*0.5 + map(p,CFG_S-.02,CFG_FIN)*0.32 + drift;
+      camera.position.lerpVectors(camA,camB,q); cfgCamara(p); camera.lookAt(tgt);
+      cfgPinta(p);
       renderer.render(scene,camera);
     }
     function frame(now){
@@ -979,9 +1266,12 @@
     }
     function kick(){ if(running) return; running=true; last=performance.now(); requestAnimationFrame(frame); }
     addEventListener("scroll",()=>{ prog=calcProg(); if(visible||prog!==pShown) kick(); },{passive:true});
-    addEventListener("resize",()=>{W=holder.clientWidth;H=holder.clientHeight;camera.aspect=W/H;camera.updateProjectionMatrix();renderer.setSize(W,H); medirIns(); prog=calcProg(); kick();});
-    addEventListener("langchange",()=>{ PHASES=phaseNames(); lastPh=-1; updatePhases(pShown); },{passive:true});
+    addEventListener("resize",()=>{W=holder.clientWidth;H=holder.clientHeight;camera.aspect=W/H;camera.updateProjectionMatrix();renderer.setSize(W,H); medirIns(); cfgMedir(); prog=calcProg(); kick();});
+    // CFG · Al cambiar de idioma cambian los anchos de las tarjetas: se vuelven a medir (y a pintar) en el fotograma siguiente.
+    addEventListener("langchange",()=>{ PHASES=phaseNames(); lastPh=-1; updatePhases(pShown); requestAnimationFrame(()=>{ cfgMedir(); kick(); }); },{passive:true});
+    if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{ cfgMedir(); kick(); });
     const vio=new IntersectionObserver(function(es){visible=es[0].isIntersecting; prog=calcProg(); if(visible||prog!==pShown) kick(); },{threshold:0}); vio.observe(buildSec);
+    cfgMedir();
     prog=pShown=calcProg(); updatePhases(pShown); updateImmersive(pShown); kick();
     if(window.__navPinta) window.__navPinta();
    }catch(err){ console.error('[dome] fallo en el setup 3D:', err); document.body.classList.remove("run"); }
