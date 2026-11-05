@@ -103,7 +103,7 @@
      ============================================================ */
   :root{
     /* Sube la burbuja del chat: en la esquina hay etiquetas y se solapaban. */
-    --acg-abajo:88px;
+    --acg-abajo:112px;
     --paper:#f2f0ea;--paper-2:#eae7df;--card:#fbfaf6;--ink:#15171a;--ink-2:#3c4147;--ink-3:#62676f;
     --plum:#26202b;--plum-2:#1b1620;
     /* PALETA ÚNICA CÁLIDA — coherencia cromática: papel + tinta + plum + ámbar.
@@ -222,7 +222,9 @@
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding:120px 0 80px;overflow:hidden}
   /* R2 · La tarjeta del domo asoma bajo el hero ya en la primera pantalla: el hero deja libre --asoma de alto. */
   :root{--asoma:clamp(150px,24vh,240px)}
-  @media(max-width:760px){:root{--asoma:112px}}
+  /* HUD · Hasta 760 px el rótulo de fase va a la izquierda: el chat vuelve a su esquina (como el widget ya hace hasta 480 px)
+     y no se sube encima de la fila de resultados del configurador. */
+  @media(max-width:760px){:root{--asoma:112px;--acg-abajo:16px}}
   .hero{min-height:calc(100vh - var(--asoma));min-height:calc(100svh - var(--asoma))}
   /* retrato B/N a sangre — FIJO, sin transiciones */
   .hero-photo{position:absolute;inset:0;z-index:0;background:url('/screenshots/eneko.jpg') no-repeat;background-size:cover;background-position:76% 28%;
@@ -306,6 +308,13 @@
   body.run .build,body.run .build .sticky{background:var(--paper)}
   body.run .build .phases{left:calc(var(--gut) + var(--insx,0px));bottom:calc(40px + var(--insy,0px))}
   body.run .build .phase-lab{right:calc(var(--gut) + var(--insx,0px));bottom:calc(34px + var(--insy,0px))}
+  /* HUD · Móvil: el widget fija ahí el chat (60 px, abajo a la derecha, sin variable que lo mueva) y tapaba «FASE 04»; y el
+     nombre largo de la fase 04 pisaba las barras. El rótulo va a la izquierda, encima de las barras, y nunca entra en
+     la columna del chat (84 px: burbuja, margen y aire). Queda por debajo de la fila de resultados (--cfg-bot:116px). */
+  @media(max-width:760px){
+    body.run .build .phase-lab{left:calc(var(--gut) + var(--insx,0px));right:auto;bottom:calc(52px + var(--insy,0px));text-align:left;
+      max-width:calc(100% - var(--gut) - var(--insx,0px) - 84px)}
+  }
   /* R8 · Marca de zona oscura que sigue el borde de arriba y de abajo de la tarjeta, no el de la sección. */
   .nav-card{display:none;position:absolute;left:0;right:0;top:var(--insy,0px);bottom:var(--insy,0px);pointer-events:none}
   body.run .nav-card{display:block}
@@ -335,15 +344,15 @@
   /* CFG · El brillo que barre la tarjeta al asentarse (lo mueve el JS con translateX, sin temporizadores). */
   .cfg-sheen{position:absolute;top:-30%;bottom:-30%;left:0;width:60%;pointer-events:none;opacity:0;transform:translateX(-100%);
     background:linear-gradient(100deg,rgba(255,228,176,0) 0%,rgba(255,228,176,.2) 50%,rgba(255,228,176,0) 100%)}
-  .cfg-lab{position:relative;display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.16em;
-    text-transform:uppercase;color:#a7a3ac;line-height:1.25}
+  .cfg-lab{position:relative;display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.15em;
+    text-transform:uppercase;color:#b3afb8;line-height:1.25}
   .cfg-n{color:#e6a92e}
   .cfg-res .cfg-lab{justify-content:space-between}
-  .cfg-calc{display:inline-flex;align-items:center;gap:6px;color:#e6a92e;font-size:.54rem;letter-spacing:.14em;white-space:nowrap}
+  .cfg-calc{display:inline-flex;align-items:center;gap:6px;color:#e6a92e;font-size:.6rem;letter-spacing:.13em;white-space:nowrap}
   .cfg-calc::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;box-shadow:0 0 8px rgba(230,169,46,.8)}
   .cfg-chips{position:relative;display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
   .cfg-chip{position:relative;font-family:'Archivo',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:-.005em;line-height:1;
-    padding:7px 10px;border-radius:999px;border:1px solid rgba(242,240,234,.15);color:#a7a3ac;white-space:nowrap}
+    padding:7px 10px;border-radius:999px;border:1px solid rgba(242,240,234,.2);color:#bcb8c1;white-space:nowrap}
   .cfg-chip.on{color:#efece4;padding-left:22px;border-color:rgba(242,240,234,.26)}
   /* CFG · Anillo de «opción» siempre visible; el relleno ámbar (la <i>) se enciende al llegar la tarjeta. */
   .cfg-chip.on::before{content:"";position:absolute;left:9px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(242,240,234,.4)}
@@ -365,7 +374,7 @@
     .cfg-chip.on::before{left:8px}.cfg-chip i::before{left:9px}
   }
   /* CFG · Las guías hasta el domo solo en escritorio ancho. */
-  @media(max-width:1099px){
+  @media(max-width:1099.98px){
     .cfg{--cfg-w:clamp(196px,23vw,236px)}
     .cfg-guias{display:none}
     .cfg-card{min-height:94px;padding:12px 13px 13px;border-radius:12px}
@@ -377,7 +386,7 @@
     .cfg-num{font-size:1.6rem}
   }
   /* CFG · Pantallas bajas (portátil apaisado, tableta tumbada): tarjetas compactas para que las tres quepan. */
-  @media(min-width:761px) and (max-height:720px){
+  @media(min-width:760.02px) and (max-height:720px){
     .cfg-col{gap:8px}
     .cfg-card{min-height:0;padding:10px 13px 11px}
     .cfg-chips{margin-top:8px}.cfg-chip{padding:5px 8px}.cfg-chip.on{padding-left:19px}
@@ -1170,12 +1179,12 @@
     }
     // CFG · El domo responde a cada opción cuando se enciende su chip, sutil y reversible: el diámetro lo hace crecer
     // un poco, la madera templa y mate las barras, y el vidrio aclara y pule los paneles.
-    const C_BLANCO=new THREE.Color(0xffffff), C_MADERA=new THREE.Color(0xd6b08a), C_AMBAR=new THREE.Color(0xe6a92e), C_VIDRIO=new THREE.Color(0xf2ead8);
+    const C_BLANCO=new THREE.Color(0xffffff), C_MADERA=new THREE.Color(0xd6b08a), C_AMBAR=new THREE.Color(0xe6a92e), C_VIDRIO=new THREE.Color(0xf6dcaa);
     function cfgReacciona(p){
       const a=suave(map(cfgT(p,0),.72,1)), b=suave(map(cfgT(p,2),.72,1)), c=suave(map(cfgT(p,4),.72,1));
       g.scale.setScalar(1+CFG_CRECE*a);
       barMat.color.copy(C_BLANCO).lerp(C_MADERA,b); barMat.roughness=.32+.3*b; barMat.metalness=.3-.24*b;
-      pm.color.copy(C_AMBAR).lerp(C_VIDRIO,c*.85); pm.roughness=.4-.34*c; pm.metalness=.15-.07*c;
+      pm.color.copy(C_AMBAR).lerp(C_VIDRIO,c*.55); pm.roughness=.4-.34*c; pm.metalness=.15+.2*c;
       return c;
     }
     // CFG · Guías (solo >=1100 px): cada tarjeta elige al entrar el nodo visible más cercano a su canto y lo sigue
@@ -1210,7 +1219,7 @@
           ? "translate3d(0,"+(c.side*u*30).toFixed(1)+"px,"+(-u*CFG_Z*.4).toFixed(1)+"px) rotateX("+(c.side*(CFG_RX_FIN+(CFG_RX_IN-CFG_RX_FIN)*u)).toFixed(2)+"deg)"
           : "translate3d("+(c.side*u*c.fuera).toFixed(1)+"px,0,"+(-u*CFG_Z).toFixed(1)+"px) rotateY("+(c.dir*(CFG_RY_FIN+(CFG_RY_IN-CFG_RY_FIN)*u)).toFixed(2)+"deg)";
         cfgSt(c,"tr",c.el,"transform",tr);
-        cfgSt(c,"op",c.el,"opacity",t<=0?"0":Math.min(1,t/.35).toFixed(3));
+        cfgSt(c,"op",c.el,"opacity",t<=0?"0":Math.min(1,t/.6).toFixed(3));
         if(c.sheen){ const sp=map(t,.5,1);
           cfgSt(c,"st",c.sheen,"transform","translateX("+(-100+267*sp).toFixed(1)+"%)");
           cfgSt(c,"so",c.sheen,"opacity",(sp>0&&sp<1?Math.sin(Math.PI*sp):0).toFixed(3)); }
@@ -1241,7 +1250,7 @@
       hubs.count=Math.max(0,Math.floor(map(q,.12,.6)*hubKeep.length));
       hubMat.emissiveIntensity=0.22+0.16*(0.5+0.5*Math.sin(clock*0.006));
       const vidrio=cfgReacciona(p);
-      pm.opacity=map(q,.6,.85)*0.42*(1-.38*vidrio);
+      pm.opacity=map(q,.6,.85)*0.42*(1-.2*vidrio);
       ghostMat.opacity=0.05+0.17*(1-map(q,.3,.6));
       // CFG · En la 04 el domo sigue girando un poco mientras entran las tarjetas y se para con la última.
       g.rotation.y=q*Math.PI*0.5 + map(p,CFG_S-.02,CFG_FIN)*0.32 + drift;
@@ -1262,7 +1271,11 @@
     }
     function kick(){ if(running) return; running=true; last=performance.now(); requestAnimationFrame(frame); }
     addEventListener("scroll",()=>{ prog=calcProg(); if(visible||prog!==pShown) kick(); },{passive:true});
-    addEventListener("resize",()=>{W=holder.clientWidth;H=holder.clientHeight;camera.aspect=W/H;camera.updateProjectionMatrix();renderer.setSize(W,H); medirIns(); cfgMedir(); prog=calcProg(); kick();});
+    function remedir(){ W=holder.clientWidth;H=holder.clientHeight;camera.aspect=W/H;camera.updateProjectionMatrix();renderer.setSize(W,H); medirIns(); cfgMedir(); prog=calcProg(); kick(); }
+    addEventListener("resize",remedir);
+    // CFG · El lienzo puede cambiar de tamaño sin ningún resize: al quitar el preloader aparece la barra de scroll
+    // (unos 15 px en Windows) y las tarjetas, las guías y el centrado de la cámara quedaban medidos con el ancho viejo.
+    if("ResizeObserver" in window) new ResizeObserver(()=>{ const w=holder.clientWidth, h=holder.clientHeight; if(w&&h&&(w!==W||h!==H)) remedir(); }).observe(holder);
     // CFG · Al cambiar de idioma cambian los anchos de las tarjetas: se vuelven a medir (y a pintar) en el fotograma siguiente.
     addEventListener("langchange",()=>{ PHASES=phaseNames(); lastPh=-1; updatePhases(pShown); requestAnimationFrame(()=>{ cfgMedir(); kick(); }); },{passive:true});
     if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{ cfgMedir(); kick(); });
