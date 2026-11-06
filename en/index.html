@@ -486,16 +486,62 @@
   .chip{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 10px;white-space:nowrap;transition:.2s var(--ease)}
   .chip:hover{border-color:var(--cobalt);color:var(--cobalt);transform:translateY(-2px)}
 
+  /* ---------- EXPLORA · cuatro páginas, cada una con su foto de la nave ----------
+     Base (sin JS, con reduced-motion o con poca altura): rejilla estática de cuatro.
+     .viva (lo pone el script de EXPLORA): la escena queda fija 430vh y los paneles entran uno a uno por la
+     derecha; el script solo les escribe transform y opacity. Papel e impresión de taller, sin cristal ni píldoras. */
   .explora{background:var(--paper)}
-  .cards{display:grid;gap:16px;margin-top:48px}
-  .ncard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:32px 30px;position:relative;overflow:hidden;transition:.32s var(--ease);display:flex;flex-direction:column}
-  .ncard::before{content:"";position:absolute;left:0;top:0;height:3px;width:0;background:var(--cobalt);transition:width .35s var(--ease)}
-  .ncard:hover{transform:translateY(-5px);box-shadow:var(--shadow)}.ncard:hover::before{width:100%}
-  .ncard .no{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--cobalt);letter-spacing:.12em}
-  .ncard h3{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.3rem;margin:16px 0 10px;letter-spacing:-.02em}
-  .ncard p{font-size:.95rem;color:var(--ink-2)}
-  .ncard .go{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-family:'Archivo',sans-serif;font-weight:700;font-size:.88rem;color:var(--cobalt)}
-  .ncard .go svg{width:14px;height:14px;transition:.2s var(--ease)}.ncard:hover .go svg{transform:translateX(4px)}
+  .ex-cab{padding-top:clamp(70px,12vh,120px)}
+  .ex-escena{max-width:var(--ample);margin:0 auto;padding:48px var(--gut) clamp(70px,12vh,120px)}
+  .ex-pista{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+  .ex-item{display:flex;min-width:0}
+  .ex-panel{position:relative;display:flex;flex-direction:column;width:100%;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:4px}
+  .ex-foto{position:relative;display:block;overflow:hidden;aspect-ratio:4/5;background:#2a211d;border-radius:3px 3px 0 0}
+  .ex-foto img{display:block;width:100%;height:100%;object-fit:cover;object-position:var(--ex-op,50% 50%);transform-origin:var(--ex-op,50% 50%)}
+  .ex-txt{display:flex;flex-direction:column;gap:12px;flex:1;padding:22px 24px 24px}
+  .ex-no{font-family:'Archivo',sans-serif;font-weight:600;font-size:1rem;line-height:1;font-variant-numeric:tabular-nums;color:var(--cobalt)}
+  .ex-panel h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:1.4rem;line-height:1.02;letter-spacing:-.028em}
+  .ex-panel p{font-size:.95rem;color:var(--ink-2);max-width:40ch}
+  .ex-go{margin-top:auto;padding-top:4px;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-family:'Archivo',sans-serif;font-weight:700;font-size:.95rem}
+  .ex-go>span{text-decoration:underline;text-decoration-color:var(--cobalt);text-decoration-thickness:1.5px;text-underline-offset:6px;transition:text-decoration-thickness .2s var(--ease)}
+  .ex-go svg{width:15px;height:15px;flex:none;color:var(--cobalt);transition:transform .22s var(--ease)}
+  .ex-panel:hover .ex-go>span{text-decoration-thickness:3px}.ex-panel:hover .ex-go svg{transform:translateX(4px)}
+  .ex-sombra{display:none}
+  @media(min-width:560px){.ex-pista{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:900px){.ex-pista{grid-template-columns:repeat(4,1fr)}}
+  /* Viva: la escena se fija bajo la cabecera (--ex-top lo mide el script) y deja libre la burbuja del chat:
+     en móvil por abajo (--ex-bot) y desde 600 px por los lados (--ex-lado, 92 px = burbuja de 60 + 20 + aire). */
+  .explora.viva .ex-pin{height:430vh;margin-bottom:clamp(24px,5vh,56px)}
+  .explora.viva .ex-escena{position:sticky;top:0;height:100vh;height:100svh;max-width:none;margin:0;padding:0;overflow:hidden;overflow:clip}
+  .explora.viva .ex-pista{position:absolute;left:0;right:0;top:var(--ex-top,96px);bottom:var(--ex-bot,32px);display:block}
+  .explora.viva .ex-item{position:absolute;inset:0;align-items:center;justify-content:center;padding:0 var(--ex-lado,var(--gut));pointer-events:none;transform:translate3d(130vw,0,0)}
+  .explora.viva.ex-cerca .ex-item,.explora.viva.ex-cerca .ex-foto img{will-change:transform}
+  .explora.viva .ex-panel{pointer-events:auto;width:min(100%,600px);height:100%;
+    box-shadow:0 1px 1px rgba(21,23,26,.06),0 24px 36px -30px rgba(21,23,26,.55)}
+  .explora.viva .ex-foto{flex:1 1 auto;min-height:0;aspect-ratio:auto}
+  .explora.viva .ex-foto img{transform:scale(1.08)}
+  .explora.viva .ex-txt{flex:none;gap:10px;padding:18px 20px 20px}
+  .explora.viva .ex-panel h3{font-size:clamp(1.45rem,5.4vw,2.3rem)}
+  /* La sombra larga del papel en el aire: crece con la velocidad y desaparece al posarse (solo opacity). */
+  .explora.viva .ex-sombra{display:block;position:absolute;inset:0;z-index:-1;border-radius:4px;pointer-events:none;opacity:0;
+    box-shadow:0 56px 64px -40px rgba(21,23,26,.42),0 26px 90px -34px rgba(21,23,26,.26)}
+  .explora.viva.ex-cerca .ex-sombra{will-change:opacity}
+  [data-theme="dark"] .explora.viva .ex-panel{box-shadow:0 1px 1px rgba(0,0,0,.3),0 24px 36px -30px rgba(0,0,0,.8)}
+  [data-theme="dark"] .explora.viva .ex-sombra{box-shadow:0 56px 64px -40px rgba(0,0,0,.72),0 26px 90px -34px rgba(0,0,0,.5)}
+  @media(min-width:600px){.explora.viva{--ex-lado:max(var(--gut),92px)}}
+  @media(max-width:599px){.explora.viva{--ex-bot:calc(var(--acg-abajo,16px) + 72px)}}
+  /* En horizontal: la foto entera en 2:3 a sangre en su mitad y el texto al lado; los pares, con la foto a la derecha. */
+  @media(min-width:760px) and (orientation:landscape){
+    .explora.viva .ex-panel{flex-direction:row;width:auto;height:min(100%,800px)}
+    .explora.viva .ex-item:nth-child(even) .ex-panel{flex-direction:row-reverse}
+    .explora.viva .ex-foto{flex:none;height:100%;aspect-ratio:2/3;border-radius:3px 0 0 3px}
+    .explora.viva .ex-item:nth-child(even) .ex-foto{border-radius:0 3px 3px 0}
+    .explora.viva .ex-txt{width:clamp(300px,34vw,480px);gap:14px;padding:clamp(26px,3vw,48px)}
+    .explora.viva .ex-no{font-size:1.08rem}
+    .explora.viva .ex-panel h3{font-size:clamp(2.1rem,4.3vw,4.3rem);line-height:.98;margin-top:.3em}
+    .explora.viva .ex-panel p{margin-top:auto;font-size:clamp(.98rem,1.1vw,1.08rem)}
+    .explora.viva .ex-go{margin-top:2px}
+  }
 
   .contacto{background:var(--ink);color:var(--paper)}
   .contacto .inner{max-width:var(--ample);margin:0 auto;padding:clamp(70px,12vh,110px) var(--gut);text-align:center}
@@ -544,9 +590,8 @@
     .spec .grid{grid-template-columns:repeat(4,1fr)}
     .spec .cell{border-bottom:0;border-right:1px solid var(--line)}.spec .cell:last-child{border-right:0}
     .sobre .grid{grid-template-columns:1.1fr .9fr;gap:70px}
-    .cards{grid-template-columns:repeat(4,1fr)}
   }
-  @media(min-width:560px) and (max-width:899px){.spec .grid{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:560px) and (max-width:899px){.spec .grid{grid-template-columns:repeat(2,1fr)}}
   .stack3d{position:relative;min-height:100svh;display:grid;place-items:center;
     background:#141019;color:#efece4;overflow:hidden;isolation:isolate;
     border-top:1px solid rgba(230,169,46,.16);border-bottom:1px solid rgba(230,169,46,.16)}
@@ -743,16 +788,20 @@
 
 
 
-<!-- EXPLORA -->
-<section class="explora pad" id="explora">
-  <div class="wrap">
+<!-- EXPLORA · cuatro páginas que pasan de derecha a izquierda (sin JS o con reduced-motion: rejilla) -->
+<section class="explora" id="explora">
+  <div class="wrap ex-cab">
     <span class="eyebrow" data-i18n="explora.eyebrow">Explore</span>
     <h2 class="kicker-h2" data-i18n-html="explora.title">In <em>four pages.</em></h2>
-    <div class="cards">
-      <a class="ncard" href="/en/trabajo"><span class="no">01</span><h3 data-i18n="explora.c1.t">Work and case study</h3><p data-i18n="explora.c1.p">DomesLab in depth, the app's real gallery and a selection of websites and 3D viewers.</p><span class="go"><span data-i18n="explora.c1.go">See work</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a class="ncard" href="/en/servicios"><span class="no">02</span><h3 data-i18n="explora.c2.t">Services and process</h3><p data-i18n="explora.c2.p">What I build —calculators, configurators, dashboards— and how I work all the way to production.</p><span class="go"><span data-i18n="explora.c2.go">See services</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a class="ncard" href="/en/domeslab"><span class="no">03</span><h3 data-i18n="explora.c3.t">Case study: DomesLab</h3><p data-i18n="explora.c3.p">How a real 3D configurator gets built: decisions, architecture and what it took to ship it to production.</p><span class="go"><span data-i18n="explora.c3.go">Read the case study</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a class="ncard" href="/en/contacto"><span class="no">04</span><h3 data-i18n="explora.c4.t">Contact</h3><p data-i18n="explora.c4.p">Tell me your idea and I'll reply with a plan and a ballpark quote, no strings attached.</p><span class="go"><span data-i18n="explora.c4.go">Let's talk</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+  </div>
+  <div class="ex-pin">
+    <div class="ex-escena">
+      <ol class="ex-pista">
+        <li class="ex-item"><a class="ex-panel" href="/en/trabajo" aria-labelledby="ex-t1" aria-describedby="ex-p1"><span class="ex-sombra" aria-hidden="true"></span><span class="ex-foto" style="--ex-op:50% 84%"><img src="/visuals/explora/01-640.webp" srcset="/visuals/explora/01-640.webp 640w, /visuals/explora/01.webp 1024w" sizes="(min-width: 760px) and (orientation: landscape) min(36vw, 540px), (min-width: 600px) 600px, 92vw" width="1024" height="1536" alt="A workshop table seen from above at night: dome drawings held down with masking tape, three battens with a band of coloured tape at the tip, a metal connector and a carpenter's pencil." data-i18n-alt="explora.c1.alt" loading="lazy" decoding="async"></span><div class="ex-txt"><span class="ex-no">01</span><h3 id="ex-t1" data-i18n="explora.c1.t">Work and case study</h3><p id="ex-p1" data-i18n="explora.c1.p">DomesLab in depth, the app's real gallery and a selection of websites and 3D viewers.</p><span class="ex-go"><span data-i18n="explora.c1.go">See work</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></li>
+        <li class="ex-item"><a class="ex-panel" href="/en/servicios" aria-labelledby="ex-t2" aria-describedby="ex-p2"><span class="ex-sombra" aria-hidden="true"></span><span class="ex-foto" style="--ex-op:50% 50%"><img src="/visuals/explora/02-640.webp" srcset="/visuals/explora/02-640.webp 640w, /visuals/explora/02.webp 1024w" sizes="(min-width: 760px) and (orientation: landscape) min(36vw, 540px), (min-width: 600px) 600px, 92vw" width="1024" height="1536" alt="A metal shelf holding four models of the same dome, smallest to largest: card, 3D printed, balsa sticks, and a piece of real pine frame with its connector." data-i18n-alt="explora.c2.alt" loading="lazy" decoding="async"></span><div class="ex-txt"><span class="ex-no">02</span><h3 id="ex-t2" data-i18n="explora.c2.t">Services and process</h3><p id="ex-p2" data-i18n="explora.c2.p">What I build (calculators, configurators, dashboards) and how I work all the way to production.</p><span class="ex-go"><span data-i18n="explora.c2.go">See services</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></li>
+        <li class="ex-item"><a class="ex-panel" href="/en/domeslab" aria-labelledby="ex-t3" aria-describedby="ex-p3"><span class="ex-sombra" aria-hidden="true"></span><span class="ex-foto" style="--ex-op:50% 24%"><img src="/visuals/explora/03-640.webp" srcset="/visuals/explora/03-640.webp 640w, /visuals/explora/03.webp 1024w" sizes="(min-width: 760px) and (orientation: landscape) min(36vw, 540px), (min-width: 600px) 600px, 92vw" width="1024" height="1536" alt="A pine dome half built inside a concrete shed at night, under a lamp hanging from a cable; struts marked with coloured tape wait on the floor." data-i18n-alt="explora.c3.alt" loading="lazy" decoding="async"></span><div class="ex-txt"><span class="ex-no">03</span><h3 id="ex-t3" data-i18n="explora.c3.t">Case study: DomesLab</h3><p id="ex-p3" data-i18n="explora.c3.p">How a real 3D configurator gets built: decisions, architecture and what it took to ship it to production.</p><span class="ex-go"><span data-i18n="explora.c3.go">Read the case study</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></li>
+        <li class="ex-item"><a class="ex-panel" href="/en/contacto" aria-labelledby="ex-t4" aria-describedby="ex-p4"><span class="ex-sombra" aria-hidden="true"></span><span class="ex-foto" style="--ex-op:50% 80%"><img src="/visuals/explora/04-640.webp" srcset="/visuals/explora/04-640.webp 640w, /visuals/explora/04.webp 1024w" sizes="(min-width: 760px) and (orientation: landscape) min(36vw, 540px), (min-width: 600px) 600px, 92vw" width="1024" height="1536" alt="The shed at blue hour with the door half open: inside, in the warm lamplight, you can make out the timber dome, with the mountains behind." data-i18n-alt="explora.c4.alt" loading="lazy" decoding="async"></span><div class="ex-txt"><span class="ex-no">04</span><h3 id="ex-t4" data-i18n="explora.c4.t">Contact</h3><p id="ex-p4" data-i18n="explora.c4.p">Tell me your idea and I'll reply with a plan and a ballpark quote, no strings attached.</p><span class="ex-go"><span data-i18n="explora.c4.go">Let's talk</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></li>
+      </ol>
     </div>
   </div>
 </section>
@@ -868,11 +917,11 @@
   })();
   if(reduce) return;
   var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.14});
-  document.querySelectorAll(".eyebrow,.chip,.ncard,.contacto p").forEach(function(el){el.classList.add("reveal");io.observe(el);});
+  document.querySelectorAll(".eyebrow,.chip,.contacto p").forEach(function(el){el.classList.add("reveal");io.observe(el);});
   // R6 · Los títulos de sección ya no se desvanecen enteros: llevan .lit, y este mismo observador les pone .in,
   // que dispara la subida por líneas y la banda ámbar (el troceado lo hace el bloque R6 de más abajo).
   document.querySelectorAll(".kicker-h2,.b-title,.contacto h2").forEach(function(el){el.classList.add("lit");io.observe(el);});
-  document.querySelectorAll(".chips,.cards").forEach(function(g){Array.prototype.forEach.call(g.children,function(c,i){c.style.setProperty("--rd",(i*50)+"ms");});});
+  document.querySelectorAll(".chips").forEach(function(g){Array.prototype.forEach.call(g.children,function(c,i){c.style.setProperty("--rd",(i*50)+"ms");});});
 
   // --- BARRIDO ÁMBAR ligado al scroll (estilo NRG): el resalte recorre el texto y se asienta ---
   var sw=[];
@@ -894,6 +943,153 @@
 })();
 </script>
 
+<!-- EXPLORA · los cuatro paneles pasan de derecha a izquierda al hacer scroll -->
+<script>
+/* EXPLORA · Con JavaScript, sin reduced-motion y con 520 px de alto o más, la sección pasa a .viva: la escena
+   (.ex-escena) queda fija mientras se recorren 330vh y los cuatro paneles entran uno a uno por la derecha.
+   La posición u va de -1 (el 01 fuera, a la derecha) a 3 (el 04 centrado) y sale solo del scroll:
+   - el 01 entra mientras la escena sube, antes de fijarse;
+   - cada cambio ocupa 0,7 pantallas y entre uno y otro el panel se queda quieto en el centro (0,3; al final 0,45).
+   Física de cada cambio (s de 0 a 1): el que entra sigue una smootherstep (sale despacio de fuera, corre y frena
+   hasta pararse centrado); cuando llega a tocar al del centro (hueco g), lo empuja y los dos van juntos; en el
+   punto en que el nuevo empieza a frenar (s = .5) el viejo se suelta, sigue deslizando con rozamiento, se tuerce
+   un poco y sale justo por la izquierda en s = 1. Cada uno gira sobre la esquina de abajo que queda lejos del otro
+   (el que entra, la izquierda; el que sale, la derecha): ninguno invade al vecino ni sube hacia la cabecera.
+   La sombra larga crece con la velocidad (papel en el aire).
+   Por fotograma solo se escriben transform y opacity, y solo si cambian; la geometría se mide al cambiar de
+   tamaño (nunca por fotograma) y el bucle se para cuando lo mostrado alcanza al scroll. Funciona con Lenis
+   (lee scrollY, que Lenis mueve) y sin él (táctil). Al enfocar un enlace con el tabulador, el scroll lleva su
+   panel al centro. Sin JS, con reduced-motion o con poca altura: la rejilla estática de siempre. */
+(function(){
+  var sec=document.getElementById("explora");
+  if(!sec||!window.requestAnimationFrame||!window.matchMedia) return;
+  var pin=sec.querySelector(".ex-pin"), esc=sec.querySelector(".ex-escena"), items=[].slice.call(sec.querySelectorAll(".ex-item"));
+  if(!pin||!esc||items.length<2||!(window.CSS&&CSS.supports&&CSS.supports("position","sticky"))) return;
+  var N=items.length, rm=matchMedia("(prefers-reduced-motion: reduce)"), hdr=document.querySelector("header");
+  var P=items.map(function(li){ return {li:li,img:li.querySelector(".ex-foto img"),sb:li.querySelector(".ex-sombra"),t:"",ti:"",o:""}; });
+  // Recorrido en pantallas: espera inicial, cambios y esperas intermedias, espera final.
+  var H0=.15, TR=.7, HM=.3, HE=.45, TOT=H0+(N-1)*TR+(N-2)*HM+HE;
+  // Giro con que sale cada panel al soltarlo y con que llega cada uno (grados): distintos, como papeles de verdad.
+  var GIRO=[-1.6,-2.2,-1.2,-1.8], LLEGA=[.9,1.2,.7,1];
+  var vivo=false, cerca=false, G=null, obj=-1, ver=-1, corre=false, ult=0, cargadas=false, rt=0;
+  function cl(v,a,b){ return v<a?a:v>b?b:v; }
+  function ss(s){ return s*s*s*(s*(s*6-15)+10); }
+  function dss(s){ return 30*s*s*(1-s)*(1-s); }
+  function carga(){ if(cargadas) return; cargadas=true; P.forEach(function(p){ if(p.img) p.img.loading="eager"; }); }
+  function limpia(){
+    P.forEach(function(p){ p.li.style.transform=""; if(p.img) p.img.style.transform=""; if(p.sb) p.sb.style.opacity=""; p.t=p.ti=p.o=""; });
+    sec.style.removeProperty("--ex-top"); sec.classList.remove("ex-cerca"); G=null;
+  }
+  function mide(){
+    var alto=innerHeight, debe=!rm.matches&&alto>=520;
+    if(debe!==vivo){ vivo=debe; sec.classList.toggle("viva",vivo); if(!vivo) limpia(); }
+    if(!vivo) return;
+    sec.classList.toggle("ex-cerca",cerca); if(cerca) carga();
+    var hb=hdr?Math.round(hdr.getBoundingClientRect().bottom):80;
+    sec.style.setProperty("--ex-top",(hb+Math.round(cl(alto*.025,12,26)))+"px");
+    var a=P[0].li.querySelector(".ex-panel"), pw=a.offsetWidth, ph=a.offsetHeight, vw=document.documentElement.clientWidth;
+    var st=esc.offsetHeight, W=vw/2+pw/2+24+ph*.045, g=Math.round(cl(pw*.02,12,22));
+    // Contacto: el que entra toca al del centro cuando su X vale pw + g.
+    var e=1-(pw+g)/W, lo=0, hi=1, k;
+    for(k=0;k<32;k++){ var m=(lo+hi)/2; if(ss(m)<e) lo=m; else hi=m; }
+    var sc=e<=0?0:lo, sr=cl(Math.max(.5,sc+.1),.5,.8), d=1-sr;
+    var xr=W*(1-ss(sr))-(pw+g), vr=W*dss(sr);
+    var acc=cl(2*(-W-xr+vr*d)/(d*d),0,vr/d);   // rozamiento que lo deja justo fuera en s = 1
+    G={vw:vw,st:st,top:pin.getBoundingClientRect().top+(window.scrollY||pageYOffset),D:Math.max(1,pin.offsetHeight-st),
+       pw:pw,hx:pw/2,hy:ph/2,W:W,g:g,sc:sc,sr:sr,xr:xr,vr:vr,acc:acc,xf:xr-vr*d+.5*acc*d*d,vmax:W*1.875,par:P[0].img.parentNode.offsetWidth*.035};
+    P.forEach(function(p){ p.t=p.ti=p.o=""; });
+  }
+  function objetivo(){
+    var y=(window.scrollY||pageYOffset)-G.top;
+    if(y<0){ var a=-.72*G.st, b=-.12*G.st; return -1+cl((y-a)/(b-a),0,1); }
+    var z=cl(y/G.D,0,1)*TOT;
+    if(z<H0) return 0;
+    z-=H0;
+    for(var k=0;k<N-1;k++){
+      if(z<TR) return k+z/TR;
+      z-=TR;
+      if(k<N-2){ if(z<HM) return k+1; z-=HM; }
+    }
+    return N-1;
+  }
+  // Scroll en el que el panel k queda quieto en el centro (mitad de su espera; el 01, al fijarse la escena).
+  function yDe(k){
+    var z=k===0?0:H0+k*TR+(k-1)*HM+(k<N-1?HM/2:HE/2);
+    return G.top+z/TOT*G.D;
+  }
+  function pose(i,u){
+    var d=u-i, x=0, r=0, v=0, lado=-1, s, f;
+    if(d<=-1){ x=G.W; r=LLEGA[i]; }
+    else if(d<0){ s=d+1; x=G.W*(1-ss(s)); v=G.W*dss(s); r=LLEGA[i]*(1-ss(s)); }
+    else if(d>=1){ x=G.xf; r=GIRO[i]; lado=1; }
+    else if(d>0){
+      s=d; lado=1;
+      if(s<=G.sc) x=0;
+      else if(s<=G.sr){ x=G.W*(1-ss(s))-(G.pw+G.g); v=G.W*dss(s); }
+      else { var t=s-G.sr; x=G.xr-G.vr*t+.5*G.acc*t*t; v=G.vr-G.acc*t; }
+      f=s<=G.sc?0:ss(cl((s-G.sc)/(1-G.sc),0,1)); r=GIRO[i]*f;
+    }
+    // Giro r sobre la esquina de abajo (izquierda si entra, derecha si sale): rotate(r) desde el centro más el
+    // desplazamiento que deja quieta esa esquina.
+    var a=r*Math.PI/180, c=Math.cos(a), sn=Math.sin(a), px=lado*G.hx, py=G.hy;
+    return {x:x+px-(px*c-py*sn),y:py-(px*sn+py*c),r:r,o:cl(v/G.vmax,0,1)*.9,par:cl(-x/(G.pw*.9),-1,1)*G.par};
+  }
+  function pinta(){
+    for(var i=0;i<N;i++){
+      var p=pose(i,ver), q=P[i];
+      var t="translate3d("+p.x.toFixed(1)+"px,"+p.y.toFixed(1)+"px,0) rotate("+p.r.toFixed(2)+"deg)";
+      if(t!==q.t){ q.li.style.transform=t; q.t=t; }
+      if(q.img){ var ti="translate3d("+p.par.toFixed(1)+"px,0,0) scale(1.08)"; if(ti!==q.ti){ q.img.style.transform=ti; q.ti=ti; } }
+      if(q.sb){ var o=p.o.toFixed(2); if(o!==q.o){ q.sb.style.opacity=o; q.o=o; } }
+    }
+  }
+  function fot(t){
+    if(!vivo||!G){ corre=false; return; }
+    var dt=ult?Math.min(64,t-ult):16; ult=t;
+    ver+=(obj-ver)*(1-Math.exp(-dt/85));
+    if(Math.abs(obj-ver)<.0006) ver=obj;
+    pinta();
+    if(ver!==obj) requestAnimationFrame(fot); else { corre=false; ult=0; }
+  }
+  function arranca(){ if(corre) return; corre=true; ult=0; requestAnimationFrame(fot); }
+  function alScroll(){
+    if(!vivo||!G) return;
+    var o=objetivo(); if(o===obj&&ver===obj) return;
+    obj=o;
+    if(!cerca){ ver=obj; pinta(); return; }   // lejos de la vista: se coloca sin animar
+    arranca();
+  }
+  function rehace(){
+    rt=0; mide(); if(!vivo) return;
+    obj=objetivo(); if(!cerca) ver=obj; pinta(); if(ver!==obj) arranca();
+  }
+  function pide(){ if(!rt) rt=requestAnimationFrame(rehace); }
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(function(es){
+      cerca=es[es.length-1].isIntersecting; sec.classList.toggle("ex-cerca",cerca&&vivo);
+      if(cerca&&vivo) carga(); else if(G){ ver=obj; pinta(); }
+    },{rootMargin:"100% 0px 100% 0px"}).observe(sec);
+  } else cerca=true;
+  addEventListener("scroll",alScroll,{passive:true});
+  addEventListener("resize",pide,{passive:true});
+  addEventListener("langchange",pide);
+  if(rm.addEventListener) rm.addEventListener("change",pide); else if(rm.addListener) rm.addListener(pide);
+  // Lo de arriba cambia de alto (el domo se fija en 600vh al arrancar, fuentes, imágenes): se vuelve a medir.
+  if("ResizeObserver" in window){ var ro=new ResizeObserver(pide); ro.observe(document.body); ro.observe(sec); }
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(pide);
+  // Tabulador: al enfocar un enlace, su panel viene al centro (la escena no se desplaza por dentro: overflow clip).
+  sec.addEventListener("focusin",function(e){
+    if(!vivo||!G) return;
+    var li=e.target&&e.target.closest?e.target.closest(".ex-item"):null, k=items.indexOf(li);
+    if(k<0) return;
+    esc.scrollLeft=0; esc.scrollTop=0;
+    var y=Math.round(yDe(k)); if(Math.abs((window.scrollY||pageYOffset)-y)<2) return;
+    if(window.__lenis) window.__lenis.scrollTo(y,{duration:.9}); else window.scrollTo({top:y,behavior:"smooth"});
+  });
+  rehace();
+})();
+</script>
+
 <!-- i18n (ES/CA/EN) + tema claro/oscuro -->
 <script>
 (function(){
@@ -910,10 +1106,10 @@
     "build.ph1":"Estructura","build.ph2":"Nodos","build.ph3":"Paneles","build.ph4":"Configurador en vivo",
     "build.cfg.diam":"Diámetro","build.cfg.est":"Estructura","build.cfg.madera":"Madera","build.cfg.acero":"Acero","build.cfg.cub":"Cubierta","build.cfg.vidrio":"Vidrio","build.cfg.lona":"Lona","build.cfg.poli":"Policarbonato","build.cfg.pedido":"Hoja de pedido","build.cfg.desp":"Despiece calculado","build.cfg.nbarras":"barras","build.cfg.nnodos":"nodos",
     "explora.eyebrow":"Explora","explora.title":"En <em>cuatro páginas.</em>",
-    "explora.c1.t":"Trabajo y caso de estudio","explora.c1.p":"DomesLab a fondo, la galería real de la app y una selección de webs y visualizadores 3D.","explora.c1.go":"Ver trabajo",
-    "explora.c2.t":"Servicios y proceso","explora.c2.p":"Qué construyo —calculadoras, configuradores, dashboards— y cómo trabajo hasta producción.","explora.c2.go":"Ver servicios",
-    "explora.c3.t":"Caso técnico: DomesLab","explora.c3.p":"Cómo se construye un configurador 3D de verdad: decisiones, arquitectura y lo que costó dejarlo en producción.","explora.c3.go":"Leer el caso",
-    "explora.c4.t":"Contacto","explora.c4.p":"Cuéntame tu idea y te respondo con un plan y un presupuesto orientativo, sin compromiso.","explora.c4.go":"Hablemos",
+    "explora.c1.t":"Trabajo y caso de estudio","explora.c1.p":"DomesLab a fondo, la galería real de la app y una selección de webs y visualizadores 3D.","explora.c1.go":"Ver trabajo","explora.c1.alt":"Mesa de taller vista desde arriba, de noche: planos de un domo sujetos con cinta de carrocero, tres listones con una vuelta de cinta de color en la punta, un conector metálico y un lápiz de carpintero.",
+    "explora.c2.t":"Servicios y proceso","explora.c2.p":"Qué construyo (calculadoras, configuradores, dashboards) y cómo trabajo hasta producción.","explora.c2.go":"Ver servicios","explora.c2.alt":"Balda de una estantería metálica con cuatro maquetas del mismo domo, de menor a mayor: de cartulina, impresa en 3D, de varillas de balsa y un trozo de estructura de pino con su conector.",
+    "explora.c3.t":"Caso técnico: DomesLab","explora.c3.p":"Cómo se construye un configurador 3D de verdad: decisiones, arquitectura y lo que costó dejarlo en producción.","explora.c3.go":"Leer el caso","explora.c3.alt":"Un domo de pino a medio montar en una nave de hormigón, de noche, bajo una lámpara colgada de un cable; en el suelo esperan barras marcadas con cinta de color.",
+    "explora.c4.t":"Contacto","explora.c4.p":"Cuéntame tu idea y te respondo con un plan y un presupuesto orientativo, sin compromiso.","explora.c4.go":"Hablemos","explora.c4.alt":"La nave a la hora azul con el portón medio abierto: dentro, a la luz cálida de una lámpara, se adivina el domo de madera, y detrás quedan las montañas.",
     "cta.eyebrow":"Siguiente paso","cta.title":"Construyamos tu <em>herramienta.</em>","cta.lead":"Cuéntame qué necesita tu equipo o tus clientes. En menos de 48 horas te respondo con un diagnóstico, una estimación de alcance y la siguiente decisión.","cta.btn":"Empieza tu proyecto"
    },
    ca:{
@@ -928,10 +1124,10 @@
     "build.ph1":"Estructura","build.ph2":"Nodes","build.ph3":"Panells","build.ph4":"Configurador en directe",
     "build.cfg.diam":"Diàmetre","build.cfg.est":"Estructura","build.cfg.madera":"Fusta","build.cfg.acero":"Acer","build.cfg.cub":"Coberta","build.cfg.vidrio":"Vidre","build.cfg.lona":"Lona","build.cfg.poli":"Policarbonat","build.cfg.pedido":"Full de comanda","build.cfg.desp":"Especejament calculat","build.cfg.nbarras":"barres","build.cfg.nnodos":"nodes",
     "explora.eyebrow":"Explora","explora.title":"En <em>quatre pàgines.</em>",
-    "explora.c1.t":"Feina i cas d'estudi","explora.c1.p":"DomesLab a fons, la galeria real de l'app i una selecció de webs i visualitzadors 3D.","explora.c1.go":"Veure la feina",
-    "explora.c2.t":"Serveis i procés","explora.c2.p":"Què construeixo —calculadores, configuradors, dashboards— i com treballo fins a producció.","explora.c2.go":"Veure serveis",
-    "explora.c3.t":"Cas tècnic: DomesLab","explora.c3.p":"Com es construeix un configurador 3D de debò: decisions, arquitectura i què va costar deixar-ho en producció.","explora.c3.go":"Llegir el cas",
-    "explora.c4.t":"Contacte","explora.c4.p":"Explica'm la teva idea i et responc amb un pla i un pressupost orientatiu, sense compromís.","explora.c4.go":"Parlem-ne",
+    "explora.c1.t":"Feina i cas d'estudi","explora.c1.p":"DomesLab a fons, la galeria real de l'app i una selecció de webs i visualitzadors 3D.","explora.c1.go":"Veure la feina","explora.c1.alt":"Taula de taller vista des de dalt, de nit: plànols d'una cúpula subjectes amb cinta de paper, tres llistons amb una volta de cinta de color a la punta, un connector metàl·lic i un llapis de fuster.",
+    "explora.c2.t":"Serveis i procés","explora.c2.p":"Què construeixo (calculadores, configuradors, dashboards) i com treballo fins a producció.","explora.c2.go":"Veure serveis","explora.c2.alt":"Prestatge d'una estanteria metàl·lica amb quatre maquetes de la mateixa cúpula, de petita a gran: de cartolina, impresa en 3D, de varetes de balsa i un tros d'estructura de pi amb el seu connector.",
+    "explora.c3.t":"Cas tècnic: DomesLab","explora.c3.p":"Com es construeix un configurador 3D de debò: decisions, arquitectura i què va costar deixar-ho en producció.","explora.c3.go":"Llegir el cas","explora.c3.alt":"Una cúpula de pi a mig muntar en una nau de formigó, de nit, sota un llum penjat d'un cable; a terra esperen barres marcades amb cinta de color.",
+    "explora.c4.t":"Contacte","explora.c4.p":"Explica'm la teva idea i et responc amb un pla i un pressupost orientatiu, sense compromís.","explora.c4.go":"Parlem-ne","explora.c4.alt":"La nau a l'hora blava amb el portal mig obert: a dins, a la llum càlida d'un llum, s'endevina la cúpula de fusta, i al darrere queden les muntanyes.",
     "cta.eyebrow":"Següent pas","cta.title":"Construïm la teva <em>eina.</em>","cta.lead":"Explica'm què necessita el teu equip o els teus clients. En menys de 48 hores et responc amb un diagnòstic, una estimació d'abast i la següent decisió.","cta.btn":"Comença el teu projecte"
    },
    en:{
@@ -946,10 +1142,10 @@
     "build.ph1":"Structure","build.ph2":"Nodes","build.ph3":"Panels","build.ph4":"Live configurator",
     "build.cfg.diam":"Diameter","build.cfg.est":"Frame","build.cfg.madera":"Timber","build.cfg.acero":"Steel","build.cfg.cub":"Cover","build.cfg.vidrio":"Glass","build.cfg.lona":"Canvas","build.cfg.poli":"Polycarbonate","build.cfg.pedido":"Order form","build.cfg.desp":"Calculated cut list","build.cfg.nbarras":"struts","build.cfg.nnodos":"nodes",
     "explora.eyebrow":"Explore","explora.title":"In <em>four pages.</em>",
-    "explora.c1.t":"Work and case study","explora.c1.p":"DomesLab in depth, the app's real gallery and a selection of websites and 3D viewers.","explora.c1.go":"See work",
-    "explora.c2.t":"Services and process","explora.c2.p":"What I build —calculators, configurators, dashboards— and how I work all the way to production.","explora.c2.go":"See services",
-    "explora.c3.t":"Case study: DomesLab","explora.c3.p":"How a real 3D configurator gets built: decisions, architecture and what it took to ship it to production.","explora.c3.go":"Read the case study",
-    "explora.c4.t":"Contact","explora.c4.p":"Tell me your idea and I'll reply with a plan and a ballpark quote, no strings attached.","explora.c4.go":"Let's talk",
+    "explora.c1.t":"Work and case study","explora.c1.p":"DomesLab in depth, the app's real gallery and a selection of websites and 3D viewers.","explora.c1.go":"See work","explora.c1.alt":"A workshop table seen from above at night: dome drawings held down with masking tape, three battens with a band of coloured tape at the tip, a metal connector and a carpenter's pencil.",
+    "explora.c2.t":"Services and process","explora.c2.p":"What I build (calculators, configurators, dashboards) and how I work all the way to production.","explora.c2.go":"See services","explora.c2.alt":"A metal shelf holding four models of the same dome, smallest to largest: card, 3D printed, balsa sticks, and a piece of real pine frame with its connector.",
+    "explora.c3.t":"Case study: DomesLab","explora.c3.p":"How a real 3D configurator gets built: decisions, architecture and what it took to ship it to production.","explora.c3.go":"Read the case study","explora.c3.alt":"A pine dome half built inside a concrete shed at night, under a lamp hanging from a cable; struts marked with coloured tape wait on the floor.",
+    "explora.c4.t":"Contact","explora.c4.p":"Tell me your idea and I'll reply with a plan and a ballpark quote, no strings attached.","explora.c4.go":"Let's talk","explora.c4.alt":"The shed at blue hour with the door half open: inside, in the warm lamplight, you can make out the timber dome, with the mountains behind.",
     "cta.eyebrow":"Next step","cta.title":"Let's build your <em>tool.</em>","cta.lead":"Tell me what your team or your clients need. In under 48 hours I'll reply with a diagnosis, a scope estimate and the next decision.","cta.btn":"Start your project"
    }
   };
@@ -960,6 +1156,7 @@
     var d=I18N[lang]||I18N.es;
     document.querySelectorAll("[data-i18n]").forEach(function(el){var k=el.getAttribute("data-i18n");if(d[k]!=null)el.textContent=d[k];});
     document.querySelectorAll("[data-i18n-html]").forEach(function(el){var k=el.getAttribute("data-i18n-html");if(d[k]!=null)el.innerHTML=d[k];});
+    document.querySelectorAll("[data-i18n-alt]").forEach(function(el){var k=el.getAttribute("data-i18n-alt");if(d[k]!=null)el.setAttribute("alt",d[k]);});
     document.querySelectorAll("[data-i18n-aria]").forEach(function(el){var k=el.getAttribute("data-i18n-aria");if(d[k]!=null){el.setAttribute("aria-label",d[k]);el.setAttribute("title",d[k]);}});
     var tEl=document.querySelector("[data-i18n-title]");if(tEl){var tk=tEl.getAttribute("data-i18n-title");if(d[tk]!=null)document.title=d[tk];}
     root.setAttribute("lang",lang);
