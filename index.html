@@ -78,6 +78,7 @@
 <link rel="preload" href="/fonts/ibm-plex-sans-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 <script>try{var _t=localStorage.getItem("eneko.theme");if(_t==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}</script>
+<script>(function(){var h=document.documentElement,a=null;function f(){var v=(window.scrollY||0)<1;if(v!==a){a=v;h.classList.toggle("cab-arriba",v);}}f();addEventListener("scroll",f,{passive:true});})();</script>
 <script type="importmap">
 {"imports":{
  "three":"/vendor/three-0.160.0/three.module.min.js",
@@ -181,7 +182,13 @@
   .pre-enter.show{opacity:1;transform:none}
 
   /* ---------- TOPBAR ---------- */
-  header{position:fixed;top:0;left:0;right:0;z-index:50}
+  /* Cabecera opaca en cuanto hay scroll: el papel del tema (o el ciruela de html.nav-dark) y un canto de 1 px
+     con sombra, que no cambia la altura. Antes, por encima de 1140 px, era transparente y el contenido de debajo
+     (el rótulo de EXPLORA, por ejemplo) se montaba con el nombre y el menú. Solo arriba del todo
+     (html.cab-arriba, que pone el script de cabeza) sigue transparente sobre el héroe. */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--paper);box-shadow:0 1px 0 var(--line)}
+  html.cab-arriba header{box-shadow:none}
+  @media(width>1140px){html.cab-arriba header{background:transparent}}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:18px var(--gut);max-width:var(--ample);margin:0 auto}
   .brand{display:flex;align-items:center;gap:11px}
   .mono-mark{width:34px;height:34px;border:1.5px solid var(--ink);border-radius:8px;display:grid;place-items:center;font-family:'Archivo',sans-serif;font-weight:900;font-size:.82rem}
@@ -216,7 +223,7 @@
     --line:rgba(242,240,234,.16);--line-2:rgba(242,240,234,.3)}
   html.nav-dark .mono-mark .mk-light{display:none}html.nav-dark .mono-mark .mk-dark{display:block}
   html.nav-swap header,html.nav-swap header *{transition:none!important}
-  header,header .brand .n,header .brand .n span,header .mono-mark,header .lang{transition:color .35s var(--ease),border-color .35s var(--ease),background-color .35s var(--ease)}
+  header,header .brand .n,header .brand .n span,header .mono-mark,header .lang{transition:color .35s var(--ease),border-color .35s var(--ease)}
 
   /* ---------- HERO ---------- */
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding:120px 0 80px;overflow:hidden}
@@ -894,11 +901,11 @@
   if(reduce){ num.textContent="100%"; ent.classList.add("show"); }
   else{ var n=0; var t=setInterval(function(){ n+=Math.random()*18; if(n>=100){n=100;clearInterval(t);ent.classList.add("show");} num.textContent=Math.floor(n)+"%"; },90); }
   setTimeout(function(){ if(!ent.classList.contains("show")){ent.classList.add("show");num.textContent="100%";} }, 4000);
-  // R8 · Cabecera según el fondo: una franja de 1 px a la altura de la cabecera (su mitad; con <=1140 px, su borde
-  // de abajo, porque ahí lleva fondo propio) mira qué zona data-nav="dark" pasa por debajo y pone html.nav-dark.
+  // R8 · Cabecera según el fondo: una franja de 1 px en el borde de abajo de la cabecera (lleva fondo propio en
+  // todos los anchos en cuanto hay scroll) mira qué zona data-nav="dark" pasa por debajo y pone html.nav-dark.
   // Con el domo vivo la sección .build es papel: cuenta su marca .nav-card, que sigue el borde de la tarjeta.
   (function(){
-    var hdr=document.querySelector("header"), html=document.documentElement, mq=matchMedia("(max-width:1140px)"), on=[], nio=null, rt;
+    var hdr=document.querySelector("header"), html=document.documentElement, on=[], nio=null, rt;
     if(!hdr||!("IntersectionObserver" in window)) return;
     function oscura(t){ return !(t.classList.contains("build")&&document.body.classList.contains("run")); }
     // El cambio va sin transición (html.nav-swap durante dos fotogramas): si fondo y tinta se cruzan a medio camino,
@@ -908,7 +915,7 @@
       requestAnimationFrame(function(){ requestAnimationFrame(function(){ html.classList.remove("nav-swap"); }); }); }
     function arma(){
       if(nio) nio.disconnect(); on=[];
-      var h=hdr.offsetHeight||74, y=Math.max(1,Math.round(mq.matches?h-2:h/2)), resto=Math.max(0,innerHeight-y-1);
+      var h=hdr.offsetHeight||74, y=Math.max(1,Math.round(h-2)), resto=Math.max(0,innerHeight-y-1);
       nio=new IntersectionObserver(function(es){
         es.forEach(function(e){ var i=on.indexOf(e.target); if(e.isIntersecting){ if(i<0) on.push(e.target); } else if(i>=0) on.splice(i,1); });
         pinta();

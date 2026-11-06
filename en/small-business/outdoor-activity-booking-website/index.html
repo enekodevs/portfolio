@@ -112,8 +112,8 @@ body::before{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:12px var(--margen);
   font-size:14px;color:var(--tinta-2);
-  background:color-mix(in srgb,var(--fondo) 86%,transparent);
-  backdrop-filter:blur(14px);
+  /* Opaca: con el 86 % y el desenfoque, el texto que subía por debajo se seguía leyendo. */
+  background:var(--fondo);
   border-bottom:1px solid var(--filete);
 }
 .cabecera b{color:var(--tinta);font-variation-settings:"wght" 600,"wdth" 92}

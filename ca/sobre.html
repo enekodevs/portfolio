@@ -53,6 +53,7 @@
 <link rel="preload" href="/fonts/ibm-plex-sans-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 <script>try{var _t=localStorage.getItem("eneko.theme");if(_t==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}</script>
+<script>(function(){var h=document.documentElement,a=null;function f(){var v=(window.scrollY||0)<1;if(v!==a){a=v;h.classList.toggle("cab-arriba",v);}}f();addEventListener("scroll",f,{passive:true});})();</script>
 <style>
 /* Fuentes self-hosted, subset latin (WEB-16). Ficheros en /fonts/.
    Archivo (wght 100-900) e IBM Plex Sans (wght 100-700) son variables: un solo
@@ -86,7 +87,6 @@
     --shadow:0 40px 80px -46px rgba(0,0,0,.72);
   }
   html.theme-anim,html.theme-anim *{transition:background-color .45s var(--ease),color .45s var(--ease),border-color .45s var(--ease)!important}
-  [data-theme="dark"] header{background:linear-gradient(var(--paper),rgba(20,16,25,0))}
   [data-theme="dark"] footer{background:var(--plum-2);color:var(--d-fg-2);border-top-color:var(--line)}
   [data-theme="dark"] .btn{background:var(--ink);color:var(--plum-2)}
 
@@ -116,7 +116,15 @@
   .btn:hover{transform:translateY(-2px);box-shadow:0 16px 34px -12px rgba(21,23,26,.5)}
   .btn svg{width:16px;height:16px;transition:transform .22s var(--ease)}.btn:hover svg{transform:translateX(3px)}
 
-  header{position:fixed;top:0;left:0;right:0;z-index:50;background:linear-gradient(var(--paper),rgba(242,240,234,0))}
+  /* Cabecera opaca en cuanto hay scroll, con un canto de 1 px en sombra (no cambia la altura): con el degradado,
+     el contenido que pasaba por debajo se transparentaba. Arriba del todo (html.cab-arriba, script de cabeza)
+     conserva el degradado de siempre. */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--paper);box-shadow:0 1px 0 var(--line)}
+  html.cab-arriba header{box-shadow:none}
+  @media(width>1140px){
+    html.cab-arriba header{background:linear-gradient(var(--paper),rgba(242,240,234,0))}
+    html.cab-arriba[data-theme="dark"] header{background:linear-gradient(var(--paper),rgba(20,16,25,0))}
+  }
   .nav{display:flex;align-items:center;justify-content:space-between;padding:16px var(--gut);max-width:var(--ample);margin:0 auto}
   .brand{display:flex;align-items:center;gap:11px}
   .mono-mark{width:34px;height:34px;border:1.5px solid var(--ink);border-radius:8px;display:grid;place-items:center;font-family:'Archivo',sans-serif;font-weight:900;font-size:.82rem}

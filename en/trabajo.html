@@ -76,6 +76,7 @@
 <link rel="preload" href="/fonts/ibm-plex-sans-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 <script>try{var _t=localStorage.getItem("eneko.theme");if(_t==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}</script>
+<script>(function(){var h=document.documentElement,a=null;function f(){var v=(window.scrollY||0)<1;if(v!==a){a=v;h.classList.toggle("cab-arriba",v);}}f();addEventListener("scroll",f,{passive:true});})();</script>
 <style>
 /* Fuentes self-hosted, subset latin (WEB-16). Ficheros en /fonts/.
    Archivo (wght 100-900) e IBM Plex Sans (wght 100-700) son variables: un solo
@@ -152,7 +153,9 @@
   /* TOPBAR */
   /* Cabecera opaca en todos los anchos: con el degradado, el subtitulo y el menu
      se perdian sobre la galeria oscura al desplazar. var(--paper) ya cambia con el tema. */
-  header{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--paper)}
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--paper);box-shadow:0 1px 0 var(--line)}
+  /* El canto (sombra de 1 px, no cambia la altura) solo con scroll, como en el resto de páginas. */
+  html.cab-arriba header{box-shadow:none}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:16px var(--gut);max-width:var(--ample);margin:0 auto}
   .brand{display:flex;align-items:center;gap:11px}
   .mono-mark{width:34px;height:34px;border:1.5px solid var(--ink);border-radius:8px;display:grid;place-items:center;font-family:'Archivo',sans-serif;font-weight:900;font-size:.82rem}

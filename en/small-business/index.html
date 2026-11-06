@@ -130,11 +130,12 @@ body::before{transition:opacity .8s .25s ease;
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:14px var(--margen);
   font-size:13.5px;color:var(--tinta-2);
-  background:color-mix(in srgb,var(--fondo) 82%,transparent);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid transparent;transition:border-color .3s;
+  /* Opaca en cuanto hay scroll, con el filete de canto. Arriba del todo (.arriba) sigue translúcida sobre el
+     lienzo, porque ahí no hay texto por debajo. Sin JS no hay .arriba: opaca siempre. */
+  background:var(--fondo);
+  border-bottom:1px solid var(--filete);
 }
-.cabecera.pegada{border-bottom-color:var(--filete)}
+.cabecera.arriba{background:color-mix(in srgb,var(--fondo) 82%,transparent);backdrop-filter:blur(14px);border-bottom-color:transparent}
 .cabecera b{color:var(--tinta);font-variation-settings:"wght" 600,"wdth" 92}
 .cabecera nav{display:flex;align-items:center;gap:14px}
 .cabecera nav a{text-decoration:none;color:var(--tinta-3);font-size:13px}
@@ -595,8 +596,9 @@ btnTema.addEventListener('click',()=>{
 /* ============ cabecera + CTA flotante ============ */
 const cab = document.querySelector('.cabecera'), flot = document.getElementById('flotante');
 const censo = document.getElementById('censo'), contacto = document.getElementById('contacto');
+cab.classList.toggle('arriba', scrollY < 1);
 addEventListener('scroll',()=>{
-  cab.classList.toggle('pegada', scrollY > 40);
+  cab.classList.toggle('arriba', scrollY < 1);
   const y = scrollY + innerHeight;
   flot.classList.toggle('dentro', scrollY > innerHeight*0.9 && y < contacto.offsetTop + 200);
 },{passive:true});
