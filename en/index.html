@@ -318,115 +318,159 @@
   /* R8 · Marca de zona oscura que sigue el borde de arriba y de abajo de la tarjeta, no el de la sección. */
   .nav-card{display:none;position:absolute;left:0;right:0;top:var(--insy,0px);bottom:var(--insy,0px);pointer-events:none}
   body.run .nav-card{display:block}
-  /* CFG · Configurador de la fase 04: seis tarjetas de cristal oscuro que entran una a una desde los lados, atadas
-     al scroll. Es una demostración decorativa (aria-hidden) y solo existe con el domo vivo: sin WebGL o con
-     reduced-motion no se pinta. El JS del domo escribe transform y opacity a partir de pShown; aquí solo va la forma.
-     Siempre paleta oscura: la escena es ciruela en los dos temas. --cfg-top lo pone el JS (alto real de la cabecera). */
-  .cfg{display:none;position:absolute;inset:0;z-index:2;pointer-events:none;perspective:1250px;perspective-origin:50% 50%;
-    --cfg-top:110px;--cfg-bot:170px;--cfg-w:clamp(258px,20.5vw,304px)}
+  /* CFG · Configurador de la fase 04 con aspecto de taller (ficha pruebas-portfolio/nrg-2026-11-04/DIRECCION-configurador.md):
+     a la izquierda, tres recortes de la hoja de pedido del cliente, cada uno con su cinta de carrocero y la opción
+     rodeada a bolígrafo; a la derecha, una sola hoja de despiece que se imprime renglón a renglón, con una cinta del
+     color con que el domo pinta cada longitud. Papel cálido, tinta ciruela y llamadas a tinta clara, como en la patente
+     de Fuller. Es decorativo (aria-hidden) y solo existe con el domo vivo: sin WebGL o con reduced-motion no se pinta.
+     El JS del domo escribe transform y opacity (y el trazo del bolígrafo y de las llamadas) a partir de pShown; aquí solo
+     va la forma. Igual en los dos temas: la escena es la nave de noche. --cfg-top lo pone el JS (alto de la cabecera). */
+  .cfg{display:none;position:absolute;inset:0;z-index:2;pointer-events:none;
+    --cfg-top:110px;--cfg-bot:112px;--cfg-w:clamp(258px,20.5vw,304px);
+    --cfg-papel:#ece2cc;--cfg-papel-2:#f1ebdf;--cfg-tinta:#2a1a2d;--cfg-tinta-2:rgba(42,26,45,.64);--cfg-filete:rgba(42,26,45,.34);
+    --cfg-boli:#2b3f93;--cfg-cinta:rgba(222,207,163,.88);--cfg-llamada:#e7dcc6;
+    --cfg-grano:url("data:image/png;base64,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"),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAQAAAD8x0bcAAAAsklEQVR42m1SQRKEMAjLiUsuPIb/v21HCGl1dhwVJU1CWlT0hYrKYlfU91aAQCxWCgiBniqfCt2en9EwmhsN48M06GU8vMuYRWgNXs0Vw3rKPwL00oZtA25SLCFWrhxvcglDsfR0Ia40Z5p3zEBJmC89HyTMyenc8ZlMI53EQ1Jp8DoFXruVFsG9e1caipK2HHeY+LCwRefdFk6YYaupp48QHP/t62xQTJhn8NMMeeKE+QN+/UlEnLpR9gAAAABJRU5ErkJggg==")}
   body.run .cfg{display:block}
   .cfg-guias{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
   .cfg-guias g{opacity:0}
-  .cfg-guias path{fill:none;stroke:#e6a92e;stroke-width:1.15;stroke-opacity:.78;stroke-dasharray:1 1;stroke-dashoffset:1;stroke-linejoin:round}
-  .cfg-guias .cfg-o{fill:#e6a92e}
-  .cfg-guias .cfg-r{fill:rgba(230,169,46,.16);stroke:#e6a92e;stroke-width:1.2;opacity:0}
-  .cfg-col{position:absolute;top:var(--cfg-top);bottom:var(--cfg-bot);width:var(--cfg-w);display:flex;flex-direction:column;justify-content:center;
-    gap:clamp(10px,1.7vh,16px);transform-style:preserve-3d}
+  .cfg-guias path{fill:none;stroke:var(--cfg-llamada);stroke-width:.9;stroke-opacity:.7;stroke-dasharray:1 1;stroke-dashoffset:1;stroke-linecap:round;stroke-linejoin:round}
+  .cfg-guias circle{fill:var(--cfg-llamada);opacity:0}
+  .cfg-guias text{fill:var(--cfg-llamada);opacity:0;font-family:'Archivo',sans-serif;font-weight:600;font-size:13px;font-variant-numeric:tabular-nums;text-anchor:middle;dominant-baseline:central}
+  .cfg-col{position:absolute;top:var(--cfg-top);bottom:var(--cfg-bot);width:var(--cfg-w);display:flex;flex-direction:column;justify-content:center;gap:clamp(14px,2.3vh,24px)}
   .cfg-in{left:var(--gut)}.cfg-out{right:var(--gut)}
-  .cfg-card{position:relative;overflow:hidden;min-height:104px;display:flex;flex-direction:column;justify-content:space-between;
-    padding:14px 16px 15px;border-radius:14px;color:#efece4;opacity:0;transform-origin:50% 50%;will-change:transform,opacity;backface-visibility:hidden;
-    background:linear-gradient(155deg,rgba(66,52,74,.8) 0%,rgba(40,32,47,.84) 48%,rgba(25,20,31,.9) 100%);
-    border:1px solid rgba(230,169,46,.24);
-    box-shadow:inset 0 1px 0 rgba(242,240,234,.1),0 32px 60px -30px rgba(0,0,0,.8),0 0 0 1px rgba(14,10,20,.35)}
-  /* CFG · Reflejo interior fijo: luz fría arriba a la izquierda y un rescoldo ámbar en la esquina contraria. */
-  .cfg-card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-    background:linear-gradient(118deg,rgba(242,240,234,.09) 0%,rgba(242,240,234,0) 34%),radial-gradient(120% 90% at 100% 0%,rgba(230,169,46,.12),rgba(230,169,46,0) 58%)}
-  /* CFG · El brillo que barre la tarjeta al asentarse (lo mueve el JS con translateX, sin temporizadores). */
-  .cfg-sheen{position:absolute;top:-30%;bottom:-30%;left:0;width:60%;pointer-events:none;opacity:0;transform:translateX(-100%);
-    background:linear-gradient(100deg,rgba(255,228,176,0) 0%,rgba(255,228,176,.2) 50%,rgba(255,228,176,0) 100%)}
-  .cfg-lab{position:relative;display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.15em;
-    text-transform:uppercase;color:#b3afb8;line-height:1.25}
-  .cfg-n{color:#e6a92e}
-  .cfg-res .cfg-lab{justify-content:space-between}
-  .cfg-calc{display:inline-flex;align-items:center;gap:6px;color:#e6a92e;font-size:.6rem;letter-spacing:.13em;white-space:nowrap}
-  .cfg-calc::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;box-shadow:0 0 8px rgba(230,169,46,.8)}
-  .cfg-chips{position:relative;display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-  .cfg-chip{position:relative;font-family:'Archivo',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:-.005em;line-height:1;
-    padding:7px 10px;border-radius:999px;border:1px solid rgba(242,240,234,.2);color:#bcb8c1;white-space:nowrap}
-  .cfg-chip.on{color:#efece4;padding-left:22px;border-color:rgba(242,240,234,.26)}
-  /* CFG · Anillo de «opción» siempre visible; el relleno ámbar (la <i>) se enciende al llegar la tarjeta. */
-  .cfg-chip.on::before{content:"";position:absolute;left:9px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(242,240,234,.4)}
-  .cfg-chip i{position:absolute;inset:-1px;border-radius:inherit;border:1px solid #e6a92e;opacity:0;
-    background:linear-gradient(180deg,rgba(230,169,46,.26),rgba(230,169,46,.12));box-shadow:0 0 22px -4px rgba(230,169,46,.7),inset 0 0 12px rgba(230,169,46,.16)}
-  .cfg-chip i::before{content:"";position:absolute;left:10px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:#e6a92e;box-shadow:0 0 8px #e6a92e}
-  .cfg-chip b{position:relative;font-weight:inherit}
-  .cfg-val{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-top:8px}
-  .cfg-num{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(1.75rem,2.3vw,2.25rem);letter-spacing:-.03em;line-height:.95;
-    font-variant-numeric:tabular-nums;color:#efece4}
-  .cfg-sw{display:flex;align-items:flex-end;gap:4px;height:24px;padding-bottom:3px}
-  .cfg-sw i{display:block;width:6px;border-radius:1.5px;transform:scaleY(0);transform-origin:50% 100%}
-  .cfg-meter{position:relative;height:2px;margin-top:12px;border-radius:2px;overflow:hidden;background:rgba(242,240,234,.12)}
-  .cfg-meter i{position:absolute;inset:0;background:linear-gradient(90deg,#c07f22,#e6a92e);transform:scaleX(0);transform-origin:0 50%}
-  /* CFG · Escritorio estrecho: columnas más estrechas para que el domo, que va entre las dos, gane ancho (cfgEncaja; esta
-     condición es MQ_ESTRECHO en el JS). Como por debajo de 1100 px, «Policarbonato» puede bajar a otra línea y
-     «Calculado» se queda en su punto; los chips, algo más justos. */
+  .cfg-pz{position:relative;display:flex;opacity:0;will-change:transform,opacity}
+  /* Dos sombras en la mesa (no se inclinan con el papel): una larga y difusa de oclusión, que con el papel en el aire se
+     separa y se abre, y otra de contacto, que solo aparece cuando el papel toca la mesa. */
+  .cfg-sombra,.cfg-contacto{position:absolute;inset:0;will-change:transform,opacity}
+  /* sin filter: blur, que el compositor recalcula en cada fotograma; una box-shadow ancha se rasteriza una vez y luego solo se mueve */
+  .cfg-sombra{inset:16px 14px;border-radius:10px;background:rgba(6,3,10,.44);box-shadow:0 0 24px 13px rgba(6,3,10,.44)}
+  .cfg-contacto{opacity:0;box-shadow:0 1px 1.5px rgba(6,3,10,.5),0 4px 9px -3px rgba(6,3,10,.45)}
+  .cfg-papel{position:relative;flex:1 1 auto;min-width:0;color:var(--cfg-tinta);font-family:'Archivo',sans-serif;font-weight:500;line-height:1.2;
+    transform-origin:50% 50%;will-change:transform;backface-visibility:hidden;isolation:isolate}
+  /* El papel va en ::before para recortarlo a tijera (cantos casi rectos, con medio píxel de canto) sin cortar la cinta. */
+  /* El grano son dos teselas PNG en línea (fibra fina a media escala, nítida en pantallas 2x, y nubes de la pasta, escaladas): un SVG con feTurbulence
+     costaba más de 400 ms de rasterizado en la GPU la primera vez que se pintaba. */
+  .cfg-papel::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--cfg-grano),var(--cfg-papel);background-size:48px 48px,260px 260px;box-shadow:inset 0 0 0 .5px rgba(42,26,45,.3);
+    clip-path:polygon(0 1.2%,38% 0,100% 1.4%,99.7% 47%,100% 98.8%,63% 100%,.4% 99.2%,.2% 52%)}
+  .cfg-hoja .cfg-papel::before{background:var(--cfg-grano),var(--cfg-papel-2);clip-path:none}
+  .cfg-recorte{padding:13px 17px 15px}
+  .cfg-cab{font-size:.74rem;font-weight:600;color:var(--cfg-tinta-2);padding-bottom:7px;margin-bottom:9px;border-bottom:.5px solid var(--cfg-filete)}
+  .cfg-tit{display:flex;align-items:baseline;gap:8px;font-size:1rem;font-weight:800;letter-spacing:-.012em}
+  .cfg-ref{font-weight:500;color:var(--cfg-tinta-2);font-variant-numeric:tabular-nums;letter-spacing:0}
+  .cfg-tit .cfg-ref{font-size:.82rem}
+  .cfg-ops{display:flex;flex-wrap:wrap;column-gap:18px;row-gap:5px;margin-top:9px;font-size:.92rem;color:var(--cfg-tinta-2)}
+  .cfg-ops>span{white-space:nowrap}
+  .cfg-sel{position:relative;color:var(--cfg-tinta);font-weight:600}
+  .cfg-boli{position:absolute;left:-10px;top:-7px;width:calc(100% + 20px);height:calc(100% + 14px);overflow:visible}
+  .cfg-boli path{fill:none;stroke:var(--cfg-boli);stroke-width:1.45;stroke-opacity:.9;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 1;stroke-dashoffset:1}
+  /* Cinta de carrocero: rasgada por los dos cabos, con su giro (--r) y su sitio en cada papel; el JS la estira (scaleX). */
+  .cfg-cinta{position:absolute;top:-8px;left:22px;width:58px;height:17px;transform:rotate(var(--r,-4deg))}
+  .cfg-cinta i,.cfg-tira i{display:block;height:100%;transform:scaleX(0);transform-origin:0 50%;will-change:transform;
+    clip-path:polygon(2.5% 0,97.5% 0,100% 16%,97% 33%,99.5% 51%,97.5% 69%,100% 85%,97% 100%,3% 100%,0 86%,2.5% 67%,0 50%,3% 32%,.5% 15%)}
+  .cfg-cinta i{background:var(--cfg-cinta);box-shadow:0 1px 1px rgba(6,3,10,.14)}
+  .cfg-pz[data-k="2"] .cfg-cinta{left:-24px;top:calc(50% - 8px);width:46px;--r:83deg}
+  .cfg-pz[data-k="4"] .cfg-cinta{left:57%;width:52px;--r:3deg}
+  .cfg-hoja .cfg-cinta{left:calc(50% - 40px);width:80px;top:-9px;--r:-1.5deg}
+  /* Hoja de despiece. Los renglones y el pie los escribe el JS con las cifras de la geometría, glifo a glifo (.cfg-g). */
+  .cfg-hoja .cfg-papel{padding:15px 18px 15px}
+  .cfg-hoja .cfg-tit{justify-content:space-between;gap:10px}
+  .cfg-diam{font-weight:600;font-size:.9rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .cfg-lista{list-style:none;margin:11px 0 0;padding:11px 0 0;border-top:.5px solid var(--cfg-filete);display:grid;gap:12px}
+  /* Renglón: referencia, cinta del color de su longitud con su letra, largo, cuántas; debajo, la barra dibujada a escala
+     (--l, su largo frente a la más larga) con las puntas encintadas, como en los kits de domo. --c lo pone el JS. */
+  .cfg-ren{display:grid;grid-template-columns:10px 30px 1fr auto;grid-template-areas:"ref tira mm ud" ". barra barra barra";column-gap:10px;row-gap:5px;align-items:center}
+  .cfg-ren .cfg-ref{grid-area:ref;font-size:.74rem}
+  .cfg-tira{grid-area:tira;width:30px;height:15px;transform:rotate(var(--r,-2deg))}
+  .cfg-tira i{display:grid;place-items:center;background:var(--c)}
+  .cfg-tira b{font-size:.66rem;font-weight:800;color:var(--cfg-tinta)}
+  .cfg-mm{grid-area:mm;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .cfg-mm b{font-size:1.4rem;font-weight:800;letter-spacing:-.01em}
+  .cfg-mm small{font-size:.76rem;font-weight:500;margin-left:4px}
+  .cfg-ud{grid-area:ud;justify-self:end;white-space:nowrap;font-size:.95rem;font-weight:600;font-variant-numeric:tabular-nums}
+  .cfg-barra{grid-area:barra;height:6px}
+  .cfg-barra i{position:relative;display:block;width:var(--l,100%);height:100%;box-shadow:inset 0 0 0 .75px var(--cfg-tinta);transform:scaleX(0);transform-origin:0 50%;will-change:transform}
+  .cfg-barra i::before,.cfg-barra i::after{content:"";position:absolute;top:0;bottom:0;left:0;width:8px;background:var(--c);box-shadow:inset 0 0 0 .75px var(--cfg-tinta)}
+  .cfg-barra i::after{left:auto;right:0}
+  .cfg-total{display:flex;justify-content:space-between;gap:10px;margin-top:12px;padding-top:9px;border-top:.5px solid var(--cfg-filete);font-size:.84rem;white-space:nowrap}
+  .cfg-total b{font-size:1.08rem;font-weight:800;font-variant-numeric:tabular-nums;margin-right:4px}
+  .cfg-g{opacity:0}
+  /* CFG · Escritorio estrecho (1100-1299 px, MQ_ESTRECHO en el JS): columnas más estrechas para que el domo, que va
+     entre las dos, gane ancho (cfgEncaja); los papeles algo más justos. */
   @media(min-width:1100px) and (max-width:1299px){
     .cfg{--cfg-w:clamp(214px,19vw,252px)}
-    .cfg-calc{font-size:0;gap:0}
-    .cfg-card{padding-left:14px;padding-right:14px}.cfg-chips{gap:5px}
-    .cfg-chip{font-size:.72rem;padding:6px 7px}.cfg-chip.on{padding-left:20px}
-    .cfg-chip.on::before{left:8px}.cfg-chip i::before{left:9px}
+    .cfg-recorte{padding:12px 14px 13px}.cfg-ops{column-gap:14px;font-size:.86rem}
+    .cfg-hoja .cfg-papel{padding:13px 14px 13px}
+    .cfg-ren{grid-template-columns:10px 26px 1fr auto;column-gap:8px}.cfg-tira{width:26px}.cfg-mm b{font-size:1.24rem}.cfg-ud{font-size:.88rem}
   }
-  /* CFG · Las guías hasta el domo solo en escritorio ancho. */
+  /* CFG · Las llamadas hasta el domo, solo en escritorio ancho. */
   @media(max-width:1099.98px){
     .cfg{--cfg-w:clamp(196px,23vw,236px)}
     .cfg-guias{display:none}
-    .cfg-card{min-height:94px;padding:12px 13px 13px;border-radius:12px}
-    .cfg-lab{font-size:.58rem;letter-spacing:.13em}
-    .cfg-calc{font-size:0;gap:0}
-    .cfg-chips{gap:5px;margin-top:10px}
-    .cfg-chip{font-size:.7rem;padding:6px 8px}.cfg-chip.on{padding-left:19px}
-    .cfg-chip.on::before{left:7px}.cfg-chip i::before{left:8px}
-    .cfg-num{font-size:1.6rem}
+    .cfg-recorte{padding:11px 13px 12px}.cfg-ops{column-gap:13px;font-size:.84rem;margin-top:7px}
+    .cfg-hoja .cfg-papel{padding:12px 13px 12px}
+    .cfg-ren{grid-template-columns:10px 26px 1fr auto;column-gap:8px}.cfg-tira{width:26px}.cfg-mm b{font-size:1.2rem}.cfg-ud{font-size:.86rem}
   }
-  /* CFG · Pantallas bajas (portátil apaisado, tableta tumbada): tarjetas compactas para que las tres quepan. */
+  /* CFG · Pantallas bajas (portátil apaisado, tableta tumbada): papeles compactos para que quepan los cuatro. */
   @media(min-width:760.02px) and (max-height:720px){
-    .cfg-col{gap:8px}
-    .cfg-card{min-height:0;padding:10px 13px 11px}
-    .cfg-chips{margin-top:8px}.cfg-chip{padding:5px 8px}.cfg-chip.on{padding-left:19px}
-    .cfg-chip.on::before{left:7px}.cfg-chip i::before{left:8px}
-    .cfg-num{font-size:1.45rem}.cfg-val{margin-top:5px}.cfg-meter{margin-top:8px}
+    .cfg-col{gap:12px}
+    .cfg-recorte{padding:9px 13px 10px}.cfg-cab{padding-bottom:5px;margin-bottom:6px}.cfg-ops{margin-top:6px}
+    .cfg-hoja .cfg-papel{padding:11px 13px 10px}.cfg-lista{margin-top:8px;padding-top:8px;gap:6px}.cfg-total{margin-top:8px;padding-top:7px}
   }
-  /* CFG · Móvil: nada encima del domo por los lados. Las opciones en una fila arriba (bajo la cabecera) y los
-     resultados en otra abajo (por encima de las barras de fase y lejos del chat); entran girando en X. */
+  /* CFG · Móvil: nada encima del domo por los lados. Los tres recortes en una fila arriba (bajo la cabecera) y la hoja
+     de despiece abajo, a todo el ancho, con sus tres renglones en columnas (por encima de las barras de fase y lejos del
+     chat); los papeles bajan o suben a posarse. Sin llamadas, los números de referencia sobran. */
   @media(max-width:760px){
-    .cfg{perspective:900px;--cfg-bot:116px}
-    .cfg-col{left:16px;right:16px;width:auto;top:auto;bottom:auto;flex-direction:row;justify-content:stretch;align-items:stretch;gap:6px}
+    .cfg{--cfg-bot:116px}
+    .cfg-col{left:16px;right:16px;width:auto;top:auto;bottom:auto;flex-direction:row;justify-content:stretch;align-items:stretch;gap:8px}
     .cfg-in{top:var(--cfg-top)}.cfg-out{bottom:var(--cfg-bot)}
-    .cfg-in .cfg-card{transform-origin:50% 0}.cfg-out .cfg-card{transform-origin:50% 100%}
-    .cfg-card{flex:1 1 0;min-width:0;min-height:0;padding:9px 9px 10px;border-radius:10px;justify-content:flex-start}
-    .cfg-lab{font-size:.52rem;letter-spacing:.08em;gap:6px}
-    .cfg-n,.cfg-calc,.cfg-sw{display:none}
-    .cfg-chips{margin-top:7px}
-    .cfg-chip:not(.on){display:none}
-    .cfg-chip{font-size:.72rem;padding:5px 8px 5px 18px}
-    .cfg-chip.on{padding-left:18px}.cfg-chip.on::before{left:7px}.cfg-chip i::before{left:8px}
-    .cfg-num{font-size:1.32rem}.cfg-val{margin-top:6px}.cfg-meter{margin-top:8px}
+    .cfg-pz{flex:1 1 0;min-width:0}
+    .cfg-cab,.cfg-ref{display:none}
+    .cfg-recorte{padding:8px 9px 9px}
+    .cfg-tit{font-size:.76rem}
+    .cfg-ops{column-gap:9px;row-gap:2px;margin-top:4px;font-size:.74rem}
+    .cfg-boli{left:-6px;top:-4px;width:calc(100% + 12px);height:calc(100% + 8px)}
+    .cfg-cinta,.cfg-pz[data-k="2"] .cfg-cinta,.cfg-pz[data-k="4"] .cfg-cinta{left:calc(50% - 20px);right:auto;top:-7px;width:40px;height:14px}
+    .cfg-pz[data-k="2"] .cfg-cinta{--r:5deg}.cfg-pz[data-k="4"] .cfg-cinta{--r:-3deg}
+    .cfg-hoja .cfg-cinta{left:calc(50% - 30px);width:60px}
+    .cfg-hoja .cfg-papel{padding:9px 11px 9px}
+    .cfg-hoja .cfg-tit{font-size:.8rem}.cfg-diam{font-size:.74rem}
+    .cfg-lista{grid-template-columns:repeat(3,1fr);gap:8px;margin-top:7px;padding-top:7px}
+    .cfg-ren{grid-template-columns:22px 1fr;grid-template-areas:"tira mm" ". ud" "barra barra";column-gap:6px;row-gap:1px}
+    .cfg-tira{width:22px;height:12px}.cfg-tira b{font-size:.56rem}
+    .cfg-mm b{font-size:1.02rem}.cfg-mm small{font-size:.66rem;margin-left:2px}
+    .cfg-ud{justify-self:start;font-size:.74rem}
+    .cfg-barra{height:5px;margin-top:4px}.cfg-barra i::before,.cfg-barra i::after{width:6px}
+    .cfg-total{margin-top:7px;padding-top:6px;font-size:.7rem}.cfg-total b{font-size:.84rem;margin-right:3px}
   }
-  /* CFG · Tableta en vertical (de 761 a 1099 px de ancho y más alta que ancha): como el móvil, las opciones en una fila
-     arriba (bajo la cabecera) y los resultados en otra abajo (por encima del chat, que sigue a --acg-abajo, y del HUD),
-     con el domo grande entre las dos; entran girando en X. Es la misma condición que MQ_TABLETA en el JS del domo. */
+  /* CFG · Tableta en vertical (de 761 a 1099 px de ancho y más alta que ancha): como el móvil, los recortes en una fila
+     arriba y la hoja abajo (por encima del chat, que sigue a --acg-abajo, y del HUD), con el domo grande entre las dos.
+     Aquí los papeles crecen con el ancho (vw) para no quedarse en tiras de móvil, y cada renglón cabe en una línea.
+     Es la misma condición que MQ_TABLETA en el JS del domo. */
   @media (760px < width < 1100px) and (orientation: portrait){
-    .cfg{perspective:1100px;--cfg-bot:calc(var(--acg-abajo,112px) + 76px)}
-    .cfg-col{left:var(--gut);right:var(--gut);width:auto;top:auto;bottom:auto;flex-direction:row;justify-content:stretch;align-items:stretch;gap:12px}
+    .cfg{--cfg-bot:calc(var(--acg-abajo,112px) + 76px)}
+    .cfg-col{left:var(--gut);right:var(--gut);width:auto;top:auto;bottom:auto;flex-direction:row;justify-content:stretch;align-items:stretch;gap:clamp(12px,1.8vw,20px)}
     .cfg-in{top:var(--cfg-top)}.cfg-out{bottom:var(--cfg-bot)}
-    .cfg-in .cfg-card{transform-origin:50% 0}.cfg-out .cfg-card{transform-origin:50% 100%}
-    .cfg-card{flex:1 1 0;min-width:0}
-    /* la tercera columna (Cubierta arriba, Nodos abajo) más ancha en las dos filas: así caben las tres cubiertas
-       («Policarbonato», «Polycarbonate») en una línea y las dos filas siguen alineadas */
-    .cfg-card[data-k="4"],.cfg-card[data-k="5"]{flex-grow:1.4}
+    .cfg-pz{flex:1 1 0;min-width:0}
+    .cfg-cab,.cfg-ref{display:none}
+    .cfg-recorte{padding:clamp(11px,1.5vw,16px) clamp(13px,1.8vw,20px) clamp(12px,1.6vw,18px)}
+    .cfg-tit{font-size:clamp(.9rem,1.7vw,1.14rem)}
+    .cfg-ops{column-gap:clamp(12px,1.8vw,20px);margin-top:clamp(6px,.9vw,10px);font-size:clamp(.84rem,1.55vw,1.06rem)}
+    .cfg-cinta,.cfg-pz[data-k="2"] .cfg-cinta,.cfg-pz[data-k="4"] .cfg-cinta{right:auto;top:-8px;width:clamp(50px,6.5vw,70px)}
+    .cfg-pz[data-k="2"] .cfg-cinta{left:62%;--r:4deg}.cfg-pz[data-k="4"] .cfg-cinta{left:14%;--r:-3deg}
+    /* la hoja, más baja que en el móvil para que el domo gane alto: el total sube a la línea del título */
+    .cfg-hoja .cfg-papel{padding:clamp(12px,1.6vw,18px) clamp(14px,2vw,22px);display:grid;grid-template-columns:1fr auto;grid-template-areas:"tit total" "lista lista";column-gap:24px;align-items:baseline}
+    .cfg-hoja .cfg-tit{grid-area:tit;justify-content:flex-start;gap:14px;font-size:clamp(.92rem,1.7vw,1.14rem)}.cfg-diam{font-size:clamp(.84rem,1.5vw,1rem)}
+    .cfg-lista{grid-area:lista}
+    .cfg-total{grid-area:total;margin:0;padding:0;border:0;gap:clamp(14px,2vw,22px)}
+    .cfg-lista{grid-template-columns:repeat(3,1fr);column-gap:clamp(14px,2.4vw,28px)}
+    .cfg-ren{grid-template-columns:clamp(24px,3vw,32px) auto 1fr;grid-template-areas:"tira mm ud" "barra barra barra";column-gap:clamp(7px,1vw,11px)}
+    .cfg-tira{width:clamp(24px,3vw,32px);height:clamp(13px,1.6vw,17px)}
+    .cfg-barra{height:clamp(5px,.7vw,7px)}
+    .cfg-mm b{font-size:clamp(1.12rem,2.5vw,1.7rem)}.cfg-mm small{font-size:clamp(.7rem,1.2vw,.84rem)}
+    .cfg-ud{font-size:clamp(.82rem,1.5vw,1.02rem)}
+    .cfg-total{font-size:clamp(.78rem,1.4vw,.94rem)}.cfg-total b{font-size:clamp(.96rem,1.8vw,1.2rem)}
   }
-  /* CFG · Si la pantalla no da para las tarjetas sin taparlo todo (móvil tumbado), no se muestran. */
+  /* CFG · Si la pantalla no da para los papeles sin taparlo todo (móvil tumbado), no se muestran. */
   @media(max-height:459px){.cfg{display:none!important}}
 
   /* ---------- CUERPO CLARO ---------- */
@@ -645,39 +689,44 @@
     </div>
     <div class="phases" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
     <div class="phase-lab" aria-hidden="true"><span data-i18n="build.phase">Phase</span> <span id="phNum">01</span><b id="phName">Estructura</b></div>
-    <!-- CFG · Configurador de la fase 04. Izquierda: lo que elige el cliente (opciones ficticias). Derecha: lo que
-         calcula la app, con las cifras reales de esta geometría (las pone el JS del domo). Orden de entrada data-k. -->
+    <!-- CFG · Configurador de la fase 04, con aspecto de taller. Izquierda: tres recortes de la hoja de pedido del cliente
+         (opciones ficticias; la elegida, rodeada a bolígrafo). Derecha: la hoja de despiece, con las cifras reales de esta
+         geometría (los renglones y el pie los escribe el JS del domo). Orden de entrada data-k; las llamadas al domo llevan
+         el mismo número de referencia que su papel o su renglón. -->
     <div class="cfg" aria-hidden="true">
-      <svg class="cfg-guias" xmlns="http://www.w3.org/2000/svg"><g data-k="0"><path pathLength="1"/><circle class="cfg-o" r="2"/><circle class="cfg-r" r="5"/></g><g data-k="1"><path pathLength="1"/><circle class="cfg-o" r="2"/><circle class="cfg-r" r="5"/></g><g data-k="2"><path pathLength="1"/><circle class="cfg-o" r="2"/><circle class="cfg-r" r="5"/></g><g data-k="3"><path pathLength="1"/><circle class="cfg-o" r="2"/><circle class="cfg-r" r="5"/></g><g data-k="4"><path pathLength="1"/><circle class="cfg-o" r="2"/><circle class="cfg-r" r="5"/></g><g data-k="5"><path pathLength="1"/><circle class="cfg-o" r="2"/><circle class="cfg-r" r="5"/></g></svg>
+      <svg class="cfg-guias" xmlns="http://www.w3.org/2000/svg"><g data-k="0"><path pathLength="1"/><circle r="1.7"/><text>1</text></g><g data-k="1"><path pathLength="1"/><circle r="1.7"/><text>4</text></g><g data-k="2"><path pathLength="1"/><circle r="1.7"/><text>2</text></g><g data-k="3"><path pathLength="1"/><circle r="1.7"/><text>5</text></g><g data-k="4"><path pathLength="1"/><circle r="1.7"/><text>3</text></g><g data-k="5"><path pathLength="1"/><circle r="1.7"/><text>6</text></g></svg>
       <div class="cfg-col cfg-in">
-        <div class="cfg-card" data-k="0"><i class="cfg-sheen"></i>
-          <div class="cfg-lab"><span class="cfg-n">01</span><span data-i18n="build.cfg.diam">Diameter</span></div>
-          <div class="cfg-chips"><span class="cfg-chip">4 m</span><span class="cfg-chip on"><i></i><b>6 m</b></span><span class="cfg-chip">8 m</span></div>
+        <div class="cfg-pz" data-k="0"><i class="cfg-sombra"></i><i class="cfg-contacto"></i>
+          <div class="cfg-papel cfg-recorte">
+            <div class="cfg-cab" data-i18n="build.cfg.pedido">Order form</div>
+            <div class="cfg-tit"><span class="cfg-ref">1</span><span data-i18n="build.cfg.diam">Diameter</span></div>
+            <div class="cfg-ops"><span>4 m</span><span class="cfg-sel"><span>6 m</span><svg class="cfg-boli" xmlns="http://www.w3.org/2000/svg"><path pathLength="1"/></svg></span><span>8 m</span></div>
+            <span class="cfg-cinta"><i></i></span>
+          </div>
         </div>
-        <div class="cfg-card" data-k="2"><i class="cfg-sheen"></i>
-          <div class="cfg-lab"><span class="cfg-n">02</span><span data-i18n="build.cfg.est">Frame</span></div>
-          <div class="cfg-chips"><span class="cfg-chip on"><i></i><b data-i18n="build.cfg.madera">Timber</b></span><span class="cfg-chip" data-i18n="build.cfg.acero">Steel</span></div>
+        <div class="cfg-pz" data-k="2"><i class="cfg-sombra"></i><i class="cfg-contacto"></i>
+          <div class="cfg-papel cfg-recorte">
+            <div class="cfg-tit"><span class="cfg-ref">2</span><span data-i18n="build.cfg.est">Frame</span></div>
+            <div class="cfg-ops"><span class="cfg-sel"><span data-i18n="build.cfg.madera">Timber</span><svg class="cfg-boli" xmlns="http://www.w3.org/2000/svg"><path pathLength="1"/></svg></span><span data-i18n="build.cfg.acero">Steel</span></div>
+            <span class="cfg-cinta"><i></i></span>
+          </div>
         </div>
-        <div class="cfg-card" data-k="4"><i class="cfg-sheen"></i>
-          <div class="cfg-lab"><span class="cfg-n">03</span><span data-i18n="build.cfg.cub">Cover</span></div>
-          <div class="cfg-chips"><span class="cfg-chip on"><i></i><b data-i18n="build.cfg.vidrio">Glass</b></span><span class="cfg-chip" data-i18n="build.cfg.lona">Canvas</span><span class="cfg-chip" data-i18n="build.cfg.poli">Polycarbonate</span></div>
+        <div class="cfg-pz" data-k="4"><i class="cfg-sombra"></i><i class="cfg-contacto"></i>
+          <div class="cfg-papel cfg-recorte">
+            <div class="cfg-tit"><span class="cfg-ref">3</span><span data-i18n="build.cfg.cub">Cover</span></div>
+            <div class="cfg-ops"><span class="cfg-sel"><span data-i18n="build.cfg.vidrio">Glass</span><svg class="cfg-boli" xmlns="http://www.w3.org/2000/svg"><path pathLength="1"/></svg></span><span data-i18n="build.cfg.lona">Canvas</span><span data-i18n="build.cfg.poli">Polycarbonate</span></div>
+            <span class="cfg-cinta"><i></i></span>
+          </div>
         </div>
       </div>
       <div class="cfg-col cfg-out">
-        <div class="cfg-card cfg-res" data-k="1"><i class="cfg-sheen"></i>
-          <div class="cfg-lab"><span data-i18n="build.cfg.barras">Struts</span><span class="cfg-calc" data-i18n="build.cfg.calc">Calculated</span></div>
-          <div class="cfg-val"><b class="cfg-num" data-n="barras">0</b></div>
-          <div class="cfg-meter"><i></i></div>
-        </div>
-        <div class="cfg-card cfg-res" data-k="3"><i class="cfg-sheen"></i>
-          <div class="cfg-lab"><span data-i18n="build.cfg.tipos">Strut types</span><span class="cfg-calc" data-i18n="build.cfg.calc">Calculated</span></div>
-          <div class="cfg-val"><b class="cfg-num" data-n="tipos">0</b><span class="cfg-sw"></span></div>
-          <div class="cfg-meter"><i></i></div>
-        </div>
-        <div class="cfg-card cfg-res" data-k="5"><i class="cfg-sheen"></i>
-          <div class="cfg-lab"><span data-i18n="build.cfg.nodos">Nodes</span><span class="cfg-calc" data-i18n="build.cfg.calc">Calculated</span></div>
-          <div class="cfg-val"><b class="cfg-num" data-n="nodos">0</b></div>
-          <div class="cfg-meter"><i></i></div>
+        <div class="cfg-pz cfg-hoja" data-k="1"><i class="cfg-sombra"></i><i class="cfg-contacto"></i>
+          <div class="cfg-papel">
+            <div class="cfg-tit"><span data-i18n="build.cfg.desp">Calculated cut list</span><span class="cfg-diam">Ø 6 m</span></div>
+            <ol class="cfg-lista"></ol>
+            <div class="cfg-total"></div>
+            <span class="cfg-cinta"><i></i></span>
+          </div>
         </div>
       </div>
     </div>
@@ -859,7 +908,7 @@
     "build.tag":"Caso de estudio · DomesLab","build.title":"Calculado<br>barra a barra.","build.phase":"Fase",
     "build.p1.t":"Estructura geodésica","build.p1.d":"— barras calculadas por longitud","build.p2.t":"Nodos","build.p2.d":"— hubs de unión","build.p3.t":"Paneles","build.p3.d":"— cerramiento de vidrio","build.p4.t":"Configurador en vivo","build.p4.d":"— 3D en tiempo real, en producción",
     "build.ph1":"Estructura","build.ph2":"Nodos","build.ph3":"Paneles","build.ph4":"Configurador en vivo",
-    "build.cfg.diam":"Diámetro","build.cfg.est":"Estructura","build.cfg.madera":"Madera","build.cfg.acero":"Acero","build.cfg.cub":"Cubierta","build.cfg.vidrio":"Vidrio","build.cfg.lona":"Lona","build.cfg.poli":"Policarbonato","build.cfg.barras":"Barras","build.cfg.tipos":"Tipos de barra","build.cfg.nodos":"Nodos","build.cfg.calc":"Calculado",
+    "build.cfg.diam":"Diámetro","build.cfg.est":"Estructura","build.cfg.madera":"Madera","build.cfg.acero":"Acero","build.cfg.cub":"Cubierta","build.cfg.vidrio":"Vidrio","build.cfg.lona":"Lona","build.cfg.poli":"Policarbonato","build.cfg.pedido":"Hoja de pedido","build.cfg.desp":"Despiece calculado","build.cfg.nbarras":"barras","build.cfg.nnodos":"nodos",
     "explora.eyebrow":"Explora","explora.title":"En <em>cuatro páginas.</em>",
     "explora.c1.t":"Trabajo y caso de estudio","explora.c1.p":"DomesLab a fondo, la galería real de la app y una selección de webs y visualizadores 3D.","explora.c1.go":"Ver trabajo",
     "explora.c2.t":"Servicios y proceso","explora.c2.p":"Qué construyo —calculadoras, configuradores, dashboards— y cómo trabajo hasta producción.","explora.c2.go":"Ver servicios",
@@ -877,7 +926,7 @@
     "build.tag":"Cas d'estudi · DomesLab","build.title":"Calculat<br>barra a barra.","build.phase":"Fase",
     "build.p1.t":"Estructura geodèsica","build.p1.d":"— barres calculades per longitud","build.p2.t":"Nodes","build.p2.d":"— hubs d'unió","build.p3.t":"Panells","build.p3.d":"— tancament de vidre","build.p4.t":"Configurador en directe","build.p4.d":"— 3D en temps real, en producció",
     "build.ph1":"Estructura","build.ph2":"Nodes","build.ph3":"Panells","build.ph4":"Configurador en directe",
-    "build.cfg.diam":"Diàmetre","build.cfg.est":"Estructura","build.cfg.madera":"Fusta","build.cfg.acero":"Acer","build.cfg.cub":"Coberta","build.cfg.vidrio":"Vidre","build.cfg.lona":"Lona","build.cfg.poli":"Policarbonat","build.cfg.barras":"Barres","build.cfg.tipos":"Tipus de barra","build.cfg.nodos":"Nodes","build.cfg.calc":"Calculat",
+    "build.cfg.diam":"Diàmetre","build.cfg.est":"Estructura","build.cfg.madera":"Fusta","build.cfg.acero":"Acer","build.cfg.cub":"Coberta","build.cfg.vidrio":"Vidre","build.cfg.lona":"Lona","build.cfg.poli":"Policarbonat","build.cfg.pedido":"Full de comanda","build.cfg.desp":"Especejament calculat","build.cfg.nbarras":"barres","build.cfg.nnodos":"nodes",
     "explora.eyebrow":"Explora","explora.title":"En <em>quatre pàgines.</em>",
     "explora.c1.t":"Feina i cas d'estudi","explora.c1.p":"DomesLab a fons, la galeria real de l'app i una selecció de webs i visualitzadors 3D.","explora.c1.go":"Veure la feina",
     "explora.c2.t":"Serveis i procés","explora.c2.p":"Què construeixo —calculadores, configuradors, dashboards— i com treballo fins a producció.","explora.c2.go":"Veure serveis",
@@ -895,7 +944,7 @@
     "build.tag":"Case study · DomesLab","build.title":"Calculated,<br>strut by strut.","build.phase":"Phase",
     "build.p1.t":"Geodesic structure","build.p1.d":"— struts sized by length","build.p2.t":"Nodes","build.p2.d":"— connection hubs","build.p3.t":"Panels","build.p3.d":"— glass cladding","build.p4.t":"Live configurator","build.p4.d":"— real-time 3D, in production",
     "build.ph1":"Structure","build.ph2":"Nodes","build.ph3":"Panels","build.ph4":"Live configurator",
-    "build.cfg.diam":"Diameter","build.cfg.est":"Frame","build.cfg.madera":"Timber","build.cfg.acero":"Steel","build.cfg.cub":"Cover","build.cfg.vidrio":"Glass","build.cfg.lona":"Canvas","build.cfg.poli":"Polycarbonate","build.cfg.barras":"Struts","build.cfg.tipos":"Strut types","build.cfg.nodos":"Nodes","build.cfg.calc":"Calculated",
+    "build.cfg.diam":"Diameter","build.cfg.est":"Frame","build.cfg.madera":"Timber","build.cfg.acero":"Steel","build.cfg.cub":"Cover","build.cfg.vidrio":"Glass","build.cfg.lona":"Canvas","build.cfg.poli":"Polycarbonate","build.cfg.pedido":"Order form","build.cfg.desp":"Calculated cut list","build.cfg.nbarras":"struts","build.cfg.nnodos":"nodes",
     "explora.eyebrow":"Explore","explora.title":"In <em>four pages.</em>",
     "explora.c1.t":"Work and case study","explora.c1.p":"DomesLab in depth, the app's real gallery and a selection of websites and 3D viewers.","explora.c1.go":"See work",
     "explora.c2.t":"Services and process","explora.c2.p":"What I build —calculators, configurators, dashboards— and how I work all the way to production.","explora.c2.go":"See services",
@@ -1089,9 +1138,12 @@
     // CFG · Reparto del recorrido con el pin de 600vh (500vh de scroll; antes 440vh y 340vh). Todo lo que ya había
     // (barras, nodos, paneles, giro, cámara, tarjeta, título) lee q=p/Q_END, que en cada píxel de scroll vale lo mismo
     // que el p de antes: las fases 01-03 duran los mismos 255vh y la 04 empieza en p=.51 con el espacio nuevo.
-    // Línea de tiempo de la 04: paneles completos en .578 · la cámara se aparta (.54-.615) · seis tarjetas desde .60,
-    // una cada .05 y .06 cada una · todo quieto de .91 a 1 antes de soltar el pin.
-    const Q_END=.68, CFG_S=.60, CFG_STEP=.05, CFG_DUR=.06, CFG_FIN=CFG_S+5*CFG_STEP+CFG_DUR, CFG_PULL0=.54, CFG_PULL1=.615;
+    // Línea de tiempo de la 04: la cámara se aparta de .495 a .55 (justo antes de la fase y a la vez que llega el primer
+    // papel) · el giro frena y el domo queda quieto en .575 · seis entradas que arrancan en CFG_T0, a saltos irregulares
+    // pero fijos (atados al scroll), cada una con su duración · la última asentada en CFG_FIN (.905): todo quieto el
+    // último 9,5 % antes de soltar el pin. Paneles completos en .578, como antes.
+    const Q_END=.68, CFG_T0=[.516,.574,.65,.706,.768,.823], CFG_DUR=[.07,.085,.062,.07,.06,.082],
+      CFG_S=CFG_T0[0], CFG_FIN=Math.max(...CFG_T0.map((t,k)=>t+CFG_DUR[k])), CFG_PULL0=.495, CFG_PULL1=.55, CFG_QUIETO=.575;
     function updatePhases(p){
       const seg=[0,.25*Q_END,.5*Q_END,.75*Q_END,1]; let active=0;
       for(let i=0;i<4;i++){ const f=map(p,seg[i],seg[i+1]); phEls[i].style.transform="scaleX("+f.toFixed(4)+")"; if(p>=seg[i]) active=i; }
@@ -1120,31 +1172,71 @@
     const camA=new THREE.Vector3(7.2,2.6,9.2), camB=new THREE.Vector3(5.2,4.4,7.2), tgt=new THREE.Vector3(0,1.1,0);
     let visible=true;
 
-    // CFG · Configurador de la fase 04: seis tarjetas (I1,S1,I2,S2,I3,S3) que entran una a una alternando lados.
-    // Cada una tiene su ventana [CFG_S+k·CFG_STEP, +CFG_DUR] y todo lo que hace (entrar en 3D, el brillo, el chip que
-    // se enciende, la cuenta, la guía y la reacción del domo) sale de esa t local, que sale de pShown. Sin
-    // temporizadores: al subir salen en orden inverso y al bajar vuelven a su sitio. Las cifras son las de esta
-    // geometría: barras = dEdges, tipos de barra = longitudes distintas (lens), nodos = hubKeep.
+    // CFG · Configurador de la fase 04 con aspecto de taller. Seis entradas k: 0, 2 y 4 son los tres recortes de la hoja de
+    // pedido (izquierda o fila de arriba) y 1, 3 y 5 los tres renglones de la hoja de despiece (derecha o fila de abajo),
+    // que llega con el 1. Cada entrada tiene su ventana [CFG_T0[k], +CFG_DUR[k]] y todo lo que hace (posarse, la cinta, el
+    // bolígrafo, la impresión, la llamada y la reacción del domo) sale de esa t local, que sale de pShown. Sin
+    // temporizadores: al subir se deshace en orden inverso y al bajar vuelve a su sitio.
     const cfgEl=buildSec.querySelector(".cfg");
-    const CFG_RY_IN=56, CFG_RY_FIN=11, CFG_RX_IN=78, CFG_RX_FIN=4, CFG_Z=560, CFG_CRECE=.06, CFG_CODO=18;
-    const CFG_CIFRAS={barras:dEdges.length,tipos:lens.length,nodos:hubKeep.length};
+    const CFG_CRECE=.06, CFG_CODO=16, CFG_ALTO=88;   // CFG_CODO: aire entre el papel y el domo para que la llamada salga en horizontal
     const cfgPaso=t=>1-Math.pow(1-t,2.4), suave=t=>t*t*(3-2*t);
-    const cfgT=(p,k)=>map(p,CFG_S+k*CFG_STEP,CFG_S+k*CFG_STEP+CFG_DUR);
-    const cfg=cfgEl?[...cfgEl.querySelectorAll(".cfg-card")].map(el=>{
-      const k=+el.dataset.k, num=el.querySelector(".cfg-num"), gEl=cfgEl.querySelector('.cfg-guias g[data-k="'+k+'"]');
-      return {el,k,side:k%2?1:-1,dir:k%2?-1:1,sheen:el.querySelector(".cfg-sheen"),lit:el.querySelector(".cfg-chip.on i"),
-        num,N:num?(CFG_CIFRAS[num.dataset.n]||0):0,meter:el.querySelector(".cfg-meter i"),sw:[],
-        gEl,path:gEl&&gEl.querySelector("path"),dot:gEl&&gEl.querySelector(".cfg-o"),ring:gEl&&gEl.querySelector(".cfg-r"),
-        x:0,y:0,w:0,h:0,fuera:0,ax:0,ay:0,plan:null,l:{}};
+    const cfgT=(p,k)=>map(p,CFG_T0[k],CFG_T0[k]+CFG_DUR[k]);
+    // Tramo de t en que se dibuja la llamada de cada entrada (los recortes, al acabar el bolígrafo; los renglones, al
+    // imprimirse; el 5 acaba antes para dejar sitio al pie).
+    const CFG_GUIA0=[.8,.84,.8,.56,.8,.56], CFG_GUIA1=[1,1,1,.86,1,.86];
+    // Cada papel se posa con su giro final (de 1 a 3°, distinto en cada uno), el giro con que viene (gIn) y su inclinación
+    // en el aire (rx, ry, en grados): ninguno cae igual.
+    const CFG_PAPEL={0:{giro:-2.3,gIn:-7,rx:11,ry:30},2:{giro:1.3,gIn:9,rx:-8,ry:24},4:{giro:-1.7,gIn:-5,rx:15,ry:33},1:{giro:-1.1,gIn:-6,rx:-10,ry:27}};
+    // CFG · La hoja de despiece sale de esta geometría: un renglón por longitud distinta (lens), con cuántas barras la tienen
+    // (dEdges), su largo medio para un domo de Ø 6 m y el color con que el domo pinta esa longitud (lc); el pie, las barras
+    // (dEdges) y los nodos (hubKeep). La escena tiene R=2,4 y la hoja es para R=3 m: ×3000/2,4 = 1250 mm por unidad.
+    const ESCALA_6M=3000/R;
+    const CFG_TIPOS=lens.map((l,i)=>{ const es=dEdges.filter(e=>Math.round(lenOf(e)*1000)===l);
+      return {letra:String.fromCharCode(65+i),n:es.length,mm:Math.round(es.reduce((s,e)=>s+lenOf(e),0)/es.length*ESCALA_6M),col:"#"+lc.get(l).toString(16).padStart(6,"0")}; });
+    if(CFG_TIPOS.length!==3||CFG_TIPOS.reduce((s,t)=>s+t.n,0)!==dEdges.length) console.warn("[dome] despiece: tipos o suma de barras inesperados",CFG_TIPOS);
+    const cfgHoja=cfgEl&&cfgEl.querySelector(".cfg-hoja");
+    const cfgPz=cfgEl?[...cfgEl.querySelectorAll(".cfg-pz")].map(el=>{ const k=+el.dataset.k;
+      return {el,k,side:k%2?1:-1,m:CFG_PAPEL[k]||CFG_PAPEL[0],papel:el.querySelector(".cfg-papel"),sombra:el.querySelector(".cfg-sombra"),
+        contacto:el.querySelector(".cfg-contacto"),cinta:el.querySelector(".cfg-cinta i"),sel:el.querySelector(".cfg-sel"),
+        boliSvg:el.querySelector(".cfg-boli"),boli:el.querySelector(".cfg-boli path"),x:0,y:0,w:0,h:0,bb:[0,0,0,0],fuera:0,vert:false,esc:1,l:{}};
     }).sort((a,b)=>a.k-b.k):[];
-    // CFG · Tipos de barra: una muesca por longitud, con su color del domo y su altura relativa.
-    const cfgSw=cfgEl&&cfgEl.querySelector(".cfg-sw");
-    if(cfgSw){ const l0=lens[0], l1=lens[lens.length-1];
-      cfgSw.innerHTML=lens.map(l=>'<i style="height:'+Math.round(9+13*(l1>l0?(l-l0)/(l1-l0):1))+'px;background:#'+lc.get(l).toString(16).padStart(6,"0")+'"></i>').join("");
-      const c=cfg.find(o=>o.el.contains(cfgSw)); if(c) c.sw=[...cfgSw.children]; }
+    const cfg=cfgEl?[0,1,2,3,4,5].map(k=>{ const gEl=cfgEl.querySelector('.cfg-guias g[data-k="'+k+'"]');
+      return {k,side:k%2?1:-1,dir:k%2?-1:1,pz:cfgPz.find(z=>z.k===(k%2?1:k)),ren:null,gl:[],tira:null,barra:null,
+        gEl,path:gEl&&gEl.querySelector("path"),dot:gEl&&gEl.querySelector("circle"),num:gEl&&gEl.querySelector("text"),
+        ax:0,ay:0,plan:null,l:{}};
+    }).filter(c=>c.pz):[];
+    let cfgPie=[], cfgPieL={};
     // CFG · Escrituras de estilo solo cuando cambia su valor en texto (como lastCp).
     function cfgSt(c,key,el,prop,val){ if(c.l[key]!==val){ c.l[key]=val; el.style[prop]=val; } }
     function cfgAt(c,key,el,attr,val){ if(c.l[key]!==val){ c.l[key]=val; el.setAttribute(attr,val); } }
+    // CFG · Renglones y pie de la hoja, con cada glifo en su span para imprimirlos de uno en uno. Se reescriben al medir,
+    // así las palabras del pie salen del diccionario del idioma de ese momento.
+    const cfgGlifos=s=>[...String(s)].map(ch=>ch===" "?" ":'<span class="cfg-g">'+ch+"</span>").join("");
+    function cfgEscribeHoja(){
+      if(!cfgHoja) return;
+      const d=(window.I18N&&(window.I18N[window.__lang||"es"]||window.I18N.es))||{}, giros=[-2.2,1.6,-.8], mx=Math.max(...CFG_TIPOS.map(t=>t.mm));
+      cfgHoja.querySelector(".cfg-lista").innerHTML=CFG_TIPOS.slice(0,3).map((t,i)=>'<li class="cfg-ren" data-k="'+(2*i+1)+'" style="--c:'+t.col+'"><span class="cfg-ref">'+cfgGlifos(4+i)+
+        '</span><span class="cfg-tira" style="--r:'+giros[i]+'deg"><i><b>'+t.letra+'</b></i></span><span class="cfg-mm"><b>'+cfgGlifos(t.mm)+"</b><small>"+cfgGlifos("mm")+
+        '</small></span><span class="cfg-ud">'+cfgGlifos("× "+t.n)+'</span><span class="cfg-barra" style="--l:'+(t.mm/mx*100).toFixed(1)+'%"><i></i></span></li>').join("");
+      cfgHoja.querySelector(".cfg-total").innerHTML="<span><b>"+cfgGlifos(dEdges.length)+"</b>"+cfgGlifos(d["build.cfg.nbarras"]||"barras")+
+        "</span><span><b>"+cfgGlifos(hubKeep.length)+"</b>"+cfgGlifos(d["build.cfg.nnodos"]||"nodos")+"</span>";
+      cfg.forEach(c=>{ if(!(c.k%2)) return; c.ren=cfgHoja.querySelector('.cfg-ren[data-k="'+c.k+'"]');
+        c.gl=c.ren?[...c.ren.querySelectorAll(".cfg-g")]:[]; c.tira=c.ren&&c.ren.querySelector(".cfg-tira i"); c.barra=c.ren&&c.ren.querySelector(".cfg-barra i"); });
+      cfgPie=[...cfgHoja.querySelectorAll(".cfg-total .cfg-g")]; cfgPieL={};
+    }
+    // CFG · Trazo de bolígrafo alrededor de la opción elegida: un óvalo a mano, irregular pero fijo (semilla por papel),
+    // que arranca arriba a la derecha y al cerrar se pasa un poco de largo. Se calcula al medir, a la medida de la
+    // palabra; por fotograma solo se mueve su stroke-dashoffset.
+    function cfgOvalo(w,h,sd){
+      const rnd=i=>{ const x=Math.sin(sd*12.9898+i*78.233)*43758.5453; return x-Math.floor(x); };
+      const cx=w/2+(rnd(1)-.5)*3, cy=h/2+(rnd(2)-.5)*1.6, rx=w/2-1.5, ry=h/2-1.5, a0=-.45-rnd(3)*.4, tot=Math.PI*2+.5+rnd(4)*.35, n=20, P=[];
+      for(let i=0;i<=n;i++){ const s=i/n, a=a0-s*tot, f=1+(rnd(5+i)-.5)*.06+s*.06;
+        P.push([cx+Math.cos(a)*rx*f, cy+Math.sin(a)*ry*f+Math.sin(a*2+sd)*.5]); }
+      let d="M"+P[0][0].toFixed(1)+" "+P[0][1].toFixed(1);
+      for(let i=0;i<n;i++){ const a=P[Math.max(0,i-1)], b=P[i], c=P[i+1], e=P[Math.min(n,i+2)];
+        d+="C"+(b[0]+(c[0]-a[0])/6).toFixed(1)+" "+(b[1]+(c[1]-a[1])/6).toFixed(1)+" "+(c[0]-(e[0]-b[0])/6).toFixed(1)+" "+(c[1]-(e[1]-b[1])/6).toFixed(1)+" "+c[0].toFixed(1)+" "+c[1].toFixed(1); }
+      return d;
+    }
 
     // CFG · La cámara se aparta lo justo para que el domo quepa entre las dos columnas (en móvil, entre las dos filas)
     // y se centra en ese hueco con setViewOffset. Se calcula al medir (carga, resize, idioma, fuentes), no por fotograma.
@@ -1198,14 +1290,20 @@
         const y=p[1]+(q[1]-p[1])*(x-p[0])/(q[0]-p[0]); if(y<a) a=y; if(y>b) b=y; }
       return a<=b?[a,b]:null;
     }
-    // CFG · Encaje por obstáculos (1100-1299 px y tableta en vertical): el domo, centrado entre las tarjetas, lo más grande
-    // que quepa sin tocar la cabecera, las barras, el rótulo de fase ni el chat (margen Mh) ni las tarjetas (margen M):
-    // en filas, sus rectángulos reales; en columnas, la franja entera de cada columna, para que el domo quede siempre
-    // entre las dos y cada guía tenga contorno delante de su codo. Su sitio en vertical, el centro del hueco que queda.
+    // CFG · Bordes interiores de los papeles (caja ya girada, con la cinta): el canto derecho de la columna izquierda, el
+    // izquierdo de la derecha, el de abajo de la fila de arriba y el de arriba de la de abajo.
+    function cfgBordes(){
+      const L=cfgPz.filter(z=>z.side<0), D=cfgPz.filter(z=>z.side>0);
+      return {lR:Math.max(...L.map(z=>z.bb[2])), lB:Math.max(...L.map(z=>z.bb[3])), rL:Math.min(...D.map(z=>z.bb[0])), rT:Math.min(...D.map(z=>z.bb[1]))};
+    }
+    // CFG · Encaje por obstáculos (1100-1299 px y tableta en vertical): el domo, centrado entre los papeles, lo más grande
+    // que quepa sin tocar la cabecera, las barras, el rótulo de fase ni el chat (margen Mh) ni los papeles (margen M):
+    // en filas, sus cajas reales; en columnas, la franja entera de cada papel, para que el domo quede siempre entre las
+    // dos y cada llamada tenga aire para salir en horizontal. Su sitio en vertical, el centro del hueco que queda.
     function cfgEncaja(top){
       const Wc=cfgEl.clientWidth, Hc=cfgEl.clientHeight, M=cfgFila?30:22, Mh=16, o=cfgEl.getBoundingClientRect();
       const ix=parseFloat(buildSec.style.getPropertyValue("--insx"))||0, iy=parseFloat(buildSec.style.getPropertyValue("--insy"))||0;
-      const Mc=M+CFG_CODO, obs=cfg.map(c=>cfgFila?[c.x-M,c.y-M,c.x+c.w+M,c.y+c.h+M]:[c.x-Mc,-1e5,c.x+c.w+Mc,1e5]);
+      const Mc=M+CFG_CODO, obs=cfgPz.map(z=>cfgFila?[z.bb[0]-M,z.bb[1]-M,z.bb[2]+M,z.bb[3]+M]:[z.bb[0]-Mc,-1e5,z.bb[2]+Mc,1e5]);
       const ph=buildSec.querySelector(".phases"), lab=buildSec.querySelector(".phase-lab");
       // HUD en su sitio de la fase 04 (sin el margen de tarjeta de las fases 01-03); el rótulo, con sitio para el nombre más largo
       if(ph){ const r=ph.getBoundingClientRect(); obs.push([r.left-o.left-ix-Mh,r.top-o.top+iy-Mh,r.right-o.left-ix+Mh,Hc]); }
@@ -1213,7 +1311,7 @@
       const ab=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--acg-abajo"))||16;
       obs.push([Wc-100,Hc-ab-60-Mh,Wc,Hc-ab+Mh]);
       const Ml=Math.max(M,Wc*.1); obs.push([-1e5,-1e5,Ml,1e5],[Wc-Ml,-1e5,1e5,1e5]);   // aire a los lados: como mucho el 80 % del ancho
-      const y0=top+8, y1=Hc-16, A=cfg[0], B=cfg[1], xc=cfgFila?Wc/2:(A.x+A.w+B.x)/2;
+      const b=cfgBordes(), y0=top+8, y1=Hc-16, xc=cfgFila?Wc/2:(b.lR+b.rL)/2;
       // Con la cámara apartada f veces: cada obstáculo veta un tramo abierto de desplazamientos verticales ty (los que
       // harían que la silueta, centrada en xc, lo tocara: su arriba y su abajo extremos dentro del ancho del obstáculo),
       // y se devuelve el centro del tramo libre más largo dentro de [y0,y1], o null si no queda ninguno.
@@ -1245,19 +1343,31 @@
       cfgEl.style.setProperty("--cfg-top",top+"px");
       cfgFila=mqFila.matches; cfgGuias=mqGuias.matches;
       cfgVivo=getComputedStyle(cfgEl).display!=="none";
-      cfg.forEach(c=>{ c.l={}; c.plan=null; });
-      if(!cfgVivo||cfg.length<6) return;
-      const Wc=cfgEl.clientWidth, Hc=cfgEl.clientHeight, P=parseFloat(getComputedStyle(cfgEl).perspective)||1250, ox=Wc/2, oy=Hc/2, a=CFG_RY_FIN*Math.PI/180;
-      cfg.forEach(c=>{ const col=c.el.parentElement;
-        c.x=col.offsetLeft+c.el.offsetLeft; c.y=col.offsetTop+c.el.offsetTop; c.w=c.el.offsetWidth; c.h=c.el.offsetHeight;
-        c.fuera=c.side<0?c.x+c.w+80:Wc-c.x+80;
-        // Salida de la guía: el canto interior de la tarjeta ya girada CFG_RY_FIN grados, proyectado con la perspectiva de .cfg.
-        const s=P/(P+c.w/2*Math.sin(a));
-        c.ax=ox+(c.x+c.w/2+c.dir*c.w/2*Math.cos(a)-ox)*s; c.ay=oy+(c.y+c.h/2-oy)*s;
+      cfgEscribeHoja();
+      cfg.forEach(c=>{ c.l={}; c.plan=null; }); cfgPz.forEach(z=>{ z.l={}; });
+      if(!cfgVivo||cfgPz.length<4||cfg.length<6) return;
+      const Wc=cfgEl.clientWidth, Hc=cfgEl.clientHeight;
+      cfgPz.forEach(z=>{ const col=z.el.parentElement, a=z.m.giro*Math.PI/180, co=Math.abs(Math.cos(a)), si=Math.abs(Math.sin(a));
+        z.x=col.offsetLeft+z.el.offsetLeft; z.y=col.offsetTop+z.el.offsetTop; z.w=z.el.offsetWidth; z.h=z.el.offsetHeight;
+        // caja del papel ya girado; por arriba, 9 px más por la cinta que asoma
+        const cx=z.x+z.w/2, cy=z.y+z.h/2, hw=(z.w*co+z.h*si)/2, hh=(z.w*si+z.h*co)/2;
+        z.bb=[cx-hw,cy-hh-9,cx+hw,cy+hh];
+        // lo que tiene que viajar para salir del todo por su lado: en filas, los recortes caen desde arriba (por detrás de
+        // la cabecera, opaca a ese ancho) y la hoja entra por la derecha, a su altura, sin cruzar el HUD ni el chat
+        z.vert=cfgFila&&z.side<0;
+        // un papel ancho (la hoja a todo el ancho en filas) se levanta, se inclina y se tuerce menos: sus esquinas se moverían mucho
+        z.esc=Math.min(1,320/z.w);
+        z.fuera=z.vert?z.bb[3]+60:(z.side<0?z.bb[2]+60:Wc-z.bb[0]+60);
+        if(z.boli){ const s=getComputedStyle(z.boliSvg), w=z.sel.offsetWidth-2*parseFloat(s.left), h=z.sel.offsetHeight-2*parseFloat(s.top);
+          z.boliSvg.setAttribute("viewBox","0 0 "+w.toFixed(1)+" "+h.toFixed(1)); z.boli.setAttribute("d",cfgOvalo(w,h,z.k+1)); }
       });
+      // Salida de cada llamada: el canto del papel que mira al domo, a media altura del recorte o del renglón, con el giro final.
+      cfg.forEach(c=>{ const z=c.pz, a=z.m.giro*Math.PI/180, ca=Math.cos(a), sa=Math.sin(a);
+        const lx=c.dir*z.w/2, ly=c.ren?c.ren.offsetTop+c.ren.offsetHeight/2-z.h/2:0;
+        c.ax=z.x+z.w/2+lx*ca-ly*sa; c.ay=z.y+z.h/2+lx*sa+ly*ca; });
       if((mqTableta.matches||mqEstrecho.matches)&&cfgEncaja(top)) return;
-      const A=cfg[0], B=cfg[1];   // I1 (columna izquierda o fila de arriba) y S1 (columna derecha o fila de abajo)
-      const bx0=cfgFila?10:A.x+A.w+30, bx1=cfgFila?Wc-10:B.x-30, by0=cfgFila?A.y+A.h+12:top+4, by1=cfgFila?B.y-12:Hc-112;
+      const b=cfgBordes();
+      const bx0=cfgFila?10:b.lR+30, bx1=cfgFila?Wc-10:b.rL-30, by0=cfgFila?b.lB+12:top+4, by1=cfgFila?b.rT-12:Hc-112;
       const bw=bx1-bx0, bh=by1-by0;
       if(bw<80||bh<80) return;
       const cabe=b=>b[1]-b[0]<=bw*.94&&b[3]-b[2]<=bh*.94;
@@ -1271,72 +1381,120 @@
       const ox=cfgDx*e, oy=cfgDy*e, vo=ox.toFixed(1)+","+oy.toFixed(1);
       if(vo!==lastVo){ lastVo=vo; if(e<=0||(Math.abs(ox)<.05&&Math.abs(oy)<.05)) camera.clearViewOffset(); else camera.setViewOffset(W,H,ox,oy,W,H); }
     }
-    // CFG · El domo responde a cada opción cuando se enciende su chip, sutil y reversible: el diámetro lo hace crecer
+    // CFG · El domo responde a cada opción cuando el bolígrafo la marca, sutil y reversible: el diámetro lo hace crecer
     // un poco, la madera templa y mate las barras, y el vidrio aclara y pule los paneles.
     const C_BLANCO=new THREE.Color(0xffffff), C_MADERA=new THREE.Color(0xd6b08a), C_AMBAR=new THREE.Color(0xe6a92e), C_VIDRIO=new THREE.Color(0xf6dcaa);
-    const cfgCrece=p=>1+CFG_CRECE*suave(map(cfgT(p,0),.72,1));
-    // Giro del domo en función de pShown (paint y la simulación de las guías usan esta misma cuenta).
-    const giroY=p=>Math.min(1,p/Q_END)*Math.PI*0.5 + map(p,CFG_S-.02,CFG_FIN)*0.32 + drift;
+    const cfgMarca=(p,k)=>suave(map(cfgT(p,k),.74,1));
+    const cfgCrece=p=>1+CFG_CRECE*cfgMarca(p,0);
+    // Giro del domo y avance de la cámara en función de pShown (paint y la simulación de las llamadas usan estas mismas
+    // cuentas). Hasta .51, los de las fases 01-03; en la 04 frenan sin saltos (misma velocidad al entrar) y se paran en
+    // CFG_QUIETO, antes de la primera llamada: desde ahí la escena está quieta, así cada llamada nace en su nodo
+    // definitivo y no hay relevos. La cámara acaba donde acababa (camB), solo que antes.
+    const G51=Math.min(1,.51/Q_END)*Math.PI*.5, GV=Math.PI*.5/Q_END, Q51=Math.min(1,.51/Q_END), QM=(CFG_QUIETO-.51)/Q_END/(1-Q51);
+    const giroY=p=>(p<=.51?Math.min(1,p/Q_END)*Math.PI*.5:G51+GV*(CFG_QUIETO-.51)*.5*(1-Math.pow(1-map(p,.51,CFG_QUIETO),2)))+drift;
+    const qCam=p=>{ if(p<=.51) return Math.min(1,p/Q_END); const s=map(p,.51,CFG_QUIETO); return Q51+(1-Q51)*(QM*s+(3-2*QM)*s*s+(QM-2)*s*s*s); };
     function cfgReacciona(p){
-      const b=suave(map(cfgT(p,2),.72,1)), c=suave(map(cfgT(p,4),.72,1));
+      const b=cfgMarca(p,2), c=cfgMarca(p,4);
       g.scale.setScalar(cfgCrece(p));
       barMat.color.copy(C_BLANCO).lerp(C_MADERA,b); barMat.roughness=.32+.3*b; barMat.metalness=.3-.24*b;
       pm.color.copy(C_AMBAR).lerp(C_VIDRIO,c*.55); pm.roughness=.4-.34*c; pm.metalness=.15+.2*c;
       return c;
     }
-    // CFG · Guías (solo >=1100 px): cada una acaba en un nodo del CONTORNO del domo, en el lado de su columna y por
-    // delante del codo, y llega por fuera, así que el tramo recto no pisa ninguna barra hasta el nodo. En la 04 el giro
-    // depende solo de pShown (la deriva se para, ver frame): al aparecer la primera guía se simula la escena a cada paso
-    // de p (.01) y se hace el plan de las seis para todo su tramo visible. Cada guía se queda con su nodo mientras siga
-    // en el contorno con hueco (CFG_HUECO), en orden y sin cruzarse ni rozar el nodo de otra guía de su lado; si el giro
-    // se lo quita, la guía se recoge y se vuelve a dibujar hacia el nodo que la releva en un tramo corto de p
-    // (CFG_RELEVO). Todo sale de p, sin temporizadores: igual al bajar que al subir.
-    const CFG_HUECO=.5, CFG_RELEVO=.006;
+    // CFG · Llamadas (solo >=1100 px): líneas a tinta clara, curvas como las de la patente de Fuller, que salen en
+    // horizontal del canto de su papel o de su renglón y llegan a un nodo del CONTORNO del domo por su normal exterior (la
+    // bisectriz de las dos aristas del contorno que salen de él), con su número de referencia al lado. La curva va siempre
+    // por fuera del contorno (CFG_AIRE px de aire) y hacia el domo, así que no pisa ninguna barra hasta el nodo. Al
+    // aparecer la primera llamada se simula la escena a cada paso de p (.01) mientras se mueve y se hace el plan de las seis
+    // para todo su tramo visible. Cada llamada nace en el nodo que le vale hasta el final (en orden, sin cruzarse ni rozar
+    // el nodo de otra de su lado); solo si no hay ninguno se queda el que más dure y, si el contorno se lo quita, se recoge
+    // y vuelve a salir hacia el que la releva en un tramo corto de p (CFG_RELEVO). Todo sale de p, sin temporizadores.
+    const CFG_RELEVO=.006, CFG_AIRE=5, CFG_MUESTRAS=12;
     const cfgV=new THREE.Vector3(), cfgPt={x:0,y:0,r:0};
-    function cfgNodo(i){   // el nodo en pantalla y el radio en px de su esfera (0.06), para que la guía acabe en su borde
+    function cfgNodo(i){   // el nodo en pantalla y el radio en px de su esfera (0.06), para que la llamada acabe en su borde
       cfgV.copy(hubKeep[i]).applyMatrix4(g.matrixWorld).applyMatrix4(camera.matrixWorldInverse);
       cfgPt.r=.06*g.scale.x*camera.projectionMatrix.elements[5]*H/2/Math.max(.01,-cfgV.z);
       cfgV.applyMatrix4(camera.projectionMatrix); cfgPt.x=(cfgV.x+1)*W/2; cfgPt.y=(1-cfgV.y)*H/2; return cfgPt; }
     const simCam=new THREE.PerspectiveCamera(35,1,0.1,100), simM=new THREE.Matrix4(), simS=new THREE.Matrix4();
     function cfgSimula(p){   // nodos en pantalla y contorno con pShown=p: las mismas cuentas que paint y cfgCamara
-      const q=Math.min(1,p/Q_END), e=suave(map(p,CFG_PULL0,CFG_PULL1)), s=cfgCrece(p), ox=cfgDx*e, oy=cfgDy*e;
-      simCam.aspect=W/H; simCam.position.lerpVectors(camA,camB,q);
+      const e=suave(map(p,CFG_PULL0,CFG_PULL1)), s=cfgCrece(p), ox=cfgDx*e, oy=cfgDy*e;
+      simCam.aspect=W/H; simCam.position.lerpVectors(camA,camB,qCam(p));
       if(e>0&&cfgF!==1) simCam.position.sub(tgt).multiplyScalar(1+(cfgF-1)*e).add(tgt);
       simCam.lookAt(tgt); simCam.updateMatrixWorld();
       if(e<=0||(Math.abs(ox)<.05&&Math.abs(oy)<.05)) simCam.clearViewOffset(); else simCam.setViewOffset(W,H,ox,oy,W,H);
       simM.makeRotationY(giroY(p)).multiply(simS.makeScale(s,s,s));
       const P=hubKeep.map(v=>{ cfgV.copy(v).applyMatrix4(simM).project(simCam); return [(cfgV.x+1)*W/2,(1-cfgV.y)*H/2]; });
       let x0=1e9, x1=-1e9; for(const q of P){ if(q[0]<x0)x0=q[0]; if(q[0]>x1)x1=q[0]; }
-      return {p,P,casco:cfgCasco(P),cx:(x0+x1)/2,hw:(x1-x0)/2};
-    }
-    // Hueco (rad) con que la guía que sale de (ex,ey) llega al nodo i: el menor ángulo entre la guía y las dos aristas del
-    // contorno que salen del nodo. -1 si el nodo no está en el contorno o si la guía entraría por dentro del domo.
-    function cfgLibre(F,i,ex,ey){
-      const C=F.casco, j=C.indexOf(i); if(j<0) return -1;
-      const n=C.length, a=F.P[C[(j-1+n)%n]], v=F.P[i], b=F.P[C[(j+1)%n]], dx=ex-v[0], dy=ey-v[1];
-      if((v[0]-a[0])*(ey-a[1])-(v[1]-a[1])*(ex-a[0])>=0&&(b[0]-v[0])*(ey-v[1])-(b[1]-v[1])*(ex-v[0])>=0) return -1;
-      const ang=(ux,uy)=>Math.acos(clamp((ux*dx+uy*dy)/((Math.hypot(ux,uy)*Math.hypot(dx,dy))||1),-1,1));
-      return Math.min(ang(a[0]-v[0],a[1]-v[1]),ang(b[0]-v[0],b[1]-v[1]));
+      const casco=cfgCasco(P);
+      return {p,P,casco,S:casco.map(i=>P[i]),cx:(x0+x1)/2,hw:(x1-x0)/2};
     }
     const cfgCorta=(a,b,c,d)=>{ const r=(b[0]-a[0])*(d[1]-c[1])-(b[1]-a[1])*(d[0]-c[0]); if(!r) return false;
       const t=((c[0]-a[0])*(d[1]-c[1])-(c[1]-a[1])*(d[0]-c[0]))/r, u=((c[0]-a[0])*(b[1]-a[1])-(c[1]-a[1])*(b[0]-a[0]))/r; return t>0&&t<1&&u>0&&u<1; };
     const cfgDist=(q,a,b)=>{ const vx=b[0]-a[0], vy=b[1]-a[1], t=clamp(((q[0]-a[0])*vx+(q[1]-a[1])*vy)/((vx*vx+vy*vy)||1),0,1); return Math.hypot(a[0]+vx*t-q[0],a[1]+vy*t-q[1]); };
+    const cfgCruzan=(M,N)=>{ for(let a=0;a<M.length-1;a++) for(let b=0;b<N.length-1;b++) if(cfgCorta(M[a],M[a+1],N[b],N[b+1])) return true; return false; };
+    const cfgDistP=(q,M)=>{ let d=1e9; for(let a=0;a<M.length-1;a++){ const x=cfgDist(q,M[a],M[a+1]); if(x<d) d=x; } return d; };
+    // Normal exterior en el nodo v del contorno, con sus vecinos a y b: la bisectriz de las dos aristas, hacia fuera.
+    function cfgNormal(a,v,b){
+      const la=Math.hypot(v[0]-a[0],v[1]-a[1])||1, lb=Math.hypot(v[0]-b[0],v[1]-b[1])||1;
+      const nx=(v[0]-a[0])/la+(v[0]-b[0])/lb, ny=(v[1]-a[1])/la+(v[1]-b[1])/lb, l=Math.hypot(nx,ny)||1; return [nx/l,ny/l]; }
+    // Puntos de control de la llamada: sale en horizontal de A hacia el domo y llega a V por la normal n.
+    function cfgCtrl(ax,ay,dir,vx,vy,nx,ny){ const k=clamp(.42*Math.hypot(vx-ax,vy-ay),20,170); return [ax,ay,ax+dir*k,ay,vx+nx*k,vy+ny*k,vx,vy]; }
+    function cfgMuestra(C){ const M=[];
+      for(let s=0;s<=CFG_MUESTRAS;s++){ const t=s/CFG_MUESTRAS, u=1-t, a=u*u*u, b=3*u*u*t, c=3*u*t*t, d=t*t*t;
+        M.push([a*C[0]+b*C[2]+c*C[4]+d*C[6],a*C[1]+b*C[3]+c*C[5]+d*C[7]]); }
+      return M; }
+    // Distancia de q al contorno convexo S si está fuera; -1 si está dentro.
+    function cfgFuera(S,q){ let sg=0, dentro=true, d=1e9;
+      for(let i=0,n=S.length;i<n;i++){ const a=S[i], b=S[(i+1)%n], c=Math.sign((b[0]-a[0])*(q[1]-a[1])-(b[1]-a[1])*(q[0]-a[0]));
+        if(c){ if(!sg) sg=c; else if(c!==sg) dentro=false; } const x=cfgDist(q,a,b); if(x<d) d=x; }
+      return dentro?-1:d; }
+    // La llamada desde A=(ax,ay) al nodo i en el fotograma F, o null si no llega limpia: el nodo ha de estar en el contorno,
+    // en la mitad del domo de su columna (fuera del cuarto central) y mirando hacia el papel (fr: lo de frente que lo mira),
+    // y la curva ha de ir siempre hacia el domo y por fuera del contorno.
+    function cfgLlega(F,i,ax,ay,dir,side){
+      const C=F.casco, j=C.indexOf(i); if(j<0) return null;
+      const V=F.P[i], n=C.length, ia=C[(j-1+n)%n], ib=C[(j+1)%n], N=cfgNormal(F.P[ia],V,F.P[ib]);
+      const dx=ax-V[0], dy=ay-V[1], fr=(N[0]*dx+N[1]*dy)/(Math.hypot(dx,dy)||1), lado=side*(V[0]-F.cx)/F.hw;
+      if(lado<.1||fr<-.1) return null;
+      const M=cfgMuestra(cfgCtrl(ax,ay,dir,V[0],V[1],N[0],N[1]));
+      // aire de la curva con el contorno (sin contar el último tramo, que ya llega por la normal)
+      let aire=1e9;
+      for(let s=1;s<CFG_MUESTRAS;s++){ const q=M[s]; if(dir*(q[0]-ax)<3) return null;
+        const d=cfgFuera(F.S,q); if(d<0) return null; if(s<=CFG_MUESTRAS-3&&d<aire) aire=d; }
+      // a la primera, las condiciones de arriba; si no, con holgura (más de canto, más hacia el centro, menos aire), que
+      // el reparto solo usa cuando a una llamada no le queda otro nodo: le resta 2 a fr, y fr puntúa
+      if(fr>=.12&&lado>=.25&&aire>=CFG_AIRE) return {fr,M,ia,ib};
+      return aire>=3?{fr:fr-2,M,ia,ib}:null;
+    }
+    const cfgDesde=k=>CFG_T0[k]+CFG_GUIA0[k]*CFG_DUR[k];
     function cfgAsigna(){
       cfgAsignado=true;
-      const Fs=[]; for(let p=CFG_S+.62*CFG_DUR;p<CFG_FIN;p+=.01) Fs.push(cfgSimula(p)); Fs.push(cfgSimula(CFG_FIN));
+      // fotogramas: a cada .01 mientras la escena se mueve (hasta .60: giro, cámara y crecimiento ya parados) y el final
+      const p0=Math.min(...cfg.map(c=>cfgDesde(c.k))), Fs=[];
+      for(let p=p0;p<.6;p+=.01) Fs.push(cfgSimula(p)); Fs.push(cfgSimula(Math.max(p0,.6))); Fs.push(cfgSimula(CFG_FIN));
       const nF=Fs.length, nN=hubKeep.length;
       for(const side of [-1,1]){
         const gs=cfg.filter(c=>c.side===side);   // en orden k: de arriba abajo
-        const E=gs.map(c=>[c.ax+c.dir*CFG_CODO,c.ay]), desde=gs.map(c=>CFG_S+c.k*CFG_STEP+.62*CFG_DUR-1e-6);
-        // hueco de cada nodo para cada guía en cada paso (-1: no vale): en el contorno, en la mitad del domo de su
-        // columna (fuera del cuarto central), no detrás del codo (la guía nunca vuelve hacia su tarjeta) y llegando por fuera
-        const hueco=gs.map((c,j)=>Fs.map(F=>F.p<desde[j]?null:hubKeep.map((_,i)=>
-          side*(F.P[i][0]-F.cx)>=.25*F.hw&&c.dir*(F.P[i][0]-E[j][0])>=0?cfgLibre(F,i,E[j][0],E[j][1]):-1)));
-        const vale=(j,f,i)=>i>=0&&!!hueco[j][f]&&hueco[j][f][i]>=CFG_HUECO;
-        // a (encima) y b: nodos distintos y en orden, tramos rectos sin cortarse y ninguno a menos de 9 px del nodo del otro
-        const casa=(f,ja,ia,jb,ib)=>{ const A=Fs[f].P[ia], B=Fs[f].P[ib];
-          return ia!==ib&&A[1]<=B[1]-14&&!cfgCorta(E[ja],A,E[jb],B)&&cfgDist(B,E[ja],A)>=9&&cfgDist(A,E[jb],B)>=9; };
+        const E=gs.map(c=>[c.ax,c.ay]), desde=gs.map(c=>cfgDesde(c.k)-1e-6);
+        const ll=gs.map((c,j)=>Fs.map(F=>F.p<desde[j]?null:hubKeep.map((_,i)=>cfgLlega(F,i,E[j][0],E[j][1],c.dir,side))));
+        const vale=(j,f,i)=>i>=0&&!!ll[j][f]&&!!ll[j][f][i];
+        // a (encima) y b: nodos distintos y en orden, curvas sin cortarse y ninguna a menos de 9 px del nodo de la otra
+        const casa=(f,ja,ia,jb,ib)=>{ const A=Fs[f].P[ia], B=Fs[f].P[ib], Ma=ll[ja][f][ia].M, Mb=ll[jb][f][ib].M;
+          return ia!==ib&&A[1]<=B[1]-14&&!cfgCruzan(Ma,Mb)&&cfgDistP(B,Ma)>=9&&cfgDistP(A,Mb)>=9; };
         const casaCon=(f,j,i,cur)=>cur.every((o,jo)=>jo===j||!vale(jo,f,o)||(jo<j?casa(f,jo,o,j,i):casa(f,j,i,jo,o)));
+        // Reparto conjunto: entre los nodos que le valen a cada llamada en todos sus fotogramas, la combinación que deja más
+        // llamadas con nodo fijo y, a igualdad, la de mejor puntuación (cerca de la altura de su papel y de frente), sin
+        // que se estorben en los fotogramas en que se ven a la vez. El recorrido de abajo la prefiere a todo lo demás.
+        const vf=gs.map((c,j)=>Fs.map((F,f)=>f).filter(f=>Fs[f].p>=desde[j]));
+        const cand=gs.map((c,j)=>hubKeep.map((_,i)=>i).filter(i=>vf[j].length&&vf[j].every(f=>vale(j,f,i))));
+        const pun=(j,i)=>{ const f=vf[j][0], P=Fs[f].P[i], yA=j?E[j-1][1]:-1e9, yB=j<gs.length-1?E[j+1][1]:1e9;
+          return (P[1]>=yA&&P[1]<=yB?1e3:0)-Math.abs(P[1]-E[j][1])-.35*Math.abs(P[0]-E[j][0])+60*ll[j][f][i].fr; };
+        const memo=new Map(), compat=(ja,ia,jb,ib)=>{ const key=ja+","+ia+","+jb+","+ib;
+          if(!memo.has(key)) memo.set(key,vf[jb].filter(f=>vf[ja].includes(f)).every(f=>casa(f,ja,ia,jb,ib))); return memo.get(key); };
+        let mejor={sel:gs.map(()=>-1),n:0,sc:-1e18};
+        const busca=(j,sel,n,sc)=>{ if(j===gs.length){ if(n>mejor.n||(n===mejor.n&&sc>mejor.sc)) mejor={sel:sel.slice(),n,sc}; return; }
+          for(const i of cand[j]) if(sel.every((o,jo)=>o<0||compat(jo,o,j,i))){ sel.push(i); busca(j+1,sel,n+1,sc+pun(j,i)); sel.pop(); }
+          sel.push(-1); busca(j+1,sel,n,sc); sel.pop(); };
+        busca(0,[],0,0);
         const cur=gs.map(()=>-1);
         gs.forEach(c=>{ c.plan=[]; });
         for(let f=0;f<nF;f++){
@@ -1345,17 +1503,18 @@
           gs.forEach((c,j)=>{ for(let jo=0;jo<j;jo++) if(cur[j]>=0&&cur[jo]>=0&&!casa(f,jo,cur[jo],j,cur[j])) cur[j]=-1; });
           gs.forEach((c,j)=>{ if(!vis[j]||cur[j]>=0) return;
             const u=c.plan[c.plan.length-1], relevo=!!u&&u.i>=0;   // el nodo que releva a otro ha de valer ya en el paso anterior
-            // primero, los nodos entre la altura de la tarjeta de encima y la de debajo: así deja sitio a las demás
+            // primero, el del reparto conjunto; luego, el que le vale hasta el final (así nace en su nodo definitivo);
+            // luego, los que caen entre la altura del papel de encima y el de debajo; luego, el que más dura y el más de frente
             const yA=j?E[j-1][1]:-1e9, yB=j<gs.length-1?E[j+1][1]:1e9;
             let best=-1, bs=-1e18;
             for(let i=0;i<nN;i++){
               if(!vale(j,f,i)||(relevo&&!vale(j,f-1,i))||!casaCon(f,j,i,cur)) continue;
               let run=0; while(f+run<nF&&vale(j,f+run,i)&&casaCon(f+run,j,i,cur)) run++;
-              const P=Fs[f].P[i], s=(P[1]>=yA&&P[1]<=yB?1e6:0)+Math.min(run,12)*1e4-Math.abs(P[1]-E[j][1])-.35*Math.abs(P[0]-E[j][0])+40*Math.min(hueco[j][f][i],1.2);
+              const P=Fs[f].P[i], s=(i===mejor.sel[j]?1e9:0)+(f+run>=nF?1e8:0)+(P[1]>=yA&&P[1]<=yB?1e6:0)+Math.min(run,12)*1e4-Math.abs(P[1]-E[j][1])-.35*Math.abs(P[0]-E[j][0])+60*ll[j][f][i].fr;
               if(s>bs){ bs=s; best=i; } }
             cur[j]=best; });
-          gs.forEach((c,j)=>{ if(!vis[j]) return; const L=c.plan, u=L[L.length-1];
-            if(u&&u.i===cur[j]) u.b=Fs[f].p; else L.push({i:cur[j],a:u?u.b:desde[j],b:Fs[f].p}); });
+          gs.forEach((c,j)=>{ if(!vis[j]) return; const L=c.plan, u=L[L.length-1], o=cur[j]>=0?ll[j][f][cur[j]]:null;
+            if(u&&u.i===cur[j]) u.b=Fs[f].p; else L.push({i:cur[j],ia:o?o.ia:-1,ib:o?o.ib:-1,a:u?u.b:desde[j],b:Fs[f].p}); });
         }
         gs.forEach(c=>{ const u=c.plan[c.plan.length-1]; if(u) u.b=2; });
       }
@@ -1365,40 +1524,56 @@
       const guias=cfgGuias&&!cfgFila;
       if(guias){ camera.updateMatrixWorld(); g.updateMatrixWorld();
         if(p<=CFG_S) cfgAsignado=false;
-        // el plan de las guías se adelanta a un rato libre en cuanto la deriva está parada (p>CFG_S), antes de la primera
+        // el plan de las llamadas se adelanta a un rato libre en cuanto la deriva está parada (p>CFG_S), antes de la primera
         else if(!cfgAsignado&&!cfgLibreRato&&"requestIdleCallback" in window){ cfgLibreRato=true;
           requestIdleCallback(()=>{ cfgLibreRato=false; if(!cfgAsignado&&cfgGuias&&!cfgFila&&pShown>CFG_S) cfgAsigna(); },{timeout:250}); } }
+      // Papeles: cada uno llega desde su lado inclinado en el aire (perspectiva propia y altura CFG_ALTO), con la sombra
+      // larga separada y abierta; al bajar la sombra se aprieta, aparece la de contacto y queda con su giro final. Luego
+      // la cinta (scaleX) y, en los recortes, el bolígrafo. En filas, los recortes caen desde arriba.
+      for(const z of cfgPz){
+        const t=cfgT(p,z.k), s=z.k===1?map(t,0,.6):map(t,0,.72), m=z.m;
+        const u=1-cfgPaso(map(s,0,.85)), h0=1-suave(map(s,.28,1)), h=h0*z.esc, gi=(m.giro+m.gIn*z.esc*u).toFixed(2);
+        const rx=z.vert?-m.ry*1.15*h:m.rx*h, ry=z.vert?m.rx*.6*h:-z.side*m.ry*h;
+        cfgSt(z,"op",z.el,"opacity",map(s,0,.2).toFixed(3));
+        cfgSt(z,"tr",z.el,"transform",z.vert?"translate3d(0,"+(-u*z.fuera).toFixed(1)+"px,0)":"translate3d("+(z.side*u*z.fuera).toFixed(1)+"px,0,0)");
+        cfgSt(z,"pt",z.papel,"transform","perspective(900px) translate3d(0,0,"+(CFG_ALTO*h).toFixed(1)+"px) rotateX("+rx.toFixed(2)+"deg) rotateY("+ry.toFixed(2)+"deg) rotate("+gi+"deg)");
+        cfgSt(z,"st",z.sombra,"transform","translate3d("+(-5-30*h).toFixed(1)+"px,"+(11+44*h).toFixed(1)+"px,0) scale("+(1+.14*h).toFixed(3)+") rotate("+gi+"deg)");
+        cfgSt(z,"so",z.sombra,"opacity",(1-.55*h).toFixed(3));
+        cfgSt(z,"ct",z.contacto,"transform","rotate("+m.giro+"deg)");
+        cfgSt(z,"co",z.contacto,"opacity",Math.pow(1-h0,3).toFixed(3));
+        if(z.cinta) cfgSt(z,"ci",z.cinta,"transform","scaleX("+suave(z.k===1?map(t,.54,.68):map(t,.64,.8)).toFixed(3)+")");
+        if(z.boli) cfgSt(z,"bo",z.boli,"strokeDashoffset",(1-suave(map(t,.74,.95))).toFixed(3));
+      }
       for(const c of cfg){
-        const t=cfgT(p,c.k), u=1-cfgPaso(t);
-        // Entrada: desde fuera de pantalla, hundida en Z y girada 56° hacia el centro; acaba girada 11° hacia el domo,
-        // como los paneles de una pantalla curva. En móvil, fila de arriba y de abajo, abatiéndose en X.
-        const tr=cfgFila
-          ? "translate3d(0,"+(c.side*u*30).toFixed(1)+"px,"+(-u*CFG_Z*.4).toFixed(1)+"px) rotateX("+(c.side*(CFG_RX_FIN+(CFG_RX_IN-CFG_RX_FIN)*u)).toFixed(2)+"deg)"
-          : "translate3d("+(c.side*u*c.fuera).toFixed(1)+"px,0,"+(-u*CFG_Z).toFixed(1)+"px) rotateY("+(c.dir*(CFG_RY_FIN+(CFG_RY_IN-CFG_RY_FIN)*u)).toFixed(2)+"deg)";
-        cfgSt(c,"tr",c.el,"transform",tr);
-        cfgSt(c,"op",c.el,"opacity",t<=0?"0":Math.min(1,t/.6).toFixed(3));
-        if(c.sheen){ const sp=map(t,.5,1);
-          cfgSt(c,"st",c.sheen,"transform","translateX("+(-100+267*sp).toFixed(1)+"%)");
-          cfgSt(c,"so",c.sheen,"opacity",(sp>0&&sp<1?Math.sin(Math.PI*sp):0).toFixed(3)); }
-        if(c.lit) cfgSt(c,"li",c.lit,"opacity",suave(map(t,.72,.95)).toFixed(3));
-        if(c.num){ const f=cfgPaso(map(t,.38,.95)), n=Math.round(f*c.N);
-          if(c.l.n!==n){ c.l.n=n; c.num.textContent=n; }
-          if(c.meter) cfgSt(c,"me",c.meter,"transform","scaleX("+f.toFixed(4)+")");
-          for(let i=0;i<c.sw.length;i++) cfgSt(c,"sw"+i,c.sw[i],"transform","scaleY("+clamp(f*c.sw.length-i,0,1).toFixed(3)+")"); }
+        const t=cfgT(p,c.k);
+        // Renglón de la hoja: se imprime glifo a glifo y luego se le pega la cinta de su color; el 5 imprime al final el pie.
+        if(c.k%2){
+          const im=c.k===1?map(t,.6,.84):map(t,.08,.5), n=c.gl.length, gi=map(im,0,.7)*n;
+          for(let i=0;i<n;i++) cfgSt(c,"g"+i,c.gl[i],"opacity",gi>i?"1":"0");
+          if(c.barra) cfgSt(c,"ba",c.barra,"transform","scaleX("+map(im,.55,1).toFixed(3)+")");
+          if(c.tira) cfgSt(c,"ti",c.tira,"transform","scaleX("+suave(c.k===1?map(t,.78,.9):map(t,.44,.62)).toFixed(3)+")");
+          if(c.k===5){ const pi=map(t,.7,.92)*cfgPie.length;
+            for(let i=0;i<cfgPie.length;i++){ const v=pi>i?"1":"0"; if(cfgPieL[i]!==v){ cfgPieL[i]=v; cfgPie[i].style.opacity=v; } } }
+        }
         if(c.gEl){
-          const d=guias&&t>0?suave(map(t,.62,1)):0;
+          const d=guias?suave(map(t,CFG_GUIA0[c.k],CFG_GUIA1[c.k])):0;
           if(d>0&&!cfgAsignado) cfgAsigna();
-          // tramo del plan en que cae p; en cada relevo la guía se recoge hasta el codo y vuelve a salir (e de 1 a 0 a 1)
+          // tramo del plan en que cae p; en un relevo la llamada se recoge y vuelve a salir (e de 1 a 0 a 1)
           let u=null, e=0;
           if(d>0&&c.plan) for(let j=0,L=c.plan;j<L.length;j++) if(p<L[j].b||j===L.length-1){ u=L[j];
             e=Math.min(1,j?(p-u.a)/CFG_RELEVO:1,j<L.length-1?(u.b-p)/CFG_RELEVO:1); break; }
           if(!u||u.i<0||e<=0){ cfgSt(c,"go",c.gEl,"opacity","0"); continue; }
-          const s=cfgNodo(u.i), ex=c.ax+c.dir*CFG_CODO, de=d*e, lx=s.x-ex, ly=s.y-c.ay, ll=Math.hypot(lx,ly)||1, k=Math.max(0,s.r-1)/ll;
-          cfgAt(c,"pd",c.path,"d","M"+c.ax.toFixed(1)+" "+c.ay.toFixed(1)+"L"+ex.toFixed(1)+" "+c.ay.toFixed(1)+"L"+(s.x-lx*k).toFixed(1)+" "+(s.y-ly*k).toFixed(1));
+          // el nodo y sus dos vecinos del contorno, en vivo: la normal por la que llega la curva, que acaba en el borde de su esfera
+          let s=cfgNodo(u.ia); const a=[s.x,s.y]; s=cfgNodo(u.ib); const b=[s.x,s.y]; s=cfgNodo(u.i);
+          const N=cfgNormal(a,[s.x,s.y],b), r=Math.max(0,s.r-1), vx=s.x+N[0]*r, vy=s.y+N[1]*r, C=cfgCtrl(c.ax,c.ay,c.dir,vx,vy,N[0],N[1]), de=d*e;
+          // el número, junto al punto: hacia fuera por la normal y a un lado, el contrario al que viene la curva
+          let px=-N[1], py=N[0]; if(px*(c.ax-vx)+py*(c.ay-vy)>0){ px=-px; py=-py; }
+          cfgAt(c,"pd",c.path,"d","M"+C.map((v,i)=>v.toFixed(1)+(i===1?"C":i<7?" ":"")).join(""));
           cfgSt(c,"pf",c.path,"strokeDashoffset",(1-de).toFixed(3));
-          cfgAt(c,"ox",c.dot,"cx",c.ax.toFixed(1)); cfgAt(c,"oy",c.dot,"cy",c.ay.toFixed(1));
-          cfgAt(c,"rx",c.ring,"cx",s.x.toFixed(1)); cfgAt(c,"ry",c.ring,"cy",s.y.toFixed(1));
-          cfgSt(c,"ro",c.ring,"opacity",map(de,.8,1).toFixed(3));
+          cfgAt(c,"cx",c.dot,"cx",vx.toFixed(1)); cfgAt(c,"cy",c.dot,"cy",vy.toFixed(1));
+          cfgSt(c,"co",c.dot,"opacity",map(de,.9,1).toFixed(3));
+          cfgAt(c,"nt",c.num,"transform","translate("+(vx+N[0]*12+px*9).toFixed(1)+" "+(vy+N[1]*12+py*9).toFixed(1)+")");
+          cfgSt(c,"no",c.num,"opacity",map(de,.85,1).toFixed(3));
           cfgSt(c,"go",c.gEl,"opacity","1");
         }
       }
@@ -1412,9 +1587,9 @@
       const vidrio=cfgReacciona(p);
       pm.opacity=map(q,.6,.85)*0.42*(1-.2*vidrio);
       ghostMat.opacity=0.05+0.17*(1-map(q,.3,.6));
-      // CFG · En la 04 el domo sigue girando un poco mientras entran las tarjetas y se para con la última.
+      // CFG · En la 04 el giro frena y el domo queda quieto en CFG_QUIETO (giroY), antes de que salgan las llamadas.
       g.rotation.y=giroY(p);
-      camera.position.lerpVectors(camA,camB,q); cfgCamara(p); camera.lookAt(tgt);
+      camera.position.lerpVectors(camA,camB,qCam(p)); cfgCamara(p); camera.lookAt(tgt);
       cfgPinta(p);
       renderer.render(scene,camera);
     }
@@ -1425,8 +1600,8 @@
       if(visible) pShown+=(prog-pShown)*(1-Math.pow(1-K,dt/16.667));
       const settled=!visible||Math.abs(prog-pShown)<EPS;
       if(settled) pShown=prog;
-      // CFG · Con guías (>=1100 px), la deriva lenta se apaga al entrar en la 04 (de .54 a .60): desde ahí el giro depende
-      // solo de pShown, el domo se para de verdad con la última tarjeta y las guías pueden prever el giro que queda.
+      // CFG · Con llamadas (>=1100 px), la deriva lenta se apaga al entrar en la 04 (de CFG_PULL0 a CFG_S): desde ahí el giro
+      // depende solo de pShown, el domo se para de verdad en CFG_QUIETO y las llamadas pueden prever el giro que queda.
       clock+=dt; drift+=dt*0.00006*(cfgGuias&&!cfgFila?1-map(pShown,CFG_PULL0,CFG_S):1);
       updatePhases(pShown); updateImmersive(pShown); paint(pShown);
       if(!settled) requestAnimationFrame(frame); else running=false;
