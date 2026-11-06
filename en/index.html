@@ -114,6 +114,8 @@
     --d-line:rgba(242,240,234,.16);--d-fg:#efece4;--d-fg-2:#a7a3ac;
     --shadow:0 40px 80px -46px rgba(21,23,26,.5);
     --ample:1220px;--gut:clamp(20px,4vw,52px);--ease:cubic-bezier(.2,.7,.2,1);
+    /* Grano de papel (dos teselas PNG en línea): lo usan los papeles del configurador y la cinta de EXPLORA. */
+    --cfg-grano:url("data:image/png;base64,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"),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAQAAAD8x0bcAAAAsklEQVR42m1SQRKEMAjLiUsuPIb/v21HCGl1dhwVJU1CWlT0hYrKYlfU91aAQCxWCgiBniqfCt2en9EwmhsN48M06GU8vMuYRWgNXs0Vw3rKPwL00oZtA25SLCFWrhxvcglDsfR0Ia40Z5p3zEBJmC89HyTMyenc8ZlMI53EQ1Jp8DoFXruVFsG9e1caipK2HHeY+LCwRefdFk6YYaupp48QHP/t62xQTJhn8NMMeeKE+QN+/UlEnLpR9gAAAABJRU5ErkJggg==");
   }
   /* ---------- TEMA OSCURO ----------
      Paleta cálida invertida (plum profundo + tinta clara). Las secciones que ya
@@ -335,8 +337,7 @@
   .cfg{display:none;position:absolute;inset:0;z-index:2;pointer-events:none;
     --cfg-top:110px;--cfg-bot:112px;--cfg-w:clamp(258px,20.5vw,304px);
     --cfg-papel:#ece2cc;--cfg-papel-2:#f1ebdf;--cfg-tinta:#2a1a2d;--cfg-tinta-2:rgba(42,26,45,.64);--cfg-filete:rgba(42,26,45,.34);
-    --cfg-boli:#2b3f93;--cfg-cinta:rgba(222,207,163,.88);--cfg-llamada:#e7dcc6;
-    --cfg-grano:url("data:image/png;base64,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"),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAQAAAD8x0bcAAAAsklEQVR42m1SQRKEMAjLiUsuPIb/v21HCGl1dhwVJU1CWlT0hYrKYlfU91aAQCxWCgiBniqfCt2en9EwmhsN48M06GU8vMuYRWgNXs0Vw3rKPwL00oZtA25SLCFWrhxvcglDsfR0Ia40Z5p3zEBJmC89HyTMyenc8ZlMI53EQ1Jp8DoFXruVFsG9e1caipK2HHeY+LCwRefdFk6YYaupp48QHP/t62xQTJhn8NMMeeKE+QN+/UlEnLpR9gAAAABJRU5ErkJggg==")}
+    --cfg-boli:#2b3f93;--cfg-cinta:rgba(222,207,163,.88);--cfg-llamada:#e7dcc6;}
   body.run .cfg{display:block}
   .cfg-guias{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
   .cfg-guias g{opacity:0}
@@ -493,63 +494,155 @@
   .chip{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 10px;white-space:nowrap;transition:.2s var(--ease)}
   .chip:hover{border-color:var(--cobalt);color:var(--cobalt);transform:translateY(-2px)}
 
-  /* ---------- EXPLORA · cuatro páginas, cada una con su foto de la nave ----------
-     Base (sin JS, con reduced-motion o con poca altura): rejilla estática de cuatro.
-     .viva (lo pone el script de EXPLORA): la escena queda fija 430vh y los paneles entran uno a uno por la
-     derecha; el script solo les escribe transform y opacity. Papel e impresión de taller, sin cristal ni píldoras. */
-  .explora{background:var(--paper)}
-  .ex-cab{padding-top:clamp(70px,12vh,120px)}
-  .ex-escena{max-width:var(--ample);margin:0 auto;padding:48px var(--gut) clamp(70px,12vh,120px)}
-  .ex-pista{list-style:none;margin:0;padding:0;display:grid;gap:16px}
-  .ex-item{display:flex;min-width:0}
-  .ex-panel{position:relative;display:flex;flex-direction:column;width:100%;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:4px}
-  .ex-foto{position:relative;display:block;overflow:hidden;aspect-ratio:4/5;background:#2a211d;border-radius:3px 3px 0 0}
-  .ex-foto img{display:block;width:100%;height:100%;object-fit:cover;object-position:var(--ex-op,50% 50%);transform-origin:var(--ex-op,50% 50%)}
-  .ex-txt{display:flex;flex-direction:column;gap:12px;flex:1;padding:22px 24px 24px}
-  .ex-no{font-family:'Archivo',sans-serif;font-weight:600;font-size:1rem;line-height:1;font-variant-numeric:tabular-nums;color:var(--cobalt)}
-  .ex-panel h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:1.4rem;line-height:1.02;letter-spacing:-.028em}
-  .ex-panel p{font-size:.95rem;color:var(--ink-2);max-width:40ch}
-  .ex-go{margin-top:auto;padding-top:4px;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-family:'Archivo',sans-serif;font-weight:700;font-size:.95rem}
-  .ex-go>span{text-decoration:underline;text-decoration-color:var(--cobalt);text-decoration-thickness:1.5px;text-underline-offset:6px;transition:text-decoration-thickness .2s var(--ease)}
-  .ex-go svg{width:15px;height:15px;flex:none;color:var(--cobalt);transition:transform .22s var(--ease)}
-  .ex-panel:hover .ex-go>span{text-decoration-thickness:3px}.ex-panel:hover .ex-go svg{transform:translateX(4px)}
-  .ex-sombra{display:none}
-  @media(min-width:560px){.ex-pista{grid-template-columns:repeat(2,1fr)}}
-  @media(min-width:900px){.ex-pista{grid-template-columns:repeat(4,1fr)}}
-  /* Viva: la escena se fija bajo la cabecera (--ex-top lo mide el script) y deja libre la burbuja del chat:
-     en móvil por abajo (--ex-bot) y desde 600 px por los lados (--ex-lado, 92 px = burbuja de 60 + 20 + aire). */
-  .explora.viva .ex-pin{height:430vh;margin-bottom:clamp(24px,5vh,56px)}
-  .explora.viva .ex-escena{position:sticky;top:0;height:100vh;height:100svh;max-width:none;margin:0;padding:0;overflow:hidden;overflow:clip}
-  .explora.viva .ex-pista{position:absolute;left:0;right:0;top:var(--ex-top,96px);bottom:var(--ex-bot,32px);display:block}
-  .explora.viva .ex-item{position:absolute;inset:0;align-items:center;justify-content:center;padding:0 var(--ex-lado,var(--gut));pointer-events:none;transform:translate3d(130vw,0,0)}
-  .explora.viva.ex-cerca .ex-item,.explora.viva.ex-cerca .ex-foto img{will-change:transform}
-  .explora.viva .ex-panel{pointer-events:auto;width:min(100%,600px);height:100%;
-    box-shadow:0 1px 1px rgba(21,23,26,.06),0 24px 36px -30px rgba(21,23,26,.55)}
-  .explora.viva .ex-foto{flex:1 1 auto;min-height:0;aspect-ratio:auto}
-  .explora.viva .ex-foto img{transform:scale(1.08)}
-  .explora.viva .ex-txt{flex:none;gap:10px;padding:18px 20px 20px}
-  .explora.viva .ex-panel h3{font-size:clamp(1.45rem,5.4vw,2.3rem)}
-  /* La sombra larga del papel en el aire: crece con la velocidad y desaparece al posarse (solo opacity). */
-  .explora.viva .ex-sombra{display:block;position:absolute;inset:0;z-index:-1;border-radius:4px;pointer-events:none;opacity:0;
-    box-shadow:0 56px 64px -40px rgba(21,23,26,.42),0 26px 90px -34px rgba(21,23,26,.26)}
-  .explora.viva.ex-cerca .ex-sombra{will-change:opacity}
-  [data-theme="dark"] .explora.viva .ex-panel{box-shadow:0 1px 1px rgba(0,0,0,.3),0 24px 36px -30px rgba(0,0,0,.8)}
-  [data-theme="dark"] .explora.viva .ex-sombra{box-shadow:0 56px 64px -40px rgba(0,0,0,.72),0 26px 90px -34px rgba(0,0,0,.5)}
-  @media(min-width:600px){.explora.viva{--ex-lado:max(var(--gut),92px)}}
-  @media(max-width:599px){.explora.viva{--ex-bot:calc(var(--acg-abajo,16px) + 72px)}}
-  /* En horizontal: la foto entera en 2:3 a sangre en su mitad y el texto al lado; los pares, con la foto a la derecha. */
-  @media(min-width:760px) and (orientation:landscape){
-    .explora.viva .ex-panel{flex-direction:row;width:auto;height:min(100%,800px)}
-    .explora.viva .ex-item:nth-child(even) .ex-panel{flex-direction:row-reverse}
-    .explora.viva .ex-foto{flex:none;height:100%;aspect-ratio:2/3;border-radius:3px 0 0 3px}
-    .explora.viva .ex-item:nth-child(even) .ex-foto{border-radius:0 3px 3px 0}
-    .explora.viva .ex-txt{width:clamp(300px,34vw,480px);gap:14px;padding:clamp(26px,3vw,48px)}
-    .explora.viva .ex-no{font-size:1.08rem}
-    .explora.viva .ex-panel h3{font-size:clamp(2.1rem,4.3vw,4.3rem);line-height:.98;margin-top:.3em}
-    .explora.viva .ex-panel p{margin-top:auto;font-size:clamp(.98rem,1.1vw,1.08rem)}
-    .explora.viva .ex-go{margin-top:2px}
+  /* ---------- EXPLORA · las cuatro páginas en una cinta de papel (el efecto de fases de NRG, traducido) ----------
+     Escena: la nave de noche (fondo ciruela) y encima una cinta de papel cálido con las cuatro páginas, cada una con su
+     título grande, su texto y una tarjeta alta con su foto. Medidas de NRG y capturas: pruebas-portfolio/nrg-2026-11-04/explora-nrg.
+     Base (sin JS o con reduced-motion): lista estática de las cuatro, cada una con su foto, sin pin.
+     .ex-v (JS; móvil, tableta en vertical o pantalla baja): la misma lista, con la etiqueta pegada bajo la cabecera y su índice.
+     .ex-h (JS; apaisado): la sección se fija y la cinta cruza de derecha a izquierda, rígida; la foto va dentro a otra
+     velocidad. El script solo escribe transform y opacity. Sin cristal, sin píldoras: papel, tinta ciruela y cinta. */
+  .explora{--ex-nave:#26202b;--ex-velo:#15171a;--ex-papel:#efe8da;--ex-papel-v:rgba(239,232,218,.38);--ex-tinta:#2a1a2d;--ex-tinta-2:rgba(42,26,45,.74);--ex-filete:rgba(42,26,45,.24);
+    --ex-eti-papel:#f3e7cc;--ex-eti-tinta:#2a1a2d;--ex-boli:#2b3f93;--ex-radio:22px;
+    background:var(--ex-nave)}
+  [data-theme="dark"] .explora{--ex-nave:#0a0710;--ex-velo:#0a0710;--ex-papel:#211a29;--ex-papel-v:rgba(33,26,41,.2);--ex-tinta:#efe8dc;--ex-tinta-2:rgba(239,232,220,.72);--ex-filete:rgba(239,232,220,.2)}
+  .ex-rail{padding-bottom:clamp(28px,5vh,48px)}
+  /* El rótulo de la sección, sobre la nave: es la «fase anterior» que la cinta tapa al llegar. */
+  .ex-tapa{position:relative;max-width:var(--ample);margin:0 auto;padding:clamp(70px,12vh,120px) var(--gut) clamp(36px,6vh,64px);color:var(--d-fg)}
+  .ex-osc{position:absolute;inset:0;pointer-events:none}
+  .ex-tapa .eyebrow{font-family:'Archivo',sans-serif;font-size:1rem;font-weight:600;letter-spacing:-.005em;text-transform:none;color:var(--d-fg-2)}
+  .ex-tapa .eyebrow::before{display:none}
+  .ex-tapa .kicker-h2{color:var(--d-fg);font-size:clamp(2.4rem,6.4vw,5.8rem);max-width:12ch}
+  .ex-tapa .kicker-h2 em{color:var(--amber)}
+  .ex-velo{display:none}
+  /* Detrás de la mitad de abajo de la hoja, la nave ya tiene el color de contacto: la sección de debajo empieza sin costura. */
+  .ex-hoja{position:relative;isolation:isolate}
+  .ex-hoja::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:50%;bottom:calc(-1*clamp(28px,5vh,48px));background:var(--ex-velo)}
+  /* La cinta: papel con grano y las esquinas redondas. En la lista es una tira que sube sobre la nave. */
+  .ex-cinta{position:relative;isolation:isolate;list-style:none;margin:0;padding:0;color:var(--ex-tinta);border-radius:var(--ex-radio);
+    background:var(--cfg-grano),var(--ex-papel);background-size:48px 48px,560px 560px}
+  /* Una mano de papel por encima del grano: a la escala de la cinta, las nubes de la pasta pesaban demasiado. */
+  .ex-cinta::before{content:"";position:absolute;z-index:-1;inset:0;border-radius:inherit;background:var(--ex-papel-v);pointer-events:none}
+  .ex-cap{display:grid;gap:clamp(24px,4vw,40px);max-width:var(--ample);margin:0 auto;padding:clamp(48px,8vw,84px) var(--gut)}
+  .ex-cap+.ex-cap{border-top:1px dashed var(--ex-filete)}
+  .ex-por{display:flex;flex-direction:column;min-width:0}
+  .ex-no{display:block;margin-bottom:.9em;font-family:'Archivo',sans-serif;font-weight:700;font-size:1rem;line-height:1;font-variant-numeric:tabular-nums;color:var(--ex-tinta-2)}
+  .ex-tit{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(2.5rem,11.6vw,5.4rem);line-height:.88;letter-spacing:-.045em;text-transform:uppercase;color:var(--ex-tinta)}
+  /* Cada línea del título en su máscara (sube desde abajo al asomar la página); nunca se parte una palabra. */
+  .ex-l{display:block;white-space:nowrap;overflow:hidden;overflow:clip;padding:.08em .06em .06em;margin:-.08em -.06em -.06em}
+  .ex-l>span{display:block}
+  .ex-cuerpo{margin-top:clamp(18px,3vw,28px)}
+  .ex-lead{max-width:30ch;font-family:'Archivo',sans-serif;font-weight:500;font-size:clamp(1.18rem,.95rem + 1.1vw,1.62rem);line-height:1.2;letter-spacing:-.012em;color:var(--ex-tinta)}
+  .ex-go{display:inline-flex;align-items:center;gap:10px;margin-top:20px;font-family:'Archivo',sans-serif;font-weight:700;font-size:1.05rem;line-height:1.2;color:var(--ex-tinta)}
+  .ex-go>span{text-decoration:underline;text-decoration-color:var(--cobalt);text-decoration-thickness:2px;text-underline-offset:6px;transition:text-decoration-thickness .2s var(--ease)}
+  .ex-go svg{width:16px;height:16px;flex:none;color:var(--cobalt);transition:transform .22s var(--ease)}
+  .ex-go:hover>span{text-decoration-thickness:3.5px}.ex-go:hover svg{transform:translateX(4px)}
+  .ex-dato{margin-top:20px;font-family:'Archivo',sans-serif;font-weight:500;font-size:.98rem;line-height:1.45;color:var(--ex-tinta-2)}
+  .ex-dato b{font-weight:700;color:var(--ex-tinta)}
+  .ex-foto{position:relative;display:block;overflow:hidden;width:100%;aspect-ratio:4/5;max-height:80vh;border-radius:16px;background:#2a211d}
+  .ex-foto img{display:block;width:100%;height:100%;object-fit:cover;object-position:var(--ex-op,50% 50%)}
+  .ex-cap-2 .ex-foto{aspect-ratio:1/1}.ex-cap-4 .ex-foto{aspect-ratio:3/4}
+  /* En dos columnas, la de la derecha no entra en la franja de la burbuja del chat (60 px a 20 del borde, y aire). */
+  @media(min-width:700px){
+    .ex-cap{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:center;column-gap:clamp(32px,5vw,72px);padding-right:max(var(--gut),92px)}
+    .ex-cap:nth-child(even){grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+    .ex-cap:nth-child(even) .ex-por{order:2}
+    .ex-tit{font-size:clamp(2.6rem,6.6vw,5.6rem)}
   }
-
+  /* La etiqueta: un rótulo de papel con su trozo de cinta, el número y el nombre de la página en la que estás, y un
+     cabo troquelado con las dos rayas del índice. Solo con JS (sin él no hace nada: lleva hidden). */
+  .ex-eti-w{z-index:4;display:flex;flex-direction:column;align-items:flex-end}
+  .ex-eti-w[hidden]{display:none!important}
+  .ex-eti{position:relative;display:flex;align-items:stretch;padding:0;border:0;border-radius:3px;cursor:pointer;color:var(--ex-eti-tinta);font-family:'Archivo',sans-serif;line-height:1;text-align:left;
+    background:var(--cfg-grano),var(--ex-eti-papel);background-size:48px 48px,260px 260px;transform:rotate(-1.4deg);
+    box-shadow:inset 0 0 0 .5px rgba(42,26,45,.3),0 1px 1.5px rgba(6,3,10,.3),0 7px 14px -8px rgba(6,3,10,.5);transition:transform .3s var(--ease)}
+  .ex-eti:hover{transform:rotate(-.6deg) translateY(-1px)}
+  .ex-eti::before{content:"";position:absolute;top:-8px;left:16px;width:52px;height:16px;background:rgba(222,207,163,.9);box-shadow:0 1px 1px rgba(6,3,10,.12);transform:rotate(-6deg);
+    clip-path:polygon(2.5% 0,97.5% 0,100% 16%,97% 33%,99.5% 51%,97.5% 69%,100% 85%,97% 100%,3% 100%,0 86%,2.5% 67%,0 50%,3% 32%,.5% 15%)}
+  .ex-eti:focus-visible{outline:2.5px solid var(--cobalt);outline-offset:4px}
+  .ex-eti-v{display:flex;align-items:stretch}
+  .ex-eti-main{display:flex;align-items:center;gap:10px;padding:11px 15px 10px 16px}
+  .ex-eti-pila{display:grid;overflow:hidden;overflow:clip}
+  .ex-eti-pila>b{grid-area:1/1;display:block;line-height:1.3;transition:transform .45s cubic-bezier(.55,.1,.26,.995),opacity .3s ease}
+  .ex-eti-pila>b.ant{transform:translate3d(0,-115%,0);opacity:0}
+  .ex-eti-pila>b.sig{transform:translate3d(0,115%,0);opacity:0}
+  .ex-eti-no>b{font-weight:800;font-size:1.06rem;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+  .ex-eti-t>b{font-weight:600;font-size:1rem;white-space:nowrap;letter-spacing:-.01em}
+  .ex-eti-cabo{display:grid;place-items:center;width:44px;border-left:1.5px dashed rgba(42,26,45,.32)}
+  .ex-eti-ic{position:relative;display:block;width:16px;height:10px}
+  .ex-eti-ic i{position:absolute;left:0;right:0;height:1.8px;border-radius:1px;background:currentColor;transition:transform .35s var(--ease)}
+  .ex-eti-ic i:first-child{top:0}.ex-eti-ic i:last-child{bottom:0}
+  .ex-eti[aria-expanded="true"] .ex-eti-ic i:first-child{transform:translate3d(0,4.1px,0) rotate(45deg)}
+  .ex-eti[aria-expanded="true"] .ex-eti-ic i:last-child{transform:translate3d(0,-4.1px,0) rotate(-45deg)}
+  /* El índice: una hoja del mismo papel que se desenrolla bajo la etiqueta (clip-path), con la página actual rodeada a
+     bolígrafo. Cada fila lleva a su página dentro de la cinta. */
+  .ex-ind{position:relative;min-width:250px;margin-top:12px;color:var(--ex-eti-tinta);background:var(--cfg-grano),var(--ex-eti-papel);background-size:48px 48px,260px 260px;border-radius:3px;
+    box-shadow:inset 0 0 0 .5px rgba(42,26,45,.3),0 1px 1.5px rgba(6,3,10,.3),0 14px 26px -14px rgba(6,3,10,.6);transform:rotate(.5deg);
+    clip-path:inset(0 0 100% 0);transition:clip-path .4s cubic-bezier(.215,.61,.355,1)}
+  .ex-ind.abierto{clip-path:inset(-24px -24px -40px -24px)}
+  .ex-ind ol{list-style:none;margin:0;padding:4px 16px}
+  .ex-ind li+li{border-top:1px dashed rgba(42,26,45,.28)}
+  .ex-ind button{display:flex;align-items:baseline;gap:14px;width:100%;padding:13px 2px 12px;border:0;background:none;color:inherit;cursor:pointer;text-align:left;font-family:'Archivo',sans-serif;font-size:1.02rem;font-weight:600;line-height:1.25}
+  .ex-ind-no{flex:none;min-width:1.5em;font-weight:800;font-variant-numeric:tabular-nums;color:rgba(42,26,45,.6)}
+  .ex-ind-t{position:relative}
+  .ex-ind button:hover .ex-ind-t>span{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px}
+  .ex-ind button:focus-visible{outline:2.5px solid var(--cobalt);outline-offset:2px;border-radius:3px}
+  .ex-boli{position:absolute;left:-13px;top:-9px;width:calc(100% + 26px);height:calc(100% + 18px);overflow:visible;pointer-events:none;opacity:0}
+  .ex-boli path{fill:none;stroke:var(--ex-boli);stroke-width:1.3;stroke-opacity:.9;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 1;stroke-dashoffset:1}
+  .ex-ind.abierto button[aria-current="true"] .ex-boli{opacity:1;transition:opacity 0s .3s}
+  .ex-ind.abierto button[aria-current="true"] .ex-boli path{stroke-dashoffset:0;transition:stroke-dashoffset .6s ease .3s}
+  /* Entrada de cada página (con JS): las líneas del título suben por su máscara y la tinta pasa de clara a plena; el texto,
+     medio segundo después. Sin degradados: solo transform y opacity. */
+  .explora.ex-h .ex-l>span,.explora.ex-v .ex-l>span{transform:translate3d(0,108%,0);opacity:.28;transition:transform .8s cubic-bezier(.215,.61,.355,1),opacity 1.2s ease .12s}
+  .explora.ex-h .ex-l+.ex-l>span,.explora.ex-v .ex-l+.ex-l>span{transition-delay:.2s,.32s}
+  .explora.ex-h .ex-cuerpo,.explora.ex-h .ex-dato,.explora.ex-v .ex-cuerpo,.explora.ex-v .ex-dato{opacity:0;transform:translate3d(0,24px,0);transition:opacity .5s ease-in-out .5s,transform .6s cubic-bezier(.215,.61,.355,1) .5s}
+  .explora.ex-h .ex-no,.explora.ex-v .ex-no{opacity:0;transition:opacity .5s ease}
+  .explora .ex-cap.ex-vis .ex-l>span,.explora .ex-cap.ex-vis .ex-cuerpo,.explora .ex-cap.ex-vis .ex-dato,.explora .ex-cap.ex-vis .ex-no{transform:none;opacity:1}
+  .explora.ex-h .ex-foto,.explora.ex-v .ex-foto{cursor:pointer}
+  /* .ex-v: la etiqueta se pega bajo la cabecera mientras la cinta está en pantalla (sticky dentro de la hoja). */
+  .explora.ex-v .ex-eti-w{position:sticky;top:calc(var(--ex-top,115px) + 12px);height:0;padding-right:max(12px,calc(var(--gut) - 8px))}
+  .explora.ex-v .ex-cinta{padding-top:8px}
+  /* .ex-h: la pista (alto que pone el script) y el raíl fijo de una pantalla, con la nave detrás. La cinta empieza bajo la
+     cabecera (--ex-top). Las medidas van en --k, que sale del alto libre para el texto (--ex-B: entre la etiqueta y la
+     franja de abajo, donde flota la burbuja del chat) y nunca pasa de 1,05vw. */
+  .explora.ex-h{--ex-chat:calc(var(--acg-abajo,112px) + 76px);--ex-y0:78px;--ex-B:calc(100vh - var(--ex-top,92px) - var(--ex-y0) - var(--ex-chat));
+    --k:min(calc(var(--ex-B) / 38.3),1.05vw);background:var(--ex-nave)}
+  .explora.ex-h .ex-pin{position:relative}
+  .explora.ex-h .ex-rail{position:sticky;top:0;height:100vh;padding:0;overflow:hidden;overflow:clip}
+  .explora.ex-h .ex-velo{display:block;position:absolute;inset:0;z-index:1;background:var(--ex-velo);opacity:0;pointer-events:none}
+  .explora.ex-h .ex-tapa{position:absolute;inset:0;max-width:none;margin:0;display:flex;flex-direction:column;justify-content:center;
+    padding:calc(var(--ex-top,92px) + 2vh) var(--gut) 8vh max(var(--gut),calc((100vw - var(--ample))/2 + var(--gut)))}
+  .explora.ex-h.ex-claro .ex-osc{display:none}
+  .explora.ex-h.ex-tapa-off .ex-tapa>:not(.ex-osc){visibility:hidden}
+  .explora.ex-h .ex-hoja{position:absolute;z-index:2;left:0;right:0;top:var(--ex-top,92px);bottom:0}
+  .explora.ex-h .ex-hoja::before{display:none}
+  .explora.ex-h .ex-cinta{position:absolute;left:0;top:0;bottom:0;display:flex;width:max-content;padding:0;transform:translate3d(110vw,0,0)}
+  .explora.ex-h.ex-cerca .ex-cinta,.explora.ex-h.ex-cerca .ex-foto img{will-change:transform}
+  .explora.ex-h .ex-cap{display:flex;align-items:stretch;max-width:none;margin:0;padding:0;gap:0;border:0}
+  .explora.ex-h .ex-por{order:0;flex:none;justify-content:space-between;padding:var(--ex-y0) 0 var(--ex-chat) calc(4.5*var(--k))}
+  .explora.ex-h .ex-cuerpo{margin-top:0}
+  .explora.ex-h .ex-no{font-size:max(15px,calc(1.3*var(--k)));margin-bottom:calc(1.5*var(--k))}
+  .explora.ex-h .ex-tit{font-size:calc(7.4*var(--k))}
+  .explora.ex-h .ex-lead{max-width:none;font-size:calc(2.05*var(--k));line-height:1.13}
+  .explora.ex-h .ex-go{margin-top:calc(1.7*var(--k));font-size:max(16px,calc(1.22*var(--k)))}
+  .explora.ex-h .ex-dato{margin:0;font-size:max(14px,calc(1.08*var(--k)))}
+  .explora.ex-h .ex-foto{flex:none;width:calc(var(--cw)*var(--k));max-height:none;aspect-ratio:auto;margin:14px calc(7*var(--k)) 14px calc(4*var(--k));border-radius:20px}
+  /* La foto, más ancha que su tarjeta: 0,357 del ancho de la tarjeta más 0,643 del de la pantalla, lo justo para que el
+     parallax (0,643 de la velocidad de la cinta respecto a la tarjeta) la cubra siempre. */
+  .explora.ex-h .ex-foto img{position:absolute;left:0;top:0;width:calc(.357*var(--cw)*var(--k) + 64.3vw);max-width:none;height:100%;object-position:var(--ex-oph,50% 50%)}
+  /* Cada página con su composición, para que no sean cuatro copias de la misma plantilla. */
+  .explora.ex-h .ex-cap-1{--cw:42}
+  .explora.ex-h .ex-cap-1 .ex-cuerpo{width:calc(29*var(--k));margin-left:calc(19*var(--k))}
+  .explora.ex-h .ex-cap-2{--cw:35}
+  .explora.ex-h .ex-cap-2 .ex-por{flex-direction:column-reverse}
+  .explora.ex-h .ex-cap-2 .ex-cuerpo{width:calc(27*var(--k));margin-left:calc(21*var(--k))}
+  .explora.ex-h .ex-cap-3{--cw:47}
+  .explora.ex-h .ex-cap-3 .ex-tit{font-size:calc(6.6*var(--k))}
+  .explora.ex-h .ex-cap-3 .ex-cuerpo{width:calc(31*var(--k))}
+  .explora.ex-h .ex-cap-4{--cw:40}
+  .explora.ex-h .ex-cap-4 .ex-cuerpo{width:calc(28*var(--k));margin-left:calc(20*var(--k))}
+  .explora.ex-h .ex-cap-4 .ex-foto{margin-right:calc(4*var(--k))}
+  .explora.ex-h .ex-eti-w{position:absolute;top:14px;right:var(--gut);opacity:0;transform:translate3d(0,-6px,0);pointer-events:none;transition:opacity .35s ease,transform .45s var(--ease)}
+  .explora.ex-h.ex-eti-on .ex-eti-w,.explora.ex-h .ex-eti-w:focus-within{opacity:1;transform:none;pointer-events:auto}
   .contacto{background:var(--ink);color:var(--paper)}
   .contacto .inner{max-width:var(--ample);margin:0 auto;padding:clamp(70px,12vh,110px) var(--gut);text-align:center}
   .contacto h2{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(2.2rem,6vw,4rem);text-transform:uppercase;letter-spacing:-.04em;color:#fff;max-width:18ch;margin:.3em auto .5em}
@@ -795,20 +888,60 @@
 
 
 
-<!-- EXPLORA · cuatro páginas que pasan de derecha a izquierda (sin JS o con reduced-motion: rejilla) -->
-<section class="explora" id="explora">
-  <div class="wrap ex-cab">
-    <span class="eyebrow" data-i18n="explora.eyebrow">Explore</span>
-    <h2 class="kicker-h2" data-i18n-html="explora.title">In <em>four pages.</em></h2>
-  </div>
+<!-- EXPLORA · las cuatro páginas en una cinta de papel que cruza de derecha a izquierda (sin JS o con reduced-motion: lista) -->
+<section class="explora" id="explora" aria-labelledby="ex-h">
   <div class="ex-pin">
-    <div class="ex-escena">
-      <ol class="ex-pista">
-        <li class="ex-item"><a class="ex-panel" href="/en/trabajo" aria-labelledby="ex-t1" aria-describedby="ex-p1"><span class="ex-sombra" aria-hidden="true"></span><span class="ex-foto" style="--ex-op:50% 84%"><img src="/visuals/explora/01-640.webp" srcset="/visuals/explora/01-640.webp 640w, /visuals/explora/01.webp 1024w" sizes="(min-width: 760px) and (orientation: landscape) min(36vw, 540px), (min-width: 600px) 600px, 92vw" width="1024" height="1536" alt="A workshop table seen from above at night: dome drawings held down with masking tape, three battens with a band of coloured tape at the tip, a metal connector and a carpenter's pencil." data-i18n-alt="explora.c1.alt" loading="lazy" decoding="async"></span><div class="ex-txt"><span class="ex-no">01</span><h3 id="ex-t1" data-i18n="explora.c1.t">Work and case study</h3><p id="ex-p1" data-i18n="explora.c1.p">DomesLab in depth, the app's real gallery and a selection of websites and 3D viewers.</p><span class="ex-go"><span data-i18n="explora.c1.go">See work</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></li>
-        <li class="ex-item"><a class="ex-panel" href="/en/servicios" aria-labelledby="ex-t2" aria-describedby="ex-p2"><span class="ex-sombra" aria-hidden="true"></span><span class="ex-foto" style="--ex-op:50% 50%"><img src="/visuals/explora/02-640.webp" srcset="/visuals/explora/02-640.webp 640w, /visuals/explora/02.webp 1024w" sizes="(min-width: 760px) and (orientation: landscape) min(36vw, 540px), (min-width: 600px) 600px, 92vw" width="1024" height="1536" alt="A metal shelf holding four models of the same dome, smallest to largest: card, 3D printed, balsa sticks, and a piece of real pine frame with its connector." data-i18n-alt="explora.c2.alt" loading="lazy" decoding="async"></span><div class="ex-txt"><span class="ex-no">02</span><h3 id="ex-t2" data-i18n="explora.c2.t">Services and process</h3><p id="ex-p2" data-i18n="explora.c2.p">What I build (calculators, configurators, dashboards) and how I work all the way to production.</p><span class="ex-go"><span data-i18n="explora.c2.go">See services</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></li>
-        <li class="ex-item"><a class="ex-panel" href="/en/domeslab" aria-labelledby="ex-t3" aria-describedby="ex-p3"><span class="ex-sombra" aria-hidden="true"></span><span class="ex-foto" style="--ex-op:50% 24%"><img src="/visuals/explora/03-640.webp" srcset="/visuals/explora/03-640.webp 640w, /visuals/explora/03.webp 1024w" sizes="(min-width: 760px) and (orientation: landscape) min(36vw, 540px), (min-width: 600px) 600px, 92vw" width="1024" height="1536" alt="A pine dome half built inside a concrete shed at night, under a lamp hanging from a cable; struts marked with coloured tape wait on the floor." data-i18n-alt="explora.c3.alt" loading="lazy" decoding="async"></span><div class="ex-txt"><span class="ex-no">03</span><h3 id="ex-t3" data-i18n="explora.c3.t">Case study: DomesLab</h3><p id="ex-p3" data-i18n="explora.c3.p">How a real 3D configurator gets built: decisions, architecture and what it took to ship it to production.</p><span class="ex-go"><span data-i18n="explora.c3.go">Read the case study</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></li>
-        <li class="ex-item"><a class="ex-panel" href="/en/contacto" aria-labelledby="ex-t4" aria-describedby="ex-p4"><span class="ex-sombra" aria-hidden="true"></span><span class="ex-foto" style="--ex-op:50% 80%"><img src="/visuals/explora/04-640.webp" srcset="/visuals/explora/04-640.webp 640w, /visuals/explora/04.webp 1024w" sizes="(min-width: 760px) and (orientation: landscape) min(36vw, 540px), (min-width: 600px) 600px, 92vw" width="1024" height="1536" alt="The shed at blue hour with the door half open: inside, in the warm lamplight, you can make out the timber dome, with the mountains behind." data-i18n-alt="explora.c4.alt" loading="lazy" decoding="async"></span><div class="ex-txt"><span class="ex-no">04</span><h3 id="ex-t4" data-i18n="explora.c4.t">Contact</h3><p id="ex-p4" data-i18n="explora.c4.p">Tell me your idea and I'll reply with a plan and a ballpark quote, no strings attached.</p><span class="ex-go"><span data-i18n="explora.c4.go">Let's talk</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a></li>
-      </ol>
+    <div class="ex-rail">
+      <div class="ex-velo" aria-hidden="true"></div>
+      <div class="ex-tapa">
+        <i class="ex-osc" data-nav="dark" aria-hidden="true"></i>
+        <span class="eyebrow" data-i18n="explora.eyebrow">Explore</span>
+        <h2 class="kicker-h2" id="ex-h" data-i18n-html="explora.title">In <em>four pages.</em></h2>
+      </div>
+      <div class="ex-hoja">
+        <div class="ex-eti-w" hidden>
+          <button type="button" class="ex-eti" aria-expanded="false" aria-controls="ex-ind"><span class="sr-only"><span data-i18n="explora.eti">Index of the four pages, now on</span> <span class="ex-eti-sr">01 Work</span></span><span class="ex-eti-v" aria-hidden="true"><span class="ex-eti-main"><span class="ex-eti-pila ex-eti-no"><b>01</b><b class="sig">02</b><b class="sig">03</b><b class="sig">04</b></span><span class="ex-eti-pila ex-eti-t"><b data-i18n="explora.c1.n">Work</b><b class="sig" data-i18n="explora.c2.n">Services</b><b class="sig" data-i18n="explora.c3.n">DomesLab case</b><b class="sig" data-i18n="explora.c4.n">Contact</b></span></span><span class="ex-eti-cabo"><span class="ex-eti-ic"><i></i><i></i></span></span></span></button>
+          <div class="ex-ind" id="ex-ind" hidden>
+            <ol>
+              <li><button type="button" data-k="0" aria-current="true"><span class="ex-ind-no">01</span><span class="ex-ind-t"><span data-i18n="explora.c1.n">Work</span><svg class="ex-boli" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M12 30C4 22 14 8 44 6c30-2 50 4 50 15 0 10-20 15-46 15C22 36 5 31 6 21 7 13 20 8 33 7"/></svg></span></button></li>
+              <li><button type="button" data-k="1"><span class="ex-ind-no">02</span><span class="ex-ind-t"><span data-i18n="explora.c2.n">Services</span><svg class="ex-boli" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M12 30C4 22 14 8 44 6c30-2 50 4 50 15 0 10-20 15-46 15C22 36 5 31 6 21 7 13 20 8 33 7"/></svg></span></button></li>
+              <li><button type="button" data-k="2"><span class="ex-ind-no">03</span><span class="ex-ind-t"><span data-i18n="explora.c3.n">DomesLab case</span><svg class="ex-boli" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M12 30C4 22 14 8 44 6c30-2 50 4 50 15 0 10-20 15-46 15C22 36 5 31 6 21 7 13 20 8 33 7"/></svg></span></button></li>
+              <li><button type="button" data-k="3"><span class="ex-ind-no">04</span><span class="ex-ind-t"><span data-i18n="explora.c4.n">Contact</span><svg class="ex-boli" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M12 30C4 22 14 8 44 6c30-2 50 4 50 15 0 10-20 15-46 15C22 36 5 31 6 21 7 13 20 8 33 7"/></svg></span></button></li>
+            </ol>
+          </div>
+        </div>
+        <ol class="ex-cinta">
+          <li class="ex-cap ex-cap-1">
+            <div class="ex-por">
+              <div class="ex-cab"><span class="ex-no" aria-hidden="true">01</span><h3 class="ex-tit"><span class="ex-l"><span data-i18n="explora.c1.t1">Work</span></span></h3></div>
+              <div class="ex-cuerpo"><p class="ex-lead" id="ex-p1" data-i18n="explora.c1.p">DomesLab in depth, the app's real gallery and a selection of websites and 3D viewers.</p><a class="ex-go" href="/en/trabajo" aria-describedby="ex-p1"><span data-i18n="explora.c1.go">See work</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </div>
+            <div class="ex-foto" style="--ex-op:50% 50%;--ex-oph:50% 45%"><img src="/visuals/explora/01-640.webp" srcset="/visuals/explora/01-640.webp 640w, /visuals/explora/01.webp 1024w" sizes="(max-width: 640px) 92vw, (orientation: portrait) and (max-width: 1025px) 44vw, 80vw" width="1024" height="1536" alt="My workshop table at night, with screenshots of real projects printed out and taped down: the DomesLab configurator in the middle, marked in red pencil; the Cupo website at the top, Cal Niu bottom left and a proposal for a riding centre on the right. Beside them, a dome connector, a carpenter's pencil and a coffee mug." data-i18n-alt="explora.c1.alt" loading="lazy" decoding="async"></div>
+          </li>
+          <li class="ex-cap ex-cap-2">
+            <div class="ex-por">
+              <div class="ex-cab"><span class="ex-no" aria-hidden="true">02</span><h3 class="ex-tit"><span class="ex-l"><span data-i18n="explora.c2.t1">Services</span></span></h3></div>
+              <div class="ex-cuerpo"><p class="ex-lead" id="ex-p2" data-i18n="explora.c2.p">What I build (calculators, configurators, dashboards) and how I work all the way to production.</p><a class="ex-go" href="/en/servicios" aria-describedby="ex-p2"><span data-i18n="explora.c2.go">See services</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </div>
+            <div class="ex-foto" style="--ex-op:50% 44%;--ex-oph:50% 39%"><img src="/visuals/explora/02-640.webp" srcset="/visuals/explora/02-640.webp 640w, /visuals/explora/02.webp 1024w" sizes="(max-width: 640px) 92vw, (orientation: portrait) and (max-width: 1025px) 44vw, 80vw" width="1024" height="1536" alt="How I build a tool, on the workshop wall: a pencil sketch on grid paper, the grey wireframe, the printed configurator and the materials and budget sheet with a tick, linked by red arrows. Below, on the bench, a pencil, a utility knife, masking tape and a small stick model of a dome." data-i18n-alt="explora.c2.alt" loading="lazy" decoding="async"></div>
+          </li>
+          <li class="ex-cap ex-cap-3">
+            <div class="ex-por">
+              <div class="ex-cab"><span class="ex-no" aria-hidden="true">03</span><h3 class="ex-tit"><span class="ex-l"><span data-i18n="explora.c3.t1">DomesLab</span></span> <span class="ex-l"><span data-i18n="explora.c3.t2">case study</span></span></h3></div>
+              <div class="ex-cuerpo"><p class="ex-lead" id="ex-p3" data-i18n="explora.c3.p">How a real 3D configurator gets built: decisions, architecture and what it took to ship it to production.</p><a class="ex-go" href="/en/domeslab" aria-describedby="ex-p3"><span data-i18n="explora.c3.go">Read the case study</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </div>
+            <div class="ex-foto" style="--ex-op:50% 30%;--ex-oph:50% 20%"><img src="/visuals/explora/03-640.webp" srcset="/visuals/explora/03-640.webp 640w, /visuals/explora/03.webp 1024w" sizes="(max-width: 640px) 92vw, (orientation: portrait) and (max-width: 1025px) 44vw, 80vw" width="1024" height="1536" alt="A pine dome half built inside a concrete shed at night, under a lamp hanging from a cable; struts marked with coloured tape wait on the floor." data-i18n-alt="explora.c3.alt" loading="lazy" decoding="async"></div>
+          </li>
+          <li class="ex-cap ex-cap-4">
+            <div class="ex-por">
+              <div class="ex-cab"><span class="ex-no" aria-hidden="true">04</span><h3 class="ex-tit"><span class="ex-l"><span data-i18n="explora.c4.t1">Contact</span></span></h3></div>
+              <div class="ex-cuerpo"><p class="ex-lead" id="ex-p4" data-i18n="explora.c4.p">Tell me your idea and I'll reply with a plan and a ballpark quote, no strings attached.</p><a class="ex-go" href="/en/contacto" aria-describedby="ex-p4"><span data-i18n="explora.c4.go">Let's talk</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+              <p class="ex-dato"><b data-i18n="explora.c4.x">I reply in under 48 hours.</b><br>eneko.devs@gmail.com · +34 617 575 495</p>
+            </div>
+            <div class="ex-foto" style="--ex-op:50% 78%;--ex-oph:50% 84%"><img src="/visuals/explora/04-640.webp" srcset="/visuals/explora/04-640.webp 640w, /visuals/explora/04.webp 1024w" sizes="(max-width: 640px) 92vw, (orientation: portrait) and (max-width: 1025px) 44vw, 80vw" width="1024" height="1536" alt="The shed at blue hour with the door half open: inside, in the warm lamplight, you can make out the timber dome, with the mountains behind." data-i18n-alt="explora.c4.alt" loading="lazy" decoding="async"></div>
+          </li>
+        </ol>
+      </div>
     </div>
   </div>
 </section>
@@ -950,149 +1083,190 @@
 })();
 </script>
 
-<!-- EXPLORA · los cuatro paneles pasan de derecha a izquierda al hacer scroll -->
+<!-- EXPLORA · las cuatro páginas en una cinta de papel que cruza de derecha a izquierda -->
 <script>
-/* EXPLORA · Con JavaScript, sin reduced-motion y con 520 px de alto o más, la sección pasa a .viva: la escena
-   (.ex-escena) queda fija mientras se recorren 330vh y los cuatro paneles entran uno a uno por la derecha.
-   La posición u va de -1 (el 01 fuera, a la derecha) a 3 (el 04 centrado) y sale solo del scroll:
-   - el 01 entra mientras la escena sube, antes de fijarse;
-   - cada cambio ocupa 0,7 pantallas y entre uno y otro el panel se queda quieto en el centro (0,3; al final 0,45).
-   Física de cada cambio (s de 0 a 1): el que entra sigue una smootherstep (sale despacio de fuera, corre y frena
-   hasta pararse centrado); cuando llega a tocar al del centro (hueco g), lo empuja y los dos van juntos; en el
-   punto en que el nuevo empieza a frenar (s = .5) el viejo se suelta, sigue deslizando con rozamiento, se tuerce
-   un poco y sale justo por la izquierda en s = 1. Cada uno gira sobre la esquina de abajo que queda lejos del otro
-   (el que entra, la izquierda; el que sale, la derecha): ninguno invade al vecino ni sube hacia la cabecera.
-   La sombra larga crece con la velocidad (papel en el aire).
-   Por fotograma solo se escriben transform y opacity, y solo si cambian; la geometría se mide al cambiar de
-   tamaño (nunca por fotograma) y el bucle se para cuando lo mostrado alcanza al scroll. Funciona con Lenis
-   (lee scrollY, que Lenis mueve) y sin él (táctil). Al enfocar un enlace con el tabulador, el scroll lleva su
-   panel al centro. Sin JS, con reduced-motion o con poca altura: la rejilla estática de siempre. */
+/* EXPLORA · El efecto de fases de NRG, traducido (medidas y capturas en pruebas-portfolio/nrg-2026-11-04/explora-nrg).
+   Tres modos, según la pantalla:
+   - "" (sin JS o con reduced-motion): la lista estática del CSS, sin pin.
+   - "v" (móvil, tableta en vertical o menos de 500 px de alto): la misma lista, con la etiqueta pegada bajo la cabecera,
+     que dice en qué página estás y abre el índice.
+   - "h" (apaisado): la sección se fija (sticky) y la cinta de papel cruza de derecha a izquierda. Con y = scroll dentro
+     de la pista:
+       entrada, E = 0,8 pantallas: la cinta llega por la derecha tapando el rótulo de la sección; arranca despacio y
+         termina justo a la velocidad del recorrido, sin parón;
+       recorrido, T = D / 0,773: rígida y lineal, 0,773 px a la izquierda por px de scroll (lo que mide NRG), hasta que
+         su borde derecho queda a media pantalla (D = ancho de la cinta menos media pantalla);
+       salida, X = 0,55 pantallas: sigue a esa velocidad, acelera y se va entera por la izquierda mientras la nave se
+         oscurece hasta el color de la sección de contacto, que viene detrás.
+     La foto de cada tarjeta va a 0,357 de la velocidad de la cinta (0,643 respecto a su tarjeta), sin escala, como en NRG.
+     El título de cada página sube por su máscara al asomar, y la etiqueta cambia cuando la página pasa de media pantalla.
+   Por fotograma solo se escriben transform y opacity, y solo si cambian. Todas las medidas se toman al cambiar de
+   tamaño, nunca por fotograma, y no hay bucle: un fotograma por evento de scroll, así que con el scroll quieto no corre
+   nada. Funciona con Lenis (lee scrollY, que Lenis mueve) y sin él (táctil, teclado). Al tabular, el scroll trae a la
+   vista la página del enlace enfocado; el índice salta a cada página. */
 (function(){
   var sec=document.getElementById("explora");
   if(!sec||!window.requestAnimationFrame||!window.matchMedia) return;
-  var pin=sec.querySelector(".ex-pin"), esc=sec.querySelector(".ex-escena"), items=[].slice.call(sec.querySelectorAll(".ex-item"));
-  if(!pin||!esc||items.length<2||!(window.CSS&&CSS.supports&&CSS.supports("position","sticky"))) return;
-  var N=items.length, rm=matchMedia("(prefers-reduced-motion: reduce)"), hdr=document.querySelector("header");
-  var P=items.map(function(li){ return {li:li,img:li.querySelector(".ex-foto img"),sb:li.querySelector(".ex-sombra"),t:"",ti:"",o:""}; });
-  // Recorrido en pantallas: espera inicial, cambios y esperas intermedias, espera final.
-  var H0=.15, TR=.7, HM=.3, HE=.45, TOT=H0+(N-1)*TR+(N-2)*HM+HE;
-  // Giro con que sale cada panel al soltarlo y con que llega cada uno (grados): distintos, como papeles de verdad.
-  var GIRO=[-1.6,-2.2,-1.2,-1.8], LLEGA=[.9,1.2,.7,1];
-  var vivo=false, cerca=false, G=null, obj=-1, ver=-1, corre=false, ult=0, cargadas=false, rt=0;
-  function cl(v,a,b){ return v<a?a:v>b?b:v; }
-  function ss(s){ return s*s*s*(s*(s*6-15)+10); }
-  function dss(s){ return 30*s*s*(1-s)*(1-s); }
-  function carga(){ if(cargadas) return; cargadas=true; P.forEach(function(p){ if(p.img) p.img.loading="eager"; }); }
+  var pin=sec.querySelector(".ex-pin"), cinta=sec.querySelector(".ex-cinta"), velo=sec.querySelector(".ex-velo"),
+      etiW=sec.querySelector(".ex-eti-w"), eti=sec.querySelector(".ex-eti"), ind=sec.querySelector(".ex-ind"), sr=sec.querySelector(".ex-eti-sr"),
+      caps=[].slice.call(sec.querySelectorAll(".ex-cap")), hdr=document.querySelector("header");
+  if(!pin||!cinta||!velo||!etiW||!eti||!ind||caps.length<2||!(window.CSS&&CSS.supports&&CSS.supports("position","sticky"))) return;
+  var N=caps.length, rm=matchMedia("(prefers-reduced-motion: reduce)"),
+      mqV=matchMedia("(max-width:640px),(orientation:portrait) and (max-width:1025px),(max-height:499px)");
+  var R=.773, K=.643;   // px de cinta por px de scroll; velocidad de la foto respecto a su tarjeta
+  var filas=[].slice.call(ind.querySelectorAll("button[data-k]")), pilas=[].slice.call(eti.querySelectorAll(".ex-eti-pila"));
+  var C=caps.map(function(li,i){ return {li:li,por:li.querySelector(".ex-por"),foto:li.querySelector(".ex-foto"),img:li.querySelector(".ex-foto img"),
+    go:li.querySelector(".ex-go"),fila:filas[i],vis:false,o:"",p0:0,f0:0,fw:0,top:0}; });
+  var modo="", G=null, pend=0, rt=0, cerca=false, cargadas=false, act=-1, est={}, xs="", vs="", destino=null, vio=null;
+  function sy(){ return window.scrollY||window.pageYOffset||0; }
+  function carga(){ if(cargadas) return; cargadas=true; C.forEach(function(c){ if(c.img) c.img.loading="eager"; }); }
+  function marca(n,v){ if(est[n]!==v){ est[n]=v; sec.classList.toggle(n,v); } }
   function limpia(){
-    P.forEach(function(p){ p.li.style.transform=""; if(p.img) p.img.style.transform=""; if(p.sb) p.sb.style.opacity=""; p.t=p.ti=p.o=""; });
-    sec.style.removeProperty("--ex-top"); sec.classList.remove("ex-cerca"); G=null;
+    cinta.style.transform=""; velo.style.opacity=""; pin.style.height="";
+    C.forEach(function(c){ if(c.img) c.img.style.transform=""; c.o=""; c.vis=false; c.li.classList.remove("ex-vis"); });
+    ["ex-claro","ex-eti-on","ex-tapa-off","ex-cerca"].forEach(function(n){ sec.classList.remove(n); });
+    est={}; xs=vs="";
+  }
+  // Etiqueta: número y nombre de la página k (los de su fila del índice, ya traducidos).
+  function pon(k){
+    if(k===act) return; act=k;
+    pilas.forEach(function(p){ [].forEach.call(p.children,function(b,i){ b.className=i<k?"ant":i>k?"sig":""; }); });
+    filas.forEach(function(b,i){ if(i===k) b.setAttribute("aria-current","true"); else b.removeAttribute("aria-current"); });
+    var f=filas[k]; if(sr&&f) sr.textContent=f.querySelector(".ex-ind-no").textContent+" "+f.querySelector(".ex-ind-t").textContent;
   }
   function mide(){
-    var alto=innerHeight, debe=!rm.matches&&alto>=520;
-    if(debe!==vivo){ vivo=debe; sec.classList.toggle("viva",vivo); if(!vivo) limpia(); }
-    if(!vivo) return;
-    sec.classList.toggle("ex-cerca",cerca); if(cerca) carga();
-    var hb=hdr?Math.round(hdr.getBoundingClientRect().bottom):80;
-    sec.style.setProperty("--ex-top",(hb+Math.round(cl(alto*.025,12,26)))+"px");
-    var a=P[0].li.querySelector(".ex-panel"), pw=a.offsetWidth, ph=a.offsetHeight, vw=document.documentElement.clientWidth;
-    var st=esc.offsetHeight, W=vw/2+pw/2+24+ph*.045, g=Math.round(cl(pw*.02,12,22));
-    // Contacto: el que entra toca al del centro cuando su X vale pw + g.
-    var e=1-(pw+g)/W, lo=0, hi=1, k;
-    for(k=0;k<32;k++){ var m=(lo+hi)/2; if(ss(m)<e) lo=m; else hi=m; }
-    var sc=e<=0?0:lo, sr=cl(Math.max(.5,sc+.1),.5,.8), d=1-sr;
-    var xr=W*(1-ss(sr))-(pw+g), vr=W*dss(sr);
-    var acc=cl(2*(-W-xr+vr*d)/(d*d),0,vr/d);   // rozamiento que lo deja justo fuera en s = 1
-    G={vw:vw,st:st,top:pin.getBoundingClientRect().top+(window.scrollY||pageYOffset),D:Math.max(1,pin.offsetHeight-st),
-       pw:pw,hx:pw/2,hy:ph/2,W:W,g:g,sc:sc,sr:sr,xr:xr,vr:vr,acc:acc,xf:xr-vr*d+.5*acc*d*d,vmax:W*1.875,par:P[0].img.parentNode.offsetWidth*.035};
-    P.forEach(function(p){ p.t=p.ti=p.o=""; });
-  }
-  function objetivo(){
-    var y=(window.scrollY||pageYOffset)-G.top;
-    if(y<0){ var a=-.72*G.st, b=-.12*G.st; return -1+cl((y-a)/(b-a),0,1); }
-    var z=cl(y/G.D,0,1)*TOT;
-    if(z<H0) return 0;
-    z-=H0;
-    for(var k=0;k<N-1;k++){
-      if(z<TR) return k+z/TR;
-      z-=TR;
-      if(k<N-2){ if(z<HM) return k+1; z-=HM; }
+    var m=rm.matches?"":(mqV.matches?"v":"h");
+    if(m!==modo){
+      cierra(false); limpia(); modo=m; act=-1;
+      sec.classList.toggle("ex-h",m==="h"); sec.classList.toggle("ex-v",m==="v"); etiW.hidden=!m;
+      if(vio){ vio.disconnect(); if(m==="v") C.forEach(function(c){ vio.observe(c.li); }); }
+      else if(m==="v") C.forEach(function(c){ c.li.classList.add("ex-vis"); });
     }
-    return N-1;
-  }
-  // Scroll en el que el panel k queda quieto en el centro (mitad de su espera; el 01, al fijarse la escena).
-  function yDe(k){
-    var z=k===0?0:H0+k*TR+(k-1)*HM+(k<N-1?HM/2:HE/2);
-    return G.top+z/TOT*G.D;
-  }
-  function pose(i,u){
-    var d=u-i, x=0, r=0, v=0, lado=-1, s, f;
-    if(d<=-1){ x=G.W; r=LLEGA[i]; }
-    else if(d<0){ s=d+1; x=G.W*(1-ss(s)); v=G.W*dss(s); r=LLEGA[i]*(1-ss(s)); }
-    else if(d>=1){ x=G.xf; r=GIRO[i]; lado=1; }
-    else if(d>0){
-      s=d; lado=1;
-      if(s<=G.sc) x=0;
-      else if(s<=G.sr){ x=G.W*(1-ss(s))-(G.pw+G.g); v=G.W*dss(s); }
-      else { var t=s-G.sr; x=G.xr-G.vr*t+.5*G.acc*t*t; v=G.vr-G.acc*t; }
-      f=s<=G.sc?0:ss(cl((s-G.sc)/(1-G.sc),0,1)); r=GIRO[i]*f;
+    var hb=hdr?Math.max(0,Math.round(hdr.getBoundingClientRect().bottom)):0;
+    sec.style.setProperty("--ex-top",hb+"px");
+    if(!m){ G=null; return; }
+    sec.classList.toggle("ex-cerca",cerca&&m==="h"); if(cerca) carga();
+    var vw=document.documentElement.clientWidth, vh=window.innerHeight, s=sy();
+    if(m==="h"){
+      // Posiciones dentro de la cinta (la resta quita su transform): se miden aquí, una vez.
+      var r0=cinta.getBoundingClientRect(), W=cinta.offsetWidth, D=Math.max(1,W-vw/2), E=Math.round(vh*.8), X=Math.round(vh*.55), T=D/R;
+      C.forEach(function(c){ var f=c.foto.getBoundingClientRect(); c.p0=c.por.getBoundingClientRect().left-r0.left; c.f0=f.left-r0.left; c.fw=f.width; c.o=""; });
+      pin.style.height=Math.round(vh+E+T+X)+"px";
+      G={vw:vw,vh:vh,hb:hb,W:W,D:D,E:E,X:X,T:T,top:pin.getBoundingClientRect().top+s,
+         m:R*E/(vw+4),c:(vw/2+6-R*X)/(X*X)};
+    }else{
+      // La página activa es la última cuya parte de arriba ha pasado una línea bajo la etiqueta; esa línea nunca baja más
+      // de media página, para que al saltar a una página (que queda justo bajo la etiqueta) no cuente ya la siguiente.
+      var minH=1e9; C.forEach(function(c){ var r=c.li.getBoundingClientRect(); c.top=r.top+s; minH=Math.min(minH,r.height); });
+      G={vw:vw,vh:vh,hb:hb,lv:hb+64+Math.min(vh*.3,minH*.5)};
     }
-    // Giro r sobre la esquina de abajo (izquierda si entra, derecha si sale): rotate(r) desde el centro más el
-    // desplazamiento que deja quieta esa esquina.
-    var a=r*Math.PI/180, c=Math.cos(a), sn=Math.sin(a), px=lado*G.hx, py=G.hy;
-    return {x:x+px-(px*c-py*sn),y:py-(px*sn+py*c),r:r,o:cl(v/G.vmax,0,1)*.9,par:cl(-x/(G.pw*.9),-1,1)*G.par};
+    xs=vs="";
   }
   function pinta(){
-    for(var i=0;i<N;i++){
-      var p=pose(i,ver), q=P[i];
-      var t="translate3d("+p.x.toFixed(1)+"px,"+p.y.toFixed(1)+"px,0) rotate("+p.r.toFixed(2)+"deg)";
-      if(t!==q.t){ q.li.style.transform=t; q.t=t; }
-      if(q.img){ var ti="translate3d("+p.par.toFixed(1)+"px,0,0) scale(1.08)"; if(ti!==q.ti){ q.img.style.transform=ti; q.ti=ti; } }
-      if(q.sb){ var o=p.o.toFixed(2); if(o!==q.o){ q.sb.style.opacity=o; q.o=o; } }
+    pend=0; if(!G) return;
+    var y=sy()-G.top, k=0, i;
+    if(modo==="h"){
+      var vw=G.vw, x0=vw+4, x, v=0, s;
+      if(y<=0) x=x0;
+      else if(y<G.E){ s=y/G.E; x=x0*(1-((3-G.m)*s*s+(G.m-2)*s*s*s)); }   // sale despacio y llega a -0,773 px/px
+      else if(y<=G.E+G.T) x=-(y-G.E)*R;
+      else { s=Math.min(y-G.E-G.T,G.X); x=-G.D-R*s-G.c*s*s; v=s/G.X; }
+      var t="translate3d("+x.toFixed(1)+"px,0,0)";
+      if(t!==xs){ cinta.style.transform=t; xs=t; }
+      var o2=(v*v).toFixed(2); if(o2!==vs){ velo.style.opacity=o2; vs=o2; }
+      for(i=0;i<N;i++){
+        var c=C[i], L=x+c.f0, P=x+c.p0;
+        if(L<vw+40&&L+c.fw>-40){
+          var l=(vw-L)/(vw+c.fw); l=l<0?0:l>1?1:l;
+          var o=(K*(l*(vw+c.fw)-vw)).toFixed(1);
+          if(o!==c.o){ c.img.style.transform="translate3d("+o+"px,0,0)"; c.o=o; }
+        }
+        if(!c.vis&&P<vw*.82){ c.vis=true; c.li.classList.add("ex-vis"); }
+        else if(c.vis&&P>vw*1.02){ c.vis=false; c.li.classList.remove("ex-vis"); }
+        if(i&&P<=vw*.55) k=i;
+      }
+      marca("ex-claro",x<vw*.5&&x+G.W>vw*.5);
+      marca("ex-eti-on",x<vw*.35&&x+G.W>vw*.62);
+      marca("ex-tapa-off",x<-2);
+    }else{
+      var lim=sy()+G.lv;
+      for(i=1;i<N;i++) if(C[i].top<=lim) k=i;
     }
+    pon(k);
   }
-  function fot(t){
-    if(!vivo||!G){ corre=false; return; }
-    var dt=ult?Math.min(64,t-ult):16; ult=t;
-    ver+=(obj-ver)*(1-Math.exp(-dt/85));
-    if(Math.abs(obj-ver)<.0006) ver=obj;
-    pinta();
-    if(ver!==obj) requestAnimationFrame(fot); else { corre=false; ult=0; }
-  }
-  function arranca(){ if(corre) return; corre=true; ult=0; requestAnimationFrame(fot); }
-  function alScroll(){
-    if(!vivo||!G) return;
-    var o=objetivo(); if(o===obj&&ver===obj) return;
-    obj=o;
-    if(!cerca){ ver=obj; pinta(); return; }   // lejos de la vista: se coloca sin animar
-    arranca();
-  }
-  function rehace(){
-    rt=0; mide(); if(!vivo) return;
-    obj=objetivo(); if(!cerca) ver=obj; pinta(); if(ver!==obj) arranca();
-  }
+  function alScroll(){ if(G&&!pend) pend=requestAnimationFrame(pinta); }
+  function rehace(){ rt=0; mide(); act=-1; if(G) pinta(); }
   function pide(){ if(!rt) rt=requestAnimationFrame(rehace); }
+  // Scroll en el que la página k queda a la vista: en "h", con su portada a la izquierda; en "v", bajo la etiqueta.
+  function yDe(k){
+    if(modo==="h") return Math.round(G.top+G.E+Math.min(G.T,Math.max(0,C[k].p0)/R));
+    return Math.round(C[k].top-G.hb-64);
+  }
+  function ve(y){
+    var a=sy(); if(Math.abs(a-y)<2) return;
+    destino=y;
+    if(window.__lenis) window.__lenis.scrollTo(y,{duration:Math.min(1.6,Math.max(.8,Math.abs(a-y)/3200)),onComplete:function(){ destino=null; }});
+    else { window.scrollTo({top:y,behavior:rm.matches?"auto":"smooth"}); setTimeout(function(){ destino=null; },1200); }
+  }
+  // El índice: se abre bajo la etiqueta; Escape o un clic fuera lo cierran; mientras está abierto, el tabulador da la
+  // vuelta entre la etiqueta y sus cuatro filas.
+  function abierto(){ return eti.getAttribute("aria-expanded")==="true"; }
+  function abre(){
+    if(!modo) return;
+    ind.hidden=false; void ind.offsetWidth; ind.classList.add("abierto");
+    eti.setAttribute("aria-expanded","true");
+    var f=filas[act>=0?act:0]; if(f) f.focus({preventScroll:true});
+  }
+  function cierra(devuelve){
+    if(!abierto()) return;
+    ind.classList.remove("abierto"); eti.setAttribute("aria-expanded","false");
+    var fin=function(){ if(!abierto()) ind.hidden=true; };
+    if(rm.matches) fin(); else { ind.addEventListener("transitionend",fin,{once:true}); setTimeout(fin,520); }
+    if(devuelve) eti.focus({preventScroll:true});
+  }
+  eti.addEventListener("click",function(){ if(abierto()) cierra(false); else abre(); });
+  filas.forEach(function(b,i){ b.addEventListener("click",function(){
+    cierra(false); if(!G) return;
+    ve(yDe(i)); if(C[i].go) C[i].go.focus({preventScroll:true});
+  }); });
+  document.addEventListener("keydown",function(e){
+    if(!abierto()) return;
+    if(e.key==="Escape"){ e.preventDefault(); cierra(true); return; }
+    var f=[eti].concat(filas), i=f.indexOf(document.activeElement);
+    if(e.key==="Tab"){ e.preventDefault(); f[i<0?0:(i+(e.shiftKey?-1:1)+f.length)%f.length].focus({preventScroll:true}); }
+    else if(e.key==="ArrowDown"||e.key==="ArrowUp"){ e.preventDefault(); var j=filas.indexOf(document.activeElement);
+      j=j<0?(act>=0?act:0):(j+(e.key==="ArrowDown"?1:-1)+filas.length)%filas.length; filas[j].focus({preventScroll:true}); }
+  });
+  document.addEventListener("pointerdown",function(e){ if(abierto()&&!etiW.contains(e.target)) cierra(false); });
+  // La foto también lleva a su página (con el ratón; con teclado, su enlace).
+  C.forEach(function(c){ if(c.foto&&c.go) c.foto.addEventListener("click",function(){ if(modo) c.go.click(); }); });
+  // Tabulador: el enlace enfocado trae su página a la vista; la etiqueta, el recorrido.
+  sec.addEventListener("focusin",function(e){
+    if(!modo||!G) return;
+    var t=e.target;
+    if(t===eti){
+      if(modo==="h"){ var y=sy()-G.top; if(y<G.E*.7) ve(Math.round(G.top+G.E)); else if(y>G.E+G.T+G.X*.3) ve(Math.round(G.top+G.E+G.T)); }
+      return;
+    }
+    var li=t.closest?t.closest(".ex-cap"):null, k=caps.indexOf(li);
+    if(k<0) return;
+    var r=sec.querySelector(".ex-rail"); if(r){ r.scrollLeft=0; r.scrollTop=0; }
+    var yk=yDe(k); if(destino!=null&&Math.abs(destino-yk)<2) return;
+    ve(yk);
+  });
   if("IntersectionObserver" in window){
+    vio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting&&modo==="v"){ e.target.classList.add("ex-vis"); vio.unobserve(e.target); } }); },{rootMargin:"0px 0px -12% 0px"});
     new IntersectionObserver(function(es){
-      cerca=es[es.length-1].isIntersecting; sec.classList.toggle("ex-cerca",cerca&&vivo);
-      if(cerca&&vivo) carga(); else if(G){ ver=obj; pinta(); }
+      cerca=es[es.length-1].isIntersecting; sec.classList.toggle("ex-cerca",cerca&&modo==="h"); if(cerca&&modo) carga();
     },{rootMargin:"100% 0px 100% 0px"}).observe(sec);
   } else cerca=true;
   addEventListener("scroll",alScroll,{passive:true});
   addEventListener("resize",pide,{passive:true});
   addEventListener("langchange",pide);
-  if(rm.addEventListener) rm.addEventListener("change",pide); else if(rm.addListener) rm.addListener(pide);
+  [rm,mqV].forEach(function(q){ if(q.addEventListener) q.addEventListener("change",pide); else if(q.addListener) q.addListener(pide); });
   // Lo de arriba cambia de alto (el domo se fija en 600vh al arrancar, fuentes, imágenes): se vuelve a medir.
   if("ResizeObserver" in window){ var ro=new ResizeObserver(pide); ro.observe(document.body); ro.observe(sec); }
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(pide);
-  // Tabulador: al enfocar un enlace, su panel viene al centro (la escena no se desplaza por dentro: overflow clip).
-  sec.addEventListener("focusin",function(e){
-    if(!vivo||!G) return;
-    var li=e.target&&e.target.closest?e.target.closest(".ex-item"):null, k=items.indexOf(li);
-    if(k<0) return;
-    esc.scrollLeft=0; esc.scrollTop=0;
-    var y=Math.round(yDe(k)); if(Math.abs((window.scrollY||pageYOffset)-y)<2) return;
-    if(window.__lenis) window.__lenis.scrollTo(y,{duration:.9}); else window.scrollTo({top:y,behavior:"smooth"});
-  });
   rehace();
 })();
 </script>
@@ -1112,11 +1286,11 @@
     "build.p1.t":"Estructura geodésica","build.p1.d":"— barras calculadas por longitud","build.p2.t":"Nodos","build.p2.d":"— hubs de unión","build.p3.t":"Paneles","build.p3.d":"— cerramiento de vidrio","build.p4.t":"Configurador en vivo","build.p4.d":"— 3D en tiempo real, en producción",
     "build.ph1":"Estructura","build.ph2":"Nodos","build.ph3":"Paneles","build.ph4":"Configurador en vivo",
     "build.cfg.diam":"Diámetro","build.cfg.est":"Estructura","build.cfg.madera":"Madera","build.cfg.acero":"Acero","build.cfg.cub":"Cubierta","build.cfg.vidrio":"Vidrio","build.cfg.lona":"Lona","build.cfg.poli":"Policarbonato","build.cfg.pedido":"Hoja de pedido","build.cfg.desp":"Despiece calculado","build.cfg.nbarras":"barras","build.cfg.nnodos":"nodos",
-    "explora.eyebrow":"Explora","explora.title":"En <em>cuatro páginas.</em>",
-    "explora.c1.t":"Trabajo y caso de estudio","explora.c1.p":"DomesLab a fondo, la galería real de la app y una selección de webs y visualizadores 3D.","explora.c1.go":"Ver trabajo","explora.c1.alt":"Mesa de taller vista desde arriba, de noche: planos de un domo sujetos con cinta de carrocero, tres listones con una vuelta de cinta de color en la punta, un conector metálico y un lápiz de carpintero.",
-    "explora.c2.t":"Servicios y proceso","explora.c2.p":"Qué construyo (calculadoras, configuradores, dashboards) y cómo trabajo hasta producción.","explora.c2.go":"Ver servicios","explora.c2.alt":"Balda de una estantería metálica con cuatro maquetas del mismo domo, de menor a mayor: de cartulina, impresa en 3D, de varillas de balsa y un trozo de estructura de pino con su conector.",
-    "explora.c3.t":"Caso técnico: DomesLab","explora.c3.p":"Cómo se construye un configurador 3D de verdad: decisiones, arquitectura y lo que costó dejarlo en producción.","explora.c3.go":"Leer el caso","explora.c3.alt":"Un domo de pino a medio montar en una nave de hormigón, de noche, bajo una lámpara colgada de un cable; en el suelo esperan barras marcadas con cinta de color.",
-    "explora.c4.t":"Contacto","explora.c4.p":"Cuéntame tu idea y te respondo con un plan y un presupuesto orientativo, sin compromiso.","explora.c4.go":"Hablemos","explora.c4.alt":"La nave a la hora azul con el portón medio abierto: dentro, a la luz cálida de una lámpara, se adivina el domo de madera, y detrás quedan las montañas.",
+    "explora.eyebrow":"Explora","explora.title":"En <em>cuatro páginas.</em>","explora.eti":"Índice de las cuatro páginas, ahora en",
+    "explora.c1.n":"Trabajo","explora.c1.t1":"Trabajo","explora.c1.p":"DomesLab a fondo, la galería real de la app y una selección de webs y visualizadores 3D.","explora.c1.go":"Ver trabajo","explora.c1.alt":"Mi mesa de taller de noche, con capturas de proyectos reales impresas y sujetas con cinta: el configurador de DomesLab en el centro, marcado a lápiz rojo; la web de Cupo arriba, Cal Niu abajo a la izquierda y una propuesta para un centro ecuestre a la derecha. Al lado, un conector de domo, un lápiz de carpintero y una taza de café.",
+    "explora.c2.n":"Servicios","explora.c2.t1":"Servicios","explora.c2.p":"Qué construyo (calculadoras, configuradores, dashboards) y cómo trabajo hasta producción.","explora.c2.go":"Ver servicios","explora.c2.alt":"Así hago una herramienta, en la pared del taller: un boceto a lápiz en papel cuadriculado, el esquema en gris, el configurador impreso y la hoja de materiales y presupuesto con el visto bueno, unidos por flechas rojas. Abajo, en el banco, un lápiz, un cúter, cinta de carrocero y una maqueta de domo de varillas.",
+    "explora.c3.n":"Caso DomesLab","explora.c3.t1":"Caso","explora.c3.t2":"DomesLab","explora.c3.p":"Cómo se construye un configurador 3D de verdad: decisiones, arquitectura y lo que costó dejarlo en producción.","explora.c3.go":"Leer el caso","explora.c3.alt":"Un domo de pino a medio montar en una nave de hormigón, de noche, bajo una lámpara colgada de un cable; en el suelo esperan barras marcadas con cinta de color.",
+    "explora.c4.n":"Contacto","explora.c4.t1":"Contacto","explora.c4.p":"Cuéntame tu idea y te respondo con un plan y un presupuesto orientativo, sin compromiso.","explora.c4.go":"Hablemos","explora.c4.x":"Respondo en menos de 48 horas.","explora.c4.alt":"La nave a la hora azul con el portón medio abierto: dentro, a la luz cálida de una lámpara, se adivina el domo de madera, y detrás quedan las montañas.",
     "cta.eyebrow":"Siguiente paso","cta.title":"Construyamos tu <em>herramienta.</em>","cta.lead":"Cuéntame qué necesita tu equipo o tus clientes. En menos de 48 horas te respondo con un diagnóstico, una estimación de alcance y la siguiente decisión.","cta.btn":"Empieza tu proyecto"
    },
    ca:{
@@ -1130,11 +1304,11 @@
     "build.p1.t":"Estructura geodèsica","build.p1.d":"— barres calculades per longitud","build.p2.t":"Nodes","build.p2.d":"— hubs d'unió","build.p3.t":"Panells","build.p3.d":"— tancament de vidre","build.p4.t":"Configurador en directe","build.p4.d":"— 3D en temps real, en producció",
     "build.ph1":"Estructura","build.ph2":"Nodes","build.ph3":"Panells","build.ph4":"Configurador en directe",
     "build.cfg.diam":"Diàmetre","build.cfg.est":"Estructura","build.cfg.madera":"Fusta","build.cfg.acero":"Acer","build.cfg.cub":"Coberta","build.cfg.vidrio":"Vidre","build.cfg.lona":"Lona","build.cfg.poli":"Policarbonat","build.cfg.pedido":"Full de comanda","build.cfg.desp":"Especejament calculat","build.cfg.nbarras":"barres","build.cfg.nnodos":"nodes",
-    "explora.eyebrow":"Explora","explora.title":"En <em>quatre pàgines.</em>",
-    "explora.c1.t":"Feina i cas d'estudi","explora.c1.p":"DomesLab a fons, la galeria real de l'app i una selecció de webs i visualitzadors 3D.","explora.c1.go":"Veure la feina","explora.c1.alt":"Taula de taller vista des de dalt, de nit: plànols d'una cúpula subjectes amb cinta de paper, tres llistons amb una volta de cinta de color a la punta, un connector metàl·lic i un llapis de fuster.",
-    "explora.c2.t":"Serveis i procés","explora.c2.p":"Què construeixo (calculadores, configuradors, dashboards) i com treballo fins a producció.","explora.c2.go":"Veure serveis","explora.c2.alt":"Prestatge d'una estanteria metàl·lica amb quatre maquetes de la mateixa cúpula, de petita a gran: de cartolina, impresa en 3D, de varetes de balsa i un tros d'estructura de pi amb el seu connector.",
-    "explora.c3.t":"Cas tècnic: DomesLab","explora.c3.p":"Com es construeix un configurador 3D de debò: decisions, arquitectura i què va costar deixar-ho en producció.","explora.c3.go":"Llegir el cas","explora.c3.alt":"Una cúpula de pi a mig muntar en una nau de formigó, de nit, sota un llum penjat d'un cable; a terra esperen barres marcades amb cinta de color.",
-    "explora.c4.t":"Contacte","explora.c4.p":"Explica'm la teva idea i et responc amb un pla i un pressupost orientatiu, sense compromís.","explora.c4.go":"Parlem-ne","explora.c4.alt":"La nau a l'hora blava amb el portal mig obert: a dins, a la llum càlida d'un llum, s'endevina la cúpula de fusta, i al darrere queden les muntanyes.",
+    "explora.eyebrow":"Explora","explora.title":"En <em>quatre pàgines.</em>","explora.eti":"Índex de les quatre pàgines, ara a",
+    "explora.c1.n":"Feina","explora.c1.t1":"Feina","explora.c1.p":"DomesLab a fons, la galeria real de l'app i una selecció de webs i visualitzadors 3D.","explora.c1.go":"Veure la feina","explora.c1.alt":"La meva taula de taller de nit, amb captures de projectes reals impreses i subjectes amb cinta: el configurador de DomesLab al centre, marcat amb llapis vermell; la web de Cupo a dalt, Cal Niu a baix a l'esquerra i una proposta per a un centre eqüestre a la dreta. Al costat, un connector de cúpula, un llapis de fuster i una tassa de cafè.",
+    "explora.c2.n":"Serveis","explora.c2.t1":"Serveis","explora.c2.p":"Què construeixo (calculadores, configuradors, dashboards) i com treballo fins a producció.","explora.c2.go":"Veure serveis","explora.c2.alt":"Així faig una eina, a la paret del taller: un esbós a llapis en paper quadriculat, l'esquema en gris, el configurador imprès i el full de materials i pressupost amb el vistiplau, units per fletxes vermelles. A baix, al banc, un llapis, un cúter, cinta de paper i una maqueta de cúpula de varetes.",
+    "explora.c3.n":"Cas DomesLab","explora.c3.t1":"Cas","explora.c3.t2":"DomesLab","explora.c3.p":"Com es construeix un configurador 3D de debò: decisions, arquitectura i què va costar deixar-ho en producció.","explora.c3.go":"Llegir el cas","explora.c3.alt":"Una cúpula de pi a mig muntar en una nau de formigó, de nit, sota un llum penjat d'un cable; a terra esperen barres marcades amb cinta de color.",
+    "explora.c4.n":"Contacte","explora.c4.t1":"Contacte","explora.c4.p":"Explica'm la teva idea i et responc amb un pla i un pressupost orientatiu, sense compromís.","explora.c4.go":"Parlem-ne","explora.c4.x":"Responc en menys de 48 hores.","explora.c4.alt":"La nau a l'hora blava amb el portal mig obert: a dins, a la llum càlida d'un llum, s'endevina la cúpula de fusta, i al darrere queden les muntanyes.",
     "cta.eyebrow":"Següent pas","cta.title":"Construïm la teva <em>eina.</em>","cta.lead":"Explica'm què necessita el teu equip o els teus clients. En menys de 48 hores et responc amb un diagnòstic, una estimació d'abast i la següent decisió.","cta.btn":"Comença el teu projecte"
    },
    en:{
@@ -1148,11 +1322,11 @@
     "build.p1.t":"Geodesic structure","build.p1.d":"— struts sized by length","build.p2.t":"Nodes","build.p2.d":"— connection hubs","build.p3.t":"Panels","build.p3.d":"— glass cladding","build.p4.t":"Live configurator","build.p4.d":"— real-time 3D, in production",
     "build.ph1":"Structure","build.ph2":"Nodes","build.ph3":"Panels","build.ph4":"Live configurator",
     "build.cfg.diam":"Diameter","build.cfg.est":"Frame","build.cfg.madera":"Timber","build.cfg.acero":"Steel","build.cfg.cub":"Cover","build.cfg.vidrio":"Glass","build.cfg.lona":"Canvas","build.cfg.poli":"Polycarbonate","build.cfg.pedido":"Order form","build.cfg.desp":"Calculated cut list","build.cfg.nbarras":"struts","build.cfg.nnodos":"nodes",
-    "explora.eyebrow":"Explore","explora.title":"In <em>four pages.</em>",
-    "explora.c1.t":"Work and case study","explora.c1.p":"DomesLab in depth, the app's real gallery and a selection of websites and 3D viewers.","explora.c1.go":"See work","explora.c1.alt":"A workshop table seen from above at night: dome drawings held down with masking tape, three battens with a band of coloured tape at the tip, a metal connector and a carpenter's pencil.",
-    "explora.c2.t":"Services and process","explora.c2.p":"What I build (calculators, configurators, dashboards) and how I work all the way to production.","explora.c2.go":"See services","explora.c2.alt":"A metal shelf holding four models of the same dome, smallest to largest: card, 3D printed, balsa sticks, and a piece of real pine frame with its connector.",
-    "explora.c3.t":"Case study: DomesLab","explora.c3.p":"How a real 3D configurator gets built: decisions, architecture and what it took to ship it to production.","explora.c3.go":"Read the case study","explora.c3.alt":"A pine dome half built inside a concrete shed at night, under a lamp hanging from a cable; struts marked with coloured tape wait on the floor.",
-    "explora.c4.t":"Contact","explora.c4.p":"Tell me your idea and I'll reply with a plan and a ballpark quote, no strings attached.","explora.c4.go":"Let's talk","explora.c4.alt":"The shed at blue hour with the door half open: inside, in the warm lamplight, you can make out the timber dome, with the mountains behind.",
+    "explora.eyebrow":"Explore","explora.title":"In <em>four pages.</em>","explora.eti":"Index of the four pages, now on",
+    "explora.c1.n":"Work","explora.c1.t1":"Work","explora.c1.p":"DomesLab in depth, the app's real gallery and a selection of websites and 3D viewers.","explora.c1.go":"See work","explora.c1.alt":"My workshop table at night, with screenshots of real projects printed out and taped down: the DomesLab configurator in the middle, marked in red pencil; the Cupo website at the top, Cal Niu bottom left and a proposal for a riding centre on the right. Beside them, a dome connector, a carpenter's pencil and a coffee mug.",
+    "explora.c2.n":"Services","explora.c2.t1":"Services","explora.c2.p":"What I build (calculators, configurators, dashboards) and how I work all the way to production.","explora.c2.go":"See services","explora.c2.alt":"How I build a tool, on the workshop wall: a pencil sketch on grid paper, the grey wireframe, the printed configurator and the materials and budget sheet with a tick, linked by red arrows. Below, on the bench, a pencil, a utility knife, masking tape and a small stick model of a dome.",
+    "explora.c3.n":"DomesLab case","explora.c3.t1":"DomesLab","explora.c3.t2":"case study","explora.c3.p":"How a real 3D configurator gets built: decisions, architecture and what it took to ship it to production.","explora.c3.go":"Read the case study","explora.c3.alt":"A pine dome half built inside a concrete shed at night, under a lamp hanging from a cable; struts marked with coloured tape wait on the floor.",
+    "explora.c4.n":"Contact","explora.c4.t1":"Contact","explora.c4.p":"Tell me your idea and I'll reply with a plan and a ballpark quote, no strings attached.","explora.c4.go":"Let's talk","explora.c4.x":"I reply in under 48 hours.","explora.c4.alt":"The shed at blue hour with the door half open: inside, in the warm lamplight, you can make out the timber dome, with the mountains behind.",
     "cta.eyebrow":"Next step","cta.title":"Let's build your <em>tool.</em>","cta.lead":"Tell me what your team or your clients need. In under 48 hours I'll reply with a diagnosis, a scope estimate and the next decision.","cta.btn":"Start your project"
    }
   };
