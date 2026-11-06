@@ -1111,10 +1111,62 @@
     const hubMat=new THREE.MeshStandardMaterial({color:0xf2ead8,emissive:0xe6a92e,emissiveIntensity:0.0,metalness:0.6,roughness:0.3});
     const hubs=new THREE.InstancedMesh(new THREE.SphereGeometry(0.06,16,16),hubMat,hubKeep.length);
     hubKeep.forEach((v,i)=>{tmp.position.copy(v);tmp.scale.set(1,1,1);tmp.quaternion.identity();tmp.updateMatrix();hubs.setMatrixAt(i,tmp.matrix);}); hubs.count=0; g.add(hubs);
+    // PAN · Cerramiento de vidrio, panel a panel. Cada cara de pg es un panel que llega desde fuera, de uno en uno. La malla
+    // de siempre (pg con pm) pinta los puestos y los huecos con un estado por cara (aPan): 1 puesto, igual que antes; 0 hueco,
+    // con alfa 0 pero escribiendo profundidad como el material a opacidad 0 de antes (así el fantasma de las fases 01-02 se
+    // ve igual); -1 en vuelo, que aquí se descarta porque lo pinta panVuelo. Con todos puestos, la malla es la de antes.
     const pos=[]; for(const t of dTris)for(const idx of t){const v=verts[idx];pos.push(v.x,v.y,v.z);}
     const pg=new THREE.BufferGeometry(); pg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); pg.computeVertexNormals();
-    const pm=new THREE.MeshStandardMaterial({color:0xe6a92e,metalness:0.15,roughness:0.4,transparent:true,opacity:0,side:THREE.DoubleSide});
+    const NP=dTris.length, panEst=new Float32Array(NP*3), panSt=new Int8Array(NP);
+    pg.setAttribute('aPan',new THREE.BufferAttribute(panEst,1));
+    const pm=new THREE.MeshStandardMaterial({color:0xe6a92e,metalness:0.15,roughness:0.4,transparent:true,opacity:.42,side:THREE.DoubleSide});
+    pm.onBeforeCompile=sh=>{
+      sh.vertexShader=sh.vertexShader.replace("void main() {","attribute float aPan;\nvarying float vPan;\nvoid main() {\n\tvPan = aPan;");
+      sh.fragmentShader=sh.fragmentShader.replace("void main() {","varying float vPan;\nvoid main() {\n\tif ( vPan < -0.5 ) discard;")
+        .replace("#include <alphamap_fragment>","#include <alphamap_fragment>\n\tdiffuseColor.a *= step( 0.5, vPan );"); };
     g.add(new THREE.Mesh(pg,pm));
+    // PAN · Los paneles en vuelo: un triángulo de referencia (1,0,0) (0,1,0) (0,0,0) con normal +z que la matriz de cada
+    // instancia lleva a su cara (columnas a-c, b-c, la normal de pg y el vértice c) y después gira y aparta. Se pintan antes
+    // que la malla y sin escribir profundidad: el que viene por detrás se ve a través del vidrio puesto y el que viene por
+    // delante no le abre huecos. aVis lo enciende al salir, para que no aparezca de golpe.
+    const triG=new THREE.BufferGeometry();
+    triG.setAttribute('position',new THREE.Float32BufferAttribute([1,0,0,0,1,0,0,0,0],3));
+    triG.setAttribute('normal',new THREE.Float32BufferAttribute([0,0,1,0,0,1,0,0,1],3));
+    const panVis=new THREE.InstancedBufferAttribute(new Float32Array(NP),1); triG.setAttribute('aVis',panVis);
+    // Sin escribir profundidad no hace falta pintar en dos pasadas (atrás y delante): una sola, que ahorra a three
+    // reevaluar el programa dos veces por fotograma. Las claves cortas de programa, por lo mismo.
+    pm.customProgramCacheKey=()=>"panMalla";
+    const pmV=pm.clone(); pmV.depthWrite=false; pmV.forceSinglePass=true; pmV.customProgramCacheKey=()=>"panVuelo";
+    pmV.onBeforeCompile=sh=>{
+      sh.vertexShader=sh.vertexShader.replace("void main() {","attribute float aVis;\nvarying float vVis;\nvoid main() {\n\tvVis = aVis;");
+      sh.fragmentShader=sh.fragmentShader.replace("void main() {","varying float vVis;\nvoid main() {")
+        .replace("#include <alphamap_fragment>","#include <alphamap_fragment>\n\tdiffuseColor.a *= vVis;"); };
+    const panVuelo=new THREE.InstancedMesh(triG,pmV,NP); panVuelo.count=0; panVuelo.frustumCulled=false; panVuelo.renderOrder=-1; g.add(panVuelo);
+    // PAN · Plan de vuelo de cada panel, de una semilla fija (mulberry32): lo mismo bajando, subiendo o recargando. Sale en
+    // una dirección hacia fuera con dispersión (no radial, y como mucho un poco por debajo de la horizontal), a una distancia y con un giro
+    // de partida (eje y ángulo) aleatorios; vuelve por una curva que acaba entrando por la normal de su hueco. El orden es
+    // aleatorio y los huecos entre salidas, irregulares: muy espaciados en los primeros, para que se vea que llegan de uno
+    // en uno, más seguidos en medio y otra vez sueltos los últimos. Todos puestos en PAN_P1, antes de que el HUD pase a
+    // la 04 (.51); el primero sale en PAN_P0, recién entrada la 03 (.34), mientras aún se ponen los últimos nodos.
+    const PAN_P0=.342, PAN_P1=.5;
+    const panRnd=(s=>()=>{ s=s+0x6D2B79F5|0; let t=Math.imul(s^s>>>15,1|s); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; })(20261106);
+    const panUnit=v=>{ const z=2*panRnd()-1, a=2*Math.PI*panRnd(), r=Math.sqrt(1-z*z); return v.set(r*Math.cos(a),z,r*Math.sin(a)); };
+    const domoC=new THREE.Vector3(0,-minY,0), panU=new THREE.Vector3();
+    const pan=dTris.map(t=>{
+      const a=verts[t[0]], b=verts[t[1]], c=verts[t[2]], F=a.clone().add(b).add(c).multiplyScalar(1/3);
+      const n=c.clone().sub(b).cross(a.clone().sub(b)).normalize();
+      const L=new THREE.Matrix4().makeBasis(a.clone().sub(c),b.clone().sub(c),n).setPosition(c.clone().sub(F));
+      const out=F.clone().sub(domoC).normalize();
+      let d=null; for(let k=0;k<8&&!d;k++){ const v=out.clone().add(panUnit(panU).multiplyScalar(.85)).normalize(); if(v.dot(out)>.45&&v.y>-.2) d=v; }
+      if(!d){ d=out.clone(); d.y=Math.max(d.y,-.2); d.normalize(); }
+      const dist=R*(.95+1.05*panRnd());
+      return {F, L, S:F.clone().addScaledVector(d,dist), C:F.clone().addScaledVector(out.clone().add(panUnit(panU).multiplyScalar(.3)).normalize(),dist*.42),
+        eje:panUnit(new THREE.Vector3()), giro:(1.2+1.6*panRnd())*(panRnd()<.5?-1:1), t0:0, dur:.02+.012*panRnd()};
+    });
+    { const orden=pan.map((_,i)=>i); for(let i=NP-1;i>0;i--){ const j=Math.floor(panRnd()*(i+1)); [orden[i],orden[j]]=[orden[j],orden[i]]; }
+      const dmax=Math.max(...pan.map(z=>z.dur)); let acc=0;
+      const hito=orden.map((_,k)=>k?(acc+=(.45+1.1*panRnd())*(1+6*Math.exp(-k/3)+2.5*Math.exp(-(NP-1-k)/1.5))):0);
+      orden.forEach((i,k)=>{ pan[i].t0=PAN_P0+hito[k]/acc*(PAN_P1-dmax-PAN_P0); }); }
     // R2 · Domo en fantasma: todas las barras como líneas finas desde p=0, para que la tarjeta nunca sea un bloque liso.
     const gpos=[]; dEdges.forEach(e=>{const a=verts[e[0]],b=verts[e[1]];gpos.push(a.x,a.y,a.z,b.x,b.y,b.z);});
     const gg=new THREE.BufferGeometry(); gg.setAttribute('position',new THREE.Float32BufferAttribute(gpos,3));
@@ -1139,7 +1191,7 @@
     // Línea de tiempo de la 04: la cámara se aparta de .495 a .55 (justo antes de la fase y a la vez que llega el primer
     // papel) · el giro frena y el domo queda quieto en .575 · seis entradas que arrancan en CFG_T0, a saltos irregulares
     // pero fijos (atados al scroll), cada una con su duración · la última asentada en CFG_FIN (.905): todo quieto el
-    // último 9,5 % antes de soltar el pin. Paneles completos en .578, como antes.
+    // último 9,5 % antes de soltar el pin. Los paneles ya están todos puestos en .50 (PAN_P1), antes de la 04.
     const Q_END=.68, CFG_T0=[.516,.574,.65,.706,.768,.823], CFG_DUR=[.07,.085,.062,.07,.06,.082],
       CFG_S=CFG_T0[0], CFG_FIN=Math.max(...CFG_T0.map((t,k)=>t+CFG_DUR[k])), CFG_PULL0=.495, CFG_PULL1=.55, CFG_QUIETO=.575;
     function updatePhases(p){
@@ -1577,13 +1629,39 @@
       }
     }
 
+    // PAN · Cada panel tiene su t local s (0 hueco, 1 puesto). En vuelo: posición por la curva S-C-F con frenada (sale a
+    // velocidad 2 y llega a 0) y, hacia s=.83, se pasa un pelo hacia dentro (1,3 % del avance) y vuelve: el asentamiento al
+    // encajar. El giro de partida se deshace igual, con un rebote de un 2 %. Se enciende en el primer 18 % del vuelo. Solo
+    // se recalcula cuando cambia pShown dentro del tramo; los estados por cara (aPan) se suben solo cuando alguno cambia.
+    // Nada de geometría nueva por fotograma.
+    const panLlega=(s,a)=>{ const r=1-s; return 1-r*r+a*s*s*s*r*r; };
+    const panQ=new THREE.Quaternion(), panM=new THREE.Matrix4();
+    let panUlt=-1;
+    function panPinta(p){
+      const pc=clamp(p,PAN_P0-.001,PAN_P1+.001); if(pc===panUlt) return; panUlt=pc;
+      const arr=panVuelo.instanceMatrix.array, vis=panVis.array; let nv=0, cambia=false;
+      for(let i=0;i<NP;i++){
+        const z=pan[i], s=map(pc,z.t0,z.t0+z.dur), st=s<=0?0:s>=1?1:-1;
+        if(st!==panSt[i]){ panSt[i]=st; panEst[3*i]=panEst[3*i+1]=panEst[3*i+2]=st; cambia=true; }
+        if(st>=0) continue;
+        const e=panLlega(s,2.6), u=1-e, el=panM.elements;
+        panQ.setFromAxisAngle(z.eje,z.giro*(1-panLlega(s,3.2)));
+        panM.makeRotationFromQuaternion(panQ).multiply(z.L);
+        el[12]+=u*u*z.S.x+2*u*e*z.C.x+e*e*z.F.x; el[13]+=u*u*z.S.y+2*u*e*z.C.y+e*e*z.F.y; el[14]+=u*u*z.S.z+2*u*e*z.C.z+e*e*z.F.z;
+        panM.toArray(arr,nv*16); vis[nv]=suave(map(s,0,.18)); nv++;
+      }
+      if(cambia) pg.attributes.aPan.needsUpdate=true;
+      panVuelo.count=nv; if(nv){ panVuelo.instanceMatrix.needsUpdate=true; panVis.needsUpdate=true; }
+    }
+
     function paint(p){
       const q=Math.min(1,p/Q_END);
       bars.count=Math.max(0,Math.floor(map(q,.05,.55)*dEdges.length));
       hubs.count=Math.max(0,Math.floor(map(q,.12,.6)*hubKeep.length));
       hubMat.emissiveIntensity=0.22+0.16*(0.5+0.5*Math.sin(clock*0.006));
       const vidrio=cfgReacciona(p);
-      pm.opacity=map(q,.6,.85)*0.42*(1-.2*vidrio);
+      pm.opacity=0.42*(1-.2*vidrio); panPinta(p);
+      pmV.opacity=pm.opacity; pmV.color.copy(pm.color); pmV.roughness=pm.roughness; pmV.metalness=pm.metalness;
       ghostMat.opacity=0.05+0.17*(1-map(q,.3,.6));
       // CFG · En la 04 el giro frena y el domo queda quieto en CFG_QUIETO (giroY), antes de que salgan las llamadas.
       g.rotation.y=giroY(p);
