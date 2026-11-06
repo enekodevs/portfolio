@@ -366,10 +366,12 @@
   .cfg-tit{display:flex;align-items:baseline;gap:8px;font-size:1rem;font-weight:800;letter-spacing:-.012em}
   .cfg-ref{font-weight:500;color:var(--cfg-tinta-2);font-variant-numeric:tabular-nums;letter-spacing:0}
   .cfg-tit .cfg-ref{font-size:.82rem}
-  .cfg-ops{display:flex;flex-wrap:wrap;column-gap:18px;row-gap:5px;margin-top:9px;font-size:.92rem;color:var(--cfg-tinta-2)}
+  .cfg-ops{display:flex;flex-wrap:wrap;column-gap:20px;row-gap:7px;margin-top:9px;font-size:.92rem;color:var(--cfg-tinta-2)}
   .cfg-ops>span{white-space:nowrap}
   .cfg-sel{position:relative;color:var(--cfg-tinta);font-weight:600}
-  .cfg-boli{position:absolute;left:-10px;top:-7px;width:calc(100% + 20px);height:calc(100% + 14px);overflow:visible}
+  /* El óvalo sale 8 px por los lados y 5 por arriba y abajo; con el trazo que se pasa de largo, el column-gap de cada ancho
+     deja al menos 4 px de aire hasta la opción vecina, el título y el canto del papel. */
+  .cfg-boli{position:absolute;left:-8px;top:-5px;width:calc(100% + 16px);height:calc(100% + 10px);overflow:visible}
   .cfg-boli path{fill:none;stroke:var(--cfg-boli);stroke-width:1.45;stroke-opacity:.9;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 1;stroke-dashoffset:1}
   /* Cinta de carrocero: rasgada por los dos cabos, con su giro (--r) y su sitio en cada papel; el JS la estira (scaleX). */
   .cfg-cinta{position:absolute;top:-8px;left:22px;width:58px;height:17px;transform:rotate(var(--r,-4deg))}
@@ -391,9 +393,9 @@
   .cfg-tira{grid-area:tira;width:30px;height:15px;transform:rotate(var(--r,-2deg))}
   .cfg-tira i{display:grid;place-items:center;background:var(--c)}
   .cfg-tira b{font-size:.66rem;font-weight:800;color:var(--cfg-tinta)}
-  .cfg-mm{grid-area:mm;white-space:nowrap;font-variant-numeric:tabular-nums}
-  .cfg-mm b{font-size:1.4rem;font-weight:800;letter-spacing:-.01em}
-  .cfg-mm small{font-size:.76rem;font-weight:500;margin-left:4px}
+  .cfg-mm{grid-area:mm;white-space:nowrap;font-variant-numeric:tabular-nums;font-size:1.4rem}
+  .cfg-mm b{font-weight:650;letter-spacing:-.01em}
+  .cfg-mm small{font-size:.8em;font-weight:500;margin-left:.16em}
   .cfg-ud{grid-area:ud;justify-self:end;white-space:nowrap;font-size:.95rem;font-weight:600;font-variant-numeric:tabular-nums}
   .cfg-barra{grid-area:barra;height:6px}
   .cfg-barra i{position:relative;display:block;width:var(--l,100%);height:100%;box-shadow:inset 0 0 0 .75px var(--cfg-tinta);transform:scaleX(0);transform-origin:0 50%;will-change:transform}
@@ -406,22 +408,28 @@
      entre las dos, gane ancho (cfgEncaja); los papeles algo más justos. */
   @media(min-width:1100px) and (max-width:1299px){
     .cfg{--cfg-w:clamp(214px,19vw,252px)}
-    .cfg-recorte{padding:12px 14px 13px}.cfg-ops{column-gap:14px;font-size:.86rem}
+    .cfg-recorte{padding:12px 14px 13px}.cfg-ops{column-gap:20px;font-size:.86rem}
     .cfg-hoja .cfg-papel{padding:13px 14px 13px}
-    .cfg-ren{grid-template-columns:10px 26px 1fr auto;column-gap:8px}.cfg-tira{width:26px}.cfg-mm b{font-size:1.24rem}.cfg-ud{font-size:.88rem}
+    .cfg-ren{grid-template-columns:10px 26px 1fr auto;column-gap:8px}.cfg-tira{width:26px}.cfg-mm{font-size:1.24rem}.cfg-ud{font-size:.88rem}
+    /* el título de la hoja en una sola línea: crece con el ancho de la columna (19vw) y cabe también en catalán */
+    .cfg-hoja .cfg-tit{white-space:nowrap;gap:8px;font-size:clamp(.78rem,1.15vw,.94rem)}.cfg-hoja .cfg-diam{font-size:.9em}
+  }
+  /* CFG · De 1024 a 1099 px en apaisado (columnas de 236 px): el mismo título en una línea. */
+  @media (1024px <= width < 1100px) and (orientation: landscape){
+    .cfg-hoja .cfg-tit{white-space:nowrap;gap:8px;font-size:.88rem}.cfg-hoja .cfg-diam{font-size:.9em}
   }
   /* CFG · Las llamadas hasta el domo, solo en escritorio ancho. */
   @media(max-width:1099.98px){
     .cfg{--cfg-w:clamp(196px,23vw,236px)}
     .cfg-guias{display:none}
-    .cfg-recorte{padding:11px 13px 12px}.cfg-ops{column-gap:13px;font-size:.84rem;margin-top:7px}
+    .cfg-recorte{padding:11px 14px 12px}.cfg-ops{column-gap:19px;font-size:.84rem;margin-top:8px}
     .cfg-hoja .cfg-papel{padding:12px 13px 12px}
-    .cfg-ren{grid-template-columns:10px 26px 1fr auto;column-gap:8px}.cfg-tira{width:26px}.cfg-mm b{font-size:1.2rem}.cfg-ud{font-size:.86rem}
+    .cfg-ren{grid-template-columns:10px 26px 1fr auto;column-gap:8px}.cfg-tira{width:26px}.cfg-mm{font-size:1.2rem}.cfg-ud{font-size:.86rem}
   }
   /* CFG · Pantallas bajas (portátil apaisado, tableta tumbada): papeles compactos para que quepan los cuatro. */
   @media(min-width:760.02px) and (max-height:720px){
     .cfg-col{gap:12px}
-    .cfg-recorte{padding:9px 13px 10px}.cfg-cab{padding-bottom:5px;margin-bottom:6px}.cfg-ops{margin-top:6px}
+    .cfg-recorte{padding:9px 13px 10px}.cfg-cab{padding-bottom:5px;margin-bottom:6px}.cfg-ops{margin-top:8px}
     .cfg-hoja .cfg-papel{padding:11px 13px 10px}.cfg-lista{margin-top:8px;padding-top:8px;gap:6px}.cfg-total{margin-top:8px;padding-top:7px}
   }
   /* CFG · Móvil: nada encima del domo por los lados. Los tres recortes en una fila arriba (bajo la cabecera) y la hoja
@@ -435,8 +443,8 @@
     .cfg-cab,.cfg-ref{display:none}
     .cfg-recorte{padding:8px 9px 9px}
     .cfg-tit{font-size:.76rem}
-    .cfg-ops{column-gap:9px;row-gap:2px;margin-top:4px;font-size:.74rem}
-    .cfg-boli{left:-6px;top:-4px;width:calc(100% + 12px);height:calc(100% + 8px)}
+    .cfg-ops{column-gap:13px;row-gap:6px;margin-top:6px;font-size:.74rem}
+    .cfg-boli{left:-4px;top:-3px;width:calc(100% + 8px);height:calc(100% + 6px)}
     .cfg-cinta,.cfg-pz[data-k="2"] .cfg-cinta,.cfg-pz[data-k="4"] .cfg-cinta{left:calc(50% - 20px);right:auto;top:-7px;width:40px;height:14px}
     .cfg-pz[data-k="2"] .cfg-cinta{--r:5deg}.cfg-pz[data-k="4"] .cfg-cinta{--r:-3deg}
     .cfg-hoja .cfg-cinta{left:calc(50% - 30px);width:60px}
@@ -445,7 +453,7 @@
     .cfg-lista{grid-template-columns:repeat(3,1fr);gap:8px;margin-top:7px;padding-top:7px}
     .cfg-ren{grid-template-columns:22px 1fr;grid-template-areas:"tira mm" ". ud" "barra barra";column-gap:6px;row-gap:1px}
     .cfg-tira{width:22px;height:12px}.cfg-tira b{font-size:.56rem}
-    .cfg-mm b{font-size:1.02rem}.cfg-mm small{font-size:.66rem;margin-left:2px}
+    .cfg-mm{font-size:1.02rem}
     .cfg-ud{justify-self:start;font-size:.74rem}
     .cfg-barra{height:5px;margin-top:4px}.cfg-barra i::before,.cfg-barra i::after{width:6px}
     .cfg-total{margin-top:7px;padding-top:6px;font-size:.7rem}.cfg-total b{font-size:.84rem;margin-right:3px}
@@ -462,7 +470,7 @@
     .cfg-cab,.cfg-ref{display:none}
     .cfg-recorte{padding:clamp(11px,1.5vw,16px) clamp(13px,1.8vw,20px) clamp(12px,1.6vw,18px)}
     .cfg-tit{font-size:clamp(.9rem,1.7vw,1.14rem)}
-    .cfg-ops{column-gap:clamp(12px,1.8vw,20px);margin-top:clamp(6px,.9vw,10px);font-size:clamp(.84rem,1.55vw,1.06rem)}
+    .cfg-ops{column-gap:clamp(19px,2.5vw,24px);margin-top:clamp(8px,1vw,11px);font-size:clamp(.84rem,1.55vw,1.06rem)}
     .cfg-cinta,.cfg-pz[data-k="2"] .cfg-cinta,.cfg-pz[data-k="4"] .cfg-cinta{right:auto;top:-8px;width:clamp(50px,6.5vw,70px)}
     .cfg-pz[data-k="2"] .cfg-cinta{left:62%;--r:4deg}.cfg-pz[data-k="4"] .cfg-cinta{left:14%;--r:-3deg}
     /* la hoja, más baja que en el móvil para que el domo gane alto: el total sube a la línea del título */
@@ -474,7 +482,7 @@
     .cfg-ren{grid-template-columns:clamp(24px,3vw,32px) auto 1fr;grid-template-areas:"tira mm ud" "barra barra barra";column-gap:clamp(7px,1vw,11px)}
     .cfg-tira{width:clamp(24px,3vw,32px);height:clamp(13px,1.6vw,17px)}
     .cfg-barra{height:clamp(5px,.7vw,7px)}
-    .cfg-mm b{font-size:clamp(1.12rem,2.5vw,1.7rem)}.cfg-mm small{font-size:clamp(.7rem,1.2vw,.84rem)}
+    .cfg-mm{font-size:clamp(1.12rem,2.5vw,1.7rem)}
     .cfg-ud{font-size:clamp(.82rem,1.5vw,1.02rem)}
     .cfg-total{font-size:clamp(.78rem,1.4vw,.94rem)}.cfg-total b{font-size:clamp(.96rem,1.8vw,1.2rem)}
   }
@@ -877,10 +885,10 @@
     </div>
   </div>
   <div class="fall-phases">
-    <div><span>01</span><b data-i18n="build.p1.t">Geodesic structure</b> <span data-i18n="build.p1.d">— struts sized by length</span></div>
-    <div><span>02</span><b data-i18n="build.p2.t">Nodes</b> <span data-i18n="build.p2.d">— connection hubs</span></div>
-    <div><span>03</span><b data-i18n="build.p3.t">Panels</b> <span data-i18n="build.p3.d">— glass cladding</span></div>
-    <div><span>04</span><b data-i18n="build.p4.t">Live configurator</b> <span data-i18n="build.p4.d">— real-time 3D, in production</span></div>
+    <div><span>01</span><b data-i18n="build.p1.t">Geodesic structure</b> <span data-i18n="build.p1.d">(struts sized by length)</span></div>
+    <div><span>02</span><b data-i18n="build.p2.t">Nodes</b> <span data-i18n="build.p2.d">(connection hubs)</span></div>
+    <div><span>03</span><b data-i18n="build.p3.t">Panels</b> <span data-i18n="build.p3.d">(glass cladding)</span></div>
+    <div><span>04</span><b data-i18n="build.p4.t">Live configurator</b> <span data-i18n="build.p4.d">(real-time 3D, in production)</span></div>
   </div>
 </section>
 
@@ -1283,7 +1291,7 @@
     "hero.lead":"Calculadoras, configuradores y 3D a medida. En <b>producción</b>, no en demo.",
     "hero.cta1":"Cuéntame tu problema","hero.cta2":"Ver DomesLab en vivo",
     "build.tag":"Caso de estudio · DomesLab","build.title":"Calculado<br>barra a barra.","build.phase":"Fase",
-    "build.p1.t":"Estructura geodésica","build.p1.d":"— barras calculadas por longitud","build.p2.t":"Nodos","build.p2.d":"— hubs de unión","build.p3.t":"Paneles","build.p3.d":"— cerramiento de vidrio","build.p4.t":"Configurador en vivo","build.p4.d":"— 3D en tiempo real, en producción",
+    "build.p1.t":"Estructura geodésica","build.p1.d":"(barras calculadas por longitud)","build.p2.t":"Nodos","build.p2.d":"(hubs de unión)","build.p3.t":"Paneles","build.p3.d":"(cerramiento de vidrio)","build.p4.t":"Configurador en vivo","build.p4.d":"(3D en tiempo real, en producción)",
     "build.ph1":"Estructura","build.ph2":"Nodos","build.ph3":"Paneles","build.ph4":"Configurador en vivo",
     "build.cfg.diam":"Diámetro","build.cfg.est":"Estructura","build.cfg.madera":"Madera","build.cfg.acero":"Acero","build.cfg.cub":"Cubierta","build.cfg.vidrio":"Vidrio","build.cfg.lona":"Lona","build.cfg.poli":"Policarbonato","build.cfg.pedido":"Hoja de pedido","build.cfg.desp":"Despiece calculado","build.cfg.nbarras":"barras","build.cfg.nnodos":"nodos",
     "explora.eyebrow":"Explora","explora.title":"En <em>cuatro páginas.</em>","explora.eti":"Índice de las cuatro páginas, ahora en",
@@ -1301,7 +1309,7 @@
     "hero.lead":"Calculadores, configuradors i 3D a mida. En <b>producció</b>, no en demo.",
     "hero.cta1":"Explica'm el teu problema","hero.cta2":"Veure DomesLab en directe",
     "build.tag":"Cas d'estudi · DomesLab","build.title":"Calculat<br>barra a barra.","build.phase":"Fase",
-    "build.p1.t":"Estructura geodèsica","build.p1.d":"— barres calculades per longitud","build.p2.t":"Nodes","build.p2.d":"— hubs d'unió","build.p3.t":"Panells","build.p3.d":"— tancament de vidre","build.p4.t":"Configurador en directe","build.p4.d":"— 3D en temps real, en producció",
+    "build.p1.t":"Estructura geodèsica","build.p1.d":"(barres calculades per longitud)","build.p2.t":"Nodes","build.p2.d":"(hubs d'unió)","build.p3.t":"Panells","build.p3.d":"(tancament de vidre)","build.p4.t":"Configurador en directe","build.p4.d":"(3D en temps real, en producció)",
     "build.ph1":"Estructura","build.ph2":"Nodes","build.ph3":"Panells","build.ph4":"Configurador en directe",
     "build.cfg.diam":"Diàmetre","build.cfg.est":"Estructura","build.cfg.madera":"Fusta","build.cfg.acero":"Acer","build.cfg.cub":"Coberta","build.cfg.vidrio":"Vidre","build.cfg.lona":"Lona","build.cfg.poli":"Policarbonat","build.cfg.pedido":"Full de comanda","build.cfg.desp":"Especejament calculat","build.cfg.nbarras":"barres","build.cfg.nnodos":"nodes",
     "explora.eyebrow":"Explora","explora.title":"En <em>quatre pàgines.</em>","explora.eti":"Índex de les quatre pàgines, ara a",
@@ -1319,7 +1327,7 @@
     "hero.lead":"Custom calculators, configurators and 3D. Shipped <b>to production</b>, not to a demo.",
     "hero.cta1":"Tell me your problem","hero.cta2":"See DomesLab live",
     "build.tag":"Case study · DomesLab","build.title":"Calculated,<br>strut by strut.","build.phase":"Phase",
-    "build.p1.t":"Geodesic structure","build.p1.d":"— struts sized by length","build.p2.t":"Nodes","build.p2.d":"— connection hubs","build.p3.t":"Panels","build.p3.d":"— glass cladding","build.p4.t":"Live configurator","build.p4.d":"— real-time 3D, in production",
+    "build.p1.t":"Geodesic structure","build.p1.d":"(struts sized by length)","build.p2.t":"Nodes","build.p2.d":"(connection hubs)","build.p3.t":"Panels","build.p3.d":"(glass cladding)","build.p4.t":"Live configurator","build.p4.d":"(real-time 3D, in production)",
     "build.ph1":"Structure","build.ph2":"Nodes","build.ph3":"Panels","build.ph4":"Live configurator",
     "build.cfg.diam":"Diameter","build.cfg.est":"Frame","build.cfg.madera":"Timber","build.cfg.acero":"Steel","build.cfg.cub":"Cover","build.cfg.vidrio":"Glass","build.cfg.lona":"Canvas","build.cfg.poli":"Polycarbonate","build.cfg.pedido":"Order form","build.cfg.desp":"Calculated cut list","build.cfg.nbarras":"struts","build.cfg.nnodos":"nodes",
     "explora.eyebrow":"Explore","explora.title":"In <em>four pages.</em>","explora.eti":"Index of the four pages, now on",
@@ -1676,7 +1684,7 @@
     // entre el móvil (760 px), la tableta y los 1100 px; y MQ_ESTRECHO es la del bloque CSS de 1100-1299 px.
     const MQ_TABLETA="(760px < width < 1100px) and (orientation: portrait)", MQ_ESTRECHO="(min-width:1100px) and (max-width:1299px)";
     const mqFila=matchMedia("(max-width:760px), "+MQ_TABLETA), mqTableta=matchMedia(MQ_TABLETA), mqEstrecho=matchMedia(MQ_ESTRECHO), mqGuias=matchMedia("(min-width:1100px)");
-    let cfgVivo=false, cfgFila=false, cfgGuias=false, cfgF=1, cfgDx=0, cfgDy=0, lastVo="", cfgAsignado=false, cfgLibreRato=false;
+    let cfgCab=0, cfgVivo=false, cfgFila=false, cfgGuias=false, cfgF=1, cfgDx=0, cfgDy=0, lastVo="", cfgAsignado=false, cfgLibreRato=false;
     function domoCaja(f){
       fitCam.aspect=W/H; fitCam.updateProjectionMatrix();
       fitCam.position.copy(camB).sub(tgt).multiplyScalar(f).add(tgt); fitCam.lookAt(tgt); fitCam.updateMatrixWorld();
@@ -1770,7 +1778,7 @@
       cfgF=1; cfgDx=0; cfgDy=0; lastVo=""; cfgAsignado=false;
       if(!cfgEl) return;
       const hdr=document.querySelector("header"), top=Math.round((hdr?hdr.getBoundingClientRect().height:80)+14);
-      cfgEl.style.setProperty("--cfg-top",top+"px");
+      cfgEl.style.setProperty("--cfg-top",top+"px"); cfgCab=top-14;
       cfgFila=mqFila.matches; cfgGuias=mqGuias.matches;
       cfgVivo=getComputedStyle(cfgEl).display!=="none";
       cfgEscribeHoja();
@@ -1968,7 +1976,10 @@
         cfgSt(z,"tr",z.el,"transform",z.vert?"translate3d(0,"+(-u*z.fuera).toFixed(1)+"px,0)":"translate3d("+(z.side*u*z.fuera).toFixed(1)+"px,0,0)");
         cfgSt(z,"pt",z.papel,"transform","perspective(900px) translate3d(0,0,"+(CFG_ALTO*h).toFixed(1)+"px) rotateX("+rx.toFixed(2)+"deg) rotateY("+ry.toFixed(2)+"deg) rotate("+gi+"deg)");
         cfgSt(z,"st",z.sombra,"transform","translate3d("+(-5-30*h).toFixed(1)+"px,"+(11+44*h).toFixed(1)+"px,0) scale("+(1+.14*h).toFixed(3)+") rotate("+gi+"deg)");
-        cfgSt(z,"so",z.sombra,"opacity",(1-.55*h).toFixed(3));
+        // en filas, el recorte cae por detrás de la cabecera (opaca a ese ancho): su sombra, que va hasta 55 px más abajo, no
+        // aparece hasta que asoma el canto de abajo del papel (con el aumento de la perspectiva) y se completa a medio papel
+        const ve=z.vert?suave(map(z.y+z.h/2*(1+900/(900-CFG_ALTO*h))-u*z.fuera-cfgCab,0,z.h*.5)):1;
+        cfgSt(z,"so",z.sombra,"opacity",((1-.55*h)*ve).toFixed(3));
         cfgSt(z,"ct",z.contacto,"transform","rotate("+m.giro+"deg)");
         cfgSt(z,"co",z.contacto,"opacity",Math.pow(1-h0,3).toFixed(3));
         if(z.cinta) cfgSt(z,"ci",z.cinta,"transform","scaleX("+suave(z.k===1?map(t,.54,.68):map(t,.64,.8)).toFixed(3)+")");
