@@ -367,8 +367,12 @@
   .cfg-sw i{display:block;width:6px;border-radius:1.5px;transform:scaleY(0);transform-origin:50% 100%}
   .cfg-meter{position:relative;height:2px;margin-top:12px;border-radius:2px;overflow:hidden;background:rgba(242,240,234,.12)}
   .cfg-meter i{position:absolute;inset:0;background:linear-gradient(90deg,#c07f22,#e6a92e);transform:scaleX(0);transform-origin:0 50%}
-  /* CFG · Escritorio estrecho: chips algo más justos para que «Policarbonato» no salte de línea. */
+  /* CFG · Escritorio estrecho: columnas más estrechas para que el domo, que va entre las dos, gane ancho (cfgEncaja; esta
+     condición es MQ_ESTRECHO en el JS). Como por debajo de 1100 px, «Policarbonato» puede bajar a otra línea y
+     «Calculado» se queda en su punto; los chips, algo más justos. */
   @media(min-width:1100px) and (max-width:1299px){
+    .cfg{--cfg-w:clamp(214px,19vw,252px)}
+    .cfg-calc{font-size:0;gap:0}
     .cfg-card{padding-left:14px;padding-right:14px}.cfg-chips{gap:5px}
     .cfg-chip{font-size:.72rem;padding:6px 7px}.cfg-chip.on{padding-left:20px}
     .cfg-chip.on::before{left:8px}.cfg-chip i::before{left:9px}
@@ -408,6 +412,19 @@
     .cfg-chip{font-size:.72rem;padding:5px 8px 5px 18px}
     .cfg-chip.on{padding-left:18px}.cfg-chip.on::before{left:7px}.cfg-chip i::before{left:8px}
     .cfg-num{font-size:1.32rem}.cfg-val{margin-top:6px}.cfg-meter{margin-top:8px}
+  }
+  /* CFG · Tableta en vertical (de 761 a 1099 px de ancho y más alta que ancha): como el móvil, las opciones en una fila
+     arriba (bajo la cabecera) y los resultados en otra abajo (por encima del chat, que sigue a --acg-abajo, y del HUD),
+     con el domo grande entre las dos; entran girando en X. Es la misma condición que MQ_TABLETA en el JS del domo. */
+  @media (760px < width < 1100px) and (orientation: portrait){
+    .cfg{perspective:1100px;--cfg-bot:calc(var(--acg-abajo,112px) + 76px)}
+    .cfg-col{left:var(--gut);right:var(--gut);width:auto;top:auto;bottom:auto;flex-direction:row;justify-content:stretch;align-items:stretch;gap:12px}
+    .cfg-in{top:var(--cfg-top)}.cfg-out{bottom:var(--cfg-bot)}
+    .cfg-in .cfg-card{transform-origin:50% 0}.cfg-out .cfg-card{transform-origin:50% 100%}
+    .cfg-card{flex:1 1 0;min-width:0}
+    /* la tercera columna (Cubierta arriba, Nodos abajo) más ancha en las dos filas: así caben las tres cubiertas
+       («Policarbonato», «Polycarbonate») en una línea y las dos filas siguen alineadas */
+    .cfg-card[data-k="4"],.cfg-card[data-k="5"]{flex-grow:1.4}
   }
   /* CFG · Si la pantalla no da para las tarjetas sin taparlo todo (móvil tumbado), no se muestran. */
   @media(max-height:459px){.cfg{display:none!important}}
@@ -1122,7 +1139,7 @@
       return {el,k,side:k%2?1:-1,dir:k%2?-1:1,sheen:el.querySelector(".cfg-sheen"),lit:el.querySelector(".cfg-chip.on i"),
         num,N:num?(CFG_CIFRAS[num.dataset.n]||0):0,meter:el.querySelector(".cfg-meter i"),sw:[],
         gEl,path:gEl&&gEl.querySelector("path"),dot:gEl&&gEl.querySelector(".cfg-o"),ring:gEl&&gEl.querySelector(".cfg-r"),
-        x:0,y:0,w:0,h:0,fuera:0,ax:0,ay:0,nodo:-1,l:{}};
+        x:0,y:0,w:0,h:0,fuera:0,ax:0,ay:0,plan:null,l:{}};
     }).sort((a,b)=>a.k-b.k):[];
     // CFG · Tipos de barra: una muesca por longitud, con su color del domo y su altura relativa.
     const cfgSw=cfgEl&&cfgEl.querySelector(".cfg-sw");
@@ -1136,8 +1153,12 @@
     // CFG · La cámara se aparta lo justo para que el domo quepa entre las dos columnas (en móvil, entre las dos filas)
     // y se centra en ese hueco con setViewOffset. Se calcula al medir (carga, resize, idioma, fuentes), no por fotograma.
     const fitCam=new THREE.PerspectiveCamera(35,1,0.1,100), fitM=new THREE.Matrix4(), fitS=new THREE.Matrix4(), fitV=new THREE.Vector3();
-    const mqFila=matchMedia("(max-width:760px)"), mqGuias=matchMedia("(min-width:1100px)");
-    let cfgVivo=false, cfgFila=false, cfgGuias=false, cfgF=1, cfgDx=0, cfgDy=0, lastVo="";
+    // CFG · Tableta en vertical (de 761 a 1099 px de ancho y más alta que ancha): filas como el móvil. MQ_TABLETA es
+    // literalmente la condición del @media del CSS, en sintaxis de rango para que no quede ningún medio píxel sin dueño
+    // entre el móvil (760 px), la tableta y los 1100 px; y MQ_ESTRECHO es la del bloque CSS de 1100-1299 px.
+    const MQ_TABLETA="(760px < width < 1100px) and (orientation: portrait)", MQ_ESTRECHO="(min-width:1100px) and (max-width:1299px)";
+    const mqFila=matchMedia("(max-width:760px), "+MQ_TABLETA), mqTableta=matchMedia(MQ_TABLETA), mqEstrecho=matchMedia(MQ_ESTRECHO), mqGuias=matchMedia("(min-width:1100px)");
+    let cfgVivo=false, cfgFila=false, cfgGuias=false, cfgF=1, cfgDx=0, cfgDy=0, lastVo="", cfgAsignado=false, cfgLibreRato=false;
     function domoCaja(f){
       fitCam.aspect=W/H; fitCam.updateProjectionMatrix();
       fitCam.position.copy(camB).sub(tgt).multiplyScalar(f).add(tgt); fitCam.lookAt(tgt); fitCam.updateMatrixWorld();
@@ -1149,14 +1170,86 @@
           if(sx<x0)x0=sx; if(sx>x1)x1=sx; if(sy<y0)y0=sy; if(sy>y1)y1=sy; } }
       return [x0,x1,y0,y1];
     }
+    // CFG · Envolvente convexa (cadena monótona) de una lista de puntos [x,y]: devuelve sus índices en orden, con el
+    // interior siempre a la izquierda de cada arista (producto cruzado positivo).
+    function cfgCasco(P){
+      const id=P.map((_,i)=>i).sort((a,b)=>P[a][0]-P[b][0]||P[a][1]-P[b][1]);
+      const cr=(o,a,b)=>(P[a][0]-P[o][0])*(P[b][1]-P[o][1])-(P[a][1]-P[o][1])*(P[b][0]-P[o][0]);
+      const lo=[], up=[];
+      for(const i of id){ while(lo.length>1&&cr(lo[lo.length-2],lo[lo.length-1],i)<=0) lo.pop(); lo.push(i); }
+      for(let j=id.length-1;j>=0;j--){ const i=id[j]; while(up.length>1&&cr(up[up.length-2],up[up.length-1],i)<=0) up.pop(); up.push(i); }
+      lo.pop(); up.pop(); return lo.concat(up);
+    }
+    // CFG · Silueta del domo con la cámara apartada f veces, sin desplazar: la envolvente de sus nodos girado a cualquier
+    // ángulo (12 giros cada 15°; el domo es simétrico a 180°), porque el giro acumulado de las fases 01-03 no se conoce.
+    function cfgSilueta(f){
+      fitCam.aspect=W/H; fitCam.updateProjectionMatrix();
+      fitCam.position.copy(camB).sub(tgt).multiplyScalar(f).add(tgt); fitCam.lookAt(tgt); fitCam.updateMatrixWorld();
+      fitS.makeScale(1+CFG_CRECE,1+CFG_CRECE,1+CFG_CRECE);
+      const P=[];
+      for(let r=0;r<12;r++){ fitM.makeRotationY(r*Math.PI/12).multiply(fitS);
+        for(const v of hubKeep){ fitV.copy(v).applyMatrix4(fitM).project(fitCam); P.push([(fitV.x+1)*W/2,(1-fitV.y)*H/2]); } }
+      const S=cfgCasco(P).map(i=>P[i]); let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;
+      for(const q of S){ if(q[0]<x0)x0=q[0]; if(q[0]>x1)x1=q[0]; if(q[1]<y0)y0=q[1]; if(q[1]>y1)y1=q[1]; }
+      return {S,x0,x1,y0,y1};
+    }
+    // CFG · Tramo vertical [arriba, abajo] de la silueta convexa S en la vertical x (null si no la corta).
+    function cfgTramo(S,x){
+      let a=1e9, b=-1e9;
+      for(let i=0,n=S.length;i<n;i++){ const p=S[i], q=S[(i+1)%n];
+        if((p[0]-x)*(q[0]-x)>0) continue;
+        if(p[0]===q[0]){ a=Math.min(a,p[1],q[1]); b=Math.max(b,p[1],q[1]); continue; }
+        const y=p[1]+(q[1]-p[1])*(x-p[0])/(q[0]-p[0]); if(y<a) a=y; if(y>b) b=y; }
+      return a<=b?[a,b]:null;
+    }
+    // CFG · Encaje por obstáculos (1100-1299 px y tableta en vertical): el domo, centrado entre las tarjetas, lo más grande
+    // que quepa sin tocar la cabecera, las barras, el rótulo de fase ni el chat (margen Mh) ni las tarjetas (margen M):
+    // en filas, sus rectángulos reales; en columnas, la franja entera de cada columna, para que el domo quede siempre
+    // entre las dos y cada guía tenga contorno delante de su codo. Su sitio en vertical, el centro del hueco que queda.
+    function cfgEncaja(top){
+      const Wc=cfgEl.clientWidth, Hc=cfgEl.clientHeight, M=cfgFila?30:22, Mh=16, o=cfgEl.getBoundingClientRect();
+      const ix=parseFloat(buildSec.style.getPropertyValue("--insx"))||0, iy=parseFloat(buildSec.style.getPropertyValue("--insy"))||0;
+      const Mc=M+CFG_CODO, obs=cfg.map(c=>cfgFila?[c.x-M,c.y-M,c.x+c.w+M,c.y+c.h+M]:[c.x-Mc,-1e5,c.x+c.w+Mc,1e5]);
+      const ph=buildSec.querySelector(".phases"), lab=buildSec.querySelector(".phase-lab");
+      // HUD en su sitio de la fase 04 (sin el margen de tarjeta de las fases 01-03); el rótulo, con sitio para el nombre más largo
+      if(ph){ const r=ph.getBoundingClientRect(); obs.push([r.left-o.left-ix-Mh,r.top-o.top+iy-Mh,r.right-o.left-ix+Mh,Hc]); }
+      if(lab){ const r=lab.getBoundingClientRect(); obs.push([r.right-o.left+ix-Math.max(r.width,260)-Mh,r.top-o.top+iy-Mh,Wc,Hc]); }
+      const ab=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--acg-abajo"))||16;
+      obs.push([Wc-100,Hc-ab-60-Mh,Wc,Hc-ab+Mh]);
+      const Ml=Math.max(M,Wc*.1); obs.push([-1e5,-1e5,Ml,1e5],[Wc-Ml,-1e5,1e5,1e5]);   // aire a los lados: como mucho el 80 % del ancho
+      const y0=top+8, y1=Hc-16, A=cfg[0], B=cfg[1], xc=cfgFila?Wc/2:(A.x+A.w+B.x)/2;
+      // Con la cámara apartada f veces: cada obstáculo veta un tramo abierto de desplazamientos verticales ty (los que
+      // harían que la silueta, centrada en xc, lo tocara: su arriba y su abajo extremos dentro del ancho del obstáculo),
+      // y se devuelve el centro del tramo libre más largo dentro de [y0,y1], o null si no queda ninguno.
+      const prueba=f=>{ const s=cfgSilueta(f), S=s.S, tx=xc-(s.x0+s.x1)/2, L=y0-s.y0, U=y1-s.y1, veto=[];
+        if(U<L) return null;
+        for(const r of obs){ const a=Math.max(r[0]-tx,s.x0), b=Math.min(r[2]-tx,s.x1); if(a>=b) continue;
+          let ar=1e9, ab=-1e9; const xs=[a,b]; for(const q of S) if(q[0]>a&&q[0]<b) xs.push(q[0]);
+          for(const x of xs){ const t=cfgTramo(S,x); if(t){ if(t[0]<ar) ar=t[0]; if(t[1]>ab) ab=t[1]; } }
+          if(ar<=ab) veto.push([r[1]-ab,r[3]-ar]); }
+        veto.sort((m,n)=>m[0]-n[0]);
+        let best=null, cur=L;
+        for(const v of veto){ if(v[1]<=cur) continue; if(v[0]>=U) break;
+          if(v[0]>cur&&(!best||v[0]-cur>best[1]-best[0])) best=[cur,v[0]];
+          cur=v[1]; if(cur>U) break; }
+        if(cur<=U&&(!best||U-cur>best[1]-best[0])) best=[cur,U];
+        return best&&{tx,ty:(best[0]+best[1])/2}; };
+      let lo=.5, hi=3.4;
+      if(!prueba(hi)) return false;
+      for(let i=0;i<16;i++){ const m=(lo+hi)/2; if(prueba(m)) hi=m; else lo=m; }
+      const f=hi*1.01, r=prueba(f);
+      if(!r) return false;
+      cfgF=f; cfgDx=-r.tx; cfgDy=-r.ty;
+      return true;
+    }
     function cfgMedir(){
-      cfgF=1; cfgDx=0; cfgDy=0; lastVo="";
+      cfgF=1; cfgDx=0; cfgDy=0; lastVo=""; cfgAsignado=false;
       if(!cfgEl) return;
       const hdr=document.querySelector("header"), top=Math.round((hdr?hdr.getBoundingClientRect().height:80)+14);
       cfgEl.style.setProperty("--cfg-top",top+"px");
       cfgFila=mqFila.matches; cfgGuias=mqGuias.matches;
       cfgVivo=getComputedStyle(cfgEl).display!=="none";
-      cfg.forEach(c=>{ c.l={}; c.nodo=-1; });
+      cfg.forEach(c=>{ c.l={}; c.plan=null; });
       if(!cfgVivo||cfg.length<6) return;
       const Wc=cfgEl.clientWidth, Hc=cfgEl.clientHeight, P=parseFloat(getComputedStyle(cfgEl).perspective)||1250, ox=Wc/2, oy=Hc/2, a=CFG_RY_FIN*Math.PI/180;
       cfg.forEach(c=>{ const col=c.el.parentElement;
@@ -1166,6 +1259,7 @@
         const s=P/(P+c.w/2*Math.sin(a));
         c.ax=ox+(c.x+c.w/2+c.dir*c.w/2*Math.cos(a)-ox)*s; c.ay=oy+(c.y+c.h/2-oy)*s;
       });
+      if((mqTableta.matches||mqEstrecho.matches)&&cfgEncaja(top)) return;
       const A=cfg[0], B=cfg[1];   // I1 (columna izquierda o fila de arriba) y S1 (columna derecha o fila de abajo)
       const bx0=cfgFila?10:A.x+A.w+30, bx1=cfgFila?Wc-10:B.x-30, by0=cfgFila?A.y+A.h+12:top+4, by1=cfgFila?B.y-12:Hc-112;
       const bw=bx1-bx0, bh=by1-by0;
@@ -1184,37 +1278,100 @@
     // CFG · El domo responde a cada opción cuando se enciende su chip, sutil y reversible: el diámetro lo hace crecer
     // un poco, la madera templa y mate las barras, y el vidrio aclara y pule los paneles.
     const C_BLANCO=new THREE.Color(0xffffff), C_MADERA=new THREE.Color(0xd6b08a), C_AMBAR=new THREE.Color(0xe6a92e), C_VIDRIO=new THREE.Color(0xf6dcaa);
+    const cfgCrece=p=>1+CFG_CRECE*suave(map(cfgT(p,0),.72,1));
+    // Giro del domo en función de pShown (paint y la simulación de las guías usan esta misma cuenta).
+    const giroY=p=>Math.min(1,p/Q_END)*Math.PI*0.5 + map(p,CFG_S-.02,CFG_FIN)*0.32 + drift;
     function cfgReacciona(p){
-      const a=suave(map(cfgT(p,0),.72,1)), b=suave(map(cfgT(p,2),.72,1)), c=suave(map(cfgT(p,4),.72,1));
-      g.scale.setScalar(1+CFG_CRECE*a);
+      const b=suave(map(cfgT(p,2),.72,1)), c=suave(map(cfgT(p,4),.72,1));
+      g.scale.setScalar(cfgCrece(p));
       barMat.color.copy(C_BLANCO).lerp(C_MADERA,b); barMat.roughness=.32+.3*b; barMat.metalness=.3-.24*b;
       pm.color.copy(C_AMBAR).lerp(C_VIDRIO,c*.55); pm.roughness=.4-.34*c; pm.metalness=.15+.2*c;
       return c;
     }
-    // CFG · Guías (solo >=1100 px): cada tarjeta elige al entrar el nodo visible más cercano a su canto y lo sigue
-    // mientras está; si el giro lo lleva a la cara de atrás, la guía se apaga.
-    const cfgCentro=new THREE.Vector3(0,-minY,0), cfgCw=new THREE.Vector3(), cfgV=new THREE.Vector3(), cfgPt={x:0,y:0,cara:0};
-    function cfgNodo(i){
-      cfgV.copy(hubKeep[i]).applyMatrix4(g.matrixWorld); cfgCw.copy(cfgCentro).applyMatrix4(g.matrixWorld);
-      const nx=cfgV.x-cfgCw.x, ny=cfgV.y-cfgCw.y, nz=cfgV.z-cfgCw.z;
-      const vx=camera.position.x-cfgV.x, vy=camera.position.y-cfgV.y, vz=camera.position.z-cfgV.z;
-      cfgPt.cara=(nx*vx+ny*vy+nz*vz)/((Math.hypot(nx,ny,nz)*Math.hypot(vx,vy,vz))||1);
-      cfgV.project(camera); cfgPt.x=(cfgV.x+1)*W/2; cfgPt.y=(1-cfgV.y)*H/2; return cfgPt;
+    // CFG · Guías (solo >=1100 px): cada una acaba en un nodo del CONTORNO del domo, en el lado de su columna y por
+    // delante del codo, y llega por fuera, así que el tramo recto no pisa ninguna barra hasta el nodo. En la 04 el giro
+    // depende solo de pShown (la deriva se para, ver frame): al aparecer la primera guía se simula la escena a cada paso
+    // de p (.01) y se hace el plan de las seis para todo su tramo visible. Cada guía se queda con su nodo mientras siga
+    // en el contorno con hueco (CFG_HUECO), en orden y sin cruzarse ni rozar el nodo de otra guía de su lado; si el giro
+    // se lo quita, la guía se recoge y se vuelve a dibujar hacia el nodo que la releva en un tramo corto de p
+    // (CFG_RELEVO). Todo sale de p, sin temporizadores: igual al bajar que al subir.
+    const CFG_HUECO=.5, CFG_RELEVO=.006;
+    const cfgV=new THREE.Vector3(), cfgPt={x:0,y:0,r:0};
+    function cfgNodo(i){   // el nodo en pantalla y el radio en px de su esfera (0.06), para que la guía acabe en su borde
+      cfgV.copy(hubKeep[i]).applyMatrix4(g.matrixWorld).applyMatrix4(camera.matrixWorldInverse);
+      cfgPt.r=.06*g.scale.x*camera.projectionMatrix.elements[5]*H/2/Math.max(.01,-cfgV.z);
+      cfgV.applyMatrix4(camera.projectionMatrix); cfgPt.x=(cfgV.x+1)*W/2; cfgPt.y=(1-cfgV.y)*H/2; return cfgPt; }
+    const simCam=new THREE.PerspectiveCamera(35,1,0.1,100), simM=new THREE.Matrix4(), simS=new THREE.Matrix4();
+    function cfgSimula(p){   // nodos en pantalla y contorno con pShown=p: las mismas cuentas que paint y cfgCamara
+      const q=Math.min(1,p/Q_END), e=suave(map(p,CFG_PULL0,CFG_PULL1)), s=cfgCrece(p), ox=cfgDx*e, oy=cfgDy*e;
+      simCam.aspect=W/H; simCam.position.lerpVectors(camA,camB,q);
+      if(e>0&&cfgF!==1) simCam.position.sub(tgt).multiplyScalar(1+(cfgF-1)*e).add(tgt);
+      simCam.lookAt(tgt); simCam.updateMatrixWorld();
+      if(e<=0||(Math.abs(ox)<.05&&Math.abs(oy)<.05)) simCam.clearViewOffset(); else simCam.setViewOffset(W,H,ox,oy,W,H);
+      simM.makeRotationY(giroY(p)).multiply(simS.makeScale(s,s,s));
+      const P=hubKeep.map(v=>{ cfgV.copy(v).applyMatrix4(simM).project(simCam); return [(cfgV.x+1)*W/2,(1-cfgV.y)*H/2]; });
+      let x0=1e9, x1=-1e9; for(const q of P){ if(q[0]<x0)x0=q[0]; if(q[0]>x1)x1=q[0]; }
+      return {p,P,casco:cfgCasco(P),cx:(x0+x1)/2,hw:(x1-x0)/2};
     }
-    function cfgElige(c){
-      let best=-1, bd=Infinity;
-      for(let i=0;i<hubKeep.length;i++){
-        if(cfg.some(o=>o!==c&&o.nodo===i)) continue;
-        const s=cfgNodo(i); if(s.cara<.3) continue;
-        const dx=s.x-c.ax, dy=s.y-c.ay, d=dx*dx+2.5*dy*dy;
-        if(d<bd){ bd=d; best=i; }
+    // Hueco (rad) con que la guía que sale de (ex,ey) llega al nodo i: el menor ángulo entre la guía y las dos aristas del
+    // contorno que salen del nodo. -1 si el nodo no está en el contorno o si la guía entraría por dentro del domo.
+    function cfgLibre(F,i,ex,ey){
+      const C=F.casco, j=C.indexOf(i); if(j<0) return -1;
+      const n=C.length, a=F.P[C[(j-1+n)%n]], v=F.P[i], b=F.P[C[(j+1)%n]], dx=ex-v[0], dy=ey-v[1];
+      if((v[0]-a[0])*(ey-a[1])-(v[1]-a[1])*(ex-a[0])>=0&&(b[0]-v[0])*(ey-v[1])-(b[1]-v[1])*(ex-v[0])>=0) return -1;
+      const ang=(ux,uy)=>Math.acos(clamp((ux*dx+uy*dy)/((Math.hypot(ux,uy)*Math.hypot(dx,dy))||1),-1,1));
+      return Math.min(ang(a[0]-v[0],a[1]-v[1]),ang(b[0]-v[0],b[1]-v[1]));
+    }
+    const cfgCorta=(a,b,c,d)=>{ const r=(b[0]-a[0])*(d[1]-c[1])-(b[1]-a[1])*(d[0]-c[0]); if(!r) return false;
+      const t=((c[0]-a[0])*(d[1]-c[1])-(c[1]-a[1])*(d[0]-c[0]))/r, u=((c[0]-a[0])*(b[1]-a[1])-(c[1]-a[1])*(b[0]-a[0]))/r; return t>0&&t<1&&u>0&&u<1; };
+    const cfgDist=(q,a,b)=>{ const vx=b[0]-a[0], vy=b[1]-a[1], t=clamp(((q[0]-a[0])*vx+(q[1]-a[1])*vy)/((vx*vx+vy*vy)||1),0,1); return Math.hypot(a[0]+vx*t-q[0],a[1]+vy*t-q[1]); };
+    function cfgAsigna(){
+      cfgAsignado=true;
+      const Fs=[]; for(let p=CFG_S+.62*CFG_DUR;p<CFG_FIN;p+=.01) Fs.push(cfgSimula(p)); Fs.push(cfgSimula(CFG_FIN));
+      const nF=Fs.length, nN=hubKeep.length;
+      for(const side of [-1,1]){
+        const gs=cfg.filter(c=>c.side===side);   // en orden k: de arriba abajo
+        const E=gs.map(c=>[c.ax+c.dir*CFG_CODO,c.ay]), desde=gs.map(c=>CFG_S+c.k*CFG_STEP+.62*CFG_DUR-1e-6);
+        // hueco de cada nodo para cada guía en cada paso (-1: no vale): en el contorno, en la mitad del domo de su
+        // columna (fuera del cuarto central), no detrás del codo (la guía nunca vuelve hacia su tarjeta) y llegando por fuera
+        const hueco=gs.map((c,j)=>Fs.map(F=>F.p<desde[j]?null:hubKeep.map((_,i)=>
+          side*(F.P[i][0]-F.cx)>=.25*F.hw&&c.dir*(F.P[i][0]-E[j][0])>=0?cfgLibre(F,i,E[j][0],E[j][1]):-1)));
+        const vale=(j,f,i)=>i>=0&&!!hueco[j][f]&&hueco[j][f][i]>=CFG_HUECO;
+        // a (encima) y b: nodos distintos y en orden, tramos rectos sin cortarse y ninguno a menos de 9 px del nodo del otro
+        const casa=(f,ja,ia,jb,ib)=>{ const A=Fs[f].P[ia], B=Fs[f].P[ib];
+          return ia!==ib&&A[1]<=B[1]-14&&!cfgCorta(E[ja],A,E[jb],B)&&cfgDist(B,E[ja],A)>=9&&cfgDist(A,E[jb],B)>=9; };
+        const casaCon=(f,j,i,cur)=>cur.every((o,jo)=>jo===j||!vale(jo,f,o)||(jo<j?casa(f,jo,o,j,i):casa(f,j,i,jo,o)));
+        const cur=gs.map(()=>-1);
+        gs.forEach(c=>{ c.plan=[]; });
+        for(let f=0;f<nF;f++){
+          const vis=gs.map((c,j)=>Fs[f].p>=desde[j]);
+          gs.forEach((c,j)=>{ if(!vale(j,f,cur[j])) cur[j]=-1; });
+          gs.forEach((c,j)=>{ for(let jo=0;jo<j;jo++) if(cur[j]>=0&&cur[jo]>=0&&!casa(f,jo,cur[jo],j,cur[j])) cur[j]=-1; });
+          gs.forEach((c,j)=>{ if(!vis[j]||cur[j]>=0) return;
+            const u=c.plan[c.plan.length-1], relevo=!!u&&u.i>=0;   // el nodo que releva a otro ha de valer ya en el paso anterior
+            // primero, los nodos entre la altura de la tarjeta de encima y la de debajo: así deja sitio a las demás
+            const yA=j?E[j-1][1]:-1e9, yB=j<gs.length-1?E[j+1][1]:1e9;
+            let best=-1, bs=-1e18;
+            for(let i=0;i<nN;i++){
+              if(!vale(j,f,i)||(relevo&&!vale(j,f-1,i))||!casaCon(f,j,i,cur)) continue;
+              let run=0; while(f+run<nF&&vale(j,f+run,i)&&casaCon(f+run,j,i,cur)) run++;
+              const P=Fs[f].P[i], s=(P[1]>=yA&&P[1]<=yB?1e6:0)+Math.min(run,12)*1e4-Math.abs(P[1]-E[j][1])-.35*Math.abs(P[0]-E[j][0])+40*Math.min(hueco[j][f][i],1.2);
+              if(s>bs){ bs=s; best=i; } }
+            cur[j]=best; });
+          gs.forEach((c,j)=>{ if(!vis[j]) return; const L=c.plan, u=L[L.length-1];
+            if(u&&u.i===cur[j]) u.b=Fs[f].p; else L.push({i:cur[j],a:u?u.b:desde[j],b:Fs[f].p}); });
+        }
+        gs.forEach(c=>{ const u=c.plan[c.plan.length-1]; if(u) u.b=2; });
       }
-      return best;
     }
     function cfgPinta(p){
       if(!cfgVivo) return;
       const guias=cfgGuias&&!cfgFila;
-      if(guias){ camera.updateMatrixWorld(); g.updateMatrixWorld(); }
+      if(guias){ camera.updateMatrixWorld(); g.updateMatrixWorld();
+        if(p<=CFG_S) cfgAsignado=false;
+        // el plan de las guías se adelanta a un rato libre en cuanto la deriva está parada (p>CFG_S), antes de la primera
+        else if(!cfgAsignado&&!cfgLibreRato&&"requestIdleCallback" in window){ cfgLibreRato=true;
+          requestIdleCallback(()=>{ cfgLibreRato=false; if(!cfgAsignado&&cfgGuias&&!cfgFila&&pShown>CFG_S) cfgAsigna(); },{timeout:250}); } }
       for(const c of cfg){
         const t=cfgT(p,c.k), u=1-cfgPaso(t);
         // Entrada: desde fuera de pantalla, hundida en Z y girada 56° hacia el centro; acaba girada 11° hacia el domo,
@@ -1234,16 +1391,19 @@
           for(let i=0;i<c.sw.length;i++) cfgSt(c,"sw"+i,c.sw[i],"transform","scaleY("+clamp(f*c.sw.length-i,0,1).toFixed(3)+")"); }
         if(c.gEl){
           const d=guias&&t>0?suave(map(t,.62,1)):0;
-          if(t<=0) c.nodo=-1;
-          if(d>0&&c.nodo<0) c.nodo=cfgElige(c);
-          if(d<=0||c.nodo<0){ cfgSt(c,"go",c.gEl,"opacity","0"); continue; }
-          const s=cfgNodo(c.nodo), ex=c.ax+c.dir*CFG_CODO;
-          cfgAt(c,"pd",c.path,"d","M"+c.ax.toFixed(1)+" "+c.ay.toFixed(1)+"L"+ex.toFixed(1)+" "+c.ay.toFixed(1)+"L"+s.x.toFixed(1)+" "+s.y.toFixed(1));
-          cfgSt(c,"pf",c.path,"strokeDashoffset",(1-d).toFixed(3));
+          if(d>0&&!cfgAsignado) cfgAsigna();
+          // tramo del plan en que cae p; en cada relevo la guía se recoge hasta el codo y vuelve a salir (e de 1 a 0 a 1)
+          let u=null, e=0;
+          if(d>0&&c.plan) for(let j=0,L=c.plan;j<L.length;j++) if(p<L[j].b||j===L.length-1){ u=L[j];
+            e=Math.min(1,j?(p-u.a)/CFG_RELEVO:1,j<L.length-1?(u.b-p)/CFG_RELEVO:1); break; }
+          if(!u||u.i<0||e<=0){ cfgSt(c,"go",c.gEl,"opacity","0"); continue; }
+          const s=cfgNodo(u.i), ex=c.ax+c.dir*CFG_CODO, de=d*e, lx=s.x-ex, ly=s.y-c.ay, ll=Math.hypot(lx,ly)||1, k=Math.max(0,s.r-1)/ll;
+          cfgAt(c,"pd",c.path,"d","M"+c.ax.toFixed(1)+" "+c.ay.toFixed(1)+"L"+ex.toFixed(1)+" "+c.ay.toFixed(1)+"L"+(s.x-lx*k).toFixed(1)+" "+(s.y-ly*k).toFixed(1));
+          cfgSt(c,"pf",c.path,"strokeDashoffset",(1-de).toFixed(3));
           cfgAt(c,"ox",c.dot,"cx",c.ax.toFixed(1)); cfgAt(c,"oy",c.dot,"cy",c.ay.toFixed(1));
           cfgAt(c,"rx",c.ring,"cx",s.x.toFixed(1)); cfgAt(c,"ry",c.ring,"cy",s.y.toFixed(1));
-          cfgSt(c,"ro",c.ring,"opacity",map(d,.8,1).toFixed(3));
-          cfgSt(c,"go",c.gEl,"opacity",clamp(s.cara*4,0,1).toFixed(3));
+          cfgSt(c,"ro",c.ring,"opacity",map(de,.8,1).toFixed(3));
+          cfgSt(c,"go",c.gEl,"opacity","1");
         }
       }
     }
@@ -1257,7 +1417,7 @@
       pm.opacity=map(q,.6,.85)*0.42*(1-.2*vidrio);
       ghostMat.opacity=0.05+0.17*(1-map(q,.3,.6));
       // CFG · En la 04 el domo sigue girando un poco mientras entran las tarjetas y se para con la última.
-      g.rotation.y=q*Math.PI*0.5 + map(p,CFG_S-.02,CFG_FIN)*0.32 + drift;
+      g.rotation.y=giroY(p);
       camera.position.lerpVectors(camA,camB,q); cfgCamara(p); camera.lookAt(tgt);
       cfgPinta(p);
       renderer.render(scene,camera);
@@ -1269,7 +1429,9 @@
       if(visible) pShown+=(prog-pShown)*(1-Math.pow(1-K,dt/16.667));
       const settled=!visible||Math.abs(prog-pShown)<EPS;
       if(settled) pShown=prog;
-      clock+=dt; drift+=dt*0.00006;
+      // CFG · Con guías (>=1100 px), la deriva lenta se apaga al entrar en la 04 (de .54 a .60): desde ahí el giro depende
+      // solo de pShown, el domo se para de verdad con la última tarjeta y las guías pueden prever el giro que queda.
+      clock+=dt; drift+=dt*0.00006*(cfgGuias&&!cfgFila?1-map(pShown,CFG_PULL0,CFG_S):1);
       updatePhases(pShown); updateImmersive(pShown); paint(pShown);
       if(!settled) requestAnimationFrame(frame); else running=false;
     }
