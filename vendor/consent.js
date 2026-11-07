@@ -280,7 +280,7 @@
       label: "Aviso de cookies y analítica",
       msg:
         "Usamos Microsoft Clarity para entender cómo se usa la web (mapas de calor y grabaciones anónimas). ¿Lo aceptas?",
-      link: "Más información",
+      link: "Leer el aviso legal",
       aviso: "/aviso-legal",
       accept: "Aceptar",
       reject: "Rechazar"
@@ -289,7 +289,7 @@
       label: "Avís de cookies i analítica",
       msg:
         "Fem servir Microsoft Clarity per entendre com s'usa la web (mapes de calor i gravacions anònimes). Ho acceptes?",
-      link: "Més informació",
+      link: "Llegir l’avís legal",
       aviso: "/ca/aviso-legal",
       accept: "Acceptar",
       reject: "Rebutjar"
@@ -298,7 +298,7 @@
       label: "Cookie and analytics notice",
       msg:
         "We use Microsoft Clarity to understand how the site is used (heatmaps and anonymous session recordings). Do you accept?",
-      link: "Learn more",
+      link: "Read the legal notice",
       aviso: "/en/aviso-legal",
       accept: "Accept",
       reject: "Reject"

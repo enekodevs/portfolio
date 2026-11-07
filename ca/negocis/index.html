@@ -377,7 +377,7 @@ main:has(#lista:empty) .solo-js,main:has(#lista:empty) .encabezados{display:none
   .portada,.censo,.contacto{min-height:0}
 }
 </style>
-<script src="/vendor/consent.js?v=20260915c" defer></script>
+<script src="/vendor/consent.js?v=20261107" defer></script>
     <script src="https://chatbot-eneko.chatbot-eneko.workers.dev/widget.js" data-cliente="enekodevs" defer></script>
 </head>
 <body>
@@ -507,7 +507,8 @@ setTimeout(function(){
 <footer class="pie hoja capa">
   <nav class="sectores" aria-label="Pàgines per ofici">
     <b>El teu ofici, en detall:</b>
-    <a href="/ca/negocis/chatbot-per-al-teu-negoci/">chatbot per al teu negoci</a>.
+    <a href="/ca/negocis/chatbot-per-al-teu-negoci/">chatbot per al teu negoci</a> ·
+    <a href="/ca/negocis/disseny-web-manresa-bergueda/">disseny web a Manresa i el Berguedà</a>.
   </nav>
   <span>Eneko Navarrete</span><span>desenvolupament web</span><span>Berguedà, Barcelona</span>
   <span><a href="/ca/">enekodevs.com</a></span>
@@ -1005,6 +1006,56 @@ const campo = (()=>{
   };
   requestAnimationFrame(tic);
 })();
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "CollectionPage",
+   "@id": "https://enekodevs.com/ca/negocis/#pagina",
+   "url": "https://enekodevs.com/ca/negocis/",
+   "name": "He obert 203 webs de negocis petits · Eneko Navarrete",
+   "description": "203 webs de negocis petits, obertes una a una. Nou problemes que surten una vegada i una altra, i amb què s'arregla cadascun. La teva web a terminis o d'un sol cop.",
+   "inLanguage": "ca",
+   "author": {
+    "@type": "Person",
+    "@id": "https://enekodevs.com/#person",
+    "name": "Eneko Navarrete",
+    "url": "https://enekodevs.com/"
+   },
+   "hasPart": [
+    {
+     "@type": "WebPage",
+     "url": "https://enekodevs.com/ca/negocis/chatbot-per-al-teu-negoci/",
+     "name": "Chatbot per al teu negoci"
+    },
+    {
+     "@type": "WebPage",
+     "url": "https://enekodevs.com/ca/negocis/disseny-web-manresa-bergueda/",
+     "name": "Disseny web a Manresa i el Berguedà"
+    }
+   ]
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "enekodevs.com",
+     "item": "https://enekodevs.com/ca/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Webs de negocis petits",
+     "item": "https://enekodevs.com/ca/negocis/"
+    }
+   ]
+  }
+ ]
+}
 </script>
 </body>
 </html>

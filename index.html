@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n-title="ptitle">enekodevs — Eneko Navarrete, apps web técnicas a medida</title>
-<meta name="description" content="enekodevs — Design engineer. 3D en tiempo real e ingeniería que llega a producción. Mira cómo se construye una herramienta a medida, paso a paso.">
+<meta name="description" content="Calculadoras, configuradores, 3D y páginas web a medida para empresas y pymes, en producción y no en demo. Eneko Navarrete, desarrollador web en el Berguedà (Barcelona).">
 <link rel="canonical" href="https://enekodevs.com/">
 <link rel="alternate" hreflang="es" href="https://enekodevs.com/">
 <link rel="alternate" hreflang="ca" href="https://enekodevs.com/ca/">
@@ -74,6 +74,7 @@
   ]
 }
 </script>
+<link rel="preload" href="/screenshots/eneko-hero-gris.avif" as="image" type="image/avif" fetchpriority="high">
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -236,7 +237,10 @@
   @media(max-width:760px){:root{--asoma:112px;--acg-abajo:16px}}
   .hero{min-height:calc(100vh - var(--asoma));min-height:calc(100svh - var(--asoma))}
   /* retrato B/N a sangre — FIJO, sin transiciones */
-  .hero-photo{position:absolute;inset:0;z-index:0;background:url('screenshots/eneko.jpg') no-repeat;background-size:cover;background-position:76% 28%;
+  /* PERF · La foto se pinta siempre en gris (grayscale(1) en los dos temas), así que se sirve ya en gris, con la misma
+     matriz Rec. 709 del filtro y en AVIF: 43 KB en vez de 123. La precarga del <head> la pide la primera; eneko.jpg queda
+     para los navegadores sin image-set(type()). */
+  .hero-photo{position:absolute;inset:0;z-index:0;background:url('/screenshots/eneko.jpg') no-repeat;background-image:image-set(url('/screenshots/eneko-hero-gris.avif') type('image/avif'),url('/screenshots/eneko.jpg') type('image/jpeg'));background-size:cover;background-position:76% 28%;
     filter:grayscale(1) contrast(1.12) brightness(1.02);mix-blend-mode:multiply;opacity:.92;transform:scale(1.05)}
   .hero-photo,.hero-photo-dither{-webkit-mask-image:linear-gradient(90deg,transparent 6%,#000 50%,#000 100%);mask-image:linear-gradient(90deg,transparent 6%,#000 50%,#000 100%)}
   .hero-photo-dither{position:absolute;inset:0;z-index:0;pointer-events:none;mix-blend-mode:multiply;opacity:.24;
@@ -290,6 +294,9 @@
   .build .svgfall svg{width:min(70vw,480px);stroke:var(--d-fg);fill:none;stroke-width:1;opacity:.6}
   #domeBuild{display:none;position:absolute;inset:0;z-index:1;overflow:hidden;will-change:border-radius,inset}
   #domeBuild canvas{display:block;width:100%;height:100%}
+  /* PERF · Bajo el preloader (opaco y a pantalla completa) el lienzo no se compone. Sin GPU, como en PageSpeed, cada
+     fotograma del domo se leía de vuelta a la CPU y la página quedaba congelada segundos. Entrar quita .preloading. */
+  body.preloading #domeBuild{visibility:hidden}
   /* CFG · 600vh (antes 440vh): las fases 01-03 recorren los mismos 255vh de antes y la 04 gana el espacio nuevo
      para el configurador. El reparto vive en el JS del domo (Q_END). */
   body.run .build{height:600vh}
@@ -783,8 +790,14 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#f2f0ea">
-<script src="/vendor/consent.js?v=20260915c" defer></script>
-<link rel="stylesheet" href="/vendor/lenis-1.3.27/lenis.css">
+<script src="/vendor/consent.js?v=20261107" defer></script>
+<style>/* /vendor/lenis-1.3.27/lenis.css, en línea: era la única hoja que bloqueaba el primer pintado */
+html.lenis,html.lenis body{height:auto}
+.lenis:not(.lenis-autoToggle).lenis-stopped{overflow:clip}
+.lenis [data-lenis-prevent],.lenis [data-lenis-prevent-wheel],.lenis [data-lenis-prevent-touch],.lenis [data-lenis-prevent-vertical],.lenis [data-lenis-prevent-horizontal]{overscroll-behavior:contain}
+.lenis.lenis-smooth iframe{pointer-events:none}
+.lenis.lenis-autoToggle{transition-property:overflow;transition-duration:1ms;transition-behavior:allow-discrete}
+</style>
     <script src="https://chatbot-eneko.chatbot-eneko.workers.dev/widget.js" data-cliente="enekodevs" defer></script>
 </head>
 <body class="preloading">
@@ -996,6 +1009,9 @@
     <a href="/negocios/pagina-web-kayak-turismo-acuatico/">Web para kayak y turismo acuático</a>
     <a href="/negocios/pagina-web-rocodromos/">Web para rocódromos</a>
     <a href="/negocios/pagina-web-turismo-activo-barranquismo/">Web para turismo activo y barranquismo</a>
+    <a href="/negocios/chatbot-para-tu-negocio/">Chatbot para tu negocio</a>
+    <a href="/negocios/diseno-web-manresa-bergueda/">Diseño web en Manresa y el Berguedà</a>
+    <a href="/negocios/precios/">Precios de la web</a>
   </nav>
   <div class="foot"><span class="n">ENEKO NAVARRETE</span><span>eneko.devs@gmail.com · +34 617 575 495</span><span><a href="/aviso-legal">Aviso legal</a></span><span><a href="/condiciones">Condiciones</a></span></div>
 </footer>
@@ -1526,6 +1542,9 @@
   const startDome = () => import('three').then(async (THREE)=>{
    try{
     const { RoomEnvironment } = await import('three/addons/environments/RoomEnvironment.js');
+    // PERF · El montaje se parte en tareas cortas (antes, una sola de casi un segundo con la CPU de un móvil): entre una
+    // y otra respiran el contador del preloader y el botón Entrar. Lo que se pinta no cambia.
+    const pausa=()=>new Promise(r=>setTimeout(r,0));
     document.body.classList.add("run");
     let W=holder.clientWidth,H=holder.clientHeight;
     const renderer=new THREE.WebGLRenderer({antialias:true});
@@ -1534,7 +1553,23 @@
     holder.appendChild(renderer.domElement);
     const scene=new THREE.Scene(); scene.background=new THREE.Color(0x26202b);
     const camera=new THREE.PerspectiveCamera(35,W/H,0.1,100);
-    const pmrem=new THREE.PMREMGenerator(renderer); scene.environment=pmrem.fromScene(new RoomEnvironment(),0.04).texture;
+    await pausa();
+    const pmrem=new THREE.PMREMGenerator(renderer), sala=new RoomEnvironment();
+    // PERF · prepara: compila una pieza sin pintarla, en su propia tarea. Con KHR_parallel_shader_compile, además, sin esperar
+    // al compilador (compileAsync); sin él (el navegador sin GPU de PageSpeed), compile() a secas.
+    const paralelo=renderer.extensions.has("KHR_parallel_shader_compile");
+    const prepara=(o,cam,esc)=>paralelo?renderer.compileAsync(o,cam,esc).catch(()=>{}):Promise.resolve(renderer.compile(o,cam,esc));
+    // PERF · Los shaders con que fromScene pinta la sala (su fondo y sus cajas) se preparan antes, en el mismo estado que usa
+    // fromScene: pintando a un render target (sin tone mapping, lineal). Si alguno no coincidiera, fromScene lo compilaría
+    // como siempre: el resultado es el mismo.
+    const rt=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType}), cc=new THREE.PerspectiveCamera(90,1,.1,100),
+      fondo=new THREE.Mesh(new THREE.BoxGeometry(),new THREE.MeshBasicMaterial({side:THREE.BackSide,depthWrite:false,depthTest:false})), prep=[];
+    for(const [o,esc] of [[fondo,null],...sala.children.filter(c=>c.material).map(c=>[c,sala])]){
+      renderer.setRenderTarget(rt); prep.push(prepara(o,cc,esc)); renderer.setRenderTarget(null); await pausa(); }
+    await Promise.all(prep);
+    scene.environment=pmrem.fromScene(sala,0.04).texture;
+    fondo.geometry.dispose(); fondo.material.dispose(); rt.dispose();
+    await pausa();
 
     // geometría geodésica (igual que dome-3d.html)
     const baseV=[[-1,1.618,0],[1,1.618,0],[-1,-1.618,0],[1,-1.618,0],[0,-1,1.618],[0,1,1.618],[0,-1,-1.618],[0,1,-1.618],[1.618,0,-1],[1.618,0,1],[-1.618,0,-1],[-1.618,0,1]].map(v=>new THREE.Vector3(v[0],v[1],v[2]).normalize());
@@ -1632,6 +1667,11 @@
     scene.add(new THREE.HemisphereLight(0xffffff,0xdfe6e9,0.5));
     const key=new THREE.DirectionalLight(0xffffff,2.4); key.position.set(6,9,6); scene.add(key);
     const rim=new THREE.DirectionalLight(0xffd39a,1.5); rim.position.set(-7,5,-6); scene.add(rim);
+    await pausa();
+    // PERF · Cada pieza del domo se prepara en su propia tarea corta, con las luces de la escena, como en el render. El primer
+    // fotograma sale cuando todas están listas («arranca», al final).
+    const compilando=[];
+    for(const o of g.children.slice()){ compilando.push(prepara(o,camera,scene)); await pausa(); }
 
     const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
     const map=(x,a,b)=>clamp((x-a)/(b-a),0,1);
@@ -2141,7 +2181,8 @@
       updatePhases(pShown); updateImmersive(pShown); paint(pShown);
       if(!settled) requestAnimationFrame(frame); else running=false;
     }
-    function kick(){ if(running) return; running=true; last=performance.now(); requestAnimationFrame(frame); }
+    let listo=false;
+    function kick(){ if(running||!listo) return; running=true; last=performance.now(); requestAnimationFrame(frame); }
     addEventListener("scroll",()=>{ prog=calcProg(); if(visible||prog!==pShown) kick(); },{passive:true});
     function remedir(){ W=holder.clientWidth;H=holder.clientHeight;camera.aspect=W/H;camera.updateProjectionMatrix();renderer.setSize(W,H); medirIns(); cfgMedir(); prog=calcProg(); kick(); }
     addEventListener("resize",remedir);
@@ -2153,11 +2194,24 @@
     if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{ cfgMedir(); kick(); });
     const vio=new IntersectionObserver(function(es){visible=es[0].isIntersecting; prog=calcProg(); if(visible||prog!==pShown) kick(); },{threshold:0}); vio.observe(buildSec);
     cfgMedir();
-    prog=pShown=calcProg(); updatePhases(pShown); updateImmersive(pShown); kick();
+    prog=pShown=calcProg(); updatePhases(pShown); updateImmersive(pShown);
+    // PERF · El primer fotograma sale cuando los shaders están compilados (ver «compilando», arriba). Antes, ese primer
+    // render esperaba al compilador con todo parado, bajo el preloader.
+    const arranca=()=>{ if(listo) return; listo=true; kick(); };
+    Promise.all(compilando).then(arranca,arranca);
+    // PERF · Al pulsar Entrar se pinta un fotograma nuevo: el lienzo estaba oculto bajo el preloader.
+    const preEnt=document.getElementById("preEnter"); if(preEnt) preEnt.addEventListener("click",()=>kick());
     if(window.__navPinta) window.__navPinta();
    }catch(err){ console.error('[dome] fallo en el setup 3D:', err); document.body.classList.remove("run"); }
   }).catch(function(err){ console.error('[dome] no se pudo cargar Three.js:', err); });
-  if('requestIdleCallback' in window) requestIdleCallback(function(){startDome();},{timeout:2000}); else setTimeout(startDome,1200);
+  // PERF · three.js (655 KB) no se pide hasta que el navegador ha pintado por primera vez (el preloader): así no compite
+  // con la foto del héroe ni con las fuentes. Si en 2 s no hay pintado (pestaña en segundo plano), arranca igual. Después,
+  // como siempre, en el primer rato libre.
+  const arrancaDomo=()=>{ if('requestIdleCallback' in window) requestIdleCallback(function(){startDome();},{timeout:2000}); else setTimeout(startDome,1200); };
+  let pintado=false; const trasPintar=()=>{ if(pintado) return; pintado=true; arrancaDomo(); };
+  try{ if(performance.getEntriesByType("paint").length) trasPintar();
+    else{ new PerformanceObserver(function(l,o){ o.disconnect(); trasPintar(); }).observe({type:"paint",buffered:true}); setTimeout(trasPintar,2000); } }
+  catch(e){ trasPintar(); }
   }
 </script>
 
