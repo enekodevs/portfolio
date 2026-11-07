@@ -627,6 +627,11 @@
      lo descubre entero (lo que en NRG hace la fase siguiente). El raíl no recibe clics fuera del papel. */
   .explora.ex-h+.contacto{position:relative;z-index:1;margin-top:calc(var(--ex-top,92px) - 100vh);min-height:calc(100vh - var(--ex-top,92px));display:flex;flex-direction:column;justify-content:center}
   .explora.ex-h.ex-cerca+.contacto{will-change:transform}
+  .explora.ex-h.ex-cerca+.contacto .inner>*{will-change:opacity}
+  /* En apaisado, la opacidad de cada pieza de contacto la lleva el script: la transición de .reveal la retrasaba y, al
+     volver hacia arriba, dejaba ver letras bajo la cinta. Con la pantalla baja, su contenido no cabía y quedaba pegado abajo. */
+  .explora.ex-h+.contacto .inner>.reveal{transition-property:transform}
+  @media (max-height:620px){.explora.ex-h+.contacto>.inner{padding-block:28px}}
   .explora.ex-h .ex-tapa{position:absolute;inset:0;max-width:none;margin:0;display:flex;flex-direction:column;justify-content:center;
     padding:calc(var(--ex-top,92px) + 2vh) var(--gut) 8vh max(var(--gut),calc((100vw - var(--ample))/2 + var(--gut)))}
   .explora.ex-h.ex-claro .ex-osc{display:none}
@@ -636,28 +641,34 @@
   .explora.ex-h .ex-cinta{position:absolute;left:0;top:0;bottom:0;display:flex;width:max-content;padding:0;transform:translate3d(110vw,0,0);pointer-events:auto}
   .explora.ex-h.ex-cerca .ex-cinta,.explora.ex-h.ex-cerca .ex-foto img{will-change:transform}
   .explora.ex-h .ex-cap{display:flex;align-items:stretch;max-width:none;margin:0;padding:0;gap:0;border:0}
-  .explora.ex-h .ex-por{order:0;flex:none;justify-content:space-between;padding:var(--ex-y0) 0 var(--ex-chat) calc(4.5*var(--k))}
+  /* Abajo se deja sitio a la burbuja del chat; con la pantalla baja (menos de ~710 px) ese sitio encoge hasta 64 px para que
+     el texto no vaya apretado arriba con un hueco vacío debajo: la burbuja está en el borde derecho y el texto solo pasa
+     bajo ella mientras la tarjeta entra. */
+  .explora.ex-h .ex-por{order:0;flex:none;justify-content:space-between;padding:var(--ex-y0) 0 clamp(64px,calc(100vh - 520px),var(--ex-chat)) calc(4.5*var(--k))}
   .explora.ex-h .ex-cuerpo{margin-top:0}
-  .explora.ex-h .ex-no{font-size:max(15px,calc(1.3*var(--k)));margin-bottom:calc(1.5*var(--k))}
+  .explora.ex-h .ex-no{font-size:max(15px,calc(1.3*var(--k)));margin-bottom:max(10px,calc(1.5*var(--k)))}
   .explora.ex-h .ex-tit{font-size:calc(7.4*var(--k))}
-  .explora.ex-h .ex-lead{max-width:none;font-size:calc(2.05*var(--k));line-height:1.13}
-  .explora.ex-h .ex-go{margin-top:calc(1.7*var(--k));font-size:max(16px,calc(1.22*var(--k)))}
-  .explora.ex-h .ex-dato{margin:0;font-size:max(14px,calc(1.08*var(--k)))}
+  /* Con la pantalla baja (portátil con el navegador al 125-150 %) --k encoge: la entradilla y el dato no bajan de
+     17,6 y 15 px, y su columna no baja de 20rem, para que no pasen de tres o cuatro líneas. */
+  .explora.ex-h .ex-lead{max-width:none;font-size:max(1.1rem,calc(2.05*var(--k)));line-height:1.18}
+  .explora.ex-h .ex-go{margin-top:max(14px,calc(1.7*var(--k)));font-size:max(16px,calc(1.22*var(--k)))}
+  .explora.ex-h .ex-dato{margin:0;font-size:max(15px,calc(1.08*var(--k)))}
   .explora.ex-h .ex-foto{flex:none;width:calc(var(--cw)*var(--k));max-height:none;aspect-ratio:auto;margin:14px calc(7*var(--k)) 14px calc(4*var(--k));border-radius:20px}
-  /* La foto, más ancha que su tarjeta: 0,357 del ancho de la tarjeta más 0,643 del de la pantalla, lo justo para que el
-     parallax (0,643 de la velocidad de la cinta respecto a la tarjeta) la cubra siempre. */
-  .explora.ex-h .ex-foto img{position:absolute;left:0;top:0;width:calc(.357*var(--cw)*var(--k) + 64.3vw);max-width:none;height:100%;object-position:var(--ex-oph,50% 50%)}
+  /* La foto, algo más ancha que su marco (el script pone el ancho exacto: el 120 % del marco o el 118 % de lo que mide la
+     foto a toda altura, lo mayor), y se desliza dentro de él lo que le sobra. Las fotos son verticales: hacerla más ancha
+     la amplía y deja ver solo un trozo (con la de antes, del 11 al 26 % de la foto). */
+  .explora.ex-h .ex-foto img{position:absolute;left:0;top:0;width:calc(1.2*var(--cw)*var(--k));max-width:none;height:100%;object-position:var(--ex-oph,50% 50%)}
   /* Cada página con su composición, para que no sean cuatro copias de la misma plantilla. */
   .explora.ex-h .ex-cap-1{--cw:42}
-  .explora.ex-h .ex-cap-1 .ex-cuerpo{width:calc(29*var(--k));margin-left:calc(19*var(--k))}
-  .explora.ex-h .ex-cap-2{--cw:35}
+  .explora.ex-h .ex-cap-1 .ex-cuerpo{width:max(20rem,calc(29*var(--k)));margin-left:max(0px,min(calc(19*var(--k)),calc((29*var(--k) - 20rem)*1000)))}
+  .explora.ex-h .ex-cap-2{--cw:45}
   .explora.ex-h .ex-cap-2 .ex-por{flex-direction:column-reverse}
-  .explora.ex-h .ex-cap-2 .ex-cuerpo{width:calc(27*var(--k));margin-left:calc(21*var(--k))}
+  .explora.ex-h .ex-cap-2 .ex-cuerpo{width:max(20rem,calc(27*var(--k)));margin-left:max(0px,min(calc(21*var(--k)),calc((27*var(--k) - 20rem)*1000)))}
   .explora.ex-h .ex-cap-3{--cw:47}
   .explora.ex-h .ex-cap-3 .ex-tit{font-size:calc(6.6*var(--k))}
-  .explora.ex-h .ex-cap-3 .ex-cuerpo{width:calc(31*var(--k))}
+  .explora.ex-h .ex-cap-3 .ex-cuerpo{width:max(20rem,calc(31*var(--k)))}
   .explora.ex-h .ex-cap-4{--cw:40}
-  .explora.ex-h .ex-cap-4 .ex-cuerpo{width:calc(28*var(--k));margin-left:calc(20*var(--k))}
+  .explora.ex-h .ex-cap-4 .ex-cuerpo{width:max(20rem,calc(28*var(--k)));margin-left:max(0px,min(calc(20*var(--k)),calc((28*var(--k) - 20rem)*1000)))}
   .explora.ex-h .ex-cap-4 .ex-foto{margin-right:calc(4*var(--k))}
   .explora.ex-h .ex-eti-w{position:absolute;top:14px;right:var(--gut);opacity:0;transform:translate3d(0,-6px,0);pointer-events:none;transition:opacity .35s ease,transform .45s var(--ease)}
   .explora.ex-h.ex-eti-on .ex-eti-w,.explora.ex-h .ex-eti-w:focus-within{opacity:1;transform:none;pointer-events:auto}
@@ -955,7 +966,7 @@
               <div class="ex-cuerpo"><p class="ex-lead" id="ex-p4" data-i18n="explora.c4.p">Tell me your idea and I'll reply with a plan and a ballpark quote, no strings attached.</p><a class="ex-go" href="/en/contacto" aria-describedby="ex-p4"><span data-i18n="explora.c4.go">Let's talk</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
               <p class="ex-dato"><b data-i18n="explora.c4.x">Or directly:</b><br><a href="mailto:eneko.devs@gmail.com">eneko.devs@gmail.com</a> · <a href="tel:+34617575495">+34 617 575 495</a></p>
             </div>
-            <div class="ex-foto" style="--ex-op:50% 78%;--ex-oph:50% 84%"><img src="/visuals/explora/04-640.webp" srcset="/visuals/explora/04-640.webp 640w, /visuals/explora/04.webp 1024w" sizes="(max-width: 640px) 92vw, (orientation: portrait) and (max-width: 1025px) 44vw, 40vw" width="1024" height="1536" alt="The shed at blue hour with the door half open: inside, in the warm lamplight, you can make out the timber dome, with the mountains behind." data-i18n-alt="explora.c4.alt" loading="lazy" decoding="async"></div>
+            <div class="ex-foto" style="--ex-op:50% 78%;--ex-oph:80% 84%"><img src="/visuals/explora/04-640.webp" srcset="/visuals/explora/04-640.webp 640w, /visuals/explora/04.webp 1024w" sizes="(max-width: 640px) 92vw, (orientation: portrait) and (max-width: 1025px) 44vw, 40vw" width="1024" height="1536" alt="The shed at blue hour with the door half open: inside, in the warm lamplight, you can make out the timber dome, with the mountains behind." data-i18n-alt="explora.c4.alt" loading="lazy" decoding="async"></div>
           </li>
         </ol>
       </div>
@@ -1118,9 +1129,14 @@
      quieta bajo la cabecera, asoma por la mitad derecha y la cinta, al irse, la descubre entera (lo que en NRG hace la
      fase siguiente). Su sitio natural (margen negativo del CSS) es justo ese al soltarse el raíl, así que luego sigue
      con el scroll sin salto.
-     La foto de cada tarjeta va a 0,357 de la velocidad de la cinta (0,643 respecto a su tarjeta), sin escala, como en NRG.
+     Cada pieza de su texto (antetítulo, titular, párrafo y botón) aparece cuando el borde de la cinta la deja atrás, no
+     antes: si no, asomaban letras sueltas del titular. Con el tabulador, al entrar en contacto la cinta termina de irse.
+     La foto de cada tarjeta es algo más ancha que su marco y, mientras el marco está entero en pantalla, se desliza dentro
+     de él de su borde derecho al izquierdo: va algo más despacio que la cinta, sin escala y sin dejar nunca hueco, con una
+     curva suave que no da tirones al tocar los bordes. Con el marco centrado se ve la parte que dice la x de --ex-oph
+     (50 %, el centro).
      El título de cada página sube por su máscara cuando su portada pasa del 82 % del ancho (y baja si vuelve), y la
-     etiqueta cambia cuando la página pasa de media pantalla. Todo depende solo de la posición: mismo scroll, misma imagen.
+     etiqueta marca la primera página cuyo texto se ve al menos a medias. Todo depende solo de la posición: mismo scroll, misma imagen.
    Por fotograma solo se escriben transform y opacity, y solo si cambian. Todas las medidas se toman al cambiar de
    tamaño, nunca por fotograma, y no hay bucle: un fotograma por evento de scroll, así que con el scroll quieto no corre
    nada. Funciona con Lenis (lee scrollY, que Lenis mueve) y sin él (táctil, teclado). Al tabular, el scroll trae a la
@@ -1131,23 +1147,23 @@
   if(!sec||!window.requestAnimationFrame||!window.matchMedia) return;
   var pin=sec.querySelector(".ex-pin"), cinta=sec.querySelector(".ex-cinta"), con=document.getElementById("contacto"),
       etiW=sec.querySelector(".ex-eti-w"), eti=sec.querySelector(".ex-eti"), ind=sec.querySelector(".ex-ind"), sr=sec.querySelector(".ex-eti-sr"),
-      caps=[].slice.call(sec.querySelectorAll(".ex-cap")), hdr=document.querySelector("header");
+      caps=[].slice.call(sec.querySelectorAll(".ex-cap")), hdr=document.querySelector("header"), conIn=con?con.querySelector(".inner"):null, conH=conIn?[].slice.call(conIn.children):[];
   if(!pin||!cinta||!etiW||!eti||!ind||caps.length<2||!(window.CSS&&CSS.supports&&CSS.supports("position","sticky"))) return;
   var N=caps.length, rm=matchMedia("(prefers-reduced-motion: reduce)"),
       mqV=matchMedia("(max-width:640px),(orientation:portrait) and (max-width:1025px),(max-height:499px)");
-  var R=.773, K=.643;   // px de cinta por px de scroll; velocidad de la foto respecto a su tarjeta
+  var R=.773;   // px de cinta por px de scroll
   var filas=[].slice.call(ind.querySelectorAll("button[data-k]")), pilas=[].slice.call(eti.querySelectorAll(".ex-eti-pila"));
   var C=caps.map(function(li,i){ var img=li.querySelector(".ex-foto img"); return {li:li,por:li.querySelector(".ex-por"),foto:li.querySelector(".ex-foto"),img:img,
-    sz:img?img.getAttribute("sizes"):"",go:li.querySelector(".ex-go"),fila:filas[i],vis:false,o:"",p0:0,f0:0,fw:0,top:0}; });
-  var modo="", G=null, pend=0, rt=0, cerca=false, cargadas=false, act=-1, est={}, xs="", cs="", destino=null, vio=null, dentro=false, dom=-1;
+    sz:img?img.getAttribute("sizes"):"",go:li.querySelector(".ex-go"),fila:filas[i],vis:false,o:"",p0:0,f0:0,fw:0,pw:0,S:0,a:1,top:0}; });
+  var modo="", G=null, pend=0, rt=0, cerca=false, cargadas=false, act=-1, est={}, xs="", cs="", cop=[], destino=null, vio=null, dentro=false, dom=-1;
   function sy(){ return window.scrollY||window.pageYOffset||0; }
   function carga(){ if(cargadas) return; cargadas=true; C.forEach(function(c){ if(c.img) c.img.loading="eager"; }); }
   function marca(n,v){ if(est[n]!==v){ est[n]=v; sec.classList.toggle(n,v); } }
   function limpia(){
-    cinta.style.transform=""; pin.style.height=""; if(con) con.style.transform="";
-    C.forEach(function(c){ if(c.img) c.img.style.transform=""; c.o=""; c.vis=false; c.li.classList.remove("ex-vis"); });
+    cinta.style.transform=""; pin.style.height=""; if(con) con.style.transform=""; conH.forEach(function(e){ e.style.opacity=""; });
+    C.forEach(function(c){ if(c.img){ c.img.style.transform=""; c.img.style.width=""; } c.o=""; c.vis=false; c.li.classList.remove("ex-vis"); });
     ["ex-claro","ex-eti-on","ex-tapa-off","ex-cerca"].forEach(function(n){ sec.classList.remove(n); });
-    est={}; xs=cs="";
+    est={}; xs=cs=""; cop=[];
   }
   // Etiqueta: número y nombre de la página k (los de su fila del índice, ya traducidos).
   function pon(k){
@@ -1169,8 +1185,8 @@
       if(modo&&m&&dentro&&dom>=0) vuelve=dom;
       cierra(false); limpia(); modo=m; act=-1; dentro=false; dom=-1;
       sec.classList.toggle("ex-h",m==="h"); sec.classList.toggle("ex-v",m==="v"); etiW.hidden=!m;
-      // En apaisado la foto es más ancha que su tarjeta (el parallax): pide la grande. En la lista, la de su columna.
-      C.forEach(function(c){ if(c.img&&c.sz) c.img.setAttribute("sizes",m==="h"?"80vw":c.sz); });
+      // En apaisado, sizes lo pone la rama h de abajo (el ancho real de la foto); en la lista, el de su columna.
+      C.forEach(function(c){ if(c.img&&c.sz&&m!=="h") c.img.setAttribute("sizes",c.sz); });
       if(vio){ vio.disconnect(); if(m==="v") C.forEach(function(c){ vio.observe(c.li); }); }
       else if(m==="v") C.forEach(function(c){ c.li.classList.add("ex-vis"); });
     }
@@ -1182,10 +1198,17 @@
     if(m==="h"){
       // Posiciones dentro de la cinta (la resta quita su transform): se miden aquí, una vez.
       var r0=cinta.getBoundingClientRect(), W=cinta.offsetWidth, D=Math.max(1,W-vw/2), E=Math.round(vh*.8), X=Math.round(vh*.55), T=D/R, Xe=Math.max(1,X-48);
-      C.forEach(function(c){ var f=c.foto.getBoundingClientRect(); c.p0=c.por.getBoundingClientRect().left-r0.left; c.f0=f.left-r0.left; c.fw=f.width; c.o=""; });
+      // La foto: el 120 % del marco o el 118 % de lo que mide a toda altura, lo mayor; lo que sobra (S) es su recorrido.
+      C.forEach(function(c){ var f=c.foto.getBoundingClientRect(); c.p0=c.por.getBoundingClientRect().left-r0.left; c.pw=c.por.offsetWidth; c.f0=f.left-r0.left; c.fw=f.width; c.o="";
+        // a: sale de la x de --ex-oph (p, entre 0,3 y 0,9): con el marco centrado se ve la parte p del sobrante.
+        if(c.img){ var nat=f.height*((+c.img.getAttribute("width")||2)/(+c.img.getAttribute("height")||3)), iw=Math.ceil(Math.max(f.width*1.2,nat*1.18)),
+            px=parseFloat(getComputedStyle(c.foto).getPropertyValue("--ex-oph"))/100;
+          c.S=iw-f.width; c.a=Math.log(1-Math.max(.3,Math.min(.9,px>=0?px:.5)))/Math.log(.5); c.img.style.width=iw+"px"; c.img.setAttribute("sizes",iw+"px"); } });
       pin.style.height=Math.round(vh+E+T+X)+"px";
       if(con) con.style.transform="";
-      G={vw:vw,vh:vh,hb:hb,W:W,D:D,E:E,X:X,Xe:Xe,T:T,top:pin.getBoundingClientRect().top+s,
+      // Dónde empieza, por la izquierda, cada pieza del texto de contacto (va centrado).
+      var tls=conH.map(function(e){ var r=e.getBoundingClientRect(); return r.width?r.left:vw; });
+      G={vw:vw,vh:vh,hb:hb,W:W,D:D,E:E,X:X,Xe:Xe,T:T,tls:tls,top:pin.getBoundingClientRect().top+s,
          m:R*E/(vw+4),c:(vw/2+6-R*Xe)/(Xe*Xe),cTop:con?con.getBoundingClientRect().top+s:1e9};
     }else{
       // La página activa es la última cuya parte de arriba ha pasado una línea bajo la etiqueta; esa línea nunca baja más
@@ -1193,7 +1216,7 @@
       var minH=1e9, fin=0; C.forEach(function(c){ var r=c.li.getBoundingClientRect(); c.top=r.top+s; fin=r.bottom+s; minH=Math.min(minH,r.height); });
       G={vw:vw,vh:vh,hb:hb,fin:fin,lv:hb+64+Math.min(vh*.3,minH*.5)};
     }
-    xs=cs="";
+    xs=cs=""; cop=[];
     if(vuelve>=0) salta(yDe(vuelve));
   }
   function pinta(){
@@ -1212,22 +1235,24 @@
         var ct="", d=G.cTop-sy();
         if(x+G.W<vw+2&&d>G.hb) ct="translate3d(0,"+(G.hb-d).toFixed(1)+"px,0)";
         if(ct!==cs){ con.style.transform=ct; cs=ct; }
+        for(var j=0,ra=vw*.12;j<conH.length;j++){ var lb=G.tls[j]-x-G.W, op=lb>=ra?"":Math.max(0,lb/ra).toFixed(3);
+          if(op!==cop[j]){ conH[j].style.opacity=op; cop[j]=op; } }
       }
-      var vmax=-1;
+      var dd=-1;
       for(i=0;i<N;i++){
-        var c=C[i], L=x+c.f0, P=x+c.p0, fin=i<N-1?x+C[i+1].p0:x+G.W, ancho=Math.min(vw,fin)-Math.max(0,P);
-        if(ancho>vmax){ vmax=ancho; dom=i; }
+        var c=C[i], L=x+c.f0, P=x+c.p0;
+        if(dd<0&&P+c.pw*.5>=0) dd=i;
         if(L<vw+40&&L+c.fw>-40){
-          var l=(vw-L)/(vw+c.fw); l=l<0?0:l>1?1:l;
-          var o=(K*(l*(vw+c.fw)-vw)).toFixed(1);
+          var l=(vw-c.fw-L)/Math.max(1,vw-c.fw); l=l<0?0:l>1?1:l;
+          var o=(-c.S*(1-Math.pow(l*l*(3-2*l),c.a))).toFixed(1);
           if(o!==c.o){ c.img.style.transform="translate3d("+o+"px,0,0)"; c.o=o; }
         }
         var on=P<vw*.82;
         if(on!==c.vis){ c.vis=on; c.li.classList.toggle("ex-vis",on); }
-        if(i&&P<=vw*.55) k=i;
       }
+      dom=k=dd<0?N-1:dd;
       marca("ex-claro",x<vw*.5&&x+G.W>vw*.5);
-      marca("ex-eti-on",x<vw*.35&&x+G.W>vw*.62);
+      marca("ex-eti-on",x<vw*.35&&x+G.W>vw*.5-2);   // -2: en el destino de la 04 el borde queda justo en vw/2
       marca("ex-tapa-off",x<-2);
       dentro=y>-G.vh*.5&&y<G.E+G.T+G.X*.5;
     }else{
@@ -1298,6 +1323,9 @@
     var yk=yDe(k); if(destino!=null&&Math.abs(destino-yk)<2) return;
     ve(yk);
   });
+  // Con el tabulador, al entrar en contacto la cinta termina de irse: si no, su botón quedaba debajo de ella. Con el ratón no
+  // (el clic también enfoca, y la página se movía sola).
+  if(con) con.addEventListener("focusin",function(e){ if(modo!=="h"||!G) return; try{ if(!e.target.matches(":focus-visible")) return; }catch(_){} var fin=Math.round(G.top+G.E+G.T+G.X); if(sy()<fin-2) ve(fin); });
   if("IntersectionObserver" in window){
     vio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting&&modo==="v"){ e.target.classList.add("ex-vis"); vio.unobserve(e.target); } }); },{rootMargin:"0px 0px -12% 0px"});
     new IntersectionObserver(function(es){
